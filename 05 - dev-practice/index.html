@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Development Practice — No Process to Platform Engineering</title>
+  <link rel="stylesheet" href="../shared/css/deck.css"/>
+</head>
+<body>
+
+<div id="prog" style="width:0%"></div>
+
+<div id="deck">
+
+<!-- ══ SLIDE 1: Cover ══════════════════════════════════════════ -->
+<section class="slide cover" data-title="Development Practice">
+  <div class="cov-grid"></div>
+  <div class="cov-glow"></div>
+  <div class="cov-content">
+    <div class="cov-kicker">Software Engineering · Evolution of Practice</div>
+    <h1 class="cov-h1">From <span class="hi2">No Process</span><br/>to <span class="hi3">Platform Engineering</span></h1>
+    <p class="cov-desc">
+      Nine phases over seventy years — how the software industry learned, the hard way,
+      that the way you build and deliver software is just as important as what you build.
+      Every transition was forced by the failure modes of the previous era.
+    </p>
+    <div class="chips">
+      <span class="chip">Waterfall → Agile</span>
+      <span class="chip ca">CI / CD</span>
+      <span class="chip cg">DevOps</span>
+      <span class="chip cp">DevSecOps</span>
+      <span class="chip ca">Platform Engineering</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 2: Journey Overview ═══════════════════════════════ -->
+<section class="slide" data-title="The Nine-Phase Journey">
+  <div class="s-era">Overview</div>
+  <h2 class="s-title">Nine Phases, <span class="hi">One Direction</span></h2>
+  <p class="s-sub">More automation · faster feedback · quality shifted earlier · ownership spread wider. Every phase directly addressed the failure mode that preceded it.</p>
+
+  <div class="dbox" style="margin-bottom:0.8rem;">
+    <img src="images/journey.svg" alt="Nine-phase development practice journey from No Process through Waterfall, Iterative Waterfall, Agile, CI, CD, DevOps, DevSecOps to Platform Engineering"/>
+  </div>
+
+  <div class="g g3">
+    <div class="card">
+      <div class="card-hd">The First Problem: Chaos → Structure</div>
+      <ul>
+        <li>Phases 1–3 solved the lack of discipline and repeatability</li>
+        <li>Waterfall gave process — but too rigid; change was impossible mid-flight</li>
+        <li>Iterative waterfall added feedback loops — but phases still ran months each</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">The Second Problem: Speed → Quality</div>
+      <ul>
+        <li>Agile broke waterfall's long cycles into sprints — but deploy was still manual</li>
+        <li>CI automated testing on commit; CD automated deployment to production</li>
+        <li>Features could now ship in hours, not months</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">The Third Problem: Silos → Shared Ownership</div>
+      <ul>
+        <li>DevOps merged development and operations — "you build it, you run it"</li>
+        <li>DevSecOps embedded security throughout — not a gate at the end</li>
+        <li>Platform Engineering gives self-serve infra — no ops ticket queue</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 3: No Process ══════════════════════════════════════ -->
+<section class="slide" data-title="Phase 1 — No Process">
+  <div class="s-era">Phase 1 · 1940s–1960s</div>
+  <h2 class="s-title"><span class="hi2">No Process</span> — Heroic Individual Effort</h2>
+  <p class="s-sub">Computing's earliest era had no methodology, no version control, no testing discipline. Programming was a craft practised by a tiny elite, and every project relied on the skill and heroism of individuals.</p>
+
+  <div class="g g2">
+    <div class="card">
+      <div class="card-hd">How Work Was Done</div>
+      <ul>
+        <li>Programs written directly in machine code or assembly — no high-level languages</li>
+        <li>Punch cards: each card = one instruction; drop the deck = start over</li>
+        <li>Batch submitted to operators overnight; errors returned next morning</li>
+        <li>No version control — the only copy was in the programmer's head and on the deck</li>
+        <li>No documentation standard; knowledge lived with individuals</li>
+        <li>Testing: manually check output against expected results on paper</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Why It Broke Down</div>
+      <ul>
+        <li><strong>The Software Crisis (1968):</strong> NATO conference formally named the problem — projects were late, over budget, unreliable, and impossible to maintain</li>
+        <li>Software projects grew too large for individual heroism to sustain</li>
+        <li>No repeatability — you couldn't hire a new person and expect the same result</li>
+        <li>No way to estimate cost or time — every project was unique</li>
+        <li>IBM System/360 required coordinating hundreds of programmers — forced the invention of structured methodology</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout ca-amber" style="margin-top:0.75rem;">
+    <strong>The Scale Problem:</strong> Fred Brooks documented this in <em>The Mythical Man-Month</em> (1975) — adding more programmers to a late project makes it later. Software complexity doesn't scale linearly. You need process, not just people.
+  </div>
+</section>
+
+<!-- ══ SLIDE 4: Waterfall ═══════════════════════════════════════ -->
+<section class="slide" data-title="Phase 2 — Waterfall">
+  <div class="s-era">Phase 2 · 1970s–1990s</div>
+  <h2 class="s-title">Waterfall — <span class="hi">Process Arrives,</span> Rigidity Follows</h2>
+  <p class="s-sub">Winston Royce (1970) described a sequential phase-based model. Industry adopted it as the answer to the software crisis — it brought discipline, but at the cost of all flexibility.</p>
+
+  <div class="g g-sb">
+    <div class="g" style="gap:0.75rem;">
+      <div class="card">
+        <div class="card-hd">What Waterfall Gave Us</div>
+        <ul>
+          <li><strong>Requirements:</strong> document everything the customer wants — freeze and sign off</li>
+          <li><strong>Design:</strong> architect the system, define interfaces, database schema</li>
+          <li><strong>Implementation:</strong> code all features against the spec</li>
+          <li><strong>Verification:</strong> test everything — QA team runs test scripts</li>
+          <li><strong>Maintenance:</strong> fix bugs in production, handle change requests</li>
+          <li>Total cycle: typically <strong>12–18 months</strong> from contract to go-live</li>
+        </ul>
+      </div>
+      <div class="card c-red">
+        <div class="card-hd">The Fatal Flaw</div>
+        <ul>
+          <li>Requirements are signed off at the start — but customers don't know what they want until they see it</li>
+          <li>Change mid-project requires re-phasing — expensive and politically painful</li>
+          <li>Bugs found in the test phase cost <strong>100× more</strong> to fix than if caught in design</li>
+          <li>Customer sees no working software for 12+ months — then discovers it's wrong</li>
+          <li>Integration testing happens last — when all the complexity lands at once</li>
+        </ul>
+      </div>
+    </div>
+    <div class="dbox">
+      <img src="images/waterfall.svg" alt="Waterfall cascade phases diagram showing Requirements, Design, Implementation, Verification, Maintenance with the expensive late-feedback arrow"/>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 5: Iterative Waterfall ════════════════════════════ -->
+<section class="slide" data-title="Phase 3 — Iterative Waterfall">
+  <div class="s-era">Phase 3 · 1980s</div>
+  <h2 class="s-title">Iterative Waterfall — <span class="hi2">Feedback Loops Added</span></h2>
+  <p class="s-sub">Barry Boehm's Spiral Model (1986) and other iterative approaches accepted that phases needed feedback connections. Each iteration reduced risk — but the core phase-gated structure remained.</p>
+
+  <div class="g g2" style="margin-bottom:0.75rem;">
+    <div class="card">
+      <div class="card-hd">What Changed from Waterfall</div>
+      <ul>
+        <li>Phases now explicitly allowed feedback to previous phases</li>
+        <li><strong>Spiral Model:</strong> each loop through the spiral adds scope and reduces risk</li>
+        <li>Prototyping introduced — show something to the customer earlier</li>
+        <li>Risk-driven rather than document-driven — highest-risk items tackled first</li>
+        <li>Incremental delivery: ship a partial system, learn, iterate</li>
+        <li>Rational Unified Process (RUP): 4 phases × multiple iterations each</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Still Broken</div>
+      <ul>
+        <li>Iterations still measured in <strong>months</strong> — not days or weeks</li>
+        <li>Each iteration still had its own mini-waterfall phases</li>
+        <li>Heavy up-front documentation and process overhead</li>
+        <li>Teams still siloed: separate requirements, design, dev, test groups</li>
+        <li>Deploy still manual and rare — a separate "release management" function</li>
+        <li>Feedback loops on paper — in practice, going back was still expensive</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout ca-amber">
+    <strong>The Core Problem Remained:</strong> All iterative waterfall variants kept the fundamental assumption that you could plan in detail before building. The Agile Manifesto (2001) rejected this assumption entirely — <em>"responding to change over following a plan."</em>
+  </div>
+</section>
+
+<!-- ══ SLIDE 6: Agile Manifesto ════════════════════════════════ -->
+<section class="slide" data-title="Phase 4 — Agile Manifesto">
+  <div class="s-era">Phase 4 · Agile Manifesto · February 2001</div>
+  <h2 class="s-title">The <span class="hi3">Agile Manifesto</span> — A Philosophy, Not a Process</h2>
+  <p class="s-sub">Seventeen practitioners at Snowbird, Utah produced four values and twelve principles. Not a framework — a set of beliefs about how good software development actually works.</p>
+
+  <div class="g g2" style="margin-bottom:0.75rem;">
+    <div class="card c-green">
+      <div class="card-hd">The Four Values</div>
+      <ul>
+        <li><strong>Individuals and interactions</strong> over processes and tools</li>
+        <li><strong>Working software</strong> over comprehensive documentation</li>
+        <li><strong>Customer collaboration</strong> over contract negotiation</li>
+        <li><strong>Responding to change</strong> over following a plan</li>
+        <li style="margin-top:0.5rem;"><em>The items on the right still have value — but we value the items on the left more.</em></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-hd">Key Principles (of twelve)</div>
+      <ul>
+        <li>Deliver working software frequently — <strong>weeks, not months</strong></li>
+        <li>Welcome changing requirements, even late in development</li>
+        <li>Business people and developers work together <strong>daily</strong></li>
+        <li>Build projects around motivated individuals; give them the environment and trust</li>
+        <li>The most efficient way to convey information: face-to-face conversation</li>
+        <li><strong>Working software is the primary measure of progress</strong></li>
+        <li>Continuous attention to technical excellence and good design enhances agility</li>
+        <li>At regular intervals, reflect on how to become more effective</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout ca-green">
+    <strong>What Made Agile Different:</strong> It acknowledged that <em>requirements are discovered, not specified</em>. You cannot know everything upfront. The Manifesto legalised change and made customer collaboration a first-class value rather than a contractual inconvenience.
+  </div>
+</section>
+
+<!-- ══ SLIDE 7: Agile in Practice ══════════════════════════════ -->
+<section class="slide" data-title="Phase 4 — Agile in Practice">
+  <div class="s-era">Phase 4 · Agile Frameworks</div>
+  <h2 class="s-title">Agile <span class="hi">in Practice</span> — Scrum, Kanban, XP</h2>
+  <p class="s-sub">The Manifesto inspired several concrete frameworks. Each operationalised the four values differently — short iterations, continuous flow, or technical rigour.</p>
+
+  <div class="g g-sbl" style="margin-bottom:0.75rem;">
+    <div class="dbox">
+      <img src="images/agile-sprint.svg" alt="Agile sprint cycle showing product backlog, sprint planning, build-test-integrate loop, sprint review and retrospective, working increment, and customer feedback"/>
+    </div>
+    <div class="g" style="gap:0.75rem;">
+      <div class="card c-green">
+        <div class="card-hd">Scrum (Most Common)</div>
+        <ul>
+          <li><strong>Sprint:</strong> 1–2 week timebox — plan, build, test, demo, retrospect</li>
+          <li><strong>Roles:</strong> Product Owner (what), Scrum Master (how), Dev Team (build)</li>
+          <li><strong>Artefacts:</strong> Product Backlog, Sprint Backlog, Working Increment</li>
+          <li>Definition of Done: tested, reviewed, merged, demo-able</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-hd">Kanban &amp; XP</div>
+        <ul>
+          <li><strong>Kanban:</strong> continuous flow, WIP limits, no fixed sprint — visualise work in progress</li>
+          <li><strong>XP (Extreme Programming):</strong> pair programming, test-first (TDD), continuous integration, small releases, collective code ownership</li>
+          <li>XP was the technical answer to Agile — Scrum handled process, XP handled engineering practices</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 8: Continuous Integration ════════════════════════ -->
+<section class="slide" data-title="Phase 5 — Continuous Integration">
+  <div class="s-era">Phase 5 · 2005 onwards</div>
+  <h2 class="s-title">Continuous <span class="hi">Integration</span></h2>
+  <p class="s-sub">Martin Fowler formalised CI in 2000: every developer integrates their work into a shared mainline at least daily, and every integration is automatically verified by an automated build and test suite. Before CI, integration was a project phase — a painful multi-day event.</p>
+
+  <div class="g g2" style="margin-bottom:0.75rem;">
+    <div class="card">
+      <div class="card-hd">The CI Contract</div>
+      <ul>
+        <li>Every <code>git push</code> triggers the pipeline automatically — no manual action</li>
+        <li><strong>Build:</strong> compile, resolve dependencies, produce a testable artifact</li>
+        <li><strong>Unit tests:</strong> fast (seconds), test one function in isolation</li>
+        <li><strong>Integration tests:</strong> test multiple components working together</li>
+        <li><strong>Quality gate:</strong> build fails → no merge → developer is notified immediately</li>
+        <li>Build must pass in under 10 minutes to be useful as fast feedback</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">The Test Pyramid</div>
+      <ul>
+        <li>🏔 <strong>Top — E2E tests (few):</strong> slow, brittle, expensive. Test the full journey. Catch regressions. Run on staging.</li>
+        <li>🔷 <strong>Middle — Integration tests:</strong> test service boundaries, database queries, message queues. Minutes to run.</li>
+        <li>🟩 <strong>Base — Unit tests (many):</strong> fast (ms each), test one function. Run on every commit. 70%+ of all tests.</li>
+        <li>Don't invert the pyramid — slow E2E suites kill CI feedback speed</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout ca-green">
+    <strong>What CI Changed:</strong> "Integration hell" — the painful multi-day merge at the end of a sprint — disappeared. Bugs are caught within minutes of being introduced, when the context is still fresh. The developer who broke the build fixes it immediately, not weeks later.
+  </div>
+</section>
+
+<!-- ══ SLIDE 9: Continuous Delivery ════════════════════════════ -->
+<section class="slide" data-title="Phase 6 — Continuous Delivery">
+  <div class="s-era">Phase 6 · 2009 onwards</div>
+  <h2 class="s-title">Continuous <span class="hi2">Delivery</span> &amp; Deployment</h2>
+  <p class="s-sub">Jez Humble and Dave Farley (2010): <em>every change that passes all tests is releasable to production at any time.</em> CD takes CI's artifact and automates the entire path to production — safely.</p>
+
+  <div class="dbox" style="margin-bottom:0.75rem;">
+    <img src="images/ci-cd-pipeline.svg" alt="Full CI/CD pipeline from git push through build, test, security scan, staging, production with canary deployment, to monitoring and feedback"/>
+  </div>
+
+  <div class="g g4">
+    <div class="card">
+      <div class="card-hd">Feature Flags</div>
+      <p><strong>Release ≠ Deploy.</strong> Code ships to production but stays hidden behind a flag. Enable for 1% → 10% → 100% of users. Kill it instantly if metrics degrade.</p>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Canary Releases</div>
+      <p>Route 1% of real traffic to the new version. Compare error rates, latency, and business metrics against the stable version. Auto-rollback on threshold breach.</p>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Blue / Green Deploy</div>
+      <p>Two identical production environments. Switch traffic from Blue (old) to Green (new) in one instant. Blue stays live — rollback is just switching back. Zero-downtime guaranteed.</p>
+    </div>
+    <div class="card c-purple">
+      <div class="card-hd">A/B Testing</div>
+      <p>Two versions of a feature simultaneously — 50% of users each. Measure which version achieves better business outcomes. Data-driven decisions, not opinion-driven.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 10: DevOps — The Wall ══════════════════════════════ -->
+<section class="slide" data-title="Phase 7 — DevOps">
+  <div class="s-era">Phase 7 · 2009 onwards · The Wall of Confusion</div>
+  <h2 class="s-title"><span class="hi3">DevOps</span> — Tearing Down the Wall</h2>
+  <p class="s-sub">CI/CD automated the pipeline — but development and operations remained separate teams with opposing goals. DevOps addressed the cultural and organisational problem that automation alone couldn't fix.</p>
+
+  <div class="dbox">
+    <img src="images/devops-wall.svg" alt="Before DevOps: wall of confusion between Development and Operations. After DevOps: shared 8-loop ownership cycle with monitoring feedback into backlog."/>
+  </div>
+</section>
+
+<!-- ══ SLIDE 11: DevOps in Depth ════════════════════════════════ -->
+<section class="slide" data-title="DevOps — Practices and Testing">
+  <div class="s-era">Phase 7 · DevOps Practices</div>
+  <h2 class="s-title">DevOps — <span class="hi">What Actually Changed</span></h2>
+  <p class="s-sub">DevOps is not a tool or a job title. It is an organisational culture shift with specific, measurable engineering practices — including testing disciplines that were systematically absent before.</p>
+
+  <div class="g g2" style="margin-bottom:0.75rem;">
+    <div class="card">
+      <div class="card-hd">Cultural &amp; Organisational Changes</div>
+      <ul>
+        <li><strong>"You build it, you run it"</strong> — Werner Vogels, Amazon CTO (2006). Developers share on-call. They feel the pain of their own reliability failures.</li>
+        <li>Operations involved in <strong>sprint planning</strong> — infra requirements treated as user stories</li>
+        <li>Developer access to production metrics — understands real-world performance, not just test environments</li>
+        <li><strong>Blameless post-mortems:</strong> when something breaks, fix the system, not the person</li>
+        <li>Infrastructure as Code (IaC) — ops changes go through the same Git review process as code</li>
+        <li><strong>DORA metrics:</strong> Deployment Frequency, Lead Time, MTTR, Change Failure Rate</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Performance &amp; Load Testing — Finally in the Pipeline</div>
+      <ul>
+        <li><strong>Before DevOps:</strong> performance testing was a separate engagement, run by a specialist team, once before a major release — too late to change the architecture</li>
+        <li><strong>In DevOps pipelines:</strong> performance tests run on every build against a production-like environment</li>
+        <li><strong>Load testing (k6, Gatling, JMeter):</strong> simulate thousands of virtual users — catch regression before it reaches production</li>
+        <li><strong>Stress testing:</strong> find the breaking point — so you know your limits before users do</li>
+        <li><strong>Soak/endurance testing:</strong> run at normal load for hours — catch memory leaks and connection pool exhaustion</li>
+        <li><strong>Chaos engineering (Netflix Chaos Monkey):</strong> deliberately kill random services in production — prove the system handles failure gracefully</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout ca-green">
+    <strong>Operations Feedback Loop:</strong> Monitoring data — slow endpoints, high error rates, memory pressure — feeds directly into the next sprint's backlog. Ops improvements are not "tech debt tickets that never get done" — they are first-class work items prioritised alongside features.
+  </div>
+</section>
+
+<!-- ══ SLIDE 12: DevSecOps ══════════════════════════════════════ -->
+<section class="slide" data-title="Phase 8 — DevSecOps">
+  <div class="s-era">Phase 8 · 2015 onwards</div>
+  <h2 class="s-title"><span class="hi2">DevSecOps</span> — Security Shifts Left</h2>
+  <p class="s-sub">In DevOps, security remained a gate at the end — a "penetration test" performed by a separate team before release. DevSecOps embeds security at every stage, making it a shared responsibility of the whole team, not an audit function.</p>
+
+  <div class="dbox" style="margin-bottom:0.75rem;">
+    <img src="images/devsecops.svg" alt="DevSecOps shift-left: top row shows traditional security all at the end; bottom row shows security checks embedded at every phase from Plan through Operate"/>
+  </div>
+
+  <div class="g g4">
+    <div class="card">
+      <div class="card-hd">SAST</div>
+      <p><strong>Static Application Security Testing</strong> — scans source code for vulnerabilities without running it. SQL injection, XSS, hard-coded secrets. Runs on every commit.</p>
+    </div>
+    <div class="card c-red">
+      <div class="card-hd">SCA</div>
+      <p><strong>Software Composition Analysis</strong> — scans third-party dependencies for known CVEs (Common Vulnerabilities and Exposures). Your code may be clean; your libraries may not be.</p>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Container Image Scan</div>
+      <p>Scans Docker images for OS-level CVEs in the base image and installed packages — before push to registry. Tools: <strong>Trivy, Grype, Snyk Container</strong>. Blocks deploy if critical CVE found.</p>
+    </div>
+    <div class="card c-purple">
+      <div class="card-hd">DAST &amp; Secrets Detection</div>
+      <p><strong>DAST</strong> — Dynamic scanning of the running application for auth flaws, injection, misconfigurations. <strong>Secrets Detection</strong> — git-leaks, TruffleHog scan commit history for API keys, passwords committed by accident.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 13: Platform Engineering ══════════════════════════ -->
+<section class="slide" data-title="Phase 9 — Platform Engineering">
+  <div class="s-era">Phase 9 · 2020 onwards</div>
+  <h2 class="s-title"><span class="hi">Platform Engineering</span> — Self-Serve Everything</h2>
+  <p class="s-sub">At scale — 50+ microservice teams, hundreds of engineers — DevOps practices create a new bottleneck: every team reinvents the same CI/CD pipelines, Kubernetes configs, monitoring dashboards, and security policies. Platform Engineering solves this with an Internal Developer Platform (IDP).</p>
+
+  <div class="dbox" style="margin-bottom:0.75rem;">
+    <img src="images/platform-eng.svg" alt="Platform Engineering diagram showing developer teams self-serving through an Internal Developer Platform that orchestrates CI/CD, Kubernetes, secrets, and IaC, maintained by a dedicated Platform Team"/>
+  </div>
+
+  <div class="g g3">
+    <div class="card">
+      <div class="card-hd">The Problem at Scale</div>
+      <ul>
+        <li>50 teams × 3 pipelines each = 150 pipeline configs to maintain</li>
+        <li>Each team applies security policies differently — inconsistent risk posture</li>
+        <li>New developer: weeks to get a working local + cloud environment</li>
+        <li>"Cognitive load" of infrastructure kills feature delivery speed</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">The IDP Solution</div>
+      <ul>
+        <li><strong>Golden paths:</strong> opinionated, pre-approved templates — deploy a new service in 5 minutes</li>
+        <li><strong>Service catalogue:</strong> every microservice documented, with runbooks, owners, SLOs</li>
+        <li><strong>Self-serve environments:</strong> dev requests a staging env — IDP provisions it, policy-compliant, billed to their cost centre</li>
+        <li><strong>GitOps:</strong> all deployments via ArgoCD/Flux — Git is the single source of truth</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Platform Team as Product Team</div>
+      <ul>
+        <li>The Platform Team treats developers as their customers</li>
+        <li>User research: what are the pain points? Where do developers lose time?</li>
+        <li>SLOs for the platform itself — uptime, provisioning latency, deployment success rate</li>
+        <li>Not a "gatekeeper" — a force multiplier. Less time on infra → more time on business features</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 14: The Transformation Summary ════════════════════ -->
+<section class="slide" data-title="What Each Phase Fixed">
+  <div class="s-era">The Pattern</div>
+  <h2 class="s-title">Each Phase Fixed a <span class="hi2">Specific Failure Mode</span></h2>
+  <p class="s-sub">Nothing was adopted for fashion. Each transition was forced by the demonstrable failures of the previous era.</p>
+
+  <div class="svc-head">
+    <div class="h-cat">Phase</div>
+    <div class="h-aws">Problem It Solved</div>
+    <div class="h-azure">What It Introduced</div>
+    <div class="h-gcp">Remaining Gap</div>
+  </div>
+  <div class="svc-row"><div class="r-cat">Waterfall</div><div class="r-aws">No process, no repeatability</div><div class="r-azure">Phases, docs, structured delivery</div><div class="r-gcp">Cannot change mid-project</div></div>
+  <div class="svc-row"><div class="r-cat">Iterative Waterfall</div><div class="r-aws">No feedback between phases</div><div class="r-azure">Loops, risk-driven iterations</div><div class="r-gcp">Still months per iteration</div></div>
+  <div class="svc-row"><div class="r-cat">Agile</div><div class="r-aws">Cannot respond to change</div><div class="r-azure">Sprints, customer collaboration</div><div class="r-gcp">Deploy still manual, rare</div></div>
+  <div class="svc-row"><div class="r-cat">CI</div><div class="r-aws">Integration hell at sprint end</div><div class="r-azure">Auto-build + test on every commit</div><div class="r-gcp">Artifact not deployed</div></div>
+  <div class="svc-row"><div class="r-cat">CD</div><div class="r-aws">Manual, risky, infrequent deploys</div><div class="r-azure">Canary, blue/green, feature flags</div><div class="r-gcp">Dev and Ops still separate</div></div>
+  <div class="svc-row"><div class="r-cat">DevOps</div><div class="r-aws">Dev vs Ops blame culture</div><div class="r-azure">Shared ownership, monitoring feedback</div><div class="r-gcp">Security still end-gated</div></div>
+  <div class="svc-row"><div class="r-cat">DevSecOps</div><div class="r-aws">Security as a late-stage blocker</div><div class="r-azure">SAST/DAST/SCA/container scan</div><div class="r-gcp">Teams reinvent everything</div></div>
+  <div class="svc-row"><div class="r-cat">Platform Eng.</div><div class="r-aws">Each team rebuilds same infra</div><div class="r-azure">IDP, golden paths, self-serve</div><div class="r-gcp">AI-assisted next frontier</div></div>
+</section>
+
+<!-- ══ SLIDE 15: Key Metrics ════════════════════════════════════ -->
+<section class="slide" data-title="DORA Metrics — Measuring the Improvement">
+  <div class="s-era">Measuring Progress</div>
+  <h2 class="s-title"><span class="hi3">DORA Metrics</span> — Are You Actually Getting Better?</h2>
+  <p class="s-sub">Google's DevOps Research and Assessment team identified four metrics that distinguish Elite performers from Low performers. These are the objective measures of how far along the journey a team has come.</p>
+
+  <div class="g g4" style="margin-bottom:0.75rem;">
+    <div class="card c-green stat">
+      <div class="stat-n sg">Freq</div>
+      <div class="stat-l">Deployment Frequency</div>
+      <div class="stat-note">Elite: multiple times per day. Low: once per 6 months. The single best proxy for team maturity.</div>
+    </div>
+    <div class="card stat">
+      <div class="stat-n">Hours</div>
+      <div class="stat-l">Lead Time for Changes</div>
+      <div class="stat-note">Elite: &lt;1 hour from commit to production. Low: 1–6 months. Shorter = faster value delivery.</div>
+    </div>
+    <div class="card c-amber stat">
+      <div class="stat-n sa">&lt;15%</div>
+      <div class="stat-l">Change Failure Rate</div>
+      <div class="stat-note">Elite: 0–15% of changes cause incidents. Low: 46–60%. High frequency + low failure = the target.</div>
+    </div>
+    <div class="card c-red stat">
+      <div class="stat-n sr">&lt;1hr</div>
+      <div class="stat-l">Mean Time to Recovery</div>
+      <div class="stat-note">Elite: recover from incidents in under an hour. Low: 1 week to 1 month. Drives blameless culture + chaos engineering.</div>
+    </div>
+  </div>
+
+  <div class="g g2">
+    <div class="card">
+      <div class="card-hd">The Counterintuitive Insight</div>
+      <ul>
+        <li>High deployment frequency and low change failure rate are <strong>not in tension</strong> — elite teams achieve both simultaneously</li>
+        <li>Deploying more frequently actually <strong>reduces risk</strong> — smaller changes, easier to diagnose failures, faster rollback</li>
+        <li>Teams that deploy rarely have the <strong>highest</strong> change failure rates — each deployment is a massive, untested blast radius</li>
+        <li>The path to high reliability is <em>more</em> deploys, not fewer</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Elite vs Low Performers (2023 DORA Report)</div>
+      <ul>
+        <li><strong>Deployment Frequency:</strong> Elite = multiple/day · Low = &lt;1/month</li>
+        <li><strong>Lead Time:</strong> Elite = &lt;1 hour · Low = 1–6 months</li>
+        <li><strong>Change Failure Rate:</strong> Elite = 0–15% · Low = 46–60%</li>
+        <li><strong>MTTR:</strong> Elite = &lt;1 hour · Low = 1 week–1 month</li>
+        <li>Elite performers are <strong>127× more likely</strong> to meet or exceed organisational goals</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 16: Summary ════════════════════════════════════════ -->
+<section class="slide" data-title="Summary — Key Takeaways">
+  <div class="s-era">Summary</div>
+  <h2 class="s-title">Seven <span class="hi">Key Ideas</span></h2>
+  <p class="s-sub">If you carry nothing else from this presentation — carry these.</p>
+
+  <div class="g g2" style="margin-bottom:0.75rem;">
+    <div class="card">
+      <div class="card-hd">① Every Phase Was Forced</div>
+      <p>Nobody adopted Agile or DevOps for fashion. Each transition happened because the previous model demonstrably failed at scale. Understanding the failure mode explains the solution.</p>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">② Quality Shifts Left</div>
+      <p>Finding a bug in production costs 100× more than finding it in code review. Every evolution — CI, CD, DevSecOps — moves quality checks earlier. Left-shift is both a cost and a reliability strategy.</p>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">③ Deploy More to Fail Less</div>
+      <p>Counterintuitive but proven: smaller, more frequent releases carry lower risk. Each deployment is smaller, easier to diagnose, easier to rollback. Elite teams deploy 100s of times per day.</p>
+    </div>
+    <div class="card c-purple">
+      <div class="card-hd">④ Silos Kill Quality</div>
+      <p>Waterfall silos created blame culture. Dev/Ops separation created "works on my machine." Security-at-the-end created late, expensive fixes. Every evolution broke down a silo.</p>
+    </div>
+    <div class="card c-red">
+      <div class="card-hd">⑤ Automation Is Not Optional</div>
+      <p>Manual testing, manual deployment, manual security review: each is a bottleneck that prevents the frequency needed for elite performance. Automate the pipeline; focus humans on judgement.</p>
+    </div>
+    <div class="card filled-amber span2">
+      <div class="card-hd">⑥ Culture Comes First — Tools Come Second · ⑦ Measure Outcomes, Not Activity</div>
+      <p>You cannot buy DevOps. Installing Jenkins without changing the Dev/Ops relationship installs a faster version of the same broken process. Culture — shared ownership, blameless retrospectives, customer focus — precedes the tooling. And always measure <strong>DORA metrics</strong>: deployment frequency, lead time, change failure rate, MTTR. Story points delivered are activity; working software in production is outcome.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 17: End ════════════════════════════════════════════ -->
+<section class="slide cover" data-title="Questions">
+  <div class="cov-grid"></div>
+  <div class="cov-glow"></div>
+  <div class="cov-content">
+    <div class="cov-kicker">End of Presentation — Development Practice Series</div>
+    <h1 class="cov-h1">Questions?<br/><span class="hi">Let's Discuss.</span></h1>
+    <p class="cov-desc">
+      From a punch card submitted overnight in 1955 to hundreds of automated production deployments per day in 2024 — the pace of delivery has accelerated a million-fold. The next frontier: AI-assisted code review, test generation, and incident response. The principles of fast feedback, shared ownership, and quality left-shift will still apply.
+    </p>
+    <div class="chips">
+      <span class="chip ca">What does AI change for CI/CD?</span>
+      <span class="chip cg">FinOps in the pipeline</span>
+      <span class="chip">Green software engineering</span>
+      <span class="chip cp">Supply chain security (SBOM)</span>
+    </div>
+  </div>
+</section>
+
+</div><!-- /#deck -->
+
+<nav id="nav">
+  <div class="nav-group">
+    <button class="nb" id="btn-prev">← Prev</button>
+    <button class="nb" id="btn-next">Next →</button>
+    <span id="counter">1 / 17</span>
+  </div>
+  <div class="nav-group">
+    <select id="jump"></select>
+  </div>
+  <div class="nav-group">
+    <button id="theme-btn">☀ Light</button>
+  </div>
+</nav>
+
+<script src="../shared/js/deck.js"></script>
+</body>
+</html>

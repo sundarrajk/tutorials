@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 270">
+  <style>
+    .bg    { fill:none; }
+    /* rows */
+    .old-r { fill:var(--svg-fill2,rgba(252,129,129,.05)); stroke:var(--svg-red,rgba(252,129,129,.25)); stroke-width:1; }
+    .new-r { fill:var(--svg-fill2,rgba(104,211,145,.05)); stroke:var(--svg-green,rgba(104,211,145,.25)); stroke-width:1; }
+    /* Phase cells */
+    .ph    { fill:var(--svg-fill2,rgba(99,179,237,.06));  stroke:var(--svg-border,rgba(99,179,237,.2)); stroke-width:.7; }
+    .ph-sec{ fill:var(--svg-fill1,rgba(252,129,129,.2));  stroke:var(--svg-red,#fc8181); stroke-width:1.2; }
+    .ph-sg { fill:var(--svg-fill1,rgba(104,211,145,.18)); stroke:var(--svg-green,#68d391); stroke-width:1.2; }
+    /* text */
+    .era-t { fill:var(--svg-text2,rgba(99,179,237,.55)); font-family:monospace; font-size:9px; font-weight:700; letter-spacing:1px; }
+    .ph-t  { fill:var(--svg-text1,#d0e4f8); font-family:monospace; font-size:8px; font-weight:700; text-anchor:middle; }
+    .ph-s  { fill:var(--svg-text2,#6a9ab8); font-family:monospace; font-size:7px; text-anchor:middle; }
+    .sec-t { fill:var(--svg-red,#fc8181);   font-family:monospace; font-size:8px; font-weight:700; text-anchor:middle; }
+    .sec-g { fill:var(--svg-green,#68d391); font-family:monospace; font-size:8px; font-weight:700; text-anchor:middle; }
+    .sec-s { fill:var(--svg-red,rgba(252,129,129,.8)); font-family:monospace; font-size:7.5px; text-anchor:middle; }
+    .sec-sg{ fill:var(--svg-green,rgba(104,211,145,.8)); font-family:monospace; font-size:7.5px; text-anchor:middle; }
+    .tool  { fill:var(--svg-text2,rgba(104,211,145,.65)); font-family:monospace; font-size:7px; }
+    .pain  { fill:var(--svg-red,rgba(252,129,129,.75));   font-family:monospace; font-size:8px; }
+    .gain  { fill:var(--svg-green,rgba(104,211,145,.8));  font-family:monospace; font-size:8px; }
+    .cost  { fill:var(--svg-amber,rgba(246,173,85,.75));  font-family:monospace; font-size:8px; font-weight:700; text-anchor:middle; }
+    .div   { stroke:var(--svg-text2,rgba(99,179,237,.15)); fill:none; }
+  </style>
+
+  <!-- ── ROW LABELS ── -->
+  <text x="6"  y="54"  class="era-t">TRADITIONAL</text>
+  <text x="6"  y="66"  class="era-t">SECURITY</text>
+  <text x="6"  y="156" class="era-t">DEVSECOPS</text>
+  <text x="6"  y="168" class="era-t">SHIFT LEFT</text>
+
+  <!-- Phase column headers -->
+  <rect x="104" y="6"  width="100" height="26" rx="4" class="ph"/>
+  <text x="154" y="23" class="ph-t">PLAN</text>
+  <rect x="212" y="6"  width="100" height="26" rx="4" class="ph"/>
+  <text x="262" y="23" class="ph-t">CODE</text>
+  <rect x="320" y="6"  width="100" height="26" rx="4" class="ph"/>
+  <text x="370" y="23" class="ph-t">BUILD / CI</text>
+  <rect x="428" y="6"  width="100" height="26" rx="4" class="ph"/>
+  <text x="478" y="23" class="ph-t">TEST</text>
+  <rect x="536" y="6"  width="100" height="26" rx="4" class="ph"/>
+  <text x="586" y="23" class="ph-t">STAGING</text>
+  <rect x="644" y="6"  width="100" height="26" rx="4" class="ph"/>
+  <text x="694" y="23" class="ph-t">PRODUCTION</text>
+  <rect x="752" y="6"  width="82"  height="26" rx="4" class="ph"/>
+  <text x="793" y="23" class="ph-t">OPERATE</text>
+
+  <!-- ── OLD MODEL ROW ── -->
+  <rect x="100" y="36" width="736" height="86" rx="7" class="old-r"/>
+  <!-- no security in first 5 cols -->
+  <rect x="108" y="44" width="84" height="68" rx="4" class="ph"/>
+  <text x="150" y="64"  class="ph-t">No security</text>
+  <text x="150" y="76"  class="ph-s">Dev codes freely</text>
+  <text x="150" y="86"  class="ph-s">No threat model</text>
+  <text x="150" y="96"  class="ph-s">Vuln. accumulate</text>
+
+  <rect x="200" y="44" width="84" height="68" rx="4" class="ph"/>
+  <text x="242" y="64"  class="ph-t">No security</text>
+  <text x="242" y="76"  class="ph-s">No code review</text>
+  <text x="242" y="86"  class="ph-s">Hard-coded creds</text>
+  <text x="242" y="96"  class="ph-s">SQL injection</text>
+
+  <rect x="292" y="44" width="84" height="68" rx="4" class="ph"/>
+  <text x="334" y="64"  class="ph-t">No security</text>
+  <text x="334" y="76"  class="ph-s">No dependency scan</text>
+  <text x="334" y="86"  class="ph-s">Old CVEs shipped</text>
+  <text x="334" y="96"  class="ph-s">No image scan</text>
+
+  <rect x="400" y="44" width="84" height="68" rx="4" class="ph"/>
+  <text x="442" y="64"  class="ph-t">Functional only</text>
+  <text x="442" y="76"  class="ph-s">No security tests</text>
+  <text x="442" y="86"  class="ph-s">No pentest</text>
+  <text x="442" y="96"  class="ph-s">No DAST</text>
+
+  <rect x="508" y="44" width="84" height="68" rx="4" class="ph"/>
+  <text x="550" y="64"  class="ph-t">Functional only</text>
+  <text x="550" y="76"  class="ph-s">No security env</text>
+  <text x="550" y="86"  class="ph-s">Pen test skipped</text>
+  <text x="550" y="96"  class="ph-s">Time pressure</text>
+
+  <!-- BIG security review at the end -->
+  <rect x="616" y="44" width="84" height="68" rx="4" class="ph-sec"/>
+  <text x="658" y="60"  class="sec-t">🔒 SECURITY</text>
+  <text x="658" y="72"  class="sec-t">REVIEW</text>
+  <text x="658" y="84"  class="sec-s">All at end</text>
+  <text x="658" y="94"  class="sec-s">Finds critical bugs</text>
+  <text x="658" y="104" class="sec-s">Blocks release</text>
+
+  <rect x="724" y="44" width="104" height="68" rx="4" class="ph"/>
+  <text x="776" y="64"  class="ph-t">Reactive only</text>
+  <text x="776" y="76"  class="ph-s">Patch after breach</text>
+  <text x="776" y="86"  class="ph-s">Pen test yearly</text>
+  <text x="776" y="96"  class="ph-s">Compliance audit</text>
+
+  <!-- Cost annotation -->
+  <text x="658" y="128" class="cost">FIX COST AT PRODUCTION: 100× more than at CODE phase</text>
+  <text x="658" y="140" class="sec-s">Late security review: developer context lost · architecture changes very expensive · release blocked</text>
+
+  <!-- ── DEVSECOPS ROW ── -->
+  <rect x="100" y="148" width="736" height="86" rx="7" class="new-r"/>
+
+  <rect x="108" y="156" width="84" height="72" rx="4" class="ph-sg"/>
+  <text x="150" y="173" class="sec-g">Threat Model</text>
+  <text x="150" y="185" class="sec-sg">Security reqs</text>
+  <text x="150" y="195" class="sec-sg">STRIDE analysis</text>
+  <text x="150" y="205" class="sec-sg">Risk register</text>
+  <text x="150" y="218" class="tool">Security champion</text>
+
+  <rect x="200" y="156" width="84" height="72" rx="4" class="ph-sg"/>
+  <text x="242" y="173" class="sec-g">Secure Coding</text>
+  <text x="242" y="185" class="sec-sg">SAST in IDE</text>
+  <text x="242" y="195" class="sec-sg">No hard-coded secrets</text>
+  <text x="242" y="205" class="sec-sg">Pre-commit hooks</text>
+  <text x="242" y="218" class="tool">Semgrep / Snyk IDE</text>
+
+  <rect x="292" y="156" width="84" height="72" rx="4" class="ph-sg"/>
+  <text x="334" y="173" class="sec-g">CI Security Gate</text>
+  <text x="334" y="185" class="sec-sg">SAST full scan</text>
+  <text x="334" y="195" class="sec-sg">SCA — CVE check</text>
+  <text x="334" y="205" class="sec-sg">Container image scan</text>
+  <text x="334" y="218" class="tool">Trivy / Snyk / Grype</text>
+
+  <rect x="400" y="156" width="84" height="72" rx="4" class="ph-sg"/>
+  <text x="442" y="173" class="sec-g">Security Tests</text>
+  <text x="442" y="185" class="sec-sg">Auth / authz tests</text>
+  <text x="442" y="195" class="sec-sg">Injection tests</text>
+  <text x="442" y="205" class="sec-sg">OWASP Top 10</text>
+  <text x="442" y="218" class="tool">OWASP ZAP</text>
+
+  <rect x="508" y="156" width="84" height="72" rx="4" class="ph-sg"/>
+  <text x="550" y="173" class="sec-g">DAST + Pentest</text>
+  <text x="550" y="185" class="sec-sg">Dynamic analysis</text>
+  <text x="550" y="195" class="sec-sg">Penetration test</text>
+  <text x="550" y="205" class="sec-sg">Fuzzing</text>
+  <text x="550" y="218" class="tool">Burp Suite / Nessus</text>
+
+  <rect x="616" y="156" width="84" height="72" rx="4" class="ph-sg"/>
+  <text x="658" y="173" class="sec-g">Policy as Code</text>
+  <text x="658" y="185" class="sec-sg">OPA / Kyverno</text>
+  <text x="658" y="195" class="sec-sg">mTLS enforced</text>
+  <text x="658" y="205" class="sec-sg">Immutable infra</text>
+  <text x="658" y="218" class="tool">Falco runtime</text>
+
+  <rect x="724" y="156" width="104" height="72" rx="4" class="ph-sg"/>
+  <text x="776" y="173" class="sec-g">Runtime Security</text>
+  <text x="776" y="185" class="sec-sg">Anomaly detection</text>
+  <text x="776" y="195" class="sec-sg">WAF / DDoS</text>
+  <text x="776" y="205" class="sec-sg">Auto quarantine</text>
+  <text x="776" y="218" class="tool">Falco / Wiz / Aqua</text>
+
+  <!-- Summary row -->
+  <line x1="100" y1="244" x2="836" y2="244" class="div" stroke-width=".8"/>
+  <text x="106" y="258" class="gain">✓ Security team embedded in squads from day one, not auditors at the end</text>
+  <text x="106" y="270" class="gain">✓ Developers own security outcomes — not just functional correctness</text>
+  <text x="500" y="258" class="gain">✓ Vulnerabilities fixed when cheapest (design/code phase)</text>
+  <text x="500" y="270" class="gain">✓ Compliance evidence auto-generated from pipeline — no last-minute audit scramble</text>
+</svg>

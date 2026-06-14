@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 200">
+  <style>
+    .bg   { fill: none; }
+    /* phase boxes */
+    .p1   { fill:var(--svg-fill2,rgba(99,179,237,.08));  stroke:var(--svg-blue,#63b3ed);   stroke-width:1.2; }
+    .p2   { fill:var(--svg-fill2,rgba(183,148,244,.08)); stroke:var(--svg-purple,#b794f4); stroke-width:1.2; }
+    .p3   { fill:var(--svg-fill2,rgba(246,173,85,.08));  stroke:var(--svg-amber,#f6ad55);  stroke-width:1.2; }
+    .p4   { fill:var(--svg-fill2,rgba(104,211,145,.08)); stroke:var(--svg-green,#68d391);  stroke-width:1.2; }
+    .p5   { fill:var(--svg-fill2,rgba(0,229,255,.08));   stroke:var(--svg-cyan,#00e5ff);   stroke-width:1.2; }
+    .p6   { fill:var(--svg-fill2,rgba(252,129,129,.08)); stroke:var(--svg-red,#fc8181);    stroke-width:1.2; }
+    /* phase connector arrows */
+    .arr  { fill:var(--svg-text2,rgba(99,179,237,.4)); }
+    .con  { stroke:var(--svg-text2,rgba(99,179,237,.3)); fill:none; stroke-width:1.2; }
+    /* text */
+    .yr   { fill:var(--svg-text2,#6a9ab8); font-family:monospace; font-size:8px; text-anchor:middle; }
+    .t1   { fill:var(--svg-blue,#63b3ed);   font-family:monospace; font-size:9px; font-weight:700; text-anchor:middle; }
+    .t2   { fill:var(--svg-purple,#b794f4); font-family:monospace; font-size:9px; font-weight:700; text-anchor:middle; }
+    .t3   { fill:var(--svg-amber,#f6ad55);  font-family:monospace; font-size:9px; font-weight:700; text-anchor:middle; }
+    .t4   { fill:var(--svg-green,#68d391);  font-family:monospace; font-size:9px; font-weight:700; text-anchor:middle; }
+    .t5   { fill:var(--svg-cyan,#00e5ff);   font-family:monospace; font-size:9px; font-weight:700; text-anchor:middle; }
+    .t6   { fill:var(--svg-red,#fc8181);    font-family:monospace; font-size:9px; font-weight:700; text-anchor:middle; }
+    .sub  { fill:var(--svg-text2,#6a9ab8);  font-family:monospace; font-size:7.5px; text-anchor:middle; }
+    .pain { fill:var(--svg-red,rgba(252,129,129,.65));   font-family:monospace; font-size:7px; text-anchor:middle; }
+    .gain { fill:var(--svg-green,rgba(104,211,145,.65)); font-family:monospace; font-size:7px; text-anchor:middle; }
+  </style>
+  <defs>
+    <marker id="tArr" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <path d="M0,0 L0,7 L7,3.5 z" class="arr"/>
+    </marker>
+  </defs>
+
+  <!-- Phase 1: No Process -->
+  <rect x="4"   y="30" width="92" height="162" rx="7" class="p1"/>
+  <text x="50"  y="48" class="t1">① NO</text>
+  <text x="50"  y="60" class="t1">PROCESS</text>
+  <text x="50"  y="73" class="yr">1940s–1960s</text>
+  <line x1="16" y1="80" x2="84" y2="80" stroke="var(--svg-blue,rgba(99,179,237,.15))" stroke-width=".6" fill="none"/>
+  <text x="50"  y="92"  class="sub">Ad-hoc coding</text>
+  <text x="50"  y="103" class="sub">Punch cards</text>
+  <text x="50"  y="114" class="sub">No tests</text>
+  <text x="50"  y="125" class="sub">Heroic effort</text>
+  <text x="50"  y="142" class="pain">No repeatability</text>
+  <text x="50"  y="153" class="pain">Undocumented</text>
+
+  <!-- arrow -->
+  <line x1="100" y1="110" x2="112" y2="110" class="con" marker-end="url(#tArr)"/>
+
+  <!-- Phase 2: Waterfall -->
+  <rect x="116" y="30" width="96" height="162" rx="7" class="p2"/>
+  <text x="164" y="48"  class="t2">② WATER-</text>
+  <text x="164" y="60"  class="t2">FALL</text>
+  <text x="164" y="73"  class="yr">1970s</text>
+  <line x1="128" y1="80" x2="200" y2="80" stroke="var(--svg-purple,rgba(183,148,244,.15))" stroke-width=".6" fill="none"/>
+  <text x="164" y="92"  class="sub">Req → Design</text>
+  <text x="164" y="103" class="sub">Build → Test</text>
+  <text x="164" y="114" class="sub">Deploy phases</text>
+  <text x="164" y="125" class="sub">Docs first</text>
+  <text x="164" y="142" class="pain">6–18 mo cycles</text>
+  <text x="164" y="153" class="pain">No change allowed</text>
+
+  <line x1="216" y1="110" x2="228" y2="110" class="con" marker-end="url(#tArr)"/>
+
+  <!-- Phase 3: Iterative Waterfall -->
+  <rect x="232" y="30" width="96" height="162" rx="7" class="p3"/>
+  <text x="280" y="48"  class="t3">③ ITER-</text>
+  <text x="280" y="60"  class="t3">ATIVE</text>
+  <text x="280" y="73"  class="yr">1980s</text>
+  <line x1="244" y1="80" x2="316" y2="80" stroke="var(--svg-amber,rgba(246,173,85,.15))" stroke-width=".6" fill="none"/>
+  <text x="280" y="92"  class="sub">Phased cycles</text>
+  <text x="280" y="103" class="sub">Feedback loops</text>
+  <text x="280" y="114" class="sub">Spiral model</text>
+  <text x="280" y="125" class="sub">Risk per iter.</text>
+  <text x="280" y="142" class="pain">Still phase-gated</text>
+  <text x="280" y="153" class="pain">Long cycles</text>
+
+  <line x1="332" y1="110" x2="344" y2="110" class="con" marker-end="url(#tArr)"/>
+
+  <!-- Phase 4: Agile -->
+  <rect x="348" y="30" width="96" height="162" rx="7" class="p4"/>
+  <text x="396" y="48"  class="t4">④ AGILE</text>
+  <text x="396" y="60"  class="t4">MANIFESTO</text>
+  <text x="396" y="73"  class="yr">2001</text>
+  <line x1="360" y1="80" x2="432" y2="80" stroke="var(--svg-green,rgba(104,211,145,.15))" stroke-width=".6" fill="none"/>
+  <text x="396" y="92"  class="sub">2-week sprints</text>
+  <text x="396" y="103" class="sub">Scrum / Kanban</text>
+  <text x="396" y="114" class="sub">Working software</text>
+  <text x="396" y="125" class="sub">Iteration first</text>
+  <text x="396" y="142" class="gain">Fast feedback</text>
+  <text x="396" y="153" class="pain">Manual deploy</text>
+
+  <line x1="448" y1="110" x2="460" y2="110" class="con" marker-end="url(#tArr)"/>
+
+  <!-- Phase 5: CI -->
+  <rect x="464" y="30" width="96" height="162" rx="7" class="p1"/>
+  <text x="512" y="48"  class="t1">⑤ CI</text>
+  <text x="512" y="73"  class="yr">2005+</text>
+  <line x1="476" y1="80" x2="548" y2="80" stroke="var(--svg-blue,rgba(99,179,237,.15))" stroke-width=".6" fill="none"/>
+  <text x="512" y="92"  class="sub">Auto build</text>
+  <text x="512" y="103" class="sub">on commit</text>
+  <text x="512" y="114" class="sub">Test pyramid</text>
+  <text x="512" y="125" class="sub">Fast feedback</text>
+  <text x="512" y="142" class="gain">Bugs caught early</text>
+  <text x="512" y="153" class="pain">Still manual deploy</text>
+
+  <line x1="564" y1="110" x2="576" y2="110" class="con" marker-end="url(#tArr)"/>
+
+  <!-- Phase 6: CD -->
+  <rect x="580" y="30" width="96" height="162" rx="7" class="p5"/>
+  <text x="628" y="48"  class="t5">⑥ CD</text>
+  <text x="628" y="73"  class="yr">2009+</text>
+  <line x1="592" y1="80" x2="664" y2="80" stroke="var(--svg-cyan,rgba(0,229,255,.15))" stroke-width=".6" fill="none"/>
+  <text x="628" y="92"  class="sub">Auto deploy</text>
+  <text x="628" y="103" class="sub">Pipeline stages</text>
+  <text x="628" y="114" class="sub">Canary/Blue-Grn</text>
+  <text x="628" y="125" class="sub">Feature flags</text>
+  <text x="628" y="142" class="gain">100s/day deploy</text>
+  <text x="628" y="153" class="pain">Dev/Ops still split</text>
+
+  <line x1="680" y1="110" x2="692" y2="110" class="con" marker-end="url(#tArr)"/>
+
+  <!-- Phase 7: DevOps -->
+  <rect x="696" y="30" width="96" height="162" rx="7" class="p4"/>
+  <text x="744" y="48"  class="t4">⑦ DEV-</text>
+  <text x="744" y="60"  class="t4">OPS</text>
+  <text x="744" y="73"  class="yr">2009+</text>
+  <line x1="708" y1="80" x2="780" y2="80" stroke="var(--svg-green,rgba(104,211,145,.15))" stroke-width=".6" fill="none"/>
+  <text x="744" y="92"  class="sub">Dev + Ops merged</text>
+  <text x="744" y="103" class="sub">You build, run it</text>
+  <text x="744" y="114" class="sub">Monitor feedback</text>
+  <text x="744" y="125" class="sub">Perf + load test</text>
+  <text x="744" y="142" class="gain">Fast recovery</text>
+  <text x="744" y="153" class="pain">Security still late</text>
+
+  <line x1="796" y1="110" x2="808" y2="110" class="con" marker-end="url(#tArr)"/>
+
+  <!-- Phase 8: DevSecOps -->
+  <rect x="812" y="30" width="72" height="162" rx="7" class="p6"/>
+  <text x="848" y="48"  class="t6">⑧ DEV-</text>
+  <text x="848" y="60"  class="t6">SECOPS</text>
+  <text x="848" y="73"  class="yr">2015+</text>
+  <line x1="820" y1="80" x2="876" y2="80" stroke="var(--svg-red,rgba(252,129,129,.15))" stroke-width=".6" fill="none"/>
+  <text x="848" y="92"  class="sub">Shift-left sec</text>
+  <text x="848" y="103" class="sub">SAST / DAST</text>
+  <text x="848" y="114" class="sub">Container scan</text>
+  <text x="848" y="125" class="sub">SCA / secrets</text>
+  <text x="848" y="142" class="gain">Security built in</text>
+
+  <line x1="888" y1="110" x2="900" y2="110" class="con" marker-end="url(#tArr)"/>
+
+  <!-- Phase 9: Platform Eng -->
+  <rect x="904" y="30" width="52" height="162" rx="7" class="p3"/>
+  <text x="930" y="50"  class="t3">⑨</text>
+  <text x="930" y="62"  class="t3">PLAT.</text>
+  <text x="930" y="74"  class="t3">ENG.</text>
+  <line x1="910" y1="80" x2="950" y2="80" stroke="var(--svg-amber,rgba(246,173,85,.15))" stroke-width=".6" fill="none"/>
+  <text x="930" y="92"  class="sub">IDP</text>
+  <text x="930" y="103" class="sub">GitOps</text>
+  <text x="930" y="114" class="sub">Paved</text>
+  <text x="930" y="125" class="sub">roads</text>
+  <text x="930" y="142" class="gain">Self-serve</text>
+  <text x="930" y="153" class="gain">infra</text>
+
+  <!-- Progress bar underneath -->
+  <line x1="4" y1="196" x2="956" y2="196" stroke="var(--svg-text2,rgba(99,179,237,.12))" stroke-width="1" fill="none"/>
+  <text x="480" y="192" fill="var(--svg-text2,#6a9ab8)" font-family="monospace" font-size="8" text-anchor="middle">DIRECTION OF TRAVEL: more automation · faster feedback · earlier quality · shared ownership</text>
+</svg>

@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 320">
+  <style>
+    .phase { stroke-width:1.2; }
+    .req  { fill:var(--svg-fill1,rgba(99,179,237,.22));  stroke:var(--svg-blue,#63b3ed); }
+    .des  { fill:var(--svg-fill1,rgba(183,148,244,.22)); stroke:var(--svg-purple,#b794f4); }
+    .imp  { fill:var(--svg-fill1,rgba(246,173,85,.22));  stroke:var(--svg-amber,#f6ad55); }
+    .ver  { fill:var(--svg-fill1,rgba(252,129,129,.22)); stroke:var(--svg-red,#fc8181); }
+    .mnt  { fill:var(--svg-fill1,rgba(104,211,145,.22)); stroke:var(--svg-green,#68d391); }
+    .arr  { fill:var(--svg-text2,rgba(99,179,237,.5)); }
+    .con  { stroke:var(--svg-text2,rgba(99,179,237,.3)); fill:none; stroke-width:1.5; stroke-dasharray:4,3; }
+    .t-req{ fill:var(--svg-blue,#63b3ed);   font-family:monospace; font-size:11px; font-weight:700; text-anchor:middle; }
+    .t-des{ fill:var(--svg-purple,#b794f4); font-family:monospace; font-size:11px; font-weight:700; text-anchor:middle; }
+    .t-imp{ fill:var(--svg-amber,#f6ad55);  font-family:monospace; font-size:11px; font-weight:700; text-anchor:middle; }
+    .t-ver{ fill:var(--svg-red,#fc8181);    font-family:monospace; font-size:11px; font-weight:700; text-anchor:middle; }
+    .t-mnt{ fill:var(--svg-green,#68d391);  font-family:monospace; font-size:11px; font-weight:700; text-anchor:middle; }
+    .sub  { fill:var(--svg-text2,#6a9ab8);  font-family:monospace; font-size:8.5px; text-anchor:middle; }
+    .dur  { fill:var(--svg-amber,rgba(246,173,85,.7)); font-family:monospace; font-size:8px; text-anchor:middle; }
+    .pain-h{ fill:var(--svg-red,#fc8181); font-family:monospace; font-size:9px; font-weight:700; }
+    .pain { fill:var(--svg-red,rgba(252,129,129,.75)); font-family:monospace; font-size:8.5px; }
+    .pain li{ list-style:none; }
+    .fb   { stroke:var(--svg-amber,rgba(246,173,85,.35)); fill:none; stroke-width:1; stroke-dasharray:3,3; }
+    .fbt  { fill:var(--svg-amber,rgba(246,173,85,.5)); font-family:monospace; font-size:7.5px; text-anchor:middle; }
+    .lock { fill:var(--svg-red,rgba(252,129,129,.5)); font-family:monospace; font-size:22px; text-anchor:middle; }
+  </style>
+  <defs>
+    <marker id="wArr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" class="arr"/>
+    </marker>
+    <marker id="wArrUp" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="var(--svg-amber,rgba(246,173,85,.4))"/>
+    </marker>
+  </defs>
+
+  <!-- Staircase phases — each shifts right and down -->
+  <rect x="10"  y="20"  width="120" height="52" rx="6" class="req phase"/>
+  <text x="70"  y="42"  class="t-req">📋 REQUIREMENTS</text>
+  <text x="70"  y="55"  class="sub">Gather, freeze, sign-off</text>
+  <text x="70"  y="65"  class="dur">~2–3 months</text>
+  <line x1="130" y1="46" x2="148" y2="46" class="con" marker-end="url(#wArr)"/>
+
+  <rect x="150" y="76"  width="120" height="52" rx="6" class="des phase"/>
+  <text x="210" y="98"  class="t-des">📐 DESIGN</text>
+  <text x="210" y="111" class="sub">Architecture, UI, DB schema</text>
+  <text x="210" y="121" class="dur">~2–3 months</text>
+  <line x1="270" y1="102" x2="288" y2="102" class="con" marker-end="url(#wArr)"/>
+
+  <rect x="290" y="132" width="120" height="52" rx="6" class="imp phase"/>
+  <text x="350" y="154" class="t-imp">💻 IMPLEMENTATION</text>
+  <text x="350" y="167" class="sub">Code all features</text>
+  <text x="350" y="177" class="dur">~4–6 months</text>
+  <line x1="410" y1="158" x2="428" y2="158" class="con" marker-end="url(#wArr)"/>
+
+  <rect x="430" y="188" width="120" height="52" rx="6" class="ver phase"/>
+  <text x="490" y="210" class="t-ver">🧪 VERIFICATION</text>
+  <text x="490" y="223" class="sub">Test everything at once</text>
+  <text x="490" y="233" class="dur">~2–3 months</text>
+  <line x1="550" y1="214" x2="568" y2="214" class="con" marker-end="url(#wArr)"/>
+
+  <rect x="570" y="244" width="100" height="52" rx="6" class="mnt phase"/>
+  <text x="620" y="266" class="t-mnt">🚀 DEPLOY /</text>
+  <text x="620" y="278" class="t-mnt">MAINTAIN</text>
+  <text x="620" y="290" class="dur">Ongoing</text>
+
+  <!-- Expensive late feedback arrow -->
+  <path d="M 620 244 Q 620 20 130 20" class="fb" stroke-width="1.2" marker-end="url(#wArrUp)"/>
+  <text x="385" y="14" class="fbt">❌  Bug found in phase 4 costs 100× more to fix than in phase 1</text>
+
+  <!-- Lock icon at requirements -->
+  <text x="22" y="32" class="lock">🔒</text>
+
+  <!-- Pain points box -->
+  <rect x="10" y="154" width="126" height="132" rx="6" fill="var(--svg-fill2,rgba(252,129,129,.06))" stroke="var(--svg-red,rgba(252,129,129,.25))" stroke-width=".8"/>
+  <text x="73" y="170" class="pain-h">PAIN POINTS</text>
+  <text x="18" y="185" class="pain">⚠ 12–18 month total cycle</text>
+  <text x="18" y="198" class="pain">⚠ Requirements frozen upfront</text>
+  <text x="18" y="211" class="pain">⚠ Customer sees nothing until end</text>
+  <text x="18" y="224" class="pain">⚠ Integration bugs found very late</text>
+  <text x="18" y="237" class="pain">⚠ Change requests = expensive</text>
+  <text x="18" y="250" class="pain">⚠ Separate QA team, not collocated</text>
+  <text x="18" y="263" class="pain">⚠ "Works to spec" ≠ works for user</text>
+  <text x="18" y="276" class="pain">⚠ No working software mid-project</text>
+</svg>

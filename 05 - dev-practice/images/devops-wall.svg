@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 290">
+  <style>
+    .bg    { fill:none; }
+    /* BEFORE side */
+    .dev-b { fill:var(--svg-fill1,rgba(99,179,237,.14));  stroke:var(--svg-blue,#63b3ed);   stroke-width:1.5; }
+    .ops-b { fill:var(--svg-fill1,rgba(246,173,85,.14));  stroke:var(--svg-amber,#f6ad55);  stroke-width:1.5; }
+    .wall  { fill:var(--svg-fill1,rgba(252,129,129,.25)); stroke:var(--svg-red,#fc8181);    stroke-width:2; }
+    .throw { stroke:var(--svg-red,rgba(252,129,129,.6));  fill:none; stroke-width:1.5; stroke-dasharray:5,3; }
+    .tarr  { fill:var(--svg-red,rgba(252,129,129,.6)); }
+    /* AFTER side */
+    .devops{ fill:var(--svg-fill1,rgba(104,211,145,.12)); stroke:var(--svg-green,#68d391);  stroke-width:1.5; }
+    .loop  { stroke:var(--svg-green,rgba(104,211,145,.55)); fill:none; stroke-width:1.8; }
+    .larr  { fill:var(--svg-green,rgba(104,211,145,.6)); }
+    .fb-loop{ stroke:var(--svg-amber,rgba(246,173,85,.5)); fill:none; stroke-width:1.2; stroke-dasharray:4,3; }
+    .flarr { fill:var(--svg-amber,rgba(246,173,85,.55)); }
+    /* text */
+    .h-dev { fill:var(--svg-blue,#63b3ed);   font-family:monospace; font-size:10px; font-weight:700; text-anchor:middle; }
+    .h-ops { fill:var(--svg-amber,#f6ad55);  font-family:monospace; font-size:10px; font-weight:700; text-anchor:middle; }
+    .h-wall{ fill:var(--svg-red,#fc8181);    font-family:monospace; font-size:9px;  font-weight:700; text-anchor:middle; }
+    .h-do  { fill:var(--svg-green,#68d391);  font-family:monospace; font-size:10px; font-weight:700; text-anchor:middle; }
+    .sub   { fill:var(--svg-text2,#6a9ab8);  font-family:monospace; font-size:8px;  text-anchor:middle; }
+    .sub-l { fill:var(--svg-text2,#6a9ab8);  font-family:monospace; font-size:8px; }
+    .gain  { fill:var(--svg-green,rgba(104,211,145,.8)); font-family:monospace; font-size:8px; }
+    .pain  { fill:var(--svg-red,rgba(252,129,129,.8));   font-family:monospace; font-size:8px; }
+    .quote { fill:var(--svg-amber,rgba(246,173,85,.75)); font-family:monospace; font-size:8.5px; text-anchor:middle; font-style:italic; }
+    .sec-t { fill:var(--svg-red,rgba(252,129,129,.75));  font-family:monospace; font-size:8px; text-anchor:middle; }
+    .divl  { stroke:var(--svg-text2,rgba(99,179,237,.15)); fill:none; stroke-dasharray:6,4; }
+    .era   { fill:var(--svg-text2,rgba(99,179,237,.5)); font-family:monospace; font-size:9px; font-weight:700; text-anchor:middle; letter-spacing:1px; }
+    .sml   { fill:var(--svg-fill1,rgba(252,129,129,.08)); stroke:var(--svg-red,rgba(252,129,129,.2)); stroke-width:.8; }
+    .sml-t { fill:var(--svg-red,rgba(252,129,129,.6)); font-family:monospace; font-size:7px; text-anchor:middle; }
+  </style>
+  <defs>
+    <marker id="throwA" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <path d="M0,0 L0,7 L7,3.5 z" class="tarr"/>
+    </marker>
+    <marker id="loopA" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <path d="M0,0 L0,7 L7,3.5 z" class="larr"/>
+    </marker>
+    <marker id="fbA" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <path d="M0,0 L0,7 L7,3.5 z" class="flarr"/>
+    </marker>
+  </defs>
+
+  <!-- ────── BEFORE ────── -->
+  <text x="200" y="18" class="era">BEFORE DEVOPS — "WALL OF CONFUSION"</text>
+
+  <!-- Dev team -->
+  <rect x="10"  y="26" width="150" height="200" rx="8" class="dev-b"/>
+  <text x="85"  y="47" class="h-dev">🖥  DEVELOPMENT</text>
+  <line x1="20" y1="54" x2="150" y2="54" stroke="var(--svg-blue,rgba(99,179,237,.2))" stroke-width=".7" fill="none"/>
+  <text x="85"  y="67"  class="sub">Goal: ship features fast</text>
+  <text x="85"  y="79"  class="sub">Metric: story points done</text>
+  <text x="85"  y="91"  class="sub">Works on my machine ✓</text>
+  <text x="85"  y="103" class="sub">No monitoring access</text>
+  <text x="85"  y="115" class="sub">No prod access</text>
+  <text x="85"  y="133" class="pain">✗ Frequent releases break prod</text>
+  <text x="85"  y="145" class="pain">✗ "Ops fault if it breaks"</text>
+  <text x="85"  y="157" class="pain">✗ No idea what prod looks like</text>
+  <text x="85"  y="169" class="pain">✗ Handover: ZIP + README</text>
+
+  <!-- The Wall -->
+  <rect x="170" y="50"  width="54" height="176" rx="6" class="wall"/>
+  <text x="197" y="100" class="h-wall" transform="rotate(-90,197,138)">WALL OF CONFUSION</text>
+  <text x="197" y="82"  class="sml-t">Blame</text>
+  <text x="197" y="94"  class="sml-t">game</text>
+  <text x="197" y="160" class="sml-t">Ticket</text>
+  <text x="197" y="172" class="sml-t">queue</text>
+
+  <!-- Throw arrow over wall -->
+  <path d="M 140 80 Q 197 36 254 80" class="throw" marker-end="url(#throwA)"/>
+  <text x="197" y="32" fill="var(--svg-red,rgba(252,129,129,.7))" font-family="monospace" font-size="8.5" text-anchor="middle">"here, you deal with it" →</text>
+
+  <!-- Ops team -->
+  <rect x="234" y="26" width="150" height="200" rx="8" class="ops-b"/>
+  <text x="309" y="47" class="h-ops">⚙  OPERATIONS</text>
+  <line x1="244" y1="54" x2="374" y2="54" stroke="var(--svg-amber,rgba(246,173,85,.2))" stroke-width=".7" fill="none"/>
+  <text x="309" y="67"  class="sub">Goal: keep prod stable</text>
+  <text x="309" y="79"  class="sub">Metric: uptime SLA</text>
+  <text x="309" y="91"  class="sub">Change = risk</text>
+  <text x="309" y="103" class="sub">Change freeze windows</text>
+  <text x="309" y="115" class="sub">Manual deploy scripts</text>
+  <text x="309" y="133" class="pain">✗ "Dev fault if it breaks"</text>
+  <text x="309" y="145" class="pain">✗ No context on new code</text>
+  <text x="309" y="157" class="pain">✗ Midnight pagers, burnout</text>
+  <text x="309" y="169" class="pain">✗ Bottleneck on all releases</text>
+
+  <text x="197" y="248" class="quote">Result: slow, painful releases · blame culture · low quality in production</text>
+
+  <!-- divider -->
+  <line x1="420" y1="10" x2="420" y2="280" class="divl"/>
+
+  <!-- ────── AFTER ────── -->
+  <text x="630" y="18" class="era">DEVOPS — SHARED OWNERSHIP</text>
+
+  <!-- DevOps loop diagram -->
+  <rect x="430" y="26" width="400" height="200" rx="8" class="devops"/>
+  <text x="630" y="47" class="h-do">🔄  ONE TEAM — SHARED OWNERSHIP</text>
+  <line x1="440" y1="54" x2="820" y2="54" stroke="var(--svg-green,rgba(104,211,145,.18))" stroke-width=".7" fill="none"/>
+
+  <!-- The 8-loop: Plan, Code, Build, Test, Release, Deploy, Operate, Monitor -->
+  <!-- Simplified as two rows linked by arrows -->
+  <!-- Top row -->
+  <rect x="444" y="62"  width="64" height="28" rx="4" fill="var(--svg-fill1,rgba(104,211,145,.22))" stroke="var(--svg-green,rgba(104,211,145,.5))" stroke-width=".9"/>
+  <text x="476" y="76" fill="var(--svg-green,#68d391)" font-family="monospace" font-size="8.5" font-weight="700" text-anchor="middle">PLAN</text>
+  <text x="476" y="86" fill="var(--svg-text2,#6a9ab8)" font-family="monospace" font-size="7" text-anchor="middle">backlog + ops input</text>
+  <line x1="510" y1="76" x2="522" y2="76" class="loop" stroke-width="1.2" marker-end="url(#loopA)"/>
+
+  <rect x="524" y="62"  width="64" height="28" rx="4" fill="var(--svg-fill1,rgba(104,211,145,.22))" stroke="var(--svg-green,rgba(104,211,145,.5))" stroke-width=".9"/>
+  <text x="556" y="76" fill="var(--svg-green,#68d391)" font-family="monospace" font-size="8.5" font-weight="700" text-anchor="middle">CODE</text>
+  <text x="556" y="86" fill="var(--svg-text2,#6a9ab8)" font-family="monospace" font-size="7" text-anchor="middle">feature + tests</text>
+  <line x1="590" y1="76" x2="602" y2="76" class="loop" stroke-width="1.2" marker-end="url(#loopA)"/>
+
+  <rect x="604" y="62"  width="64" height="28" rx="4" fill="var(--svg-fill1,rgba(104,211,145,.22))" stroke="var(--svg-green,rgba(104,211,145,.5))" stroke-width=".9"/>
+  <text x="636" y="76" fill="var(--svg-green,#68d391)" font-family="monospace" font-size="8.5" font-weight="700" text-anchor="middle">BUILD</text>
+  <text x="636" y="86" fill="var(--svg-text2,#6a9ab8)" font-family="monospace" font-size="7" text-anchor="middle">CI pipeline</text>
+  <line x1="670" y1="76" x2="682" y2="76" class="loop" stroke-width="1.2" marker-end="url(#loopA)"/>
+
+  <rect x="684" y="62"  width="64" height="28" rx="4" fill="var(--svg-fill1,rgba(104,211,145,.22))" stroke="var(--svg-green,rgba(104,211,145,.5))" stroke-width=".9"/>
+  <text x="716" y="76" fill="var(--svg-green,#68d391)" font-family="monospace" font-size="8.5" font-weight="700" text-anchor="middle">TEST</text>
+  <text x="716" y="86" fill="var(--svg-text2,#6a9ab8)" font-family="monospace" font-size="7" text-anchor="middle">auto + perf tests</text>
+  <line x1="750" y1="76" x2="762" y2="76" class="loop" stroke-width="1.2" marker-end="url(#loopA)"/>
+
+  <!-- Right turn down -->
+  <rect x="764" y="62"  width="56" height="28" rx="4" fill="var(--svg-fill1,rgba(99,179,237,.22))" stroke="var(--svg-blue,rgba(99,179,237,.5))" stroke-width=".9"/>
+  <text x="792" y="76" fill="var(--svg-blue,#63b3ed)" font-family="monospace" font-size="8.5" font-weight="700" text-anchor="middle">RELEASE</text>
+  <text x="792" y="86" fill="var(--svg-text2,#6a9ab8)" font-family="monospace" font-size="7" text-anchor="middle">versioned artifact</text>
+  <line x1="792" y1="90" x2="792" y2="110" class="loop" stroke-width="1.2" marker-end="url(#loopA)"/>
+
+  <!-- Bottom row (right to left) -->
+  <rect x="764" y="112" width="56" height="28" rx="4" fill="var(--svg-fill1,rgba(0,229,255,.22))" stroke="var(--svg-cyan,rgba(0,229,255,.5))" stroke-width=".9"/>
+  <text x="792" y="126" fill="var(--svg-cyan,#00e5ff)" font-family="monospace" font-size="8.5" font-weight="700" text-anchor="middle">DEPLOY</text>
+  <text x="792" y="136" fill="var(--svg-text2,#6a9ab8)" font-family="monospace" font-size="7" text-anchor="middle">canary/blue-green</text>
+  <line x1="762" y1="126" x2="750" y2="126" class="loop" stroke-width="1.2" marker-end="url(#loopA)"/>
+
+  <rect x="684" y="112" width="64" height="28" rx="4" fill="var(--svg-fill1,rgba(183,148,244,.22))" stroke="var(--svg-purple,rgba(183,148,244,.5))" stroke-width=".9"/>
+  <text x="716" y="126" fill="var(--svg-purple,#b794f4)" font-family="monospace" font-size="8.5" font-weight="700" text-anchor="middle">OPERATE</text>
+  <text x="716" y="136" fill="var(--svg-text2,#6a9ab8)" font-family="monospace" font-size="7" text-anchor="middle">you run it</text>
+  <line x1="682" y1="126" x2="670" y2="126" class="loop" stroke-width="1.2" marker-end="url(#loopA)"/>
+
+  <rect x="604" y="112" width="64" height="28" rx="4" fill="var(--svg-fill1,rgba(183,148,244,.22))" stroke="var(--svg-purple,rgba(183,148,244,.5))" stroke-width=".9"/>
+  <text x="636" y="126" fill="var(--svg-purple,#b794f4)" font-family="monospace" font-size="8.5" font-weight="700" text-anchor="middle">MONITOR</text>
+  <text x="636" y="136" fill="var(--svg-text2,#6a9ab8)" font-family="monospace" font-size="7" text-anchor="middle">metrics+logs+traces</text>
+  <line x1="602" y1="126" x2="590" y2="126" class="loop" stroke-width="1.2" marker-end="url(#loopA)"/>
+
+  <rect x="524" y="112" width="64" height="28" rx="4" fill="var(--svg-fill1,rgba(246,173,85,.22))" stroke="var(--svg-amber,rgba(246,173,85,.5))" stroke-width=".9"/>
+  <text x="556" y="126" fill="var(--svg-amber,#f6ad55)" font-family="monospace" font-size="8.5" font-weight="700" text-anchor="middle">FEEDBACK</text>
+  <text x="556" y="136" fill="var(--svg-text2,#6a9ab8)" font-family="monospace" font-size="7" text-anchor="middle">ops → backlog</text>
+  <line x1="522" y1="126" x2="510" y2="126" class="loop" stroke-width="1.2" marker-end="url(#loopA)"/>
+
+  <!-- Left turn up = close loop -->
+  <rect x="444" y="112" width="64" height="28" rx="4" fill="var(--svg-fill1,rgba(246,173,85,.22))" stroke="var(--svg-amber,rgba(246,173,85,.5))" stroke-width=".9"/>
+  <text x="476" y="126" fill="var(--svg-amber,#f6ad55)" font-family="monospace" font-size="8.5" font-weight="700" text-anchor="middle">IMPROVE</text>
+  <text x="476" y="136" fill="var(--svg-text2,#6a9ab8)" font-family="monospace" font-size="7" text-anchor="middle">perf + reliability</text>
+  <line x1="476" y1="112" x2="476" y2="92" class="loop" stroke-width="1.2" marker-end="url(#loopA)"/>
+
+  <!-- Outcomes -->
+  <text x="444" y="157" class="gain">✓ Dev included in on-call — understands production reality</text>
+  <text x="444" y="169" class="gain">✓ Ops included in sprint planning — infrastructure as code</text>
+  <text x="444" y="181" class="gain">✓ Monitoring feedback drives next sprint priorities</text>
+  <text x="444" y="193" class="gain">✓ Mean Time to Recovery (MTTR) drops from days to minutes</text>
+  <text x="444" y="207" class="gain">✓ "You build it, you run it" — Werner Vogels, Amazon CTO</text>
+
+  <!-- Security still late callout -->
+  <rect x="440" y="218" width="394" height="14" rx="4" class="sml"/>
+  <text x="637" y="228" class="sec-t">⚠  Security team still reviews at the end — enters DevSecOps (next slide)</text>
+</svg>

@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 230">
+  <style>
+    .stage { stroke-width:1.3; }
+    .s-src { fill:var(--svg-fill1,rgba(99,179,237,.16));  stroke:var(--svg-blue,#63b3ed); }
+    .s-bld { fill:var(--svg-fill1,rgba(183,148,244,.16)); stroke:var(--svg-purple,#b794f4); }
+    .s-tst { fill:var(--svg-fill1,rgba(104,211,145,.16)); stroke:var(--svg-green,#68d391); }
+    .s-sec { fill:var(--svg-fill1,rgba(252,129,129,.16)); stroke:var(--svg-red,#fc8181); }
+    .s-stg { fill:var(--svg-fill1,rgba(246,173,85,.16));  stroke:var(--svg-amber,#f6ad55); }
+    .s-prd { fill:var(--svg-fill1,rgba(0,229,255,.16));   stroke:var(--svg-cyan,#00e5ff); }
+    .s-mon { fill:var(--svg-fill1,rgba(183,148,244,.16)); stroke:var(--svg-purple,#b794f4); }
+    .gate  { fill:var(--svg-fill1,rgba(104,211,145,.25)); stroke:var(--svg-green,#68d391); stroke-width:1.5; }
+    .gate-f{ fill:var(--svg-fill1,rgba(252,129,129,.25)); stroke:var(--svg-red,#fc8181); stroke-width:1.5; }
+    .arr   { fill:var(--svg-text2,rgba(99,179,237,.55)); }
+    .con   { stroke:var(--svg-text2,rgba(99,179,237,.4)); fill:none; stroke-width:1.4; }
+    .con-fb{ stroke:var(--svg-amber,rgba(246,173,85,.45)); fill:none; stroke-width:1; stroke-dasharray:4,3; }
+    .h-src { fill:var(--svg-blue,#63b3ed);   font-family:monospace; font-size:9px; font-weight:700; text-anchor:middle; }
+    .h-bld { fill:var(--svg-purple,#b794f4); font-family:monospace; font-size:9px; font-weight:700; text-anchor:middle; }
+    .h-tst { fill:var(--svg-green,#68d391);  font-family:monospace; font-size:9px; font-weight:700; text-anchor:middle; }
+    .h-sec { fill:var(--svg-red,#fc8181);    font-family:monospace; font-size:9px; font-weight:700; text-anchor:middle; }
+    .h-stg { fill:var(--svg-amber,#f6ad55);  font-family:monospace; font-size:9px; font-weight:700; text-anchor:middle; }
+    .h-prd { fill:var(--svg-cyan,#00e5ff);   font-family:monospace; font-size:9px; font-weight:700; text-anchor:middle; }
+    .h-mon { fill:var(--svg-purple,#b794f4); font-family:monospace; font-size:9px; font-weight:700; text-anchor:middle; }
+    .sub   { fill:var(--svg-text2,#6a9ab8);  font-family:monospace; font-size:7.5px; text-anchor:middle; }
+    .gate-t{ fill:var(--svg-green,rgba(104,211,145,.8)); font-family:monospace; font-size:7px; text-anchor:middle; font-weight:700; }
+    .time  { fill:var(--svg-amber,rgba(246,173,85,.65)); font-family:monospace; font-size:8.5px; text-anchor:middle; font-weight:700; }
+    .tool  { fill:var(--svg-text2,rgba(99,179,237,.5)); font-family:monospace; font-size:7px; text-anchor:middle; }
+  </style>
+  <defs>
+    <marker id="pArr" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <path d="M0,0 L0,7 L7,3.5 z" class="arr"/>
+    </marker>
+    <marker id="fbArr" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <path d="M0,0 L0,7 L7,3.5 z" fill="var(--svg-amber,rgba(246,173,85,.5))"/>
+    </marker>
+  </defs>
+
+  <!-- Stage widths: 6 stages × ~108px + margins -->
+
+  <!-- 1. Source Control -->
+  <rect x="6"   y="40" width="104" height="124" rx="7" class="s-src stage"/>
+  <text x="58"  y="58" class="h-src">GIT PUSH</text>
+  <line x1="14" y1="64" x2="102" y2="64" stroke="var(--svg-blue,rgba(99,179,237,.15))" stroke-width=".7" fill="none"/>
+  <text x="58"  y="76"  class="sub">Feature branch</text>
+  <text x="58"  y="87"  class="sub">Code review / PR</text>
+  <text x="58"  y="98"  class="sub">Merge to main</text>
+  <text x="58"  y="109" class="sub">Triggers pipeline</text>
+  <text x="58"  y="125" class="tool">GitHub / GitLab</text>
+  <text x="58"  y="136" class="tool">Bitbucket / Azure Repos</text>
+  <line x1="112" y1="102" x2="126" y2="102" class="con" marker-end="url(#pArr)"/>
+
+  <!-- 2. Build -->
+  <rect x="130" y="40" width="104" height="124" rx="7" class="s-bld stage"/>
+  <text x="182" y="58" class="h-bld">BUILD</text>
+  <line x1="138" y1="64" x2="226" y2="64" stroke="var(--svg-purple,rgba(183,148,244,.15))" stroke-width=".7" fill="none"/>
+  <text x="182" y="76"  class="sub">Compile / transpile</text>
+  <text x="182" y="87"  class="sub">Dependency resolve</text>
+  <text x="182" y="98"  class="sub">Docker image build</text>
+  <text x="182" y="109" class="sub">Push to registry</text>
+  <text x="182" y="125" class="tool">Maven / Gradle</text>
+  <text x="182" y="136" class="tool">npm / pip / cargo</text>
+  <line x1="236" y1="102" x2="250" y2="102" class="con" marker-end="url(#pArr)"/>
+
+  <!-- 3. Test -->
+  <rect x="254" y="40" width="104" height="124" rx="7" class="s-tst stage"/>
+  <text x="306" y="58" class="h-tst">TEST</text>
+  <line x1="262" y1="64" x2="350" y2="64" stroke="var(--svg-green,rgba(104,211,145,.15))" stroke-width=".7" fill="none"/>
+  <text x="306" y="76"  class="sub">Unit tests</text>
+  <text x="306" y="87"  class="sub">Integration tests</text>
+  <text x="306" y="98"  class="sub">API / contract tests</text>
+  <text x="306" y="109" class="sub">Performance / load</text>
+  <text x="306" y="125" class="tool">JUnit / Jest / PyTest</text>
+  <text x="306" y="136" class="tool">k6 / Gatling / JMeter</text>
+  <line x1="360" y1="102" x2="374" y2="102" class="con" marker-end="url(#pArr)"/>
+
+  <!-- 4. Security Scan -->
+  <rect x="378" y="40" width="104" height="124" rx="7" class="s-sec stage"/>
+  <text x="430" y="58" class="h-sec">SECURITY</text>
+  <line x1="386" y1="64" x2="474" y2="64" stroke="var(--svg-red,rgba(252,129,129,.15))" stroke-width=".7" fill="none"/>
+  <text x="430" y="76"  class="sub">SAST (static code)</text>
+  <text x="430" y="87"  class="sub">SCA (dependencies)</text>
+  <text x="430" y="98"  class="sub">Container image scan</text>
+  <text x="430" y="109" class="sub">Secrets detection</text>
+  <text x="430" y="125" class="tool">Snyk / Trivy / Grype</text>
+  <text x="430" y="136" class="tool">SonarQube / Checkov</text>
+  <line x1="484" y1="102" x2="498" y2="102" class="con" marker-end="url(#pArr)"/>
+
+  <!-- 5. Staging Deploy -->
+  <rect x="502" y="40" width="104" height="124" rx="7" class="s-stg stage"/>
+  <text x="554" y="58" class="h-stg">STAGING</text>
+  <line x1="510" y1="64" x2="598" y2="64" stroke="var(--svg-amber,rgba(246,173,85,.15))" stroke-width=".7" fill="none"/>
+  <text x="554" y="76"  class="sub">Deploy to staging</text>
+  <text x="554" y="87"  class="sub">E2E / smoke tests</text>
+  <text x="554" y="98"  class="sub">DAST (dynamic scan)</text>
+  <text x="554" y="109" class="sub">Approval gate</text>
+  <text x="554" y="125" class="tool">Selenium / Playwright</text>
+  <text x="554" y="136" class="tool">OWASP ZAP / Burp</text>
+  <line x1="608" y1="102" x2="622" y2="102" class="con" marker-end="url(#pArr)"/>
+
+  <!-- 6. Production Deploy -->
+  <rect x="626" y="40" width="104" height="124" rx="7" class="s-prd stage"/>
+  <text x="678" y="58" class="h-prd">PRODUCTION</text>
+  <line x1="634" y1="64" x2="722" y2="64" stroke="var(--svg-cyan,rgba(0,229,255,.15))" stroke-width=".7" fill="none"/>
+  <text x="678" y="76"  class="sub">Canary 1% → 100%</text>
+  <text x="678" y="87"  class="sub">Blue/green cutover</text>
+  <text x="678" y="98"  class="sub">Auto rollback</text>
+  <text x="678" y="109" class="sub">Feature flags</text>
+  <text x="678" y="125" class="tool">Kubernetes rolling</text>
+  <text x="678" y="136" class="tool">Argo Rollouts / Spinnaker</text>
+  <line x1="732" y1="102" x2="746" y2="102" class="con" marker-end="url(#pArr)"/>
+
+  <!-- 7. Monitor / Feedback -->
+  <rect x="750" y="40" width="104" height="124" rx="7" class="s-mon stage"/>
+  <text x="802" y="58" class="h-mon">OBSERVE</text>
+  <line x1="758" y1="64" x2="846" y2="64" stroke="var(--svg-purple,rgba(183,148,244,.15))" stroke-width=".7" fill="none"/>
+  <text x="802" y="76"  class="sub">Metrics (Prometheus)</text>
+  <text x="802" y="87"  class="sub">Logs (Loki / ELK)</text>
+  <text x="802" y="98"  class="sub">Traces (Jaeger)</text>
+  <text x="802" y="109" class="sub">Alerts → auto fix</text>
+  <text x="802" y="125" class="tool">Grafana / Datadog</text>
+  <text x="802" y="136" class="tool">PagerDuty / OpsGenie</text>
+
+  <!-- Quality gates -->
+  <rect x="245" y="170" width="48" height="20" rx="10" class="gate"/>
+  <text x="269" y="184" class="gate-t">QUALITY GATE</text>
+  <rect x="369" y="170" width="48" height="20" rx="10" class="gate"/>
+  <text x="393" y="184" class="gate-t">QUALITY GATE</text>
+  <rect x="493" y="170" width="48" height="20" rx="10" class="gate-f"/>
+  <text x="517" y="184" class="gate-t" fill="var(--svg-red,rgba(252,129,129,.8))">SECURITY GATE</text>
+
+  <!-- Feedback arrow from monitor back to commit -->
+  <path d="M 802 166 Q 802 215 430 215 Q 58 215 58 166" class="con-fb" marker-end="url(#fbArr)"/>
+  <text x="430" y="210" fill="var(--svg-amber,rgba(246,173,85,.55))" font-family="monospace" font-size="8" text-anchor="middle">⟳  operational feedback → new backlog items · SLO violations → bug fix commits</text>
+
+  <!-- Time labels top -->
+  <text x="430" y="18"  class="time">COMMIT → PRODUCTION  ≈  minutes to hours  (was: 6–18 months)</text>
+  <text x="430" y="30"  class="tool">Every stage automated · No manual handoffs · Full audit trail</text>
+</svg>
