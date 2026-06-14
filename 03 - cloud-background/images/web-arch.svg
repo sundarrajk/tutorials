@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 260">
+  <style>
+    .bg       { fill: var(--svg-bg, #0d1117); }
+    .box      { fill: var(--svg-card, #161b22); }
+    .web      { stroke: var(--svg-blue, #58a6ff); stroke-width: 1.5; }
+    .app      { stroke: var(--svg-accent, #f0a500); stroke-width: 1.5; }
+    .db       { stroke: var(--svg-green, #3fb950); stroke-width: 1.5; }
+    .tier-web { fill: var(--svg-blue, #58a6ff); }
+    .tier-app { fill: var(--svg-accent, #f0a500); }
+    .tier-db  { fill: var(--svg-green, #3fb950); }
+    .lbl      { fill: var(--svg-text2, #8b949e); font-family: monospace; font-size: 12px;
+                letter-spacing: 1px; text-transform: uppercase; text-anchor: middle; }
+    .name     { fill: var(--svg-text, #e6edf3); font-family: monospace; font-size: 13px;
+                font-weight: 600; text-anchor: middle; }
+    .ip       { fill: var(--svg-green, #3fb950); font-family: monospace; font-size: 12px;
+                text-anchor: middle; }
+    .line     { stroke-width: 1.5; stroke-dasharray: 4 3; fill: none; }
+    .l-web    { stroke: var(--svg-blue, #58a6ff); opacity: 0.5; }
+    .l-app    { stroke: var(--svg-accent, #f0a500); opacity: 0.5; }
+  </style>
+
+  <rect class="bg" width="580" height="260"/>
+
+  <!-- Tier bands — tall enough for label + 3 boxes -->
+  <rect class="tier-web" x="10" y="14" width="560" height="72" rx="6" opacity=".04"/>
+  <rect class="tier-app" x="10" y="102" width="560" height="72" rx="6" opacity=".04"/>
+  <rect class="tier-db"  x="10" y="188" width="560" height="58" rx="6" opacity=".04"/>
+
+  <!-- Tier labels -->
+  <text class="lbl" x="34" y="30">Web Tier</text>
+  <text class="lbl" x="34" y="118">App Tier</text>
+  <text class="lbl" x="34" y="204">Data Tier</text>
+
+  <!-- Web servers — box 110×44, text centred with 14px spacing -->
+  <rect class="box web" x="64"  y="30" width="110" height="48" rx="5"/>
+  <text class="name"    x="119" y="50">WEB-01</text>
+  <text class="ip"      x="119" y="68">10.0.1.10 : 80</text>
+
+  <rect class="box web" x="235" y="30" width="110" height="48" rx="5"/>
+  <text class="name"    x="290" y="50">WEB-02</text>
+  <text class="ip"      x="290" y="68">10.0.1.11 : 80</text>
+
+  <rect class="box web" x="406" y="30" width="110" height="48" rx="5"/>
+  <text class="name"    x="461" y="50">WEB-03</text>
+  <text class="ip"      x="461" y="68">10.0.1.12 : 80</text>
+
+  <!-- Web → App connectors -->
+  <line class="line l-web" x1="119" y1="78" x2="210" y2="112"/>
+  <line class="line l-web" x1="290" y1="78" x2="290" y2="112"/>
+  <line class="line l-web" x1="461" y1="78" x2="370" y2="112"/>
+
+  <!-- App servers — box 110×44 -->
+  <rect class="box app" x="64"  y="112" width="110" height="48" rx="5"/>
+  <text class="name"    x="119" y="132">APP-01</text>
+  <text class="ip"      x="119" y="150">10.0.2.20 : 8080</text>
+
+  <rect class="box app" x="235" y="112" width="110" height="48" rx="5"/>
+  <text class="name"    x="290" y="132">APP-02</text>
+  <text class="ip"      x="290" y="150">10.0.2.21 : 8080</text>
+
+  <rect class="box app" x="406" y="112" width="110" height="48" rx="5"/>
+  <text class="name"    x="461" y="132">APP-03</text>
+  <text class="ip"      x="461" y="150">10.0.2.22 : 8080</text>
+
+  <!-- App → DB connectors -->
+  <line class="line l-app" x1="119" y1="160" x2="238" y2="196"/>
+  <line class="line l-app" x1="290" y1="160" x2="290" y2="196"/>
+  <line class="line l-app" x1="461" y1="160" x2="342" y2="196"/>
+
+  <!-- DB server — box 176×44 -->
+  <rect class="box db" x="202" y="196" width="176" height="48" rx="5"/>
+  <text class="name"   x="290" y="216">DB-PRIMARY</text>
+  <text class="ip"     x="290" y="234">10.0.3.30 : 5432</text>
+</svg>

@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 280">
+  <style>
+    .bg    { fill: var(--svg-bg, #0d1117); }
+    .box   { fill: var(--svg-card, #161b22); stroke-width: 1.5; }
+    .bapp  { stroke: var(--svg-blue, #58a6ff); }
+    .besb  { stroke: var(--svg-accent, #f0a500); }
+    <!-- title and labels -->
+    .tit   { fill: var(--svg-text2, #8b949e); font-family: monospace; font-size: 13px;
+             letter-spacing: 1.5px; text-transform: uppercase; text-anchor: middle; }
+    <!-- app box text: two lines, each 16px apart -->
+    .name  { fill: var(--svg-text, #e6edf3); font-family: monospace; font-size: 13px;
+             font-weight: 600; text-anchor: middle; }
+    .sub   { fill: var(--svg-text2, #8b949e); font-family: monospace; font-size: 12px;
+             text-anchor: middle; }
+    <!-- ESB text -->
+    .esb-n { fill: var(--svg-text, #e6edf3); font-family: monospace; font-size: 14px;
+             font-weight: 700; text-anchor: middle; }
+    .esb-s { fill: var(--svg-text2, #8b949e); font-family: monospace; font-size: 12px;
+             text-anchor: middle; }
+    .conn  { stroke: var(--svg-accent, #f0a500); stroke-width: 1.5; stroke-dasharray: 3 2;
+             fill: none; opacity: 0.6; }
+  </style>
+
+  <rect class="bg" width="600" height="280"/>
+
+  <text class="tit" x="300" y="20">On-Premises Enterprise Service Bus (ESB)</text>
+
+  <!-- Left app column — boxes 130×46 with 18px between name/sub, 62px row pitch -->
+  <!-- Row 1 -->
+  <rect class="box bapp" x="14"  y="34"  width="130" height="46" rx="5"/>
+  <text class="name"     x="79"  y="53">CRM App</text>
+  <text class="sub"      x="79"  y="70">10.0.5.10 : 7070</text>
+  <!-- Row 2 -->
+  <rect class="box bapp" x="14"  y="96"  width="130" height="46" rx="5"/>
+  <text class="name"     x="79"  y="115">ERP App</text>
+  <text class="sub"      x="79"  y="132">10.0.5.11 : 7071</text>
+  <!-- Row 3 -->
+  <rect class="box bapp" x="14"  y="158" width="130" height="46" rx="5"/>
+  <text class="name"     x="79"  y="177">HR App</text>
+  <text class="sub"      x="79"  y="194">10.0.5.12 : 7072</text>
+  <!-- Row 4 -->
+  <rect class="box bapp" x="14"  y="220" width="130" height="46" rx="5"/>
+  <text class="name"     x="79"  y="239">Finance App</text>
+  <text class="sub"      x="79"  y="256">10.0.5.13 : 7073</text>
+
+  <!-- Right app column -->
+  <!-- Row 1 -->
+  <rect class="box bapp" x="456" y="34"  width="130" height="46" rx="5"/>
+  <text class="name"     x="521" y="53">Supply Chain</text>
+  <text class="sub"      x="521" y="70">10.0.6.10 : 8070</text>
+  <!-- Row 2 -->
+  <rect class="box bapp" x="456" y="96"  width="130" height="46" rx="5"/>
+  <text class="name"     x="521" y="115">Billing App</text>
+  <text class="sub"      x="521" y="132">10.0.6.11 : 8071</text>
+  <!-- Row 3 -->
+  <rect class="box bapp" x="456" y="158" width="130" height="46" rx="5"/>
+  <text class="name"     x="521" y="177">Inventory</text>
+  <text class="sub"      x="521" y="194">10.0.6.12 : 8072</text>
+  <!-- Row 4 -->
+  <rect class="box bapp" x="456" y="220" width="130" height="46" rx="5"/>
+  <text class="name"     x="521" y="239">Analytics</text>
+  <text class="sub"      x="521" y="256">10.0.6.13 : 8073</text>
+
+  <!-- ESB box — centre, tall enough for two text lines -->
+  <rect class="box besb" x="168" y="110" width="264" height="62" rx="8"/>
+  <text class="esb-n" x="300" y="135">Enterprise Service Bus</text>
+  <text class="esb-s" x="300" y="155">ESB-01 · 10.0.4.40 : 61616</text>
+
+  <!-- Left connections to ESB midpoint y≈141 -->
+  <line class="conn" x1="144" y1="57"  x2="168" y2="128"/>
+  <line class="conn" x1="144" y1="119" x2="168" y2="135"/>
+  <line class="conn" x1="144" y1="181" x2="168" y2="148"/>
+  <line class="conn" x1="144" y1="243" x2="168" y2="158"/>
+
+  <!-- Right connections from ESB -->
+  <line class="conn" x1="432" y1="128" x2="456" y2="57"/>
+  <line class="conn" x1="432" y1="135" x2="456" y2="119"/>
+  <line class="conn" x1="432" y1="148" x2="456" y2="181"/>
+  <line class="conn" x1="432" y1="158" x2="456" y2="243"/>
+</svg>

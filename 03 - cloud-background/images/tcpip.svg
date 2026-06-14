@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 200">
+  <style>
+    .bg   { fill: var(--svg-bg, #0d1117); }
+    .box  { fill: var(--svg-card, #161b22); }
+    .bc   { stroke: var(--svg-blue, #58a6ff); stroke-width: 1.5; }
+    .bs   { stroke: var(--svg-accent, #f0a500); stroke-width: 1.5; }
+    .name { fill: var(--svg-text, #e6edf3); font-family: monospace; font-size: 13px; font-weight: 600; text-anchor: middle; }
+    .ip   { fill: var(--svg-green, #3fb950); font-family: monospace; font-size: 13px; font-weight: 600; text-anchor: middle; }
+    .port { fill: var(--svg-accent, #f0a500); font-family: monospace; font-size: 13px; font-weight: 600; text-anchor: middle; }
+    .sub  { fill: var(--svg-text2, #8b949e); font-family: monospace; font-size: 12px; text-anchor: middle; }
+    .pipe { stroke: var(--svg-accent, #f0a500); stroke-width: 2.5; fill: none; }
+    .arr  { fill: var(--svg-accent, #f0a500); }
+    .anno { fill: var(--svg-text2, #8b949e); font-family: monospace; font-size: 12px; text-anchor: middle; }
+    .dup  { fill: var(--svg-blue, #58a6ff); font-family: monospace; font-size: 12px; text-anchor: middle; }
+  </style>
+
+  <rect class="bg" width="560" height="200"/>
+
+  <!-- Client box — 150×70 for 3 lines of text -->
+  <rect class="box bc" x="20"  y="60" width="150" height="70" rx="6"/>
+  <text class="name" x="95"  y="85">CLIENT APP</text>
+  <text class="ip"   x="95"  y="103">192.168.1.5</text>
+  <text class="sub"  x="95"  y="120">ephemeral port</text>
+
+  <!-- Server box — 150×70 -->
+  <rect class="box bs" x="390" y="60" width="150" height="70" rx="6"/>
+  <text class="name" x="465" y="85">SERVER APP</text>
+  <text class="ip"   x="465" y="103">192.168.1.10</text>
+  <text class="port" x="465" y="120">port 8080</text>
+
+  <!-- TCP pipe -->
+  <line class="pipe" x1="170" y1="95" x2="390" y2="95"/>
+  <!-- Bidirectional arrows -->
+  <polygon class="arr" points="384,90 396,95 384,100"/>
+  <polygon class="arr" points="176,90 164,95 176,100"/>
+
+  <!-- Pipe labels -->
+  <text class="anno" x="280" y="84">TCP Connection</text>
+  <text class="anno" x="280" y="112">192.168.1.10 : 8080</text>
+
+  <!-- Request / Response labels -->
+  <text class="dup" x="228" y="72">Request →</text>
+  <text class="dup" x="332" y="72">← Response</text>
+
+  <!-- Full-duplex caption -->
+  <text class="dup" x="280" y="152">Full-Duplex — data flows in both directions simultaneously</text>
+
+  <!-- Bottom explainer -->
+  <text class="sub" x="280" y="176">IP Address identifies the machine · Port identifies the application</text>
+</svg>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 140">
+  <style>
+    .bg   { fill: var(--svg-bg, #0d1117); }
+    .lbl  { font-family: monospace; font-size: 12px; font-weight: 700; text-anchor: middle; fill: #000; }
+    .sub  { font-family: monospace; font-size: 11px; text-anchor: middle; fill: rgba(0,0,0,0.8); }
+    .head { fill: var(--svg-text2, #8b949e); font-family: monospace; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; text-anchor: middle; }
+  </style>
+
+  <rect class="bg" width="600" height="140"/>
+  <text class="head" x="300" y="18">Hardware Procurement Timeline — Before Cloud</text>
+
+  <!-- Phase bars — each 110px wide, height 62, with room for 2 text lines -->
+  <!-- Budget Approval -->
+  <rect x="12"  y="30" width="110" height="62" rx="4" fill="#f85149"/>
+  <text class="lbl" x="67"  y="56">Budget</text>
+  <text class="lbl" x="67"  y="71">Approval</text>
+  <text class="sub" x="67"  y="86">Weeks</text>
+
+  <!-- Vendor Procurement -->
+  <rect x="126" y="30" width="110" height="62" rx="4" fill="#e05b00"/>
+  <text class="lbl" x="181" y="56">Vendor</text>
+  <text class="lbl" x="181" y="71">Procurement</text>
+  <text class="sub" x="181" y="86">Weeks</text>
+
+  <!-- Shipping -->
+  <rect x="240" y="30" width="110" height="62" rx="4" fill="#f0a500"/>
+  <text class="lbl" x="295" y="56">Shipping</text>
+  <text class="lbl" x="295" y="71">&amp; Delivery</text>
+  <text class="sub" x="295" y="86">Days–Weeks</text>
+
+  <!-- Rack & Cable -->
+  <rect x="354" y="30" width="110" height="62" rx="4" fill="#7abf4e"/>
+  <text class="lbl" x="409" y="56">Rack</text>
+  <text class="lbl" x="409" y="71">&amp; Cable</text>
+  <text class="sub" x="409" y="86">Days</text>
+
+  <!-- OS Install & Deploy -->
+  <rect x="468" y="30" width="120" height="62" rx="4" fill="#3fb950"/>
+  <text class="lbl" x="528" y="56">OS Install</text>
+  <text class="lbl" x="528" y="71">&amp; Deploy</text>
+  <text class="sub" x="528" y="86">Days</text>
+
+  <text class="head" x="300" y="122">Total: weeks to months before first line of application code runs in production</text>
+</svg>

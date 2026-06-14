@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 228">
+  <style>
+    .bg   { fill: var(--svg-bg, #0d1117); }
+    .col  { fill: var(--svg-card, #161b22); }
+    .cold { stroke: var(--svg-accent, #f0a500); stroke-width: 1; }
+    .colc { stroke: var(--svg-green, #3fb950); stroke-width: 1; }
+    .hd   { fill: var(--svg-accent, #f0a500); font-family: monospace; font-size: 14px; font-weight: 700; text-anchor: middle; }
+    .hc   { fill: var(--svg-green, #3fb950); font-family: monospace; font-size: 14px; font-weight: 700; text-anchor: middle; }
+    .row  { fill: var(--svg-text2, #8b949e); font-family: monospace; font-size: 12px; }
+    .good { fill: var(--svg-green, #3fb950); font-family: monospace; font-size: 12px; }
+    .bad  { fill: var(--svg-red, #f85149); font-family: monospace; font-size: 12px; }
+    .rkey { fill: var(--svg-text2, #8b949e); font-family: monospace; font-size: 12px; font-weight: 600; }
+    .divl { stroke: var(--svg-text2, #8b949e); stroke-width: 0.4; opacity: 0.25; }
+  </style>
+
+  <rect class="bg" width="600" height="228"/>
+
+  <!-- On-prem column -->
+  <rect class="col cold" x="10"  y="10" width="274" height="208" rx="8"/>
+  <text class="hd" x="147" y="36">On-Premises</text>
+
+  <!-- Cloud column -->
+  <rect class="col colc" x="316" y="10" width="274" height="208" rx="8"/>
+  <text class="hc" x="453" y="36">Cloud</text>
+
+  <!-- Row 1: New server — y band 46–82 -->
+  <line class="divl" x1="10" y1="46" x2="590" y2="46"/>
+  <text class="rkey" x="24" y="62">New server</text>
+  <text class="bad"  x="24" y="78">Weeks–months (procurement)</text>
+  <text class="rkey" x="330" y="62">New server</text>
+  <text class="good" x="330" y="78">Minutes (API / console)</text>
+
+  <!-- Row 2: Scale up — y band 88–124 -->
+  <line class="divl" x1="10" y1="88" x2="590" y2="88"/>
+  <text class="rkey" x="24" y="104">Scale up CPU/RAM</text>
+  <text class="bad"  x="24" y="120">Hardware change + downtime</text>
+  <text class="rkey" x="330" y="104">Scale up CPU/RAM</text>
+  <text class="good" x="330" y="120">Resize VM, brief restart</text>
+
+  <!-- Row 3: Add instance — y band 130–166 -->
+  <line class="divl" x1="10" y1="130" x2="590" y2="130"/>
+  <text class="rkey" x="24" y="146">Add app instance</text>
+  <text class="bad"  x="24" y="162">Days of planning &amp; execution</text>
+  <text class="rkey" x="330" y="146">Add app instance</text>
+  <text class="good" x="330" y="162">Hours (image → deploy → config)</text>
+
+  <!-- Row 4: Cost model — y band 172–208 -->
+  <line class="divl" x1="10" y1="172" x2="590" y2="172"/>
+  <text class="rkey" x="24" y="188">Cost model</text>
+  <text class="row"  x="24" y="204">CapEx — buy before you need it</text>
+  <text class="rkey" x="330" y="188">Cost model</text>
+  <text class="row"  x="330" y="204">OpEx — pay for what you use</text>
+</svg>

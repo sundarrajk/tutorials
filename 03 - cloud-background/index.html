@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Road to Cloud — Background &amp; Context</title>
+  <link rel="stylesheet" href="../shared/css/deck.css"/>
+</head>
+<body>
+
+<div id="prog" style="width:0%"></div>
+
+<div id="deck">
+
+  <!-- ══ SLIDE 1: Cover ══════════════════════════════════════════ -->
+  <section class="slide cover" data-title="The Road to Cloud">
+    <div class="cov-grid"></div>
+    <div class="cov-glow"></div>
+    <div class="cov-content">
+      <div class="cov-kicker">Cloud Architecture Series · Lecture 1</div>
+      <h1 class="cov-h1">The Road<br>to <span class="hi">Cloud</span></h1>
+      <p class="cov-desc">
+        Before we redesign for the cloud, we must understand what we are redesigning
+        <em>from</em>. This session covers the architecture and deployment reality of
+        the pre-cloud data-centre era — and why simply moving to the cloud is not enough.
+      </p>
+      <div class="chips">
+        <span class="chip ca">Networking Fundamentals</span>
+        <span class="chip">Application Architecture</span>
+        <span class="chip cg">Deployment Lifecycle</span>
+        <span class="chip cp">Cloud Migration Challenges</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 2: Two dominant architectures ═════════════════════ -->
+  <section class="slide" data-title="Two Dominant Patterns">
+    <div class="s-era">Application Architecture — Before Cloud</div>
+    <h2 class="s-title">Two Dominant <span class="hi">Patterns</span></h2>
+    <p class="s-sub">Every enterprise ran one or both of these architectural patterns. Understanding them is essential context for what we had to rethink when moving to the cloud.</p>
+
+    <div class="two-col">
+      <div class="col-block">
+        <h3>3-Tier Web Architecture</h3>
+        <p><strong>Web Server</strong> — handles HTTP, serves static content.<br>
+        <strong>Application Server</strong> — executes business logic.<br>
+        <strong>Database Server</strong> — persistence and queries.</p>
+        <p>Each tier ran on dedicated physical or virtual machines with well-known, static IPs. Scaling meant adding more machines to a tier.</p>
+      </div>
+      <div class="col-block">
+        <h3>ESB / SOA Architecture</h3>
+        <p>The <strong>Enterprise Service Bus (ESB)</strong> acted as a central message broker connecting disparate systems. Under <strong>Service-Oriented Architecture (SOA)</strong>, each application exposed services consumed by others via the bus.</p>
+        <p>The ESB handled routing, transformation, and orchestration — avoiding brittle point-to-point wiring between every pair of applications.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 3: Web-arch diagram ═══════════════════════════════ -->
+  <section class="slide" data-title="3-Tier Architecture Diagram">
+    <div class="s-era">On-Premises Network Layout</div>
+    <h2 class="s-title">3-Tier Architecture <span class="hi">in Practice</span></h2>
+    <p class="s-sub">Every tier had fixed, assigned IP addresses. Other applications and services simply hard-coded or configured these addresses — they almost never changed.</p>
+    <div class="dbox">
+      <img src="images/web-arch.svg" alt="3-tier web architecture diagram showing web servers, app servers and database with fixed IP addresses"/>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 4: ESB diagram ════════════════════════════════════ -->
+  <section class="slide" data-title="ESB / SOA Architecture Diagram">
+    <div class="s-era">Enterprise Integration Pattern</div>
+    <h2 class="s-title">ESB / SOA — <span class="hi2">All Roads Lead to the Bus</span></h2>
+    <p class="s-sub">Rather than applications wiring directly to each other (creating a spaghetti of point-to-point connections), the ESB centralised all inter-application communication through one well-known address and port.</p>
+    <div class="dbox">
+      <img src="images/esb-arch.svg" alt="ESB and SOA architecture showing multiple applications connected through a central Enterprise Service Bus"/>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 5: TCP/IP primer ══════════════════════════════════ -->
+  <section class="slide" data-title="TCP/IP Fundamentals">
+    <div class="s-era">Networking Fundamentals</div>
+    <h2 class="s-title">TCP/IP — The Language of <span class="hi3">Applications</span></h2>
+
+    <div class="g g-sb" style="margin-bottom:0.75rem;">
+      <div>
+        <p style="font-size:clamp(0.9rem,1.7vw,1.05rem);color:var(--text2);line-height:1.65;margin-bottom:0.75rem;">
+          Applications communicated using <strong style="color:var(--text1);">Transmission Control Protocol / Internet Protocol (TCP/IP)</strong>.
+          Every server had a fixed <strong style="color:var(--text1);">IP address</strong>. Each application <em>listened</em> on a <strong style="color:var(--text1);">port number</strong>.
+          Together, they formed the endpoint address:
+        </p>
+        <div class="callout" style="margin-bottom:0.75rem;">
+          <strong><code>192.168.1.10 : 8080</code></strong><br>
+          IP Address → <em>which machine</em> &nbsp;·&nbsp; Port → <em>which application</em>
+        </div>
+        <p style="font-size:clamp(0.9rem,1.7vw,1.05rem);color:var(--text2);line-height:1.65;">
+          Any client that knew this pair could <strong style="color:var(--text1);">establish a connection</strong>.
+          The channel was <strong style="color:var(--text1);">full-duplex</strong> — data could flow in both directions simultaneously,
+          making it suitable for request/response, streaming, and long-lived connections alike.
+        </p>
+      </div>
+      <div class="col-block">
+        <h3>Key TCP Properties</h3>
+        <ul class="steps">
+          <li><span class="step-num">✓</span><span><strong>Reliable delivery</strong> — TCP guarantees all packets arrive and are delivered in order</span></li>
+          <li><span class="step-num">✓</span><span><strong>Connection-oriented</strong> — 3-way handshake before any data is exchanged</span></li>
+          <li><span class="step-num">✓</span><span><strong>Full-duplex</strong> — both sides can send and receive simultaneously</span></li>
+          <li><span class="step-num">✓</span><span><strong>Static addressing</strong> — in on-premises setups, IPs rarely if ever changed</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="dbox">
+      <img src="images/tcpip.svg" alt="TCP/IP connection diagram showing client connecting to server via IP address and port"/>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 6: Deploying an application ══════════════════════ -->
+  <section class="slide" data-title="Deploying an Application">
+    <div class="s-era">Deployment Lifecycle</div>
+    <h2 class="s-title">Deploying an <span class="hi2">Application</span></h2>
+    <p class="s-sub">There were two scenarios. Both required careful planning and execution, but the timeline differed dramatically depending on whether spare capacity already existed.</p>
+    <div class="dbox" style="margin-bottom:0.75rem;">
+      <img src="images/deploy-options.svg" alt="Side-by-side comparison of Option A deployment on existing server versus Option B requiring new server setup"/>
+    </div>
+    <div class="callout ca-red">
+      <strong>⏱ Key point:</strong> Even Option A could consume hours of skilled engineering time. Option B — which required procuring and setting up a physical server first — routinely stretched to <em>days or weeks</em> before the application was running in production.
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 7: Scaling and migration pain ════════════════════ -->
+  <section class="slide" data-title="Scaling and Migration">
+    <div class="s-era">Scaling &amp; Migration</div>
+    <h2 class="s-title">Adding an Instance or <span class="hi2">Moving an App</span></h2>
+    <p class="s-sub">Even a routine <em>scale-out</em> (adding one more application-server instance) was effectively equivalent to a full new deployment. Moving an application from one server to another carried the additional risk of <strong>silently breaking every other application</strong> that had been configured with its old IP and port.</p>
+
+    <div class="g g2">
+      <div class="card">
+        <span class="card-icon">📅</span>
+        <div class="card-hd">Weekend windows only</div>
+        <p>Migrations ran Friday night through Sunday. Teams arrived Monday morning uncertain whether all systems would work as expected.</p>
+      </div>
+      <div class="card c-amber">
+        <span class="card-icon">⏳</span>
+        <div class="card-hd">Hours to days of downtime</div>
+        <p>Application downtime during migrations regularly ran into hours. Complex estates with many dependencies could require 24–48 hours of downtime.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">📋</span>
+        <div class="card-hd">Meticulous planning required</div>
+        <p>Every downstream dependency had to be mapped. Every configuration had to be updated. A single missed endpoint could cascade into a Monday morning crisis.</p>
+      </div>
+      <div class="card c-amber">
+        <span class="card-icon">📈</span>
+        <div class="card-hd">Memory &amp; CPU scaling too</div>
+        <p>Increasing RAM or CPU on a bare-metal server was a physical hardware task. Even on VMs it typically required a scheduled maintenance window and downtime.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 8: VMs improved things ═══════════════════════════ -->
+  <section class="slide" data-title="Virtualisation Era">
+    <div class="s-era">Virtualisation Era</div>
+    <h2 class="s-title">VMs Eased — But Did Not <span class="hi2">Solve</span> — the Problem</h2>
+
+    <div class="two-col">
+      <div>
+        <p style="font-size:clamp(0.9rem,1.7vw,1.05rem);color:var(--text2);line-height:1.65;margin-bottom:0.75rem;">
+          With <strong style="color:var(--text1);">Virtual Machines</strong>, the OS and application-server stack was pre-baked into a reusable image.
+          Deployment could begin from <em>application install</em> rather than bare-metal OS installation, compressing the cycle significantly.
+        </p>
+        <div class="callout ca-green" style="margin-bottom:0.75rem;">
+          <strong>✅ CPU and memory</strong> could now be increased by reconfiguring the hypervisor — no physical hardware work needed, and often no downtime.
+        </div>
+        <p style="font-size:clamp(0.9rem,1.7vw,1.05rem);color:var(--text2);line-height:1.65;">
+          Network and load-balancer configuration still needed updating with the new VM's IP and port. But overall the cycle shrank from weeks to days.
+        </p>
+      </div>
+      <div class="col-block">
+        <h3>VM Deployment Steps</h3>
+        <ol class="steps">
+          <li><span class="step-num">1</span><span>Clone or spin up a pre-built OS/runtime VM image</span></li>
+          <li><span class="step-num">2</span><span>Deploy the application binary to the new VM</span></li>
+          <li><span class="step-num">3</span><span>Configure the application (data sources, queues, etc.)</span></li>
+          <li><span class="step-num">4</span><span>Update load balancer or web server with the new IP:port</span></li>
+          <li><span class="step-num">5</span><span>Start the server and validate all connections</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 9: The roadblock ════════════════════════════════ -->
+  <section class="slide" data-title="The Real Roadblock">
+    <div class="s-era">The Core Bottleneck</div>
+    <h2 class="s-title">The Real Roadblock: <span class="hi2">Hardware Procurement</span></h2>
+
+    <div class="callout ca-red" style="margin-bottom:0.75rem;">
+      <strong>💡 Key insight:</strong> Nobody wanted idle servers sitting unused — every machine was put to work. The moment you needed additional capacity, you had to <em>buy new hardware</em>, and that process took months from approval to production.
+    </div>
+    <div class="dbox" style="margin-bottom:0.75rem;">
+      <img src="images/procurement-timeline.svg" alt="Hardware procurement timeline showing sequential phases from budget approval through vendor procurement, shipping, racking, and OS installation"/>
+    </div>
+    <div class="g g4">
+      <div class="card">
+        <span class="card-icon">💰</span>
+        <div class="card-hd">Budget approvals</div>
+        <p>Internal finance sign-offs traversed multiple management layers. Unplanned capacity requests were especially slow.</p>
+      </div>
+      <div class="card c-amber">
+        <span class="card-icon">🤝</span>
+        <div class="card-hd">Vendor negotiations</div>
+        <p>Price negotiation, lead-time commitments, and SLA agreements with hardware vendors consumed additional weeks.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🚚</span>
+        <div class="card-hd">Shipping &amp; racking</div>
+        <p>Hardware shipped from manufacturer to data centre, physically racked, and cabled into the network switch fabric.</p>
+      </div>
+      <div class="card c-amber">
+        <span class="card-icon">🔧</span>
+        <div class="card-hd">OS install &amp; hardening</div>
+        <p>Only after all of the above could the OS installation and security hardening begin — before the application was even touched.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 10: The cloud solution ══════════════════════════ -->
+  <section class="slide" data-title="The Cloud Solution">
+    <div class="s-era">Enter the Cloud</div>
+    <h2 class="s-title">The Solution: On-Demand <span class="hi3">"Infinite" Infrastructure</span></h2>
+    <p class="s-sub">Cloud providers solved the hardware procurement problem entirely. With pre-baked VM images, self-service APIs, and extensive automation, standing up a new server collapsed from <strong>months to hours</strong>.</p>
+
+    <div class="dbox" style="margin-bottom:0.75rem;">
+      <img src="images/cloud-vs-onprem.svg" alt="Side-by-side comparison table contrasting on-premises and cloud for new server provisioning, scaling, adding instances, and cost model"/>
+    </div>
+    <div class="g g3">
+      <div class="card c-green">
+        <span class="card-icon">♾️</span>
+        <div class="card-hd">Effectively unlimited capacity</div>
+        <p>Need ten more servers? Spin them up in minutes. Need a hundred? Same API call. No procurement cycle, no waiting.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">⚡</span>
+        <div class="card-hd">Hours, not months</div>
+        <p>CLI tools, APIs, and Infrastructure-as-Code (IaC) templates provision fully configured VMs in minutes. Deployment pipelines handle the rest automatically.</p>
+      </div>
+      <div class="card c-amber">
+        <span class="card-icon">💳</span>
+        <div class="card-hd">Pay-as-you-go</div>
+        <p>Switch from CapEx (buy before you need it) to OpEx (pay for what you use). Scale down just as easily as you scale up.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 11: Obstacles to cloud adoption ═════════════════ -->
+  <section class="slide" data-title="Obstacles to Cloud Adoption">
+    <div class="s-era">Obstacles</div>
+    <h2 class="s-title">Why Moving to Cloud Was <span class="hi2">Not Simple</span></h2>
+    <p class="s-sub">The cloud promised fast, cheap capacity — but most enterprise application estates were not built to exploit it. Six common obstacles blocked or complicated migration:</p>
+
+    <ul class="prob-list">
+      <li data-icon="🧩"><strong>Legacy technology stacks</strong> — Older frameworks and JVM versions not supported on modern cloud infrastructure. Rewrites are expensive and risky.</li>
+      <li data-icon="📦"><strong>OS and library version pinning</strong> — Applications depended on exact OS patch levels and library versions that were difficult to replicate in cloud-managed environments.</li>
+      <li data-icon="🔌"><strong>Point-to-point IP hard-coding</strong> — Without an ESB, applications dialled each other by hard-coded IP. In the cloud, IPs change constantly, silently breaking those connections.</li>
+      <li data-icon="🏗️"><strong>Hybrid connectivity</strong> — Apps that could not move to the cloud (regulation, technology, security) still had to be reachable from cloud-hosted apps — requiring complex VPN or direct-connect solutions.</li>
+      <li data-icon="🌍"><strong>Regulatory and data-residency rules</strong> — Banking, healthcare, and government sectors often mandated that data remain within national borders, limiting available cloud regions.</li>
+      <li data-icon="🖥️"><strong>No CLI for enterprise app servers</strong> — Many enterprise-grade application servers lacked scriptable command-line interfaces, making automated deployment pipelines difficult or impossible to build.</li>
+    </ul>
+  </section>
+
+  <!-- ══ SLIDE 12: Lift-and-shift failures ═════════════════════ -->
+  <section class="slide" data-title="Post-Migration Pitfalls">
+    <div class="s-era">Post-Migration Pitfalls</div>
+    <h2 class="s-title">What Went Wrong <span class="hi2">After Moving</span></h2>
+    <p class="s-sub">Many enterprises adopted <strong>"lift and shift"</strong> — moving applications with minimal changes. This transplanted on-premises habits into a metered cloud billing model, with predictably expensive results.</p>
+
+    <div class="g g2">
+      <ul class="prob-list">
+        <li data-icon="💸"><strong>Inefficient apps on the clock</strong> — Applications that ran fine with cheap sunk-cost on-prem servers generated enormous ongoing bills when hosted in the cloud.</li>
+        <li data-icon="📊"><strong>30–40% utilisation culture</strong> — Teams used to maintaining "spare headroom" on-premises continued the same practice — at pay-per-minute cloud rates.</li>
+        <li data-icon="📉"><strong>Scale-out multiplied costs</strong> — Adding more instances to compensate for inefficient code multiplied the bill without fixing the root cause.</li>
+      </ul>
+      <ul class="prob-list">
+        <li data-icon="🔒"><strong>Security concerns persisted</strong> — Some enterprises did not trust shared cloud infrastructure for sensitive workloads, requiring expensive additional controls.</li>
+        <li data-icon="🔗"><strong>Vendor lock-in is real</strong> — Proprietary managed services (databases, queues, serverless runtimes) made it technically difficult and expensive to switch providers later.</li>
+      </ul>
+    </div>
+
+    <div class="callout mt-sm">
+      <strong>⚠ Lift-and-shift is a transitional tactic, not a strategy.</strong> It defers the real architectural work and often makes the eventual rearchitecture harder by embedding cloud-hostile patterns more deeply.
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 13: What's next ══════════════════════════════════ -->
+  <section class="slide" data-title="What Comes Next">
+    <div class="s-era">Looking Ahead</div>
+    <h2 class="s-title">Rearchitect for the <span class="hi3">Cloud</span></h2>
+    <p class="s-sub">Every pain point we explored today — static IPs, monolithic deployments, hard-coded addresses, over-provisioning — has a cloud-native pattern that directly addresses it. Understanding the problem is the first step to understanding the solution.</p>
+
+    <div class="g g3">
+      <div class="card">
+        <span class="card-icon">📐</span>
+        <div class="card-hd">Next Session</div>
+        <p>We move from <em>what we had</em> to <em>what we need</em> — cloud-native design patterns: microservices, service discovery, circuit breakers, auto-scaling, containerisation, and beyond.</p>
+      </div>
+      <div class="card c-green">
+        <span class="card-icon">🎯</span>
+        <div class="card-hd">The Goal</div>
+        <p>Applications designed for the cloud are <strong>efficient, resilient, observable, and independently deployable</strong>. Each pattern we study directly solves a failure mode we examined today.</p>
+      </div>
+      <div class="card c-amber">
+        <span class="card-icon">💬</span>
+        <div class="card-hd">Discussion Prompt</div>
+        <p>Looking at the six obstacles in slide 11 and the five post-migration problems in slide 12 — which do you think is the hardest to solve, and why?</p>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /#deck -->
+
+<nav id="nav">
+  <div class="nav-group">
+    <button class="nb" id="btn-prev">← Prev</button>
+    <button class="nb" id="btn-next">Next →</button>
+    <span id="counter">1 / 13</span>
+  </div>
+  <div class="nav-group">
+    <select id="jump"></select>
+  </div>
+  <div class="nav-group">
+    <button id="theme-btn">☀ Light</button>
+  </div>
+</nav>
+
+<script src="../shared/js/deck.js"></script>
+</body>
+</html>
