@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 140">
+  <style>
+    .card-bg { fill: var(--svg-card, #e8d5a8); stroke: var(--svg-orange, #c9a84c); stroke-width: 1.5; }
+    .card-top { fill: var(--svg-accent, #5a8fc4); fill-opacity: .75; }
+    .card-corner{ fill: var(--svg-orange, #c9a84c); fill-opacity: .45; }
+    .row-lbl { fill: var(--svg-text2, #7a5c2a); font-family: monospace; font-size: 7px; }
+    .hole { fill: var(--svg-text2, #8B4513); fill-opacity: .75; }
+    .top-text { fill: white; font-family: monospace; font-size: 7px; letter-spacing: 2px; }
+    .bot-text { fill: var(--svg-text2, #7a5c2a); font-family: monospace; font-size: 6px; letter-spacing: 3px; }
+  </style>
+  <defs>
+    <linearGradient id="cardGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="var(--svg-card, #f5e6c8)"/>
+      <stop offset="100%" stop-color="var(--svg-fill1, #e8d5a8)"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="284" height="124" rx="4" fill="url(#cardGrad2)" stroke="var(--svg-orange,#c9a84c)" stroke-width="1.5"/>
+  <polygon points="8,8 38,8 8,30" class="card-corner"/>
+  <rect x="8" y="8" width="284" height="14" rx="4" class="card-top"/>
+  <text x="20" y="19" class="top-text">IBM 80-COLUMN PUNCH CARD</text>
+  <!-- Row labels -->
+  <text x="14" y="35"  class="row-lbl">12</text>
+  <text x="14" y="45"  class="row-lbl">11</text>
+  <text x="14" y="55"  class="row-lbl">0</text>
+  <text x="14" y="65"  class="row-lbl">1</text>
+  <text x="14" y="75"  class="row-lbl">2</text>
+  <text x="14" y="85"  class="row-lbl">3</text>
+  <text x="14" y="95"  class="row-lbl">4</text>
+  <text x="14" y="105" class="row-lbl">5</text>
+  <text x="14" y="115" class="row-lbl">6</text>
+  <text x="14" y="125" class="row-lbl">7</text>
+  <!-- Punch holes -->
+  <rect x="28"  y="42" width="4" height="7" rx="1" class="hole"/>
+  <rect x="36"  y="62" width="4" height="7" rx="1" class="hole"/>
+  <rect x="44"  y="52" width="4" height="7" rx="1" class="hole"/>
+  <rect x="52"  y="72" width="4" height="7" rx="1" class="hole"/>
+  <rect x="60"  y="42" width="4" height="7" rx="1" class="hole"/>
+  <rect x="68"  y="82" width="4" height="7" rx="1" class="hole"/>
+  <rect x="76"  y="52" width="4" height="7" rx="1" class="hole"/>
+  <rect x="84"  y="62" width="4" height="7" rx="1" class="hole"/>
+  <rect x="92"  y="42" width="4" height="7" rx="1" class="hole"/>
+  <rect x="100" y="72" width="4" height="7" rx="1" class="hole"/>
+  <rect x="108" y="52" width="4" height="7" rx="1" class="hole"/>
+  <rect x="116" y="62" width="4" height="7" rx="1" class="hole"/>
+  <rect x="124" y="42" width="4" height="7" rx="1" class="hole"/>
+  <rect x="132" y="52" width="4" height="7" rx="1" class="hole"/>
+  <rect x="140" y="82" width="4" height="7" rx="1" class="hole"/>
+  <rect x="148" y="62" width="4" height="7" rx="1" class="hole"/>
+  <rect x="156" y="42" width="4" height="7" rx="1" class="hole"/>
+  <rect x="164" y="72" width="4" height="7" rx="1" class="hole"/>
+  <rect x="172" y="52" width="4" height="7" rx="1" class="hole"/>
+  <rect x="180" y="42" width="4" height="7" rx="1" class="hole"/>
+  <rect x="188" y="62" width="4" height="7" rx="1" class="hole"/>
+  <rect x="196" y="82" width="4" height="7" rx="1" class="hole"/>
+  <rect x="204" y="52" width="4" height="7" rx="1" class="hole"/>
+  <rect x="212" y="42" width="4" height="7" rx="1" class="hole"/>
+  <rect x="220" y="72" width="4" height="7" rx="1" class="hole"/>
+  <rect x="228" y="62" width="4" height="7" rx="1" class="hole"/>
+  <rect x="236" y="42" width="4" height="7" rx="1" class="hole"/>
+  <rect x="244" y="52" width="4" height="7" rx="1" class="hole"/>
+  <rect x="252" y="72" width="4" height="7" rx="1" class="hole"/>
+  <rect x="260" y="82" width="4" height="7" rx="1" class="hole"/>
+  <rect x="268" y="42" width="4" height="7" rx="1" class="hole"/>
+  <rect x="276" y="52" width="4" height="7" rx="1" class="hole"/>
+  <text x="148" y="133" class="bot-text" text-anchor="middle">DO NOT FOLD SPINDLE OR MUTILATE</text>
+</svg>

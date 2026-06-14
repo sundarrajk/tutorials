@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 260">
+  <style>
+    .iaas { fill: var(--svg-card,rgba(26,54,93,.8)); stroke: var(--svg-accent,#63b3ed); stroke-width: 1.2; }
+    .paas { fill: var(--svg-card,rgba(53,39,90,.8)); stroke: var(--svg-purple,#b794f4); stroke-width: 1.2; }
+    .saas { fill: var(--svg-card,rgba(26,52,26,.8)); stroke: var(--svg-green,#68d391); stroke-width: 1.2; }
+    .item-i{ fill: var(--svg-fill1,rgba(99,179,237,.2)); stroke: var(--svg-stroke,rgba(99,179,237,.3)); stroke-width: .8; }
+    .item-p{ fill: var(--svg-fill1,rgba(183,148,244,.15)); stroke: var(--svg-purple,rgba(183,148,244,.3)); stroke-width: .8; }
+    .item-s{ fill: var(--svg-fill1,rgba(104,211,145,.1)); stroke: var(--svg-green,rgba(104,211,145,.3)); stroke-width: .8; }
+    .ctrl  { fill: var(--svg-fill2,rgba(99,179,237,.05)); stroke: var(--svg-stroke,rgba(99,179,237,.12)); stroke-width: .5; }
+    .key   { fill: var(--svg-fill2,rgba(246,173,85,.06)); stroke: var(--svg-orange,rgba(246,173,85,.25)); stroke-width: 1; }
+    .tit-i { fill: var(--svg-accent,#90cdf4); font-family: monospace; font-size: 8.5px; font-weight: 700; }
+    .sub-i { fill: var(--svg-text2,rgba(144,205,244,.65)); font-family: monospace; font-size: 6.5px; }
+    .it-i  { fill: var(--svg-text2,rgba(144,205,244,.85)); font-family: monospace; font-size: 6.5px; }
+    .ex-i  { fill: var(--svg-orange,rgba(246,173,85,.7)); font-family: monospace; font-size: 6px; }
+    .tit-p { fill: var(--svg-purple,#d6bcfa); font-family: monospace; font-size: 8.5px; font-weight: 700; }
+    .sub-p { fill: var(--svg-purple,rgba(214,188,250,.65)); font-family: monospace; font-size: 6.5px; }
+    .it-p  { fill: var(--svg-purple,rgba(214,188,250,.85)); font-family: monospace; font-size: 6.5px; }
+    .tit-s { fill: var(--svg-green,#9ae6b4); font-family: monospace; font-size: 8.5px; font-weight: 700; }
+    .sub-s { fill: var(--svg-green,rgba(154,230,180,.65)); font-family: monospace; font-size: 6.5px; }
+    .it-s  { fill: var(--svg-green,rgba(154,230,180,.85)); font-family: monospace; font-size: 6.5px; }
+    .ex-s  { fill: var(--svg-green,rgba(154,230,180,.7)); font-family: monospace; font-size: 6px; }
+    .ctrl-t{ fill: var(--svg-text2,rgba(160,174,192,.8)); font-family: monospace; font-size: 7.5px; }
+    .ctrl-s{ fill: var(--svg-text2,rgba(160,174,192,.5)); font-family: monospace; font-size: 6.5px; }
+    .key-t { fill: var(--svg-orange,#f6ad55); font-family: monospace; font-size: 8px; font-weight: 700; }
+    .key-s { fill: var(--svg-orange,rgba(246,173,85,.8)); font-family: monospace; font-size: 7.5px; }
+    .key-b { fill: var(--svg-text2,rgba(246,173,85,.65)); font-family: monospace; font-size: 7px; }
+  </style>
+
+  <!-- IaaS -->
+  <rect x="50" y="48" width="100" height="104" rx="8" class="iaas"/>
+  <text x="100" y="66" class="tit-i" text-anchor="middle">IaaS</text>
+  <text x="100" y="76" class="sub-i" text-anchor="middle">Infra as a Service</text>
+  <rect x="60" y="83" width="80" height="15" rx="3" class="item-i"/>
+  <text x="100" y="93" class="it-i" text-anchor="middle">Virtual Machines</text>
+  <rect x="60" y="101" width="80" height="15" rx="3" class="item-i"/>
+  <text x="100" y="111" class="it-i" text-anchor="middle">Storage / S3</text>
+  <rect x="60" y="119" width="80" height="15" rx="3" class="item-i"/>
+  <text x="100" y="129" class="it-i" text-anchor="middle">Networking / VPC</text>
+  <text x="100" y="145" class="ex-i" text-anchor="middle">AWS EC2 / Azure VM</text>
+
+  <!-- PaaS -->
+  <rect x="180" y="48" width="100" height="104" rx="8" class="paas"/>
+  <text x="230" y="66" class="tit-p" text-anchor="middle">PaaS</text>
+  <text x="230" y="76" class="sub-p" text-anchor="middle">Platform as a Service</text>
+  <rect x="190" y="83" width="80" height="15" rx="3" class="item-p"/>
+  <text x="230" y="93" class="it-p" text-anchor="middle">Runtimes / DBaaS</text>
+  <rect x="190" y="101" width="80" height="15" rx="3" class="item-p"/>
+  <text x="230" y="111" class="it-p" text-anchor="middle">CI/CD Pipelines</text>
+  <rect x="190" y="119" width="80" height="15" rx="3" class="item-p"/>
+  <text x="230" y="129" class="it-p" text-anchor="middle">Kubernetes / EKS</text>
+  <text x="230" y="145" fill="var(--svg-orange,rgba(246,173,85,.7))" font-family="monospace" font-size="6" text-anchor="middle">Heroku / GCP AppEngine</text>
+
+  <!-- SaaS -->
+  <rect x="310" y="48" width="100" height="104" rx="8" class="saas"/>
+  <text x="360" y="66" class="tit-s" text-anchor="middle">SaaS</text>
+  <text x="360" y="76" class="sub-s" text-anchor="middle">Software as a Service</text>
+  <rect x="320" y="83" width="80" height="15" rx="3" class="item-s"/>
+  <text x="360" y="93" class="it-s" text-anchor="middle">Salesforce CRM</text>
+  <rect x="320" y="101" width="80" height="15" rx="3" class="item-s"/>
+  <text x="360" y="111" class="it-s" text-anchor="middle">Google Workspace</text>
+  <rect x="320" y="119" width="80" height="15" rx="3" class="item-s"/>
+  <text x="360" y="129" class="it-s" text-anchor="middle">MS Office 365</text>
+  <text x="360" y="145" class="ex-s" text-anchor="middle">Pay as You Use ✓</text>
+
+  <!-- Control row -->
+  <rect x="30" y="165" width="400" height="34" rx="6" class="ctrl"/>
+  <text x="50" y="178" class="ctrl-t">CONTROL:</text>
+  <text x="112" y="178" class="tit-i" font-size="7">IaaS</text>
+  <text x="130" y="178" class="ctrl-s">You manage OS, runtime, apps</text>
+  <text x="112" y="191" class="tit-p" font-size="7">PaaS</text>
+  <text x="130" y="191" class="ctrl-s">You manage apps &amp; data only</text>
+  <text x="305" y="178" class="tit-s" font-size="7">SaaS</text>
+  <text x="325" y="178" class="ctrl-s">Provider manages everything</text>
+
+  <!-- Key shift -->
+  <rect x="30" y="207" width="400" height="44" rx="8" class="key"/>
+  <text x="50"  y="224" class="key-t">💡 KEY SHIFT:</text>
+  <text x="148" y="224" class="key-s">CAPEX (Buy hardware upfront) → OPEX (Pay as you use)</text>
+  <text x="50"  y="240" class="key-b">No more idle servers. Scale up in minutes. Scale down and stop paying.</text>
+</svg>

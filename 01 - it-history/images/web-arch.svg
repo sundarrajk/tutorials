@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 200">
+  <style>
+    .tit  { fill: var(--svg-text2,rgba(160,174,192,.55)); font-family: monospace; font-size: 8px; letter-spacing: 1.5px; }
+    .inet { fill: var(--svg-fill2,rgba(99,179,237,.08)); stroke: var(--svg-stroke,rgba(99,179,237,.3)); }
+    .ws   { fill: var(--svg-card,rgba(26,54,93,.7)); stroke: var(--svg-accent,#63b3ed); stroke-width: 1; }
+    .as   { fill: var(--svg-card,rgba(53,39,90,.7)); stroke: var(--svg-purple,#b794f4); stroke-width: 1; }
+    .db-e { fill: var(--svg-card,rgba(22,74,50,.8)); stroke: var(--svg-green,#68d391); stroke-width: 1.2; }
+    .db-r { fill: var(--svg-card,rgba(16,56,38,.8)); stroke: var(--svg-green,#68d391); stroke-width: 1.2; }
+    .db-d { fill: var(--svg-card,rgba(22,74,50,.4)); stroke: var(--svg-green,rgba(104,211,145,.4)); stroke-dasharray: 3,2; }
+    .ln-c  { fill: var(--svg-text2,rgba(99,179,237,.55)); font-family: monospace; font-size: 7px; }
+    .ln-p  { fill: var(--svg-purple,rgba(214,188,250,.6)); font-family: monospace; font-size: 7px; }
+    .lbl-i { fill: var(--svg-accent,#90cdf4); font-family: monospace; font-size: 7px; }
+    .lbl-w { fill: var(--svg-accent,#90cdf4); font-family: monospace; font-size: 7px; }
+    .lbl-a { fill: var(--svg-purple,#d6bcfa); font-family: monospace; font-size: 7px; }
+    .lbl-d { fill: var(--svg-green,#9ae6b4); font-family: monospace; font-size: 7px; }
+    .lbl-s { fill: var(--svg-text2,rgba(144,205,244,.5)); font-family: monospace; font-size: 6.5px; }
+    .lbl-sa{ fill: var(--svg-purple,rgba(214,188,250,.45)); font-family: monospace; font-size: 6.5px; }
+    .con-b { stroke: var(--svg-accent,#63b3ed); fill: none; stroke-width: 1.2; stroke-dasharray: 3,2; }
+    .con-p { stroke: var(--svg-purple,#b794f4); fill: none; stroke-width: 1.2; stroke-dasharray: 3,2; }
+    .con-g { stroke: var(--svg-green,rgba(104,211,145,.55)); fill: none; stroke-width: 1.2; stroke-dasharray: 3,2; }
+    .screen{ fill: var(--svg-bg,#0d1010); }
+    .bar-c { fill: var(--svg-accent,rgba(99,179,237,.6)); }
+    .bar-p { fill: var(--svg-purple,rgba(183,148,244,.6)); }
+    .arr   { fill: var(--svg-accent,rgba(99,179,237,.75)); }
+  </style>
+  <defs>
+    <marker id="arW" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <path d="M0,0 L0,7 L7,3.5 z" class="arr"/>
+    </marker>
+  </defs>
+
+  <text x="220" y="16" class="tit" text-anchor="middle">WEB APPLICATION ARCHITECTURE (3-TIER)</text>
+
+  <!-- Internet -->
+  <ellipse cx="42" cy="110" rx="36" ry="22" class="inet" stroke-dasharray="4,3"/>
+  <text x="42" y="106" class="lbl-i" text-anchor="middle">INTERNET</text>
+  <text x="42" y="116" class="lbl-s" text-anchor="middle">Browser /</text>
+  <text x="42" y="124" class="lbl-s" text-anchor="middle">Mobile</text>
+  <line x1="78" y1="110" x2="105" y2="110" class="con-b" marker-end="url(#arW)"/>
+  <text x="91" y="105" class="ln-c" text-anchor="middle">HTTP/S</text>
+
+  <!-- Load Balancer -->
+  <rect x="105" y="88" width="64" height="44" rx="6" fill="var(--svg-fill1,rgba(43,108,176,.4))" stroke="var(--svg-accent,#63b3ed)" stroke-width="1.3"/>
+  <text x="137" y="107" class="lbl-w" text-anchor="middle">LOAD</text>
+  <text x="137" y="117" class="lbl-w" text-anchor="middle">BALANCER</text>
+  <text x="137" y="126" class="lbl-s" text-anchor="middle">Nginx / F5</text>
+
+  <!-- LB → Web tier -->
+  <line x1="169" y1="100" x2="193" y2="80"  class="con-b" marker-end="url(#arW)"/>
+  <line x1="169" y1="110" x2="193" y2="110" class="con-b" marker-end="url(#arW)"/>
+  <line x1="169" y1="120" x2="193" y2="140" class="con-b" marker-end="url(#arW)"/>
+
+  <!-- Web Servers -->
+  <text x="220" y="36" class="tit" text-anchor="middle">PRESENTATION TIER</text>
+  <rect x="193" y="44" width="55" height="30" rx="5" class="ws"/>
+  <text x="220" y="62" class="lbl-w" text-anchor="middle">Web Server 1</text>
+  <rect x="193" y="95" width="55" height="30" rx="5" class="ws"/>
+  <text x="220" y="113" class="lbl-w" text-anchor="middle">Web Server 2</text>
+  <rect x="193" y="146" width="55" height="30" rx="5" class="ws"/>
+  <text x="220" y="164" class="lbl-w" text-anchor="middle">Web Server 3</text>
+  <text x="220" y="188" class="lbl-s" text-anchor="middle">Apache / IIS</text>
+
+  <!-- Web → App tier -->
+  <line x1="248" y1="59"  x2="272" y2="80"  class="con-p" marker-end="url(#arW)"/>
+  <line x1="248" y1="110" x2="272" y2="110" class="con-p" marker-end="url(#arW)"/>
+  <line x1="248" y1="161" x2="272" y2="140" class="con-p" marker-end="url(#arW)"/>
+
+  <!-- App Servers -->
+  <text x="315" y="36" class="tit" text-anchor="middle">BUSINESS LOGIC</text>
+  <rect x="272" y="70"  width="85" height="30" rx="5" class="as"/>
+  <text x="314" y="88"  class="lbl-a" text-anchor="middle">App Server 1</text>
+  <rect x="272" y="110" width="85" height="30" rx="5" class="as"/>
+  <text x="314" y="128" class="lbl-a" text-anchor="middle">App Server 2</text>
+  <text x="314" y="188" class="lbl-sa" text-anchor="middle">Java EE / .NET / PHP</text>
+
+  <!-- App → DB -->
+  <line x1="357" y1="95"  x2="383" y2="100" class="con-g" marker-end="url(#arW)"/>
+  <line x1="357" y1="125" x2="383" y2="120" class="con-g" marker-end="url(#arW)"/>
+
+  <!-- DB Tier -->
+  <text x="415" y="36" class="tit" text-anchor="middle">DATA TIER</text>
+  <ellipse cx="415" cy="90"  rx="28" ry="8" class="db-e"/>
+  <rect    x="387" y="90"   width="56" height="30" class="db-r"/>
+  <ellipse cx="415" cy="120" rx="28" ry="8" class="db-e"/>
+  <text x="415" y="108" class="lbl-d" text-anchor="middle">PRIMARY DB</text>
+  <text x="415" y="140" class="lbl-s" text-anchor="middle">Oracle / MySQL</text>
+  <!-- Standby -->
+  <ellipse cx="415" cy="156" rx="22" ry="6" class="db-d"/>
+  <rect    x="393" y="156" width="44" height="20" class="db-d"/>
+  <ellipse cx="415" cy="176" rx="22" ry="6" class="db-d"/>
+  <text x="415" y="168" class="lbl-s" text-anchor="middle" fill-opacity=".55">STANDBY</text>
+</svg>

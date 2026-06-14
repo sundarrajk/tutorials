@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <style>
+    .zone  { fill: var(--svg-fill2,rgba(99,179,237,.03)); stroke: var(--svg-stroke,rgba(99,179,237,.14)); }
+    .srv   { fill: var(--svg-card,rgba(26,54,93,.7)); stroke: var(--svg-accent,#63b3ed); stroke-width: 1.5; }
+    .srv-ru{ fill: var(--svg-fill1,rgba(99,179,237,.25)); stroke: var(--svg-stroke,rgba(99,179,237,.45)); stroke-width: .5; }
+    .db-el { fill: var(--svg-fill1,rgba(99,179,237,.30)); stroke: var(--svg-accent,#63b3ed); stroke-width: 1; }
+    .db-rc { fill: var(--svg-card,rgba(26,54,93,.8)); stroke: var(--svg-accent,#63b3ed); stroke-width: 1; }
+    .cli   { fill: var(--svg-card,rgba(39,103,73,.7)); stroke: var(--svg-green,#68d391); stroke-width: 1.2; }
+    .cli-s { fill: var(--svg-bg,#0d1a10); }
+    .cli-ln{ fill: var(--svg-green,rgba(104,211,145,.6)); }
+    .cli-st{ fill: var(--svg-card,rgba(39,103,73,.65)); }
+    .ind-g { fill: #00cc44; fill-opacity: .85; }
+    .lbl-lan{ fill: var(--svg-text2,rgba(99,179,237,.6)); font-family: monospace; font-size: 9px; letter-spacing: 2px; }
+    .lbl-srv{ fill: var(--svg-accent,#90cdf4); font-family: monospace; font-size: 7.5px; }
+    .lbl-cli{ fill: var(--svg-green,#9ae6b4); font-family: monospace; font-size: 7.5px; }
+    .lbl-req{ fill: var(--svg-stroke,rgba(99,179,237,.75)); font-family: monospace; font-size: 6.5px; }
+    .conn  { stroke: var(--svg-accent,#63b3ed); fill: none; stroke-width: 1.2; stroke-dasharray: 4,3; }
+    .arr   { fill: var(--svg-accent,rgba(99,179,237,.8)); }
+  </style>
+  <defs>
+    <marker id="arB" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" class="arr"/>
+    </marker>
+  </defs>
+  <!-- LAN zone -->
+  <rect x="4" y="4" width="392" height="192" rx="10" class="zone" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="180" rx="8" fill="var(--svg-fill2,rgba(99,179,237,.025))"/>
+  <text x="20" y="25" class="lbl-lan">LOCAL AREA NETWORK (LAN)</text>
+
+  <!-- Server -->
+  <rect x="160" y="35" width="80" height="110" rx="8" class="srv"/>
+  <rect x="166" y="43" width="68" height="8" rx="2" class="srv-ru"/>
+  <rect x="166" y="54" width="68" height="8" rx="2" class="srv-ru"/>
+  <rect x="166" y="65" width="68" height="8" rx="2" class="srv-ru"/>
+  <circle cx="172" cy="47" r="2" class="ind-g"/>
+  <circle cx="172" cy="58" r="2" class="ind-g" fill-opacity=".8"/>
+  <circle cx="172" cy="69" r="2" fill="#f6ad55" fill-opacity=".9"/>
+  <ellipse cx="200" cy="95" rx="22" ry="6" class="db-el"/>
+  <rect x="178" y="95" width="44" height="20" class="db-rc"/>
+  <ellipse cx="200" cy="115" rx="22" ry="6" class="db-el"/>
+  <text x="200" y="132" class="lbl-srv" text-anchor="middle">APPLICATION</text>
+  <text x="200" y="141" class="lbl-srv" text-anchor="middle">+ DATABASE</text>
+
+  <!-- Clients left -->
+  <rect x="20" y="40" width="80" height="55" rx="5" class="cli"/>
+  <rect x="26" y="46" width="68" height="38" rx="3" class="cli-s"/>
+  <rect x="30" y="50" width="48" height="3" rx="1" class="cli-ln" fill-opacity=".6"/>
+  <rect x="30" y="55" width="38" height="3" rx="1" class="cli-ln" fill-opacity=".3"/>
+  <rect x="30" y="60" width="44" height="3" rx="1" class="cli-ln" fill-opacity=".3"/>
+  <rect x="30" y="65" width="28" height="3" rx="1" class="cli-ln" fill-opacity=".3"/>
+  <rect x="30" y="70" width="40" height="3" rx="1" class="cli-ln" fill-opacity=".2"/>
+  <rect x="52" y="95" width="16" height="6" rx="2" class="cli-st"/>
+  <rect x="44" y="100" width="32" height="4" rx="2" class="cli-st"/>
+  <text x="60" y="114" class="lbl-cli" text-anchor="middle">CLIENT 1</text>
+  <text x="60" y="123" class="lbl-req" text-anchor="middle">THICK CLIENT</text>
+
+  <rect x="20" y="130" width="80" height="55" rx="5" class="cli"/>
+  <rect x="26" y="136" width="68" height="38" rx="3" class="cli-s"/>
+  <rect x="30" y="140" width="42" height="3" rx="1" class="cli-ln" fill-opacity=".6"/>
+  <rect x="30" y="145" width="55" height="3" rx="1" class="cli-ln" fill-opacity=".3"/>
+  <rect x="30" y="150" width="32" height="3" rx="1" class="cli-ln" fill-opacity=".3"/>
+  <rect x="30" y="155" width="48" height="3" rx="1" class="cli-ln" fill-opacity=".2"/>
+  <rect x="30" y="160" width="36" height="3" rx="1" class="cli-ln" fill-opacity=".3"/>
+  <rect x="52" y="185" width="16" height="6" rx="2" class="cli-st"/>
+  <text x="60" y="178" class="lbl-cli" text-anchor="middle">CLIENT 2</text>
+
+  <!-- Clients right -->
+  <rect x="300" y="40" width="80" height="55" rx="5" class="cli"/>
+  <rect x="306" y="46" width="68" height="38" rx="3" class="cli-s"/>
+  <rect x="310" y="50" width="52" height="3" rx="1" class="cli-ln" fill-opacity=".6"/>
+  <rect x="310" y="55" width="36" height="3" rx="1" class="cli-ln" fill-opacity=".3"/>
+  <rect x="310" y="60" width="46" height="3" rx="1" class="cli-ln" fill-opacity=".3"/>
+  <rect x="310" y="65" width="28" height="3" rx="1" class="cli-ln" fill-opacity=".2"/>
+  <rect x="310" y="70" width="42" height="3" rx="1" class="cli-ln" fill-opacity=".3"/>
+  <rect x="332" y="95" width="16" height="6" rx="2" class="cli-st"/>
+  <rect x="324" y="100" width="32" height="4" rx="2" class="cli-st"/>
+  <text x="340" y="114" class="lbl-cli" text-anchor="middle">CLIENT 3</text>
+
+  <rect x="300" y="130" width="80" height="55" rx="5" class="cli"/>
+  <rect x="306" y="136" width="68" height="38" rx="3" class="cli-s"/>
+  <rect x="310" y="140" width="44" height="3" rx="1" class="cli-ln" fill-opacity=".6"/>
+  <rect x="310" y="145" width="56" height="3" rx="1" class="cli-ln" fill-opacity=".3"/>
+  <rect x="310" y="150" width="30" height="3" rx="1" class="cli-ln" fill-opacity=".3"/>
+  <rect x="310" y="155" width="48" height="3" rx="1" class="cli-ln" fill-opacity=".2"/>
+  <rect x="310" y="160" width="38" height="3" rx="1" class="cli-ln" fill-opacity=".3"/>
+  <text x="340" y="178" class="lbl-cli" text-anchor="middle">CLIENT N</text>
+
+  <!-- Connection lines -->
+  <line x1="100" y1="67"  x2="160" y2="90"  class="conn" marker-end="url(#arB)"/>
+  <line x1="100" y1="157" x2="160" y2="110" class="conn" marker-end="url(#arB)"/>
+  <line x1="300" y1="67"  x2="240" y2="90"  class="conn" marker-end="url(#arB)"/>
+  <line x1="300" y1="157" x2="240" y2="110" class="conn" marker-end="url(#arB)"/>
+  <text x="118" y="76"  class="lbl-req" transform="rotate(-10,118,76)">REQUEST</text>
+  <text x="112" y="138" class="lbl-req" transform="rotate(8,112,138)">RESPONSE</text>
+</svg>

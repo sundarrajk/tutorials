@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 320">
+  <style>
+    .crm  { fill: var(--svg-card,#7b341e); stroke: var(--svg-orange,#f6ad55); stroke-width: 1.5; }
+    .esb  { stroke: var(--svg-purple,rgba(180,145,230,.7)); stroke-width: 2; }
+    .pre  { fill: var(--svg-card,#1a3a2a); stroke: var(--svg-green,#68d391); stroke-width: 1.3; }
+    .post { fill: var(--svg-card,#1a2a3a); stroke: var(--svg-accent,#63b3ed); stroke-width: 1.3; }
+    .nss  { fill: var(--svg-card,#2a1a3a); stroke: var(--svg-purple,#b794f4); stroke-width: 1.3; }
+    .digs { fill: var(--svg-card,#2a2a1a); stroke: var(--svg-orange,#f6ad55); stroke-width: 1.3; }
+    .inner{ fill: var(--svg-fill1,rgba(255,255,255,.1)); stroke: var(--svg-stroke,rgba(255,255,255,.2)); stroke-width: .8; }
+    .leg  { fill: var(--svg-fill2,rgba(99,179,237,.04)); stroke: var(--svg-stroke,rgba(99,179,237,.1)); stroke-width: .5; }
+    .user-c{ fill: none; stroke: var(--svg-accent,#63b3ed); stroke-width: 1.5; }
+    .user-f{ fill: var(--svg-accent,#63b3ed); fill-opacity: .7; }
+    .tit  { fill: var(--svg-text2,rgba(160,174,192,.7)); font-family: monospace; font-size: 9px; letter-spacing: 3px; }
+    .esb-t{ fill: white; font-family: monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; }
+    .esb-s{ fill: rgba(255,255,255,.6); font-family: monospace; font-size: 7px; }
+    .esb-d{ fill: rgba(255,255,255,.5); font-family: monospace; font-size: 6.5px; }
+    .esb-e{ fill: rgba(255,255,255,.35); font-family: monospace; font-size: 6px; }
+    .crm-t{ fill: var(--svg-orange,#fbd38d); font-family: monospace; font-size: 8.5px; font-weight: 700; }
+    .crm-s{ fill: var(--svg-orange,rgba(251,211,141,.7)); font-family: monospace; font-size: 6.5px; }
+    .pre-t{ fill: var(--svg-green,#9ae6b4); font-family: monospace; font-size: 8.5px; font-weight: 700; }
+    .pre-s{ fill: var(--svg-green,rgba(154,230,180,.65)); font-family: monospace; font-size: 6.5px; }
+    .post-t{fill: var(--svg-accent,#90cdf4); font-family: monospace; font-size: 8.5px; font-weight: 700; }
+    .post-s{fill: var(--svg-accent,rgba(144,205,244,.65)); font-family: monospace; font-size: 6.5px; }
+    .nss-t{ fill: var(--svg-purple,#d6bcfa); font-family: monospace; font-size: 8.5px; font-weight: 700; }
+    .nss-s{ fill: var(--svg-purple,rgba(214,188,250,.65)); font-family: monospace; font-size: 6.5px; }
+    .dig-t{ fill: var(--svg-orange,#fbd38d); font-family: monospace; font-size: 8.5px; font-weight: 700; }
+    .dig-s{ fill: var(--svg-orange,rgba(251,211,141,.65)); font-family: monospace; font-size: 6.5px; }
+    .usr-t{ fill: var(--svg-accent,#90cdf4); font-family: monospace; font-size: 7.5px; }
+    .usr-s{ fill: var(--svg-text2,rgba(144,205,244,.65)); font-family: monospace; font-size: 6.5px; }
+    .leg-t{ fill: var(--svg-text2,rgba(160,174,192,.7)); font-family: monospace; font-size: 7px; font-weight: 700; }
+    .leg-s{ fill: var(--svg-text2,rgba(160,174,192,.55)); font-family: monospace; font-size: 6.5px; }
+    .con-a { stroke: var(--svg-orange,rgba(246,173,85,.7)); fill: none; stroke-width: 1.5; }
+    .con-g { stroke: var(--svg-green,rgba(104,211,145,.65)); fill: none; stroke-width: 1.3; stroke-dasharray: 5,3; }
+    .con-b { stroke: var(--svg-accent,rgba(99,179,237,.65)); fill: none; stroke-width: 1.3; stroke-dasharray: 5,3; }
+    .con-p { stroke: var(--svg-purple,rgba(183,148,244,.65)); fill: none; stroke-width: 1.3; stroke-dasharray: 5,3; }
+    .con-o { stroke: var(--svg-orange,rgba(246,173,85,.65)); fill: none; stroke-width: 1.3; stroke-dasharray: 5,3; }
+    .con-u { stroke: var(--svg-accent,rgba(99,179,237,.65)); fill: none; stroke-width: 1.3; stroke-dasharray: 4,3; }
+    .arr-o { fill: var(--svg-accent,rgba(99,179,237,.75)); }
+  </style>
+  <defs>
+    <linearGradient id="esbG2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#553c9a"/>
+      <stop offset="100%" stop-color="#2b6cb0"/>
+    </linearGradient>
+    <marker id="arrE" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <path d="M0,0 L0,7 L7,3.5 z" class="arr-o"/>
+    </marker>
+  </defs>
+
+  <text x="250" y="18" class="tit" text-anchor="middle">TELECOM — SOA / ESB ARCHITECTURE</text>
+
+  <!-- CRM -->
+  <rect x="10" y="130" width="88" height="60" rx="8" class="crm"/>
+  <text x="54" y="153" class="crm-t" text-anchor="middle">CRM</text>
+  <text x="54" y="164" class="crm-s" text-anchor="middle">Salesforce /</text>
+  <text x="54" y="173" class="crm-s" text-anchor="middle">Siebel</text>
+  <text x="54" y="183" class="crm-s" text-anchor="middle">User Registration</text>
+  <line x1="98" y1="160" x2="155" y2="160" class="con-a" marker-end="url(#arrE)"/>
+  <text x="126" y="155" fill="var(--svg-orange,rgba(246,173,85,.6))" font-family="monospace" font-size="6">NEW USER</text>
+
+  <!-- ESB Hub -->
+  <rect x="155" y="90" width="190" height="140" rx="10" fill="url(#esbG2)" class="esb"/>
+  <text x="250" y="112" class="esb-t" text-anchor="middle">ESB</text>
+  <text x="250" y="124" class="esb-s" text-anchor="middle">Enterprise Service Bus</text>
+  <rect x="170" y="134" width="160" height="4" rx="2" fill="rgba(255,255,255,.2)"/>
+  <rect x="172" y="144" width="50" height="18" rx="4" class="inner"/>
+  <text x="197" y="155" class="esb-d" text-anchor="middle">ROUTE</text>
+  <rect x="228" y="144" width="50" height="18" rx="4" class="inner"/>
+  <text x="253" y="155" class="esb-d" text-anchor="middle">TRANSFORM</text>
+  <rect x="284" y="144" width="50" height="18" rx="4" class="inner"/>
+  <text x="309" y="155" class="esb-d" text-anchor="middle">ORCHESTRATE</text>
+  <text x="250" y="185" class="esb-d" text-anchor="middle">Adapters / Protocol Mediation</text>
+  <text x="250" y="196" class="esb-d" text-anchor="middle">SOAP · REST · JMS · CORBA</text>
+  <text x="250" y="207" class="esb-d" text-anchor="middle">Security · Logging · SLA Monitoring</text>
+  <text x="250" y="220" class="esb-e" text-anchor="middle">(IBM MQ · TIBCO · Oracle SOA Suite)</text>
+
+  <!-- Downstream: Prepaid -->
+  <rect x="365" y="28"  width="125" height="46" rx="7" class="pre"/>
+  <text x="427" y="46"  class="pre-t" text-anchor="middle">PREPAID SYSTEM</text>
+  <text x="427" y="57"  class="pre-s" text-anchor="middle">COTS — Balance / Recharge</text>
+  <text x="427" y="67"  class="pre-s" text-anchor="middle">e.g. Convergys, Huawei OCS</text>
+
+  <!-- Postpaid -->
+  <rect x="365" y="88"  width="125" height="46" rx="7" class="post"/>
+  <text x="427" y="106" class="post-t" text-anchor="middle">POSTPAID BILLING</text>
+  <text x="427" y="117" class="post-s" text-anchor="middle">COTS — Invoice / Credit</text>
+  <text x="427" y="127" class="post-s" text-anchor="middle">e.g. Amdocs, Oracle BRM</text>
+
+  <!-- Network -->
+  <rect x="365" y="148" width="125" height="46" rx="7" class="nss"/>
+  <text x="427" y="163" class="nss-t" text-anchor="middle">NETWORK / OSS</text>
+  <text x="427" y="174" class="nss-s" text-anchor="middle">Device Activation / SIM</text>
+  <text x="427" y="184" class="nss-s" text-anchor="middle">e.g. Ericsson OSS, NSN</text>
+
+  <!-- Digital Services -->
+  <rect x="365" y="208" width="125" height="46" rx="7" class="digs"/>
+  <text x="427" y="223" class="dig-t" text-anchor="middle">DIGITAL SERVICES</text>
+  <text x="427" y="234" class="dig-s" text-anchor="middle">VAS / IVR / Roaming</text>
+  <text x="427" y="244" class="dig-s" text-anchor="middle">Bespoke / Homegrown</text>
+
+  <!-- ESB → Systems arrows -->
+  <line x1="345" y1="130" x2="365" y2="51"  class="con-g" marker-end="url(#arrE)"/>
+  <line x1="345" y1="145" x2="365" y2="111" class="con-b" marker-end="url(#arrE)"/>
+  <line x1="345" y1="160" x2="365" y2="171" class="con-p" marker-end="url(#arrE)"/>
+  <line x1="345" y1="175" x2="365" y2="231" class="con-o" marker-end="url(#arrE)"/>
+
+  <!-- User icon -->
+  <circle cx="30" cy="64" r="12" class="user-c"/>
+  <circle cx="30" cy="59" r="5"  class="user-f"/>
+  <path d="M18,76 Q18,68 30,68 Q42,68 42,76" class="user-f"/>
+  <text x="30" y="84"  class="usr-t" text-anchor="middle">USER</text>
+  <text x="30" y="94"  class="usr-s" text-anchor="middle">New Sub.</text>
+  <line x1="30" y1="100" x2="30" y2="128" class="con-u" marker-end="url(#arrE)"/>
+  <text x="38" y="116" fill="var(--svg-accent,rgba(99,179,237,.65))" font-family="monospace" font-size="6">REGISTER</text>
+
+  <!-- Legend -->
+  <rect x="12" y="262" width="470" height="52" rx="6" class="leg"/>
+  <text x="24" y="277" class="leg-t">FLOW:</text>
+  <text x="60" y="277" class="leg-s">1. User registers → CRM captures subscriber data</text>
+  <text x="24" y="288" class="leg-s">2. CRM sends "New Subscriber" event to ESB   3. ESB routes to Prepaid/Postpaid for billing setup</text>
+  <text x="24" y="299" class="leg-s">4. ESB triggers Network OSS to activate SIM/device   5. ESB enables Digital Services (VAS, IVR, Roaming)</text>
+  <text x="24" y="310" class="leg-s">6. All systems acknowledge → ESB sends confirmation to CRM → User fully provisioned</text>
+</svg>
