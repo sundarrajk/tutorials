@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 380">
+  <style>
+    .bg    { fill: var(--svg-bg,#0d1117); }
+    .col   { fill: var(--svg-card,#1a2235); stroke-width: 1.2; }
+    .vm-col{ stroke: var(--svg-blue,#58a6ff); }
+    .ct-col{ stroke: var(--svg-green,#3fb950); }
+    .layer { fill: var(--svg-fill1,rgba(99,179,237,0.15)); stroke: var(--svg-blue,#58a6ff); stroke-width: 0.8; }
+    .layer-g{ fill: var(--svg-fill1,rgba(63,185,80,0.15)); stroke: var(--svg-green,#3fb950); stroke-width: 0.8; }
+    .layer-s{ fill: var(--svg-fill2,rgba(240,165,0,0.15)); stroke: var(--svg-accent,#f0a500); stroke-width: 0.8; }
+    .hw    { fill: rgba(88,166,255,0.20); stroke: var(--svg-blue,#58a6ff); stroke-width: 1; }
+    .hw-g  { fill: rgba(63,185,80,0.20); stroke: var(--svg-green,#3fb950); stroke-width: 1; }
+    .tit   { font-family: monospace; font-size:14px; font-weight:700; text-anchor:middle; }
+    .vm-t  { fill: var(--svg-blue,#58a6ff); }
+    .ct-t  { fill: var(--svg-green,#3fb950); }
+    .lyr-t { fill: var(--svg-text,#e6edf3); font-family: monospace; font-size:12px; text-anchor:middle; }
+    .lyr-s { fill: var(--svg-text2,#8b949e); font-family: monospace; font-size:11px; text-anchor:middle; }
+    .hw-t  { fill: var(--svg-text,#e6edf3); font-family: monospace; font-size:12px; font-weight:700; text-anchor:middle; }
+    .note  { fill: var(--svg-text2,#8b949e); font-family: monospace; font-size:11px; text-anchor:middle; }
+    .head  { fill: var(--svg-text2,#8b949e); font-family: monospace; font-size:12px; letter-spacing:1px; text-transform:uppercase; text-anchor:middle; }
+    .vs    { fill: var(--svg-accent,#f0a500); font-family: monospace; font-size:18px; font-weight:700; text-anchor:middle; }
+  </style>
+
+  <rect class="bg" width="680" height="380"/>
+  <text class="head" x="340" y="20">Virtual Machines vs Containers</text>
+
+  <!-- ── VM side ── left column x=14 width=296 -->
+  <rect class="col vm-col" x="14"  y="30" width="296" height="320" rx="8"/>
+  <text class="tit vm-t" x="162" y="52">Virtual Machines</text>
+
+  <!-- Hardware -->
+  <rect class="hw" x="26" y="60" width="272" height="32" rx="4"/>
+  <text class="hw-t" x="162" y="81">Physical Hardware</text>
+
+  <!-- Hypervisor -->
+  <rect class="layer" x="26" y="98" width="272" height="28" rx="4"/>
+  <text class="lyr-t" x="162" y="116">Hypervisor (VMware / KVM)</text>
+
+  <!-- Three VMs -->
+  <!-- VM1 -->
+  <rect class="layer-s" x="30" y="134" width="82" height="80" rx="4"/>
+  <text class="lyr-t" x="71" y="152">VM 1</text>
+  <rect fill="rgba(240,165,0,0.1)" stroke="var(--svg-accent,#f0a500)" stroke-width=".6" x="36" y="158" width="70" height="18" rx="3"/>
+  <text class="lyr-s" x="71" y="171">Guest OS</text>
+  <rect fill="rgba(240,165,0,0.1)" stroke="var(--svg-accent,#f0a500)" stroke-width=".6" x="36" y="180" width="70" height="18" rx="3"/>
+  <text class="lyr-s" x="71" y="193">App A</text>
+
+  <!-- VM2 -->
+  <rect class="layer-s" x="122" y="134" width="82" height="80" rx="4"/>
+  <text class="lyr-t" x="163" y="152">VM 2</text>
+  <rect fill="rgba(240,165,0,0.1)" stroke="var(--svg-accent,#f0a500)" stroke-width=".6" x="128" y="158" width="70" height="18" rx="3"/>
+  <text class="lyr-s" x="163" y="171">Guest OS</text>
+  <rect fill="rgba(240,165,0,0.1)" stroke="var(--svg-accent,#f0a500)" stroke-width=".6" x="128" y="180" width="70" height="18" rx="3"/>
+  <text class="lyr-s" x="163" y="193">App B</text>
+
+  <!-- VM3 -->
+  <rect class="layer-s" x="214" y="134" width="82" height="80" rx="4"/>
+  <text class="lyr-t" x="255" y="152">VM 3</text>
+  <rect fill="rgba(240,165,0,0.1)" stroke="var(--svg-accent,#f0a500)" stroke-width=".6" x="220" y="158" width="70" height="18" rx="3"/>
+  <text class="lyr-s" x="255" y="171">Guest OS</text>
+  <rect fill="rgba(240,165,0,0.1)" stroke="var(--svg-accent,#f0a500)" stroke-width=".6" x="220" y="180" width="70" height="18" rx="3"/>
+  <text class="lyr-s" x="255" y="193">App C</text>
+
+  <!-- VM notes -->
+  <text class="note" x="162" y="234">Each VM has full OS copy</text>
+  <text class="note" x="162" y="250">GBs of image per VM</text>
+  <text class="note" x="162" y="266">Minutes to start</text>
+  <text class="note" x="162" y="282">Strong isolation (hypervisor)</text>
+  <text class="note" x="162" y="298">Heavy resource usage</text>
+
+  <!-- VS -->
+  <text class="vs" x="340" y="210">vs</text>
+
+  <!-- ── Container side ── right column x=370 width=296 -->
+  <rect class="col ct-col" x="370" y="30" width="296" height="320" rx="8"/>
+  <text class="tit ct-t" x="518" y="52">Containers</text>
+
+  <!-- Hardware + OS (shared) -->
+  <rect class="hw-g" x="382" y="60" width="272" height="32" rx="4"/>
+  <text class="hw-t" x="518" y="81">Physical Hardware</text>
+
+  <!-- Host OS -->
+  <rect class="layer-g" x="382" y="98" width="272" height="28" rx="4"/>
+  <text class="lyr-t" x="518" y="116">Host OS (Linux Kernel)</text>
+
+  <!-- Docker Engine -->
+  <rect class="layer-g" x="382" y="132" width="272" height="24" rx="4"/>
+  <text class="lyr-t" x="518" y="148">Docker Engine (namespaces + cgroups)</text>
+
+  <!-- Three containers — no Guest OS, just libs + app -->
+  <!-- C1 -->
+  <rect fill="rgba(63,185,80,0.12)" stroke="var(--svg-green,#3fb950)" stroke-width=".8" x="386" y="162" width="82" height="68" rx="4"/>
+  <text class="lyr-t" x="427" y="180">C 1</text>
+  <rect fill="rgba(63,185,80,0.1)" stroke="var(--svg-green,#3fb950)" stroke-width=".6" x="392" y="184" width="70" height="16" rx="3"/>
+  <text class="lyr-s" x="427" y="196">libs</text>
+  <rect fill="rgba(63,185,80,0.1)" stroke="var(--svg-green,#3fb950)" stroke-width=".6" x="392" y="204" width="70" height="16" rx="3"/>
+  <text class="lyr-s" x="427" y="216">App A</text>
+
+  <!-- C2 -->
+  <rect fill="rgba(63,185,80,0.12)" stroke="var(--svg-green,#3fb950)" stroke-width=".8" x="478" y="162" width="82" height="68" rx="4"/>
+  <text class="lyr-t" x="519" y="180">C 2</text>
+  <rect fill="rgba(63,185,80,0.1)" stroke="var(--svg-green,#3fb950)" stroke-width=".6" x="484" y="184" width="70" height="16" rx="3"/>
+  <text class="lyr-s" x="519" y="196">libs</text>
+  <rect fill="rgba(63,185,80,0.1)" stroke="var(--svg-green,#3fb950)" stroke-width=".6" x="484" y="204" width="70" height="16" rx="3"/>
+  <text class="lyr-s" x="519" y="216">App B</text>
+
+  <!-- C3 -->
+  <rect fill="rgba(63,185,80,0.12)" stroke="var(--svg-green,#3fb950)" stroke-width=".8" x="570" y="162" width="82" height="68" rx="4"/>
+  <text class="lyr-t" x="611" y="180">C 3</text>
+  <rect fill="rgba(63,185,80,0.1)" stroke="var(--svg-green,#3fb950)" stroke-width=".6" x="576" y="184" width="70" height="16" rx="3"/>
+  <text class="lyr-s" x="611" y="196">libs</text>
+  <rect fill="rgba(63,185,80,0.1)" stroke="var(--svg-green,#3fb950)" stroke-width=".6" x="576" y="204" width="70" height="16" rx="3"/>
+  <text class="lyr-s" x="611" y="216">App C</text>
+
+  <!-- Container notes -->
+  <text class="note" x="518" y="248">Shares host OS kernel</text>
+  <text class="note" x="518" y="264">MBs of image per container</text>
+  <text class="note" x="518" y="280">Seconds to start</text>
+  <text class="note" x="518" y="296">Isolation via namespaces/cgroups</text>
+  <text class="note" x="518" y="312">Lightweight resource usage</text>
+
+  <!-- cgroups / namespace annotation -->
+  <text class="head" x="340" y="364">cgroups = CPU/RAM limits per container · namespaces = isolated view of OS, network, PID</text>
+</svg>

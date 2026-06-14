@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 440">
+  <style>
+    .bg    { fill: var(--svg-bg,#0d1117); }
+    .outer { fill: var(--svg-card,#1a2235); stroke: var(--svg-accent,#f0a500); stroke-width: 2; }
+    .mod   { fill: var(--svg-fill1,rgba(240,165,0,0.09)); stroke: var(--svg-accent,#f0a500); stroke-width: 1; stroke-dasharray:5,3; }
+    .be    { fill: var(--svg-card,#1a2235); stroke: var(--svg-blue,#58a6ff); stroke-width: 1.5; }
+    .db    { fill: var(--svg-card,#1a2235); stroke: var(--svg-green,#3fb950); stroke-width: 1.5; }
+    .conn  { stroke: var(--svg-accent,#f0a500); stroke-width: 1.2; stroke-dasharray:4,3; fill:none; opacity:.65; }
+    .tit   { fill: var(--svg-accent,#f0a500); font-family: monospace; font-size:14px; font-weight:700; text-anchor:middle; }
+    .sub   { fill: var(--svg-text2,#8b949e); font-family: monospace; font-size:11px; text-anchor:middle; }
+    .mod-t { fill: var(--svg-text,#e6edf3); font-family: monospace; font-size:12px; font-weight:700; text-anchor:middle; }
+    .mod-s { fill: var(--svg-text2,#8b949e); font-family: monospace; font-size:11px; text-anchor:middle; }
+    .be-t  { fill: var(--svg-blue,#58a6ff); font-family: monospace; font-size:12px; font-weight:700; text-anchor:middle; }
+    .be-s  { fill: var(--svg-text2,#8b949e); font-family: monospace; font-size:11px; text-anchor:middle; }
+    .db-t  { fill: var(--svg-green,#3fb950); font-family: monospace; font-size:12px; font-weight:700; text-anchor:middle; }
+    .lbl   { fill: var(--svg-text2,#8b949e); font-family: monospace; font-size:11px; text-anchor:middle; }
+    .arr   { fill: var(--svg-accent,#f0a500); opacity:.65; }
+  </style>
+  <defs>
+    <marker id="aMod" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <path d="M0,0 L0,7 L7,3.5z" class="arr"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="680" height="440"/>
+
+  <!-- Outer monolith shell -->
+  <rect class="outer" x="10" y="28" width="310" height="378" rx="10"/>
+  <text class="tit" x="165" y="52">MODULITH APPLICATION</text>
+  <text class="sub" x="165" y="68">Same binary — logical module boundaries inside</text>
+
+  <!-- Module boxes — 132×52, 2 columns, padding 14px -->
+  <!-- Row 1 -->
+  <rect class="mod" x="22"  y="80" width="132" height="52" rx="5"/>
+  <text class="mod-t" x="88"  y="101">Core Banking</text>
+  <text class="mod-s" x="88"  y="117">Accts 1–4</text>
+
+  <rect class="mod" x="166" y="80" width="132" height="52" rx="5"/>
+  <text class="mod-t" x="232" y="101">Demat</text>
+  <text class="mod-s" x="232" y="117">Securities</text>
+
+  <!-- Row 2 -->
+  <rect class="mod" x="22"  y="142" width="132" height="52" rx="5"/>
+  <text class="mod-t" x="88"  y="163">Loans</text>
+  <text class="mod-s" x="88"  y="179">LMS</text>
+
+  <rect class="mod" x="166" y="142" width="132" height="52" rx="5"/>
+  <text class="mod-t" x="232" y="163">Cards</text>
+  <text class="mod-s" x="232" y="179">Credit &amp; Debit</text>
+
+  <!-- Row 3 -->
+  <rect class="mod" x="22"  y="204" width="132" height="52" rx="5"/>
+  <text class="mod-t" x="88"  y="225">Payments</text>
+  <text class="mod-s" x="88"  y="241">UPI / Transfers</text>
+
+  <rect class="mod" x="166" y="204" width="132" height="52" rx="5"/>
+  <text class="mod-t" x="232" y="225">KYC</text>
+  <text class="mod-s" x="232" y="241">CRM</text>
+
+  <!-- Row 4 -->
+  <rect class="mod" x="22"  y="266" width="132" height="52" rx="5"/>
+  <text class="mod-t" x="88"  y="287">FAQ</text>
+  <text class="mod-s" x="88"  y="303">CMS</text>
+
+  <!-- Still one shared DB -->
+  <rect class="db" x="50" y="348" width="230" height="36" rx="5"/>
+  <text class="db-t" x="165" y="371">Single Shared Database</text>
+
+  <!-- Backend systems -->
+  <rect class="be" x="490" y="38"  width="174" height="44" rx="5"/>
+  <text class="be-t" x="577" y="57">Core Banking</text>
+  <text class="be-s" x="577" y="71">Accts 1–4</text>
+
+  <rect class="be" x="490" y="96"  width="174" height="44" rx="5"/>
+  <text class="be-t" x="577" y="115">Securities Trading</text>
+  <text class="be-s" x="577" y="129">Demat</text>
+
+  <rect class="be" x="490" y="154" width="174" height="44" rx="5"/>
+  <text class="be-t" x="577" y="173">Loan Mgmt (LMS)</text>
+  <text class="be-s" x="577" y="187">Loans</text>
+
+  <rect class="be" x="490" y="212" width="174" height="44" rx="5"/>
+  <text class="be-t" x="577" y="231">Card Systems</text>
+  <text class="be-s" x="577" y="245">Credit &amp; Debit</text>
+
+  <rect class="be" x="490" y="270" width="174" height="44" rx="5"/>
+  <text class="be-t" x="577" y="289">CRM</text>
+  <text class="be-s" x="577" y="303">KYC</text>
+
+  <rect class="be" x="490" y="328" width="174" height="44" rx="5"/>
+  <text class="be-t" x="577" y="347">CMS</text>
+  <text class="be-s" x="577" y="361">FAQ</text>
+
+  <!-- Connections -->
+  <line class="conn" x1="320" y1="106" x2="490" y2="60"  marker-end="url(#aMod)"/>
+  <line class="conn" x1="320" y1="106" x2="490" y2="118" marker-end="url(#aMod)"/>
+  <line class="conn" x1="320" y1="168" x2="490" y2="176" marker-end="url(#aMod)"/>
+  <line class="conn" x1="320" y1="230" x2="490" y2="234" marker-end="url(#aMod)"/>
+  <line class="conn" x1="320" y1="287" x2="490" y2="292" marker-end="url(#aMod)"/>
+  <line class="conn" x1="320" y1="303" x2="490" y2="350" marker-end="url(#aMod)"/>
+
+  <text class="lbl" x="340" y="420">Logical separation — but still one binary, one DB, one deployment</text>
+</svg>

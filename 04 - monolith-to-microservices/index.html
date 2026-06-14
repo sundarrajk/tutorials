@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Engineering Applications for the Cloud</title>
+  <link rel="stylesheet" href="../shared/css/deck.css"/>
+</head>
+<body>
+
+<div id="prog" style="width:0%"></div>
+
+<div id="deck">
+
+  <!-- ══ SLIDE 1: Cover ══════════════════════════════════════════ -->
+  <section class="slide cover" data-title="Engineering for the Cloud">
+    <div class="cov-grid"></div>
+    <div class="cov-glow"></div>
+    <div class="cov-content">
+      <div class="cov-kicker">Cloud Architecture Series · Lecture 3</div>
+      <h1 class="cov-h1">Engineering<br>for the <span class="hi">Cloud</span></h1>
+      <p class="cov-desc">
+        We know <em>why</em> lift-and-shift fails. Now we learn <em>how</em> to redesign
+        applications to be efficient, resilient, and independently deployable in the cloud.
+        From monolith to microservices — and the principles that make it work.
+      </p>
+      <div class="chips">
+        <span class="chip ca">Monolith → Microservices</span>
+        <span class="chip">The Twelve-Factor App</span>
+        <span class="chip cg">Docker &amp; Kubernetes</span>
+        <span class="chip cp">Observability</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 2: The Monolith ═══════════════════════════════════ -->
+  <section class="slide" data-title="The Monolith">
+    <div class="s-era">Architecture Pattern 1</div>
+    <h2 class="s-title">The <span class="hi2">Monolith</span></h2>
+    <p class="s-sub">
+      Most enterprise applications before cloud were monolithic — a single deployable binary containing every feature,
+      all sharing one database. Think SAP, Siebel, Oracle Financials — or any large bespoke in-house system.
+      The internet banking application below is a classic example.
+    </p>
+    <div class="dbox">
+      <img src="images/monolith.svg" alt="Monolith banking application with all features in one binary connecting to backend systems through a single shared database"/>
+    </div>
+    <div class="callout mt-sm">
+      <strong>💡 Key characteristic:</strong> One binary. One database. One deployment. Scale anything → scale everything.
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 3: Monolith problems ════════════════════════════ -->
+  <section class="slide" data-title="Problems with the Monolith">
+    <div class="s-era">Why Monoliths Struggle in the Cloud</div>
+    <h2 class="s-title">Problems with the <span class="hi2">Monolith</span></h2>
+
+    <ul class="prob-list">
+      <li data-icon="💸"><strong>Scaling is all-or-nothing.</strong> More load on Payments (payday) or Accounts (balance check day) means spinning up a full new instance containing <em>every</em> module — wasting memory, CPU, and cloud budget on features not under load.</li>
+      <li data-icon="🐢"><strong>Slow startup.</strong> A large binary takes longer to initialise. Every restart — whether for a bug fix or a config change — costs time that affects availability.</li>
+      <li data-icon="🧪"><strong>Long test cycles.</strong> A change anywhere requires regression testing of everything. A card-management bug fix cannot ship without re-running loan and KYC tests.</li>
+      <li data-icon="📅"><strong>Release coordination hell.</strong> Banks have separate teams for Loans, Cards, Retail Banking, KYC. Each team has its own release schedule — aligning them all for every deployment is slow and expensive.</li>
+      <li data-icon="🔥"><strong>Load in one module affects all.</strong> A spike in Payments slows down the FAQ page. A memory leak in Demat crashes Loans. There is no isolation.</li>
+      <li data-icon="💥"><strong>One bug → total instability.</strong> An unhandled exception in any module can bring down the entire application for all users.</li>
+      <li data-icon="🕸️"><strong>Modules bleed into each other.</strong> Over time, Loans code calls Accounts classes; Payments queries the Cards table directly. Changing one module silently breaks another. The codebase becomes a tightly coupled ball of mud.</li>
+    </ul>
+  </section>
+
+  <!-- ══ SLIDE 4: Modulith ═══════════════════════════════════════ -->
+  <section class="slide" data-title="The Modulith">
+    <div class="s-era">Architecture Pattern 2</div>
+    <h2 class="s-title">The Modulith — <span class="hi3">A Step Forward</span></h2>
+    <p class="s-sub">
+      A <strong>modulith</strong> is a monolith that enforces strict logical boundaries between its modules —
+      each module has its own package/namespace, its own internal API, and cannot directly access another module's
+      internals. Still one binary, still one database, but the internal structure is disciplined.
+    </p>
+    <div class="dbox">
+      <img src="images/modulith.svg" alt="Modulith banking application showing clearly separated logical modules inside one monolith application, still sharing one database"/>
+    </div>
+    <div class="g g2 mt-sm">
+      <div class="callout ca-green">
+        <strong>✅ Fixes problem 7</strong> — modules can no longer reach into each other's classes or tables. Each module communicates only through defined interfaces. Changing one module no longer silently breaks another.
+      </div>
+      <div class="callout ca-red">
+        <strong>❌ Problems 1–6 remain.</strong> It is still one binary, one database, one deployment. Scaling, startup time, test cycles, release coordination, cross-module load interference, and crash propagation are all unchanged.
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 5: Domain-Driven Design ══════════════════════════ -->
+  <section class="slide" data-title="Domain-Driven Design">
+    <div class="s-era">The Solution</div>
+    <h2 class="s-title">Domain-Driven Design &amp; <span class="hi">Bounded Contexts</span></h2>
+    <p class="s-sub">
+      The real solution is to break the application along <strong>functional domain boundaries</strong>.
+      Each domain becomes an independent service that owns its own data, its own deployment lifecycle,
+      and communicates with other services only through well-defined APIs.
+    </p>
+    <div class="callout" style="margin-bottom:0.75rem;">
+      <strong>📐 Bounded Context:</strong> A boundary within which a particular domain model applies. Inside the boundary, all terms, rules, and data belong exclusively to that service. Nothing outside the boundary can touch its database directly.
+    </div>
+    <div class="g g3">
+      <div class="card">
+        <span class="card-icon">🏦</span>
+        <div class="card-hd">Accounts Svc</div>
+        <p>Savings, Current, Fixed Deposit, Recurring Deposit → Core Banking System</p>
+      </div>
+      <div class="card c-green">
+        <span class="card-icon">📈</span>
+        <div class="card-hd">Demat Svc</div>
+        <p>Demat account management → Securities Trading System</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🏠</span>
+        <div class="card-hd">Loans Svc</div>
+        <p>Home, personal, auto loans → Loan Management System (LMS)</p>
+      </div>
+      <div class="card c-purple">
+        <span class="card-icon">🪪</span>
+        <div class="card-hd">KYC Svc</div>
+        <p>Know Your Customer — identity verification → CRM System</p>
+      </div>
+      <div class="card c-amber">
+        <span class="card-icon">💳</span>
+        <div class="card-hd">Card Services</div>
+        <p>Debit card management (separate service) + Credit card management (separate service)</p>
+      </div>
+      <div class="card c-red">
+        <span class="card-icon">💸</span>
+        <div class="card-hd">Payments Svc</div>
+        <p>UPI, transfers, online payments — calls Accounts, Debit, Credit APIs</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 6: Microservices diagram ════════════════════════ -->
+  <section class="slide" data-title="Microservices Architecture">
+    <div class="s-era">Microservices in Practice</div>
+    <h2 class="s-title">The Banking App as <span class="hi3">Microservices</span></h2>
+    <p class="s-sub">Each service deploys independently, owns its own database, and communicates via API only. An API Gateway is the single entry point for all client requests.</p>
+    <div class="dbox">
+      <img src="images/microservices.svg" alt="Banking application broken into 8 microservices each with its own database, connected through an API gateway, showing bounded context separation"/>
+    </div>
+    <div class="callout ca-green mt-sm">
+      <strong>✅ On payday,</strong> scale <code>accounts-svc</code> from 3 to 20 replicas. Everything else stays at its normal size. Cost goes up only for the service that needs it.
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 7: Twelve-Factor App intro ═══════════════════════ -->
+  <section class="slide" data-title="The Twelve-Factor App">
+    <div class="s-era">Cloud-Native Design Principles</div>
+    <h2 class="s-title">The <span class="hi">Twelve-Factor</span> App</h2>
+    <p class="s-sub">
+      In 2011, engineers at Heroku distilled the hard-won lessons from deploying thousands of applications into
+      twelve principles — a methodology for building software that is <strong>portable, scalable, and maintainable</strong>
+      in modern cloud environments. Full manifesto at <strong>12factor.net</strong>.
+    </p>
+    <div class="callout" style="margin-bottom:0.75rem;">
+      <strong>💡 These are not framework rules.</strong> They are <strong>architectural habits</strong> — ways of thinking about how an application relates to its environment, its data, and the outside world. Each violation makes the application harder to run reliably in the cloud.
+    </div>
+    <div class="g g4">
+      <div class="card">
+        <span class="card-icon">📋</span>
+        <div class="card-hd">Factors 1–3</div>
+        <p>Codebase, Dependencies, Config — how you <em>package</em> and <em>configure</em> an application so it is reproducible across environments.</p>
+      </div>
+      <div class="card c-amber">
+        <span class="card-icon">🔌</span>
+        <div class="card-hd">Factors 4–6</div>
+        <p>Backing Services, Build/Release/Run, Processes — how an application <em>connects</em> to the world and maintains a <em>clean separation</em> of stages.</p>
+      </div>
+      <div class="card c-green">
+        <span class="card-icon">🌐</span>
+        <div class="card-hd">Factors 7–9</div>
+        <p>Port Binding, Concurrency, Disposability — how an application <em>exposes</em> itself, <em>scales</em>, and handles <em>failures gracefully</em>.</p>
+      </div>
+      <div class="card c-purple">
+        <span class="card-icon">🔍</span>
+        <div class="card-hd">Factors 10–12</div>
+        <p>Dev/Prod Parity, Logs, Admin Processes — how you keep <em>environments consistent</em>, <em>observe</em> the system, and run <em>operational tasks</em> safely.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 8: Factors 1–3 ══════════════════════════════════ -->
+  <section class="slide" data-title="Factors 1–3: Codebase, Dependencies, Config">
+    <div class="s-era">The Twelve-Factor App · Factors 1–3</div>
+    <h2 class="s-title">Codebase, <span class="hi">Dependencies</span> &amp; Config</h2>
+
+    <div class="g g3">
+      <div class="card">
+        <span class="card-icon">1️⃣</span>
+        <div class="card-hd">Codebase — One repo, many deploys</div>
+        <p><strong>Rule:</strong> One codebase per service, tracked in version control (Git). The same code is deployed to dev, staging, and production — only configuration differs between them.</p>
+        <p><strong>Why it matters:</strong> If you have separate codebases for dev and prod, you introduce drift — production bugs that cannot be reproduced locally.</p>
+        <p><strong>Violation:</strong> A team maintains a "dev branch" that diverges from "prod branch" for months. Merging becomes a nightmare.</p>
+      </div>
+      <div class="card c-amber">
+        <span class="card-icon">2️⃣</span>
+        <div class="card-hd">Dependencies — Declare &amp; isolate</div>
+        <p><strong>Rule:</strong> Explicitly declare all dependencies in a manifest (e.g. <code>pom.xml</code>, <code>package.json</code>). Never rely on packages being pre-installed on the host OS.</p>
+        <p><strong>Why it matters:</strong> "It works on my machine" is the most expensive phrase in software. Declaring dependencies means any fresh machine can reproduce the exact same environment.</p>
+        <p><strong>Violation:</strong> The app depends on <code>imagemagick</code> being installed on the server. Works locally, fails on a fresh cloud VM.</p>
+      </div>
+      <div class="card c-green">
+        <span class="card-icon">3️⃣</span>
+        <div class="card-hd">Config — Store in the environment</div>
+        <p><strong>Rule:</strong> Anything that varies between deployments (DB URLs, API keys, port numbers) must be stored in <strong>environment variables</strong> — never hard-coded or committed to Git.</p>
+        <p><strong>Why it matters:</strong> A twelve-factor app should be deployable to a new environment simply by changing env vars — no code changes, no re-build. This is exactly how Kubernetes ConfigMaps and Secrets work.</p>
+        <p><strong>Violation:</strong> Developer commits <code>DB_PASSWORD=prod-secret-123</code> into Git. Now exposed to anyone with repo access.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 9: Factors 4–6 ══════════════════════════════════ -->
+  <section class="slide" data-title="Factors 4–6: Backing Services, Build/Release/Run, Processes">
+    <div class="s-era">The Twelve-Factor App · Factors 4–6</div>
+    <h2 class="s-title">Backing Services, <span class="hi2">Build/Release/Run</span> &amp; Processes</h2>
+
+    <div class="g g3">
+      <div class="card">
+        <span class="card-icon">4️⃣</span>
+        <div class="card-hd">Backing Services — Treat as attached resources</div>
+        <p><strong>Rule:</strong> Any service the app consumes over the network — databases, message queues, caches — is a <em>backing service</em> and should be treated as an interchangeable resource, accessed via a URL stored in config.</p>
+        <p><strong>Why it matters:</strong> You should be able to swap a local PostgreSQL for an AWS RDS instance just by changing an env var — no code changes.</p>
+        <p><strong>Banking example:</strong> Payments treats Core Banking as a backing service. Swap the URL to a test stub and the service works identically in a test environment.</p>
+      </div>
+      <div class="card c-amber">
+        <span class="card-icon">5️⃣</span>
+        <div class="card-hd">Build, Release, Run — Strict separation</div>
+        <p><strong>Rule:</strong> <strong>Build:</strong> compile code into an artifact. <strong>Release:</strong> combine the build with config to create a versioned, immutable release. <strong>Run:</strong> execute the release in the target environment.</p>
+        <p><strong>Why it matters:</strong> A release is immutable — if something is wrong, roll back to the previous release. Rollback in Kubernetes is a single command.</p>
+        <p><strong>Violation:</strong> An ops engineer SSH-es into a running container to hotfix a config file. The change is invisible to Git and lost on the next deployment.</p>
+      </div>
+      <div class="card c-purple">
+        <span class="card-icon">6️⃣</span>
+        <div class="card-hd">Processes — Execute as stateless processes</div>
+        <p><strong>Rule:</strong> The application should run as one or more <strong>stateless</strong> processes. Any data that needs to persist must be stored in a backing service — never in the process's memory or local filesystem.</p>
+        <p><strong>Why it matters:</strong> A stateless process can be killed and restarted anywhere. Kubernetes does exactly this.</p>
+        <p><strong>Violation:</strong> Accounts service stores user's session in a HashMap in memory. The load balancer routes the next request to a different pod. Session is gone. User logged out.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 10: Factors 7–9 ═════════════════════════════════ -->
+  <section class="slide" data-title="Factors 7–9: Port Binding, Concurrency, Disposability">
+    <div class="s-era">The Twelve-Factor App · Factors 7–9</div>
+    <h2 class="s-title">Port Binding, <span class="hi3">Concurrency</span> &amp; Disposability</h2>
+
+    <div class="g g3">
+      <div class="card">
+        <span class="card-icon">7️⃣</span>
+        <div class="card-hd">Port Binding — Export services via port</div>
+        <p><strong>Rule:</strong> The app is self-contained and exposes its service by binding to a port. It does not rely on an external web server being installed on the host. The HTTP server is a dependency declared in the app itself.</p>
+        <p><strong>Why it matters:</strong> This is how Docker containers work — each container binds to a port and the runtime maps it. The app carries its own server (e.g. embedded Tomcat in Spring Boot, Express in Node.js).</p>
+        <p><strong>Microservices angle:</strong> Each of the 8 banking services runs on its own port. Kubernetes's Service resource maps these to stable internal DNS names regardless of which pod is running.</p>
+      </div>
+      <div class="card c-amber">
+        <span class="card-icon">8️⃣</span>
+        <div class="card-hd">Concurrency — Scale out via the process model</div>
+        <p><strong>Rule:</strong> Scale by running more processes, not by making a single process bigger. Different workload types can be handled by different process types — web processes for HTTP, worker processes for background jobs.</p>
+        <p><strong>Why it matters:</strong> On payday, add more Accounts pods — don't buy a bigger server. Kubernetes's Horizontal Pod Autoscaler (HPA) does this automatically.</p>
+        <p><strong>Monolith contrast:</strong> Scaling one feature means scaling the entire application. Factor 8 is the core reason microservices exist.</p>
+      </div>
+      <div class="card c-green">
+        <span class="card-icon">9️⃣</span>
+        <div class="card-hd">Disposability — Fast start, graceful shutdown</div>
+        <p><strong>Rule:</strong> Processes should start quickly and shut down gracefully. On receiving a <code>SIGTERM</code>, the app should stop accepting new requests, finish in-flight requests, and exit cleanly.</p>
+        <p><strong>Why it matters:</strong> Kubernetes kills pods constantly — during scale-down, rolling updates, and node failures. An app that starts in 30 seconds delays recovery. An app that crashes mid-request corrupts data.</p>
+        <p><strong>Target:</strong> Start in under 5 seconds. Drain gracefully. Never hold a DB transaction across multiple HTTP calls.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 11: Factors 10–12 ═══════════════════════════════ -->
+  <section class="slide" data-title="Factors 10–12: Dev/Prod Parity, Logs, Admin Processes">
+    <div class="s-era">The Twelve-Factor App · Factors 10–12</div>
+    <h2 class="s-title">Dev/Prod Parity, <span class="hi">Logs</span> &amp; Admin Processes</h2>
+
+    <div class="g g3">
+      <div class="card">
+        <span class="card-icon">🔟</span>
+        <div class="card-hd">Dev/Prod Parity — Keep environments as similar as possible</div>
+        <p><strong>Rule:</strong> Minimise the gap between development, staging, and production — in time (deploy often), personnel (developers deploy their own code), and tooling (use the same DB engine locally as in production).</p>
+        <p><strong>Why it matters:</strong> Using H2 in-memory DB locally but PostgreSQL in production causes subtle SQL bugs that only appear in production. Docker Compose makes running PostgreSQL locally trivial.</p>
+        <p><strong>Container benefit:</strong> A Docker image built on a developer's laptop is <em>exactly</em> the image deployed to production. Dev/prod parity is structural, not a team discipline.</p>
+      </div>
+      <div class="card c-amber">
+        <span class="card-icon">1️⃣1️⃣</span>
+        <div class="card-hd">Logs — Treat as event streams</div>
+        <p><strong>Rule:</strong> The app never concerns itself with routing or storing its logs. It writes all log events to <strong>stdout</strong> as a stream. The execution environment captures stdout and forwards to a centralised log aggregator.</p>
+        <p><strong>Why it matters:</strong> An app that writes logs to <code>/var/log/app.log</code> inside the container violates Factor 6 (stateless) and makes logs invisible to Kubernetes.</p>
+        <p><strong>Connection to observability:</strong> Kubernetes collects stdout from every pod and forwards to Loki or ELK. The app has zero log-routing code.</p>
+      </div>
+      <div class="card c-green">
+        <span class="card-icon">1️⃣2️⃣</span>
+        <div class="card-hd">Admin Processes — Run as one-off tasks</div>
+        <p><strong>Rule:</strong> Administrative tasks — database migrations, data clean-up scripts, one-time backfills — should run as one-off processes in the same environment as the app, using the same codebase and config.</p>
+        <p><strong>Why it matters:</strong> In Kubernetes this maps to a <strong>Job</strong> or <strong>CronJob</strong> — a container that runs to completion and is auditable.</p>
+        <p><strong>Banking example:</strong> Month-end close is a CronJob that spins up the same container image as Accounts service, runs the process, and exits cleanly.</p>
+      </div>
+    </div>
+    <div class="callout mt-sm">
+      <strong>📌 Summary:</strong> The twelve factors form a coherent philosophy. Factor 3 (config in env) enables Factor 10 (dev/prod parity). Factor 6 (stateless) enables Factor 9 (disposability). Factor 11 (logs to stdout) enables observability. Each factor reinforces the others.
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 12: How Containers Fulfil the 12 Factors ═══════ -->
+  <section class="slide" data-title="12 Factors Meet Containers">
+    <div class="s-era">The Twelve-Factor App · Applied</div>
+    <h2 class="s-title">How <span class="hi">Containers</span> &amp; Kubernetes Fulfil the Twelve Factors</h2>
+    <p class="s-sub">The twelve factors were written before Kubernetes existed — but they describe <em>exactly</em> what containers and orchestrators provide. This is not a coincidence: both grew from the same operational lessons.</p>
+
+    <div class="two-col">
+      <div class="col-block">
+        <h3>Docker fulfils</h3>
+        <ul class="steps">
+          <li><span class="step-num">2</span><span><strong>Dependencies</strong> — the Dockerfile declares every library; the image is self-contained. "Works on my machine" becomes a non-issue.</span></li>
+          <li><span class="step-num">5</span><span><strong>Build/Release/Run</strong> — <code>docker build</code> is the Build stage. Tagging an image with a version creates an immutable Release. <code>docker run</code> is the Run stage.</span></li>
+          <li><span class="step-num">7</span><span><strong>Port Binding</strong> — each container exposes its own port; Docker maps it. No external web server installed on the host.</span></li>
+          <li><span class="step-num">10</span><span><strong>Dev/Prod Parity</strong> — the same image runs on a developer laptop and in production. The environment inside the container is structurally identical.</span></li>
+        </ul>
+      </div>
+      <div class="col-block">
+        <h3>Kubernetes fulfils</h3>
+        <ul class="steps">
+          <li><span class="step-num">3</span><span><strong>Config</strong> — ConfigMaps and Secrets inject env vars at pod startup. No secrets in code or images.</span></li>
+          <li><span class="step-num">4</span><span><strong>Backing Services</strong> — Services provide stable DNS names for databases, queues, caches. Swap the backing service by changing a config value.</span></li>
+          <li><span class="step-num">8</span><span><strong>Concurrency</strong> — the Horizontal Pod Autoscaler adds replicas when load rises, removes them when it drops. Scale-out is automated.</span></li>
+          <li><span class="step-num">9</span><span><strong>Disposability</strong> — Kubernetes sends <code>SIGTERM</code> before killing a pod, giving the app time to drain in-flight requests. Self-healing restarts failed pods.</span></li>
+          <li><span class="step-num">11</span><span><strong>Logs</strong> — stdout from every pod is captured automatically and forwarded to the log aggregator. The app writes; the platform routes.</span></li>
+          <li><span class="step-num">12</span><span><strong>Admin Processes</strong> — Kubernetes Jobs and CronJobs run one-off tasks in the same container image as the production service.</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout ca-green mt-sm">
+      <strong>🎯 The insight:</strong> If you build your microservices following the twelve factors, you get the benefits of Docker and Kubernetes <em>for free</em> — because the platform was designed to run exactly that kind of application.
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 13: Containers intro ═════════════════════════════ -->
+  <section class="slide" data-title="Containerisation">
+    <div class="s-era">Deployment Technology</div>
+    <h2 class="s-title">How Do We Deploy All These <span class="hi2">Services?</span></h2>
+    <p class="s-sub">Eight services. Each with multiple replicas. Each needing its own OS libraries and runtime version. Managing individual VMs would be chaos. The answer is <strong>containerisation</strong>.</p>
+
+    <div class="dbox" style="margin-bottom:0.75rem;">
+      <img src="images/vm-vs-container.svg" alt="Side-by-side comparison of Virtual Machines versus Containers showing the hypervisor stack versus the shared kernel approach with cgroups and namespaces"/>
+    </div>
+    <div class="two-col">
+      <div class="col-block">
+        <h3>How Docker Works</h3>
+        <ul class="steps">
+          <li><span class="step-num">1</span><span><strong>Namespaces</strong> — give each container its own isolated view: PID tree, network interfaces, filesystem mount points, hostname. Each process thinks it is the only one on the OS.</span></li>
+          <li><span class="step-num">2</span><span><strong>cgroups</strong> (control groups) — enforce hard limits on CPU, memory, and I/O per container. A memory leak in one container cannot starve another.</span></li>
+          <li><span class="step-num">3</span><span><strong>Layer filesystem</strong> — images are layered. Base OS layer is shared across containers; only the app layer is unique. Images are megabytes, not gigabytes.</span></li>
+        </ul>
+      </div>
+      <div class="col-block">
+        <h3>Twelve-Factor Alignment</h3>
+        <ul class="steps">
+          <li><span class="step-num">F2</span><span>The Dockerfile <em>is</em> the dependency declaration — all libraries pinned, all system packages specified. Factor 2 enforced structurally.</span></li>
+          <li><span class="step-num">F6</span><span>Containers are inherently stateless — the filesystem is ephemeral. Anything that must survive a restart goes to a backing service. Factor 6 by design.</span></li>
+          <li><span class="step-num">F9</span><span>Containers start in seconds (no guest OS). Kubernetes sends SIGTERM for graceful shutdown. Factor 9 is native behaviour.</span></li>
+          <li><span class="step-num">F10</span><span>The same Docker image is promoted from dev → staging → production. Not "similar" — identical. Factor 10 by construction.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 14: Kubernetes ════════════════════════════════════ -->
+  <section class="slide" data-title="Kubernetes">
+    <div class="s-era">Orchestration</div>
+    <h2 class="s-title">Kubernetes — <span class="hi3">Orchestrating the Fleet</span></h2>
+    <p class="s-sub">Docker packages the application. <strong>Kubernetes (K8s)</strong> decides where it runs, how many copies run, and what happens when something goes wrong.</p>
+    <div class="dbox">
+      <img src="images/kubernetes.svg" alt="Banking microservices deployed in a Kubernetes cluster showing pods with sidecar proxies, control plane components including scheduler, autoscaler, load balancer, and secrets management"/>
+    </div>
+    <div class="callout mt-sm">
+      <strong>🔀 Sidecar pattern:</strong> Each pod runs your application container <em>plus</em> a lightweight proxy (Envoy/Istio). The sidecar handles TLS, mTLS, retries, circuit breakers, and emits metrics and traces — all without changing application code. This is Factor 11 (logs) and Factor 8 (concurrency) operated by the platform, not the developer.
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 15: Benefits of Docker + K8s ════════════════════ -->
+  <section class="slide" data-title="Benefits of Docker + Kubernetes">
+    <div class="s-era">Why Docker + Kubernetes</div>
+    <h2 class="s-title">Benefits of <span class="hi">Containerisation</span> &amp; Orchestration</h2>
+    <p class="s-sub">Each benefit below maps directly to one or more twelve-factor principles — showing that the factors and the platform are two sides of the same coin.</p>
+
+    <div class="g g4">
+      <div class="card">
+        <span class="card-icon">📦</span>
+        <div class="card-hd">Library isolation <span class="factor-badge">· F2</span></div>
+        <p>Multiple library versions on the same host without conflict. The Dockerfile declares every dependency. No more "works on my machine."</p>
+      </div>
+      <div class="card c-green">
+        <span class="card-icon">⚡</span>
+        <div class="card-hd">Elastic scale <span class="factor-badge">· F8, F9</span></div>
+        <p>No guest OS to boot — containers start in seconds (F9). Kubernetes HPA adds replicas when load rises, removes them when it drops (F8). Cost follows load.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🔒</span>
+        <div class="card-hd">Network security <span class="factor-badge">· F4</span></div>
+        <p>Docker manages container networking. Backing services (F4) are addressed by internal DNS name, not hard-coded IPs. mTLS prevents spoofing.</p>
+      </div>
+      <div class="card c-amber">
+        <span class="card-icon">🔑</span>
+        <div class="card-hd">Secrets management <span class="factor-badge">· F3</span></div>
+        <p>Kubernetes Secrets inject credentials as env vars at runtime (F3). API keys, DB passwords, and certificates are never baked into images or committed to Git.</p>
+      </div>
+      <div class="card c-purple">
+        <span class="card-icon">🔄</span>
+        <div class="card-hd">Rolling restarts &amp; rollback <span class="factor-badge">· F5, F9</span></div>
+        <p>Each deployment is an immutable versioned release (F5). Kubernetes deploys pod-by-pod after health checks pass (F9). Bad release? One command rolls back.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">📊</span>
+        <div class="card-hd">Built-in observability <span class="factor-badge">· F11</span></div>
+        <p>Stdout from every pod is captured automatically (F11). Sidecar proxies emit metrics and traces. No log-routing code in the application.</p>
+      </div>
+      <div class="card c-green">
+        <span class="card-icon">🛡️</span>
+        <div class="card-hd">Resilience &amp; isolation <span class="factor-badge">· F6, F9</span></div>
+        <p>Stateless services (F6) can be killed and restarted anywhere. Kubernetes restarts failed pods automatically. One service's crash does not affect the rest.</p>
+      </div>
+      <div class="card c-amber">
+        <span class="card-icon">🚀</span>
+        <div class="card-hd">Independent releases <span class="factor-badge">· F1, F5</span></div>
+        <p>One codebase per service (F1) means teams deploy independently. Payments ships Friday; Loans ships Monday. No shared deployment window.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 16: Microservices Challenges ════════════════════ -->
+  <section class="slide" data-title="Microservices Challenges">
+    <div class="s-era">The Other Side of the Coin</div>
+    <h2 class="s-title">Microservices Come with <span class="hi2">Baggage</span></h2>
+    <p class="s-sub">Every architectural choice is a trade-off. Microservices solve the monolith's problems but introduce a new category of operational complexity.</p>
+
+    <div class="g g2">
+      <div>
+        <div class="s-era" style="margin-bottom:0.5rem;">Operational Complexity</div>
+        <ul class="prob-list">
+          <li data-icon="🔢"><strong>Too many moving parts.</strong> A monolith = 1 process. A microservices estate = dozens of services × N replicas = hundreds of running processes. Each must be started, monitored, and managed.</li>
+          <li data-icon="📡"><strong>Network is now in the call path.</strong> What was an in-process function call is now an HTTP/gRPC request over the network. Network failures, timeouts, and retries become first-class problems.</li>
+          <li data-icon="🔄"><strong>Distributed transactions.</strong> Updating two services consistently (e.g. debit Accounts and credit Payments atomically) is hard. There is no shared database transaction to roll back.</li>
+          <li data-icon="🗂️"><strong>Data consistency.</strong> Each service owns its DB. Keeping data in sync across service boundaries requires eventual consistency patterns (sagas, outbox) that add design complexity.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="s-era" style="margin-bottom:0.5rem;">Debugging Complexity</div>
+        <ul class="prob-list">
+          <li data-icon="📋"><strong>Logs everywhere.</strong> 8 services × 3 replicas = 24 log streams. Which one has the error? Which instance served <em>this</em> request?</li>
+          <li data-icon="🔍"><strong>No single process to inspect.</strong> With a monolith, attach a debugger and inspect state. With microservices, the state is spread across many processes on many machines.</li>
+          <li data-icon="🌐"><strong>Request spans many services.</strong> A user's payment request touches Payments → Accounts → Debit Card → Core Banking. If it fails, which hop caused it?</li>
+          <li data-icon="⏱️"><strong>Latency attribution.</strong> The total response was 3 seconds. Which service contributed the most? Without distributed tracing, you cannot know.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 17: Debug complexity diagram ════════════════════ -->
+  <section class="slide" data-title="Debugging Complexity Illustrated">
+    <div class="s-era">Why Debugging is Hard</div>
+    <h2 class="s-title">A Single User Request — <span class="hi2">Many Log Streams</span></h2>
+    <p class="s-sub">When a user's payment fails, a developer must trace through multiple services, each running multiple instances, each generating its own log file. Without tooling, this is hours of manual work.</p>
+    <div class="dbox">
+      <img src="images/debug-complexity.svg" alt="Diagram showing a user payment request flowing through multiple banking microservices with the payments service throwing an error, and each service generating its own separate log file making debugging difficult"/>
+    </div>
+    <div class="callout ca-red mt-sm">
+      <strong>🔥 Real scenario:</strong> Payment fails at 2 AM. On-call engineer sees a 500 error in the Payments service. But Payments called Accounts, which called Core Banking. The root cause is in the Core Banking response — three hops back — buried in a log file on a different pod that may have already been recycled by Kubernetes.
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 18: Observability intro ══════════════════════════ -->
+  <section class="slide" data-title="Observability — Three Pillars">
+    <div class="s-era">The Solution to Debugging Complexity</div>
+    <h2 class="s-title"><span class="hi3">Observability</span> — Three Pillars</h2>
+    <p class="s-sub">
+      <strong>Observability</strong> is the ability to understand the internal state of a system from its external outputs.
+      It is built on three complementary signals that together answer: <em>is something wrong, where is it wrong, and why is it wrong?</em>
+      Factor 11 (logs to stdout) is the foundation that makes all three pillars collectible by the platform.
+    </p>
+    <div class="dbox">
+      <img src="images/observability.svg" alt="Three pillars of observability: Metrics showing counts and latencies collected by Prometheus, Traces showing request flow across services via Jaeger, and Logs showing detailed error information — all aggregated into a unified observability platform"/>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 19: Three pillars detail + Summary ══════════════ -->
+  <section class="slide" data-title="Metrics, Traces, Logs & Summary">
+    <div class="s-era">Observability in Depth &amp; What We Covered</div>
+    <h2 class="s-title">The Three Pillars — and the <span class="hi">Full Journey</span></h2>
+
+    <div class="g g4">
+      <div class="card">
+        <span class="card-icon">📊</span>
+        <div class="card-hd">Metrics</div>
+        <p><strong>What:</strong> Request rates, latencies (p50/p99), error rates, CPU, memory. Kubernetes and the sidecar capture most automatically.</p>
+        <p><strong>Answers:</strong> <em>"Is something wrong right now?"</em></p>
+        <p><strong>Tools:</strong> Prometheus + Grafana</p>
+      </div>
+      <div class="card c-amber">
+        <span class="card-icon">🔗</span>
+        <div class="card-hd">Traces</div>
+        <p><strong>What:</strong> End-to-end journey of a single request across all services. Each service adds a span via the sidecar. App only passes the Trace ID header through.</p>
+        <p><strong>Answers:</strong> <em>"Where is the failure / slowness?"</em></p>
+        <p><strong>Tools:</strong> Jaeger, Zipkin, Grafana Tempo</p>
+      </div>
+      <div class="card c-green">
+        <span class="card-icon">📋</span>
+        <div class="card-hd">Logs</div>
+        <p><strong>What:</strong> Structured JSON written to <strong>stdout</strong> (Factor 11). Kubernetes captures and forwards to aggregator. App has zero routing code.</p>
+        <p><strong>Answers:</strong> <em>"Exactly what went wrong?"</em></p>
+        <p><strong>Tools:</strong> Grafana Loki, ELK Stack</p>
+      </div>
+      <div class="card c-purple">
+        <span class="card-icon">🧱</span>
+        <div class="card-hd">Monolith → Modulith</div>
+        <p>Single binary, single DB. Modulith adds internal module boundaries. Both share all-or-nothing scaling and deployment.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">⚙️</span>
+        <div class="card-hd">Microservices + DDD</div>
+        <p>Bounded contexts. Independent services, each owning its data and deployment. Scaled individually, released independently.</p>
+      </div>
+      <div class="card c-amber">
+        <span class="card-icon">📐</span>
+        <div class="card-hd">Twelve-Factor App</div>
+        <p>Design principles that make services work <em>with</em> — not against — the container platform. Config in env, stateless, fast startup, logs to stdout.</p>
+      </div>
+      <div class="card c-green">
+        <span class="card-icon">🐳</span>
+        <div class="card-hd">Docker</div>
+        <p>Self-contained, immutable images. Namespaces + cgroups = isolation. Same image from dev to prod. Fulfils Factors 2, 5, 7, 10.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">☸️</span>
+        <div class="card-hd">Kubernetes</div>
+        <p>Scheduling, autoscaling, self-healing, rolling updates, secrets, service mesh. Fulfils Factors 3, 4, 8, 9, 11, 12.</p>
+      </div>
+    </div>
+    <div class="callout mt-sm">
+      <strong>💬 Discussion:</strong> Pick any two of the twelve factors and explain how violating them would cause a specific operational problem for the banking application we've been working with throughout these slides.
+    </div>
+  </section>
+
+</div><!-- /#deck -->
+
+<nav id="nav">
+  <div class="nav-group">
+    <button class="nb" id="btn-prev">← Prev</button>
+    <button class="nb" id="btn-next">Next →</button>
+    <span id="counter">1 / 19</span>
+  </div>
+  <div class="nav-group">
+    <select id="jump"></select>
+  </div>
+  <div class="nav-group">
+    <button id="theme-btn">☀ Light</button>
+  </div>
+</nav>
+
+<script src="../shared/js/deck.js"></script>
+</body>
+</html>

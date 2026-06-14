@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 460">
+  <style>
+    .bg   { fill: var(--svg-bg,#0d1117); }
+    .k8s  { fill: var(--svg-fill2,rgba(99,179,237,0.05)); stroke: var(--svg-blue,#58a6ff); stroke-width: 1.5; }
+    .pod  { fill: var(--svg-card,#1a2235); stroke-width: 1.2; }
+    .p1   { stroke: var(--svg-blue,#58a6ff); }
+    .p2   { stroke: var(--svg-green,#3fb950); }
+    .p3   { stroke: var(--svg-accent,#f0a500); }
+    .p4   { stroke: #b794f4; }
+    .p5   { stroke: #fc8181; }
+    .p6   { stroke: #63b3ed; }
+    .p7   { stroke: #f6ad55; }
+    .p8   { stroke: #68d391; }
+    .ing  { fill: var(--svg-fill1,rgba(240,165,0,0.12)); stroke: var(--svg-accent,#f0a500); stroke-width: 1.5; }
+    .tit  { fill: var(--svg-text2,#8b949e); font-family:monospace; font-size:12px; letter-spacing:1px; text-transform:uppercase; text-anchor:middle; }
+    .k8t  { fill: var(--svg-blue,#58a6ff); font-family:monospace; font-size:13px; font-weight:700; text-anchor:middle; }
+    .pod-t{ fill: var(--svg-text,#e6edf3); font-family:monospace; font-size:11px; font-weight:700; text-anchor:middle; }
+    .pod-s{ fill: var(--svg-text2,#8b949e); font-family:monospace; font-size:10px; text-anchor:middle; }
+    .ns-t { fill: var(--svg-blue,#58a6ff); font-family:monospace; font-size:11px; }
+    .rep  { font-family:monospace; font-size:10px; text-anchor:middle; }
+    .conn { stroke: var(--svg-accent,#f0a500); stroke-width: 1; stroke-dasharray:3,2; fill:none; opacity:.5; }
+    .arr  { fill: var(--svg-accent,#f0a500); opacity:.5; }
+    .side { fill: var(--svg-fill1,rgba(63,185,80,0.1)); stroke: var(--svg-green,#3fb950); stroke-width: 0.8; }
+    .side-t{ fill: var(--svg-green,#3fb950); font-family:monospace; font-size:10px; text-anchor:middle; }
+  </style>
+  <defs>
+    <marker id="aK" markerWidth="6" markerHeight="6" refX="4" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L6,3z" class="arr"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="740" height="460"/>
+  <text class="tit" x="370" y="18">Banking Microservices on Kubernetes</text>
+
+  <!-- Ingress / API Gateway -->
+  <rect class="ing" x="270" y="26" width="200" height="40" rx="7"/>
+  <text class="k8t" x="370" y="43">Ingress / API Gateway</text>
+  <text class="pod-s" x="370" y="58">TLS termination · routing · rate limiting</text>
+
+  <!-- Kubernetes cluster box -->
+  <rect class="k8s" x="10" y="76" width="720" height="344" rx="10"/>
+  <text class="k8t" x="370" y="96">Kubernetes Cluster</text>
+
+  <!-- Pod grid: 4 cols × 2 rows, pod box 148×60, margin 14px -->
+  <!-- Col x: 18, 184, 350, 516  (but 4 per row × 2 = 8, we have 8 services) -->
+  <!-- Row 1 top y=106, row2 y=226 -->
+
+  <!-- Row 1 -->
+  <!-- Accounts pod -->
+  <rect class="pod p1" x="18"  y="106" width="148" height="60" rx="5"/>
+  <text class="pod-t" x="92"  y="124">accounts-svc</text>
+  <text class="pod-s" x="92"  y="138">× 3 replicas</text>
+  <rect class="side" x="30" y="148" width="56" height="14" rx="3"/>
+  <text class="side-t" x="58" y="159">sidecar</text>
+
+  <!-- Demat pod -->
+  <rect class="pod p2" x="186" y="106" width="148" height="60" rx="5"/>
+  <text class="pod-t" x="260" y="124">demat-svc</text>
+  <text class="pod-s" x="260" y="138">× 2 replicas</text>
+  <rect class="side" x="198" y="148" width="56" height="14" rx="3"/>
+  <text class="side-t" x="226" y="159">sidecar</text>
+
+  <!-- Loans pod -->
+  <rect class="pod p3" x="354" y="106" width="148" height="60" rx="5"/>
+  <text class="pod-t" x="428" y="124">loans-svc</text>
+  <text class="pod-s" x="428" y="138">× 2 replicas</text>
+  <rect class="side" x="366" y="148" width="56" height="14" rx="3"/>
+  <text class="side-t" x="394" y="159">sidecar</text>
+
+  <!-- KYC pod -->
+  <rect class="pod p4" x="522" y="106" width="148" height="60" rx="5"/>
+  <text class="pod-t" x="596" y="124">kyc-svc</text>
+  <text class="pod-s" x="596" y="138">× 1 replica</text>
+  <rect class="side" x="534" y="148" width="56" height="14" rx="3"/>
+  <text class="side-t" x="562" y="159">sidecar</text>
+
+  <!-- Row 2 -->
+  <!-- Debit card pod -->
+  <rect class="pod p5" x="18"  y="226" width="148" height="60" rx="5"/>
+  <text class="pod-t" x="92"  y="244">debit-card-svc</text>
+  <text class="pod-s" x="92"  y="258">× 2 replicas</text>
+  <rect class="side" x="30" y="268" width="56" height="14" rx="3"/>
+  <text class="side-t" x="58" y="279">sidecar</text>
+
+  <!-- Credit card pod -->
+  <rect class="pod p6" x="186" y="226" width="148" height="60" rx="5"/>
+  <text class="pod-t" x="260" y="244">credit-card-svc</text>
+  <text class="pod-s" x="260" y="258">× 2 replicas</text>
+  <rect class="side" x="198" y="268" width="56" height="14" rx="3"/>
+  <text class="side-t" x="226" y="279">sidecar</text>
+
+  <!-- Payments pod -->
+  <rect class="pod p7" x="354" y="226" width="148" height="60" rx="5"/>
+  <text class="pod-t" x="428" y="244">payments-svc</text>
+  <text class="pod-s" x="428" y="258">× 5 replicas</text>
+  <rect class="side" x="366" y="268" width="56" height="14" rx="3"/>
+  <text class="side-t" x="394" y="279">sidecar</text>
+
+  <!-- FAQ pod -->
+  <rect class="pod p8" x="522" y="226" width="148" height="60" rx="5"/>
+  <text class="pod-t" x="596" y="244">faq-svc</text>
+  <text class="pod-s" x="596" y="258">× 1 replica</text>
+  <rect class="side" x="534" y="268" width="56" height="14" rx="3"/>
+  <text class="side-t" x="562" y="279">sidecar</text>
+
+  <!-- Kubernetes control plane -->
+  <rect fill="rgba(88,166,255,0.06)" stroke="var(--svg-blue,#58a6ff)" stroke-width="1" stroke-dasharray="4,3" x="18" y="306" width="710" height="100" rx="7"/>
+  <text class="k8t" x="370" y="324">Kubernetes Control Plane</text>
+
+  <!-- Control plane components — 4 boxes × 156px wide -->
+  <rect fill="rgba(88,166,255,0.12)" stroke="var(--svg-blue,#58a6ff)" stroke-width=".8" x="30" y="332" width="156" height="30" rx="4"/>
+  <text class="pod-t" x="108" y="351">Scheduler</text>
+
+  <rect fill="rgba(88,166,255,0.12)" stroke="var(--svg-blue,#58a6ff)" stroke-width=".8" x="200" y="332" width="156" height="30" rx="4"/>
+  <text class="pod-t" x="278" y="351">Auto-scaler (HPA)</text>
+
+  <rect fill="rgba(88,166,255,0.12)" stroke="var(--svg-blue,#58a6ff)" stroke-width=".8" x="370" y="332" width="156" height="30" rx="4"/>
+  <text class="pod-t" x="448" y="351">Load Balancer (svc)</text>
+
+  <rect fill="rgba(88,166,255,0.12)" stroke="var(--svg-blue,#58a6ff)" stroke-width=".8" x="540" y="332" width="156" height="30" rx="4"/>
+  <text class="pod-t" x="618" y="351">Secrets / ConfigMap</text>
+
+  <!-- Row 3 additional details -->
+  <rect fill="rgba(88,166,255,0.12)" stroke="var(--svg-blue,#58a6ff)" stroke-width=".8" x="30" y="368" width="240" height="28" rx="4"/>
+  <text class="pod-t" x="150" y="385">Rolling Restart · Rollback</text>
+
+  <rect fill="rgba(88,166,255,0.12)" stroke="var(--svg-blue,#58a6ff)" stroke-width=".8" x="286" y="368" width="240" height="28" rx="4"/>
+  <text class="pod-t" x="406" y="385">Health checks · Self-healing</text>
+
+  <rect fill="rgba(88,166,255,0.12)" stroke="var(--svg-blue,#58a6ff)" stroke-width=".8" x="542" y="368" width="154" height="28" rx="4"/>
+  <text class="pod-t" x="619" y="385">mTLS · Circuit breakers</text>
+
+  <!-- Ingress → cluster arrow -->
+  <line class="conn" x1="370" y1="66" x2="370" y2="76" marker-end="url(#aK)"/>
+
+  <text class="tit" x="370" y="440">Sidecar proxy (Envoy/Istio) injects metrics, traces, retries, mTLS per pod</text>
+</svg>
