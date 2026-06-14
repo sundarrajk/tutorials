@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cloud Facilities &amp; Features — AWS · Azure · GCP</title>
+<link rel="stylesheet" href="../shared/css/deck.css"/>
+</head>
+<body>
+
+<div id="prog" style="width:0%"></div>
+
+<div id="deck">
+
+<!-- ══════════════ SLIDE 1: Cover ══════════════ -->
+<section class="slide cover" data-title="Cover">
+  <div class="cov-grid"></div>
+  <div class="cov-glow"></div>
+  <div class="cov-content">
+    <div class="cov-kicker">Cloud Computing · For Sophomores</div>
+    <h1 class="cov-h1">Cloud <span class="hi">Facilities</span><br/>&amp; <span class="hi2">Features</span></h1>
+    <p class="cov-desc">Everything the cloud offers — from virtual machines and databases to serverless functions, AI/ML platforms, and developer tools — mapped across AWS, Azure, and GCP.</p>
+    <div class="chips">
+      <span class="chip">IaaS · PaaS · SaaS</span>
+      <span class="chip aws">Amazon Web Services</span>
+      <span class="chip az">Microsoft Azure</span>
+      <span class="chip gcp">Google Cloud</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SLIDE 2: IaaS / PaaS / SaaS ══════════════ -->
+<section class="slide" data-title="IaaS, PaaS & SaaS Explained">
+  <div class="s-era">The Service Models</div>
+  <h2 class="s-title"><span class="hi">IaaS</span> · <span class="hi3">PaaS</span> · <span class="hi2">SaaS</span></h2>
+  <p class="s-sub">Three layers of cloud service — how much you manage vs. how much the provider manages</p>
+
+  <div class="g g-sbl" style="margin-bottom:0.75rem;">
+    <div class="dbox">
+      <img src="images/iaas-paas-saas.svg" alt="IaaS PaaS SaaS responsibility stack diagram"/>
+    </div>
+    <div class="g" style="gap:0.75rem;">
+      <div class="card">
+        <div class="card-hd">IaaS — Infrastructure as a Service</div>
+        <ul>
+          <li>Provider manages: physical servers, network, storage, hypervisor</li>
+          <li>You manage: OS, runtime, middleware, application, data</li>
+          <li>Most flexible — full control over the environment</li>
+          <li><strong>Examples:</strong> AWS EC2, Azure Virtual Machines, GCP Compute Engine</li>
+        </ul>
+      </div>
+      <div class="card c-green">
+        <div class="card-hd">PaaS — Platform as a Service</div>
+        <ul>
+          <li>Provider manages: everything up to and including the runtime</li>
+          <li>You manage: your application code and data only</li>
+          <li>Deploy code — not servers. No OS patching needed.</li>
+          <li><strong>Examples:</strong> AWS Elastic Beanstalk, Azure App Service, GCP App Engine</li>
+        </ul>
+      </div>
+      <div class="card c-amber">
+        <div class="card-hd">SaaS — Software as a Service</div>
+        <ul>
+          <li>Provider manages everything — hardware, OS, runtime, application</li>
+          <li>You use the software via a browser — zero infrastructure ownership</li>
+          <li>Pay per user per month — the Salesforce model</li>
+          <li><strong>Examples:</strong> Microsoft 365, Google Workspace, Salesforce, Zoom</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout ca-amber">
+    <strong>The Key Shift:</strong> CAPEX (buy hardware upfront, depreciate over 5 years) → OPEX (pay monthly for what you use). No more idle servers. Scale up in minutes, scale down and stop paying. The CFO and the CTO both win.
+  </div>
+</section>
+
+<!-- ══════════════ SLIDE 3: The Three Cloud Players ══════════════ -->
+<section class="slide" data-title="The Three Cloud Giants">
+  <div class="s-era">The Market</div>
+  <h2 class="s-title">The Three <span class="hi2">Cloud Giants</span></h2>
+  <p class="s-sub">AWS, Azure, and GCP together hold ~67% of the global cloud market — with different strengths</p>
+
+  <div class="g g-sb" style="margin-bottom:0.75rem;">
+    <div class="g" style="gap:0.75rem;">
+      <div class="card c-aws filled-aws">
+        <div class="card-hd">☁ AWS — The Pioneer</div>
+        <ul>
+          <li>Launched 2006 — first mover advantage, largest ecosystem</li>
+          <li><strong>~31% market share</strong> · 200+ services · 33 regions · 105 AZs</li>
+          <li>Broadest service catalogue; richest managed service options</li>
+          <li>Strongest for: startups, internet companies, broadest service depth</li>
+          <li>Key differentiators: Lambda (serverless), SageMaker (ML), Aurora (DB)</li>
+        </ul>
+      </div>
+      <div class="card c-azure filled-azure">
+        <div class="card-hd">☁ Azure — The Enterprise Leader</div>
+        <ul>
+          <li>Launched 2010 — deepest Microsoft/Office 365 integration</li>
+          <li><strong>~25% market share</strong> · 200+ services · 60+ regions</li>
+          <li>Dominant in enterprises already running Windows Server, Active Directory</li>
+          <li>Key differentiators: AVD (Virtual Desktops), Azure DevOps, Arc (hybrid)</li>
+          <li>Strongest for: enterprise hybrid cloud, Microsoft ecosystem</li>
+        </ul>
+      </div>
+      <div class="card c-gcp filled-gcp">
+        <div class="card-hd">☁ GCP — The AI/Data Leader</div>
+        <ul>
+          <li>Launched 2008 — runs on Google's own global fibre network</li>
+          <li><strong>~11% market share</strong> · 150+ services · 40 regions</li>
+          <li>Invented Kubernetes (GKE is the reference implementation)</li>
+          <li>Key differentiators: BigQuery, Vertex AI, GKE, global network</li>
+          <li>Strongest for: data analytics, AI/ML workloads, Kubernetes</li>
+        </ul>
+      </div>
+    </div>
+    <div class="dbox">
+      <img src="images/providers.svg" alt="AWS Azure GCP market share and feature comparison"/>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SLIDE 4: Compute ══════════════ -->
+<section class="slide" data-title="Compute Services">
+  <div class="s-era">Service Category 1</div>
+  <h2 class="s-title"><span class="hi">Compute</span></h2>
+  <p class="s-sub">Virtual machines, containers, and serverless — three ways to run your code in the cloud</p>
+
+  <div class="svc-head">
+    <div class="h-cat">Service</div>
+    <div class="h-aws">AWS</div>
+    <div class="h-azure">Azure</div>
+    <div class="h-gcp">GCP</div>
+  </div>
+  <div class="svc-row"><div class="r-cat">Virtual Machines (IaaS)</div><div class="r-aws">EC2 (100+ instance types)</div><div class="r-azure">Virtual Machines (all sizes)</div><div class="r-gcp">Compute Engine (N2, C3, A3…)</div></div>
+  <div class="svc-row"><div class="r-cat">VM Auto-Scaling</div><div class="r-aws">Auto Scaling Groups</div><div class="r-azure">Virtual Machine Scale Sets</div><div class="r-gcp">Managed Instance Groups</div></div>
+  <div class="svc-row"><div class="r-cat">Managed Kubernetes</div><div class="r-aws">EKS (Elastic Kubernetes)</div><div class="r-azure">AKS (Azure Kubernetes)</div><div class="r-gcp">GKE (Google Kubernetes Engine)</div></div>
+  <div class="svc-row"><div class="r-cat">Serverless Functions</div><div class="r-aws">Lambda (1ms billing)</div><div class="r-azure">Azure Functions</div><div class="r-gcp">Cloud Functions / Cloud Run</div></div>
+  <div class="svc-row"><div class="r-cat">Container Registry</div><div class="r-aws">ECR (Elastic Container Reg.)</div><div class="r-azure">Azure Container Registry</div><div class="r-gcp">Artifact Registry</div></div>
+  <div class="svc-row"><div class="r-cat">Managed Container Apps</div><div class="r-aws">ECS / Fargate (serverless)</div><div class="r-azure">Azure Container Apps</div><div class="r-gcp">Cloud Run (fully managed)</div></div>
+  <div class="svc-row"><div class="r-cat">Batch / HPC</div><div class="r-aws">AWS Batch</div><div class="r-azure">Azure Batch / CycleCloud</div><div class="r-gcp">Cloud Batch / Dataproc</div></div>
+  <div class="svc-row"><div class="r-cat">Edge / Lightweight</div><div class="r-aws">Lambda@Edge, Outposts</div><div class="r-azure">Azure Arc, IoT Edge</div><div class="r-gcp">Distributed Cloud Edge</div></div>
+
+  <div class="callout" style="margin-top:0.6rem;">
+    <strong>Serverless = No Server Management:</strong> You upload code, the cloud runs it on-demand, and you pay only per invocation (often sub-millisecond billing). Zero idle cost. Scales automatically from 0 to millions of requests.
+  </div>
+</section>
+
+<!-- ══════════════ SLIDE 5: Storage ══════════════ -->
+<section class="slide" data-title="Storage Services">
+  <div class="s-era">Service Category 2</div>
+  <h2 class="s-title"><span class="hi2">Storage</span></h2>
+  <p class="s-sub">Object storage, block disks, file shares, and archival — every storage pattern covered</p>
+
+  <div class="svc-head">
+    <div class="h-cat">Service</div>
+    <div class="h-aws">AWS</div>
+    <div class="h-azure">Azure</div>
+    <div class="h-gcp">GCP</div>
+  </div>
+  <div class="svc-row"><div class="r-cat">Object Storage</div><div class="r-aws">S3 (11 nines durability)</div><div class="r-azure">Blob Storage</div><div class="r-gcp">Cloud Storage (GCS)</div></div>
+  <div class="svc-row"><div class="r-cat">Block Storage (VM Disks)</div><div class="r-aws">EBS (gp3, io2 NVMe)</div><div class="r-azure">Managed Disks (Premium SSD)</div><div class="r-gcp">Persistent Disk / Hyperdisk</div></div>
+  <div class="svc-row"><div class="r-cat">Shared File System</div><div class="r-aws">EFS (NFS) / FSx (Windows)</div><div class="r-azure">Azure Files (SMB/NFS)</div><div class="r-gcp">Filestore (NFS)</div></div>
+  <div class="svc-row"><div class="r-cat">Archival / Cold</div><div class="r-aws">S3 Glacier (cents/GB/mo)</div><div class="r-azure">Archive Blob Tier</div><div class="r-gcp">Archive Storage Class</div></div>
+  <div class="svc-row"><div class="r-cat">Storage Transfer / CDN</div><div class="r-aws">DataSync / CloudFront</div><div class="r-azure">Data Box / Azure CDN</div><div class="r-gcp">Transfer Service / Cloud CDN</div></div>
+
+  <div class="g g3" style="margin-top:0.6rem;">
+    <div class="card c-aws stat"><div class="stat-n sa">11 9s</div><div class="stat-l">S3 Object Durability</div><div class="stat-note">0.000000001% annual loss rate</div></div>
+    <div class="card stat"><div class="stat-n">$0.023</div><div class="stat-l">Per GB/month (S3 Standard)</div><div class="stat-note">Archive: ~$0.004 /GB/month</div></div>
+    <div class="card c-green stat"><div class="stat-n sg">∞</div><div class="stat-l">Effective scale</div><div class="stat-note">Exabyte-scale object storage with no pre-provisioning</div></div>
+  </div>
+</section>
+
+<!-- ══════════════ SLIDE 6: Databases ══════════════ -->
+<section class="slide" data-title="Database Services">
+  <div class="s-era">Service Category 3</div>
+  <h2 class="s-title"><span class="hi3">Databases</span> &amp; Caches</h2>
+  <p class="s-sub">Managed relational, NoSQL, in-memory caches, time-series, and graph databases — all fully managed</p>
+
+  <div class="svc-head">
+    <div class="h-cat">Service</div>
+    <div class="h-aws">AWS</div>
+    <div class="h-azure">Azure</div>
+    <div class="h-gcp">GCP</div>
+  </div>
+  <div class="svc-row"><div class="r-cat">Managed Relational (SQL)</div><div class="r-aws">RDS (MySQL/Postgres/SQL Server)</div><div class="r-azure">Azure Database (MySQL/Postgres)</div><div class="r-gcp">Cloud SQL</div></div>
+  <div class="svc-row"><div class="r-cat">Cloud-Native SQL</div><div class="r-aws">Aurora (MySQL/Postgres compat)</div><div class="r-azure">Azure SQL Database (Hyperscale)</div><div class="r-gcp">AlloyDB / Spanner (global)</div></div>
+  <div class="svc-row"><div class="r-cat">NoSQL / Document</div><div class="r-aws">DynamoDB (key-value + doc)</div><div class="r-azure">Cosmos DB (multi-model)</div><div class="r-gcp">Firestore / Bigtable</div></div>
+  <div class="svc-row"><div class="r-cat">In-Memory Cache</div><div class="r-aws">ElastiCache (Redis/Memcached)</div><div class="r-azure">Azure Cache for Redis</div><div class="r-gcp">Memorystore (Redis/Memcached)</div></div>
+  <div class="svc-row"><div class="r-cat">Data Warehouse</div><div class="r-aws">Redshift</div><div class="r-azure">Synapse Analytics</div><div class="r-gcp">BigQuery (serverless DW)</div></div>
+  <div class="svc-row"><div class="r-cat">Graph Database</div><div class="r-aws">Neptune</div><div class="r-azure">Cosmos DB (Gremlin API)</div><div class="r-gcp">Spanner Graph</div></div>
+
+  <div class="callout ca-green" style="margin-top:0.6rem;">
+    <strong>Why Managed Databases?</strong> No more patching, backups, high-availability setup, or failover configuration. The cloud handles all of it. You create a database in minutes and connect your app — no DBA needed for basic operations.
+  </div>
+</section>
+
+<!-- ══════════════ SLIDE 7: Networking ══════════════ -->
+<section class="slide" data-title="Networking Services">
+  <div class="s-era">Service Category 4</div>
+  <h2 class="s-title"><span class="hi">Networking</span></h2>
+  <p class="s-sub">Virtual private networks, load balancers, DNS, CDN, firewalls — the full network stack as a service</p>
+
+  <div class="svc-head">
+    <div class="h-cat">Service</div>
+    <div class="h-aws">AWS</div>
+    <div class="h-azure">Azure</div>
+    <div class="h-gcp">GCP</div>
+  </div>
+  <div class="svc-row"><div class="r-cat">Virtual Private Network</div><div class="r-aws">VPC (Virtual Private Cloud)</div><div class="r-azure">Virtual Network (VNet)</div><div class="r-gcp">VPC (global by default)</div></div>
+  <div class="svc-row"><div class="r-cat">Load Balancer</div><div class="r-aws">ALB (L7) / NLB (L4) / GLB</div><div class="r-azure">Application Gateway / Load Balancer</div><div class="r-gcp">Cloud Load Balancing (global)</div></div>
+  <div class="svc-row"><div class="r-cat">DNS</div><div class="r-aws">Route 53 (with health checks)</div><div class="r-azure">Azure DNS / Traffic Manager</div><div class="r-gcp">Cloud DNS</div></div>
+  <div class="svc-row"><div class="r-cat">Content Delivery (CDN)</div><div class="r-aws">CloudFront (450+ PoPs)</div><div class="r-azure">Azure CDN / Front Door</div><div class="r-gcp">Cloud CDN / Media CDN</div></div>
+  <div class="svc-row"><div class="r-cat">Web Application Firewall</div><div class="r-aws">AWS WAF / Shield (DDoS)</div><div class="r-azure">Azure WAF / DDoS Protection</div><div class="r-gcp">Cloud Armor (WAF+DDoS)</div></div>
+  <div class="svc-row"><div class="r-cat">Hybrid Connectivity</div><div class="r-aws">Direct Connect (dedicated)</div><div class="r-azure">ExpressRoute (dedicated)</div><div class="r-gcp">Cloud Interconnect</div></div>
+  <div class="svc-row"><div class="r-cat">Service Mesh / API GW</div><div class="r-aws">API Gateway / App Mesh</div><div class="r-azure">API Management / Service Fabric</div><div class="r-gcp">Apigee / Traffic Director</div></div>
+</section>
+
+<!-- ══════════════ SLIDE 8: Messaging & Events ══════════════ -->
+<section class="slide" data-title="Messaging, Queues & Events">
+  <div class="s-era">Service Category 5</div>
+  <h2 class="s-title"><span class="hi2">Messaging</span>, Queues &amp; Events</h2>
+  <p class="s-sub">Decouple services, buffer load spikes, and build event-driven architectures without managing brokers</p>
+
+  <div class="g g2" style="margin-bottom:0.75rem;">
+    <div class="card">
+      <div class="card-hd">Why Messaging Matters</div>
+      <ul>
+        <li><strong>Decoupling:</strong> Service A sends a message; Service B processes it independently</li>
+        <li><strong>Load levelling:</strong> absorb traffic spikes — queue fills, workers drain at their own rate</li>
+        <li><strong>Reliability:</strong> if Service B is down, messages wait safely in the queue</li>
+        <li><strong>Fan-out:</strong> one event triggers multiple downstream services in parallel</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Message Queue Patterns</div>
+      <ul>
+        <li><strong>Queue (point-to-point):</strong> one producer → one consumer — order processing</li>
+        <li><strong>Pub/Sub (broadcast):</strong> one event → many subscribers — event notifications</li>
+        <li><strong>Streaming:</strong> high-throughput ordered log — real-time analytics, audit trails</li>
+        <li><strong>Dead letter queue:</strong> failed messages held for inspection and retry</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="svc-head">
+    <div class="h-cat">Service</div>
+    <div class="h-aws">AWS</div>
+    <div class="h-azure">Azure</div>
+    <div class="h-gcp">GCP</div>
+  </div>
+  <div class="svc-row"><div class="r-cat">Message Queue</div><div class="r-aws">SQS (Standard &amp; FIFO)</div><div class="r-azure">Service Bus (queues)</div><div class="r-gcp">Cloud Tasks / Pub/Sub</div></div>
+  <div class="svc-row"><div class="r-cat">Pub/Sub Topics</div><div class="r-aws">SNS (Simple Notification)</div><div class="r-azure">Service Bus (topics)</div><div class="r-gcp">Pub/Sub</div></div>
+  <div class="svc-row"><div class="r-cat">Event Streaming</div><div class="r-aws">Kinesis Data Streams</div><div class="r-azure">Event Hubs (Kafka-compat)</div><div class="r-gcp">Dataflow / Pub/Sub</div></div>
+  <div class="svc-row"><div class="r-cat">Event Bus / Router</div><div class="r-aws">EventBridge</div><div class="r-azure">Event Grid</div><div class="r-gcp">Eventarc</div></div>
+  <div class="svc-row"><div class="r-cat">Workflow Orchestration</div><div class="r-aws">Step Functions</div><div class="r-azure">Logic Apps / Durable Fns</div><div class="r-gcp">Cloud Workflows</div></div>
+</section>
+
+<!-- ══════════════ SLIDE 9: Developer Tools ══════════════ -->
+<section class="slide" data-title="Developer Tools — CI/CD, IaC, DevOps">
+  <div class="s-era">Service Category 6</div>
+  <h2 class="s-title"><span class="hi3">Developer Tools</span></h2>
+  <p class="s-sub">Version control, CI/CD pipelines, Infrastructure as Code, cloud shells, and virtual developer desktops</p>
+
+  <div class="svc-head">
+    <div class="h-cat">Service</div>
+    <div class="h-aws">AWS</div>
+    <div class="h-azure">Azure</div>
+    <div class="h-gcp">GCP</div>
+  </div>
+  <div class="svc-row"><div class="r-cat">Version Control</div><div class="r-aws">CodeCommit (Git)</div><div class="r-azure">Azure Repos (Git / TFVC)</div><div class="r-gcp">Cloud Source Repositories</div></div>
+  <div class="svc-row"><div class="r-cat">CI/CD Pipelines</div><div class="r-aws">CodePipeline + CodeBuild</div><div class="r-azure">Azure Pipelines (DevOps)</div><div class="r-gcp">Cloud Build / Cloud Deploy</div></div>
+  <div class="svc-row"><div class="r-cat">Artifact / Package Registry</div><div class="r-aws">CodeArtifact</div><div class="r-azure">Azure Artifacts</div><div class="r-gcp">Artifact Registry</div></div>
+  <div class="svc-row"><div class="r-cat">Infrastructure as Code</div><div class="r-aws">CloudFormation / CDK</div><div class="r-azure">Bicep / ARM Templates</div><div class="r-gcp">Deployment Manager / Terraform</div></div>
+  <div class="svc-row"><div class="r-cat">Cloud Shell / IDE</div><div class="r-aws">CloudShell / Cloud9 (IDE)</div><div class="r-azure">Azure Cloud Shell</div><div class="r-gcp">Cloud Shell / Cloud Workstations</div></div>
+  <div class="svc-row"><div class="r-cat">Virtual Developer Desktops</div><div class="r-aws">WorkSpaces (VDI)</div><div class="r-azure">Azure Virtual Desktop (AVD)</div><div class="r-gcp">Cloud Workstations</div></div>
+  <div class="svc-row"><div class="r-cat">Monitoring &amp; Observability</div><div class="r-aws">CloudWatch / X-Ray</div><div class="r-azure">Azure Monitor / App Insights</div><div class="r-gcp">Cloud Monitoring / Trace</div></div>
+
+  <div class="callout ca-green" style="margin-top:0.6rem;">
+    <strong>Azure Virtual Desktop (AVD):</strong> Stream a full Windows desktop to any device — browser, thin client, phone. Developers and call-centre staff get enterprise desktop environments hosted in Azure, accessed from anywhere. No VPN, no local software installation.
+  </div>
+</section>
+
+<!-- ══════════════ SLIDE 10: AI/ML & Analytics ══════════════ -->
+<section class="slide" data-title="AI/ML & Analytics">
+  <div class="s-era">Service Category 7</div>
+  <h2 class="s-title"><span class="hi">AI / ML</span> &amp; <span class="hi2">Analytics</span></h2>
+  <p class="s-sub">From pre-built AI APIs to full model training platforms and petabyte-scale data warehouses</p>
+
+  <div class="svc-head">
+    <div class="h-cat">Service</div>
+    <div class="h-aws">AWS</div>
+    <div class="h-azure">Azure</div>
+    <div class="h-gcp">GCP</div>
+  </div>
+  <div class="svc-row"><div class="r-cat">ML Platform (train/deploy)</div><div class="r-aws">SageMaker</div><div class="r-azure">Azure Machine Learning</div><div class="r-gcp">Vertex AI</div></div>
+  <div class="svc-row"><div class="r-cat">Generative AI / LLM APIs</div><div class="r-aws">Bedrock (Claude, Llama, etc.)</div><div class="r-azure">Azure OpenAI Service (GPT-4o)</div><div class="r-gcp">Vertex AI Gemini API</div></div>
+  <div class="svc-row"><div class="r-cat">Pre-Built AI APIs</div><div class="r-aws">Rekognition, Polly, Lex</div><div class="r-azure">Cognitive Services / AI Studio</div><div class="r-gcp">Vision, NL, Speech, Translation</div></div>
+  <div class="svc-row"><div class="r-cat">Data Warehouse</div><div class="r-aws">Redshift</div><div class="r-azure">Synapse Analytics</div><div class="r-gcp">BigQuery (serverless, ~$5/TB)</div></div>
+  <div class="svc-row"><div class="r-cat">Stream Processing</div><div class="r-aws">Kinesis Data Analytics</div><div class="r-azure">Stream Analytics</div><div class="r-gcp">Dataflow (Apache Beam)</div></div>
+  <div class="svc-row"><div class="r-cat">Data Lake</div><div class="r-aws">S3 + Lake Formation</div><div class="r-azure">ADLS Gen2 + Synapse</div><div class="r-gcp">Cloud Storage + Dataplex</div></div>
+  <div class="svc-row"><div class="r-cat">BI / Dashboarding</div><div class="r-aws">QuickSight</div><div class="r-azure">Power BI (Microsoft)</div><div class="r-gcp">Looker / Looker Studio</div></div>
+</section>
+
+<!-- ══════════════ SLIDE 11: Security & Identity ══════════════ -->
+<section class="slide" data-title="Security & Identity">
+  <div class="s-era">Service Category 8</div>
+  <h2 class="s-title"><span class="hi2">Security</span> &amp; Identity</h2>
+  <p class="s-sub">IAM, secrets management, encryption, threat detection, and compliance — the security stack built in</p>
+
+  <div class="g g2">
+    <div class="card">
+      <div class="card-hd">Identity &amp; Access Management</div>
+      <ul>
+        <li><strong>AWS IAM</strong> / Azure Active Directory (Entra ID) / GCP IAM</li>
+        <li>Fine-grained permissions: who can do what on which resource</li>
+        <li>Service accounts / managed identities — apps authenticate without passwords</li>
+        <li>MFA, SAML federation, SSO with corporate identity providers</li>
+        <li>Azure Entra ID: deeply integrated with Microsoft 365 and on-prem AD</li>
+      </ul>
+    </div>
+    <div class="card c-red">
+      <div class="card-hd">Secrets &amp; Encryption</div>
+      <ul>
+        <li><strong>AWS Secrets Manager</strong> / Azure Key Vault / GCP Secret Manager</li>
+        <li>Store API keys, DB passwords, certificates — never in source code</li>
+        <li>Automatic rotation of credentials</li>
+        <li>KMS (Key Management Service): encrypt data at rest and in transit</li>
+        <li>Hardware Security Modules (HSM) for compliance (PCI-DSS, HIPAA)</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Threat Detection</div>
+      <ul>
+        <li><strong>AWS GuardDuty</strong> / Azure Defender / GCP Security Command Center</li>
+        <li>Continuous monitoring for unusual API calls, network patterns, anomalies</li>
+        <li>Automated response: quarantine a compromised instance automatically</li>
+        <li>DDoS protection built-in at network edge</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Compliance &amp; Governance</div>
+      <ul>
+        <li>All three meet: SOC 2, ISO 27001, PCI-DSS, HIPAA, GDPR</li>
+        <li>AWS Config / Azure Policy / GCP Org Policy: enforce rules across all resources</li>
+        <li>Audit logs: every API call logged — who did what and when</li>
+        <li>Private networking: VPC endpoints keep data off the public internet</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SLIDE 12: OS Images & Hybrid ══════════════ -->
+<section class="slide" data-title="OS Images, Hybrid Cloud & Management">
+  <div class="s-era">Service Category 9</div>
+  <h2 class="s-title"><span class="hi">OS Images</span>, Hybrid &amp; Management</h2>
+  <p class="s-sub">Pre-built VM images, hybrid cloud connectivity, and platform management tools</p>
+
+  <div class="g g2">
+    <div class="card">
+      <div class="card-hd">OS &amp; VM Images (Marketplace)</div>
+      <ul>
+        <li>All three offer a <strong>Marketplace</strong> of pre-built images</li>
+        <li>Linux: Ubuntu, RHEL, SUSE, Amazon Linux, Debian, Rocky</li>
+        <li>Windows: Windows Server 2019/2022 with licences included</li>
+        <li>Pre-configured: WordPress, SQL Server, SAP HANA, Oracle DB ready to launch</li>
+        <li><strong>Custom images:</strong> build your "golden" image once, deploy everywhere</li>
+        <li>AWS AMI / Azure Compute Gallery / GCP Custom Images</li>
+      </ul>
+    </div>
+    <div class="card c-azure">
+      <div class="card-hd">Hybrid Cloud</div>
+      <ul>
+        <li><strong>Azure Arc:</strong> manage on-premises servers and Kubernetes clusters from Azure portal</li>
+        <li><strong>AWS Outposts:</strong> AWS hardware rack deployed in your own data centre</li>
+        <li><strong>GCP Distributed Cloud:</strong> run GCP services at your edge</li>
+        <li>Private connectivity: ExpressRoute / Direct Connect / Cloud Interconnect (dedicated fibre)</li>
+        <li>Site-to-Site VPN: encrypted tunnel from on-prem to cloud over internet</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Platform Management</div>
+      <ul>
+        <li><strong>AWS Organizations / Azure Management Groups / GCP Resource Hierarchy</strong></li>
+        <li>Multi-account/subscription structure — separate environments per team</li>
+        <li>Cost management: budgets, alerts, cost allocation tags, recommendations</li>
+        <li>Patch management: automated OS patching across fleets of VMs</li>
+        <li>Configuration management: AWS Systems Manager / Azure Automation / GCP Ops Agent</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Service Mesh &amp; API Management</div>
+      <ul>
+        <li>Manages east-west traffic between microservices inside the cluster</li>
+        <li>AWS App Mesh (Envoy) / Azure Service Mesh (Istio) / GCP Traffic Director</li>
+        <li>mTLS encryption between services, traffic shaping, circuit breakers</li>
+        <li>API Gateway: rate limiting, authentication, routing, SDK generation</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SLIDE 13: Full Services Map ══════════════ -->
+<section class="slide" data-title="Complete Service Map">
+  <div class="s-era">At a Glance</div>
+  <h2 class="s-title">Complete <span class="hi2">Service Map</span></h2>
+  <p class="s-sub">All major categories — every significant cloud service, three providers side by side</p>
+
+  <div class="svc-head">
+    <div class="h-cat">Category</div>
+    <div class="h-aws">AWS</div>
+    <div class="h-azure">Azure</div>
+    <div class="h-gcp">GCP</div>
+  </div>
+  <div class="svc-row"><div class="r-cat">Virtual Machines</div><div class="r-aws">EC2</div><div class="r-azure">Virtual Machines</div><div class="r-gcp">Compute Engine</div></div>
+  <div class="svc-row"><div class="r-cat">Kubernetes (Managed)</div><div class="r-aws">EKS</div><div class="r-azure">AKS</div><div class="r-gcp">GKE</div></div>
+  <div class="svc-row"><div class="r-cat">Serverless</div><div class="r-aws">Lambda</div><div class="r-azure">Azure Functions</div><div class="r-gcp">Cloud Functions / Run</div></div>
+  <div class="svc-row"><div class="r-cat">Object Storage</div><div class="r-aws">S3</div><div class="r-azure">Blob Storage</div><div class="r-gcp">Cloud Storage</div></div>
+  <div class="svc-row"><div class="r-cat">Relational Database</div><div class="r-aws">RDS / Aurora</div><div class="r-azure">Azure SQL / Postgres</div><div class="r-gcp">Cloud SQL / AlloyDB</div></div>
+  <div class="svc-row"><div class="r-cat">NoSQL Database</div><div class="r-aws">DynamoDB</div><div class="r-azure">Cosmos DB</div><div class="r-gcp">Firestore / Bigtable</div></div>
+  <div class="svc-row"><div class="r-cat">Cache (Redis)</div><div class="r-aws">ElastiCache</div><div class="r-azure">Cache for Redis</div><div class="r-gcp">Memorystore</div></div>
+  <div class="svc-row"><div class="r-cat">Message Queue</div><div class="r-aws">SQS / SNS / EventBridge</div><div class="r-azure">Service Bus / Event Grid</div><div class="r-gcp">Pub/Sub / Eventarc</div></div>
+  <div class="svc-row"><div class="r-cat">CI/CD &amp; DevOps</div><div class="r-aws">CodePipeline / CodeBuild</div><div class="r-azure">Azure DevOps / Pipelines</div><div class="r-gcp">Cloud Build / Deploy</div></div>
+  <div class="svc-row"><div class="r-cat">Virtual Desktop (VDI)</div><div class="r-aws">WorkSpaces</div><div class="r-azure">Azure Virtual Desktop</div><div class="r-gcp">Cloud Workstations</div></div>
+  <div class="svc-row"><div class="r-cat">ML Platform</div><div class="r-aws">SageMaker</div><div class="r-azure">Azure ML / OpenAI</div><div class="r-gcp">Vertex AI / Gemini</div></div>
+  <div class="svc-row"><div class="r-cat">Identity &amp; IAM</div><div class="r-aws">AWS IAM</div><div class="r-azure">Entra ID (AAD)</div><div class="r-gcp">Cloud IAM</div></div>
+</section>
+
+<!-- ══════════════ SLIDE 14: Summary ══════════════ -->
+<section class="slide" data-title="Summary — Key Takeaways">
+  <div class="s-era">Summary</div>
+  <h2 class="s-title">Key <span class="hi">Takeaways</span></h2>
+  <p class="s-sub">What to remember about cloud services</p>
+
+  <div class="g g2" style="margin-bottom:0.75rem;">
+    <div class="card"><div class="card-hd">① Service Model Determines Control</div><ul><li>IaaS = maximum control, maximum responsibility. SaaS = zero control, zero responsibility. PaaS lives in between. Choose based on how much you want to manage.</li></ul></div>
+    <div class="card c-amber"><div class="card-hd">② Three Giants, Different Strengths</div><ul><li>AWS: broadest catalogue, best for startups and internet companies. Azure: best for Microsoft/enterprise shops. GCP: best for AI/ML, data analytics, Kubernetes.</li></ul></div>
+    <div class="card c-green"><div class="card-hd">③ Managed Services = No Ops Toil</div><ul><li>Every managed service (RDS, ElastiCache, EKS…) eliminates patching, backups, failover setup, and capacity planning. Your team focuses on application logic, not infrastructure plumbing.</li></ul></div>
+    <div class="card c-purple"><div class="card-hd">④ Serverless = Pay for Actual Use</div><ul><li>Lambda/Functions/Cloud Run charge per invocation, often at millisecond granularity. A service handling 1,000 requests/month costs cents. No minimum, no idle cost.</li></ul></div>
+  </div>
+
+  <div class="callout ca-green">
+    <strong>The Cloud is a Superpower:</strong> A two-person startup today can access the same global infrastructure, AI models, and managed database technology as the largest enterprises in the world — billed by the second, with no upfront commitment.
+  </div>
+</section>
+
+<!-- ══════════════ SLIDE 15: End ══════════════ -->
+<section class="slide cover" data-title="Questions">
+  <div class="cov-grid"></div>
+  <div class="cov-glow" style="left:-150px;top:auto;bottom:-150px;right:auto;"></div>
+  <div class="cov-content" style="margin-top:80px;">
+    <div class="cov-kicker">End of Presentation</div>
+    <h1 class="cov-h1">Questions?<br/><span class="hi">Let's Discuss.</span></h1>
+    <p class="cov-desc">A two-person startup can access the same global infrastructure, AI models, and managed services as the largest enterprises — billed by the second, zero upfront commitment.</p>
+    <div class="chips">
+      <span class="chip">What about FinOps?</span>
+      <span class="chip ca">Containers vs Serverless?</span>
+      <span class="chip az">Multi-cloud strategy?</span>
+      <span class="chip gcp">AI/ML next steps?</span>
+    </div>
+  </div>
+</section>
+
+</div><!-- /deck -->
+
+<nav id="nav">
+  <div class="nav-group">
+    <button class="nb" id="btn-prev">← Prev</button>
+    <button class="nb" id="btn-next">Next →</button>
+    <span id="counter">1 / 15</span>
+  </div>
+  <div class="nav-group">
+    <select id="jump"></select>
+  </div>
+  <div class="nav-group">
+    <button id="theme-btn">☀ Light</button>
+  </div>
+</nav>
+
+<script src="../shared/js/deck.js"></script>
+</body>
+</html>

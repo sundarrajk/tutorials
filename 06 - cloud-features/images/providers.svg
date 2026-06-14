@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 200">
+  <style>
+    .aws-bg  { fill: rgba(255,153,0,0.12); stroke: rgba(255,153,0,0.5); stroke-width:1.5; }
+    .az-bg   { fill: rgba(0,120,212,0.12); stroke: rgba(0,120,212,0.5); stroke-width:1.5; }
+    .gcp-bg  { fill: rgba(66,133,244,0.12);stroke: rgba(66,133,244,0.5);stroke-width:1.5; }
+    .aws-t   { fill: var(--svg-amber,#ff9900); font-family: sans-serif; font-size:16px; font-weight:900; }
+    .az-t    { fill: #0078d4; font-family: sans-serif; font-size:16px; font-weight:900; }
+    .gcp-t   { fill: #4285f4; font-family: sans-serif; font-size:16px; font-weight:900; }
+    .sub     { fill: var(--svg-text2,#6a9ab8); font-family: monospace; font-size:8px; }
+    .body    { fill: var(--svg-text1,#d0e4f8); font-family: sans-serif; font-size:10px; }
+    .stat-n  { font-family: sans-serif; font-size:22px; font-weight:900; }
+    .stat-l  { fill: var(--svg-text2,#6a9ab8); font-family: monospace; font-size:8px; }
+    .yr      { fill: var(--svg-text2,#6a9ab8); font-family: monospace; font-size:8px; }
+    .bar-bg  { fill: var(--svg-fill2,rgba(255,255,255,.07)); rx:3; }
+    .bar-aws { fill: rgba(255,153,0,0.7); }
+    .bar-az  { fill: rgba(0,120,212,0.7); }
+    .bar-gcp { fill: rgba(66,133,244,0.7); }
+    .mkt-t   { fill: var(--svg-text2,#6a9ab8); font-family:monospace; font-size:8px; }
+    .divl    { stroke: var(--svg-border,rgba(99,179,237,.2)); fill:none; }
+  </style>
+
+  <!-- AWS Card -->
+  <rect x="8"   y="8" width="142" height="184" rx="10" class="aws-bg"/>
+  <text x="79"  y="38" class="aws-t" text-anchor="middle">AWS</text>
+  <text x="79"  y="52" class="sub" text-anchor="middle">Amazon Web Services</text>
+  <line x1="20" y1="60" x2="138" y2="60" class="divl" stroke-width=".8"/>
+  <text x="79"  y="75" class="stat-n" fill="#ff9900" text-anchor="middle">~31%</text>
+  <text x="79"  y="87" class="stat-l" text-anchor="middle">MARKET SHARE 2024</text>
+  <text x="79"  y="104" class="body" text-anchor="middle">Est. 2006</text>
+  <text x="79"  y="118" class="body" text-anchor="middle">200+ services</text>
+  <text x="79"  y="132" class="body" text-anchor="middle">33 regions</text>
+  <text x="79"  y="146" class="body" text-anchor="middle">105 AZs</text>
+  <text x="79"  y="162" class="sub" text-anchor="middle">The market pioneer &amp;</text>
+  <text x="79"  y="173" class="sub" text-anchor="middle">broadest service catalogue</text>
+
+  <!-- Azure Card -->
+  <rect x="169" y="8" width="142" height="184" rx="10" class="az-bg"/>
+  <text x="240" y="38" class="az-t" text-anchor="middle">Azure</text>
+  <text x="240" y="52" class="sub" text-anchor="middle">Microsoft Azure</text>
+  <line x1="181" y1="60" x2="299" y2="60" class="divl" stroke-width=".8"/>
+  <text x="240" y="75" class="stat-n" fill="#0078d4" text-anchor="middle">~25%</text>
+  <text x="240" y="87" class="stat-l" text-anchor="middle">MARKET SHARE 2024</text>
+  <text x="240" y="104" class="body" text-anchor="middle">Est. 2010</text>
+  <text x="240" y="118" class="body" text-anchor="middle">200+ services</text>
+  <text x="240" y="132" class="body" text-anchor="middle">60+ regions</text>
+  <text x="240" y="146" class="body" text-anchor="middle">Deepest Microsoft/</text>
+  <text x="240" y="158" class="body" text-anchor="middle">Office 365 integration</text>
+  <text x="240" y="174" class="sub" text-anchor="middle">Strongest enterprise &amp;</text>
+  <text x="240" y="185" class="sub" text-anchor="middle">hybrid footprint</text>
+
+  <!-- GCP Card -->
+  <rect x="330" y="8" width="142" height="184" rx="10" class="gcp-bg"/>
+  <text x="401" y="38" class="gcp-t" text-anchor="middle">GCP</text>
+  <text x="401" y="52" class="sub" text-anchor="middle">Google Cloud Platform</text>
+  <line x1="342" y1="60" x2="460" y2="60" class="divl" stroke-width=".8"/>
+  <text x="401" y="75" class="stat-n" fill="#4285f4" text-anchor="middle">~11%</text>
+  <text x="401" y="87" class="stat-l" text-anchor="middle">MARKET SHARE 2024</text>
+  <text x="401" y="104" class="body" text-anchor="middle">Est. 2008</text>
+  <text x="401" y="118" class="body" text-anchor="middle">150+ services</text>
+  <text x="401" y="132" class="body" text-anchor="middle">40 regions</text>
+  <text x="401" y="146" class="body" text-anchor="middle">Leader in AI/ML,</text>
+  <text x="401" y="158" class="body" text-anchor="middle">Kubernetes (GKE)</text>
+  <text x="401" y="174" class="sub" text-anchor="middle">Google's own global</text>
+  <text x="401" y="185" class="sub" text-anchor="middle">fibre network backbone</text>
+</svg>
