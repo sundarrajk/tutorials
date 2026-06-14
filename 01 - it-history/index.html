@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>IT History — From Punch Cards to The Cloud</title>
+<link rel="stylesheet" href="../shared/css/deck.css"/>
+</head>
+<body>
+
+<div id="prog" style="width:0%"></div>
+
+<div id="deck">
+
+<!-- ── SLIDE 1: Cover ── -->
+<section class="slide cover" data-title="Cover">
+  <div class="cov-grid"></div>
+  <div class="cov-glow"></div>
+  <div class="cov-content">
+    <div class="cov-kicker">IT History · Sophomores &amp; Seniors</div>
+    <h1 class="cov-h1">From <span class="hi">Punch Cards</span><br/>to The Cloud</h1>
+    <p class="cov-desc">How the IT industry evolved over seven decades — and how Google, Amazon, Facebook &amp; Netflix accidentally invented cloud computing.</p>
+    <div class="chips">
+      <span class="chip">1950s → Today</span>
+      <span class="chip ca">Hardware Evolution</span>
+      <span class="chip cg">Software &amp; Integration</span>
+      <span class="chip cp">The Cloud Revolution</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── SLIDE 2: Master Timeline ── -->
+<section class="slide" data-title="Master Timeline">
+  <div class="s-era">Overview</div>
+  <h2 class="s-title">The Journey at a Glance</h2>
+  <p class="s-sub">Seven decades of computing — the two defining eras divided by the internet</p>
+
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-y">1950s</div><div class="tl-t">Punch Cards &amp; Batch Jobs</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-y">1960–70s</div><div class="tl-t">Mainframes</div></div>
+    <div class="tl-item"><div class="tl-dot da"></div><div class="tl-y">1970–80s</div><div class="tl-t">Minicomputers</div></div>
+    <div class="tl-item"><div class="tl-dot da"></div><div class="tl-y">1980–90s</div><div class="tl-t">Client-Server &amp; PCs</div></div>
+    <div class="tl-item"><div class="tl-dot dg"></div><div class="tl-y">1990–2000s</div><div class="tl-t">Web &amp; SOA/ESB</div></div>
+    <div class="tl-item"><div class="tl-dot dr"></div><div class="tl-y">2000–2010s</div><div class="tl-t">Internet Giants</div></div>
+    <div class="tl-item"><div class="tl-dot dr"></div><div class="tl-y">2006+</div><div class="tl-t">Birth of The Cloud</div></div>
+    <div class="tl-item"><div class="tl-dot dg"></div><div class="tl-y">2010s+</div><div class="tl-t">Cloud-Native Today</div></div>
+  </div>
+
+  <div class="g g2" style="margin-top:0.5rem;">
+    <div class="card">
+      <div class="card-hd">The Pre-Internet Era (1950s–1990s)</div>
+      <ul>
+        <li>Software used <strong>within the enterprise</strong> — limited internal user base</li>
+        <li>Load was <strong>predictable</strong>; hardware planned and procured in advance</li>
+        <li>Hardware growth was <strong>linear</strong> — add a server as you grow</li>
+        <li>Releases: once every <strong>6 months to a year</strong> — "stop the world"</li>
+        <li>Bare metal servers in <strong>in-house data centres</strong></li>
+        <li>Monitoring: tens of servers — check CPU, RAM, Disk, Network</li>
+      </ul>
+    </div>
+    <div class="card c-amber filled-amber">
+      <div class="card-hd">The Internet Era (2000s–Today)</div>
+      <ul>
+        <li>Apps opened to <strong>millions of retail users</strong> worldwide</li>
+        <li>Load became <strong>unpredictable</strong> — events, viral spikes, Black Friday</li>
+        <li>Hardware demand could spike <strong>10–20× overnight</strong></li>
+        <li>Releases: <strong>daily or continuous delivery</strong></li>
+        <li>Cloud: <strong>pay as you use</strong>, scale instantly, zero hardware ownership</li>
+        <li>Monitoring: millions of containers — metrics, logs, traces, SLOs</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── SLIDE 3: Punch Cards & Mainframes ── -->
+<section class="slide" data-title="Punch Cards & Mainframes">
+  <div class="s-era">Era 1 · 1950s–1970s</div>
+  <h2 class="s-title">Punch Cards &amp; <span class="hi">Mainframes</span></h2>
+  <p class="s-sub">Computing begins — massive machines, tiny teams, no keyboards, no screens</p>
+
+  <div class="g g-sb">
+    <div class="g" style="gap:0.8rem;">
+      <div class="g g2" style="gap:0.8rem;">
+        <div class="card">
+          <div class="card-hd">Punch Cards</div>
+          <ul>
+            <li>Programs coded by punching holes in physical cards</li>
+            <li>Each card = one line of code; drop the deck → start over</li>
+            <li>Batch submitted to operators; results next morning</li>
+            <li>No interactivity whatsoever</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-hd">Mainframe Era</div>
+          <ul>
+            <li>IBM System/360 (1964) — the landmark platform</li>
+            <li>Room-sized computers costing millions</li>
+            <li>Shared by the entire organisation via job queues</li>
+            <li>Still run banking &amp; airline cores today</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card c-green">
+        <div class="card-hd">Key Characteristics</div>
+        <ul>
+          <li>Users: a handful of operators — <strong>never end users</strong></li>
+          <li>Load: completely predictable batch windows (overnight runs)</li>
+          <li>Data centre: purpose-built, air-conditioned vault</li>
+          <li>Software: custom-written assembly or early COBOL/FORTRAN</li>
+        </ul>
+      </div>
+    </div>
+    <div class="dbox">
+      <img src="images/mainframe.svg" alt="Mainframe and punch card illustration"/>
+    </div>
+  <div class="callout ca-amber" style="margin-top:0.75rem;">
+    <strong>The Debug</strong> How did the phrase debugging orignate</br>
+    <strong>Siberia</strong> TCS office had a floor nick-named The Siberia</br>
+    <strong>Shifts</strong> TCS worked in three shifts</br>
+    <strong>Rented</strong> Mainframe time was rented out during non-working hours</br>
+    <strong>Dumb Terminal</strong> Mainframes introduced interaction through Dump Terminals with green fonts and keyboards.
+  </div>
+  </div>
+</section>
+
+<!-- ── SLIDE 4: Minis, PC, Client-Server & Web ── -->
+<section class="slide" data-title="Minis, Client-Server & Web">
+  <div class="s-era">Era 2–4 · 1970s–2000s</div>
+  <h2 class="s-title">Minis, <span class="hi">PCs</span>, Client-Server &amp; the <span class="hi3">Web</span></h2>
+  <p class="s-sub">Computers shrink from rooms to desks — putting power directly in users' hands — then the browser opens those desks to the entire internet</p>
+
+  <div class="g g2">
+
+    <!-- ── LEFT: Hardware shrinks (cause) ── -->
+    <div class="g" style="gap:0.65rem;">
+
+      <div class="card">
+        <div class="card-hd">Minicomputers (1970s–80s)</div>
+        <ul>
+          <li>DEC PDP, VAX — affordable for a single <strong>department</strong>, not the whole organisation</li>
+          <li>Multiple users via <strong>dumb terminals</strong> — keyboard + screen only, zero local CPU</li>
+          <li>UNIX born here — the foundation of Linux, macOS, and every cloud server today</li>
+          <li>First real interactive computing: type a command, get an immediate response</li>
+          <li>Still centralised — all compute lived on the minicomputer, terminals just displayed it</li>
+        </ul>
+      </div>
+
+      <div class="card c-amber">
+        <div class="card-hd">The Desktop PC Arrives (1981–90s)</div>
+        <ul>
+          <li><strong>IBM PC (1981)</strong> + Intel x86 + MS-DOS — a full computer on every desk</li>
+          <li>For the first time, <strong>compute power moved to the user</strong> — not just a display</li>
+          <li>Apple Macintosh (1984) — graphical UI, mouse; computing becomes accessible to non-engineers</li>
+          <li>PCs were standalone islands — each had its own files, its own applications</li>
+          <li>The problem this created: <strong>how do 50 PCs share data and applications?</strong></li>
+          <li>Answer: connect them to a shared server → <em>Client-Server architecture</em></li>
+        </ul>
+      </div>
+    </div><!-- /left -->
+
+    <!-- ── RIGHT: Architecture evolves (effect) ── -->
+    <div class="g" style="gap:0.65rem;">
+
+      <div class="card c-green">
+        <div class="card-hd">Client-Server (mid-1980s–90s)</div>
+        <ul>
+          <li><strong>Thick client:</strong> business logic and UI run on the PC; the server holds shared data and handles heavy queries</li>
+          <li>LAN connects PCs to a central database server — first time a network was essential to the application</li>
+          <li>SAP R/3, Oracle Forms, Lotus Notes, Microsoft Exchange — all thick client-server</li>
+          <li>Users <strong>internal only</strong> — employees on the corporate LAN behind a firewall</li>
+          <li>Scaling meant buying a bigger server; no concept of serving the public internet</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-hd">The Web Era (mid-1990s+)</div>
+        <ul>
+          <li><strong>Browser becomes the universal thin client</strong> — nothing to install on the PC</li>
+          <li>3-tier: Browser → Web Server → App Server → Database (no thick client needed)</li>
+          <li>Firewall opens <strong>Port 80/443 to the internet</strong> for the first time — public users can now reach the app</li>
+          <li>First wave: internet banking, e-retail, online insurance, travel booking</li>
+          <li>Load grows — but slowly and predictably; still mostly existing customers</li>
+        </ul>
+      </div>
+
+      <div class="card c-purple">
+        <div class="card-hd">COTS &amp; SOA / ESB (late 1990s–2000s)</div>
+        <ul>
+          <li>Enterprises stop building everything — buy off-the-shelf: SAP (ERP), Siebel (CRM), Amdocs (Billing)</li>
+          <li>10 systems × 10 peers = <strong>90 point-to-point integrations</strong> — spaghetti</li>
+          <li><strong>ESB solution:</strong> single hub, all systems plug in once — SOAP, REST, JMS routing, transformation, orchestration</li>
+          <li>Telecom: CRM → ESB → Prepaid / Postpaid / Network OSS / Digital Services</li>
+        </ul>
+      </div>
+
+    </div><!-- /right -->
+      <div class="dbox">
+        <img src="images/client-server.svg" alt="Client Server illustration"/></br>
+      </div>
+      <div class="dbox">
+        <img src="images/esb-diagram.svg" alt="Client Server illustration"/></br>
+      </div>
+      <div class="dbox">
+        <img src="images/web-arch.svg" alt="Client Server illustration"/></br>
+      </div>
+    <div class="callout ca-amber" style="margin-top:0.75rem;">
+       <strong>The Railway Reservation</strong> CMC wrote every line of code in first version of Railway Reservation system on Operating System. No database</br>
+    </div>
+
+  </div><!-- /g g2 -->
+</section>
+
+<!-- ── SLIDE 5: The Internet Giants ── -->
+<section class="slide" data-title="The Internet Giants Arrive">
+  <div class="s-era">Inflection Point · 1998–2007</div>
+  <h2 class="s-title">The <span class="hi2">Giants</span> Arrive &amp; Everything Changes</h2>
+  <p class="s-sub">Four companies rewired what the world expects from software — and from infrastructure</p>
+
+  <div class="g g2">
+    <div class="card c-amber">
+      <div class="card-hd">🛒 Amazon — A to Z</div>
+      <ul>
+        <li>Books (1994) → every product A to Z</li>
+        <li>Black Friday / Prime Day → load spikes <strong>10–20× overnight</strong></li>
+        <li>Must provision for peak, but 85% idle the rest of the year</li>
+        <li>Drove invention of elastic, on-demand infrastructure</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-hd">🔍 Google — Search &amp; Ads</div>
+      <ul>
+        <li>9/11 (2001): global search traffic spikes <strong>in minutes</strong></li>
+        <li>Any world event = instant, unpredictable surge</li>
+        <li>Proved: advertising revenue scales with users → feature velocity = market share</li>
+        <li>Drove: release features fast → attract users → earn ads → fund features</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">📱 Facebook / Social</div>
+      <ul>
+        <li>Orkut (2004), Facebook (2004) — photos, comments, likes, shares</li>
+        <li>User base = <strong>everyone on the planet</strong></li>
+        <li>Viral content creates massive, unpredictable spikes</li>
+        <li>Feature wars: each new reaction required faster release cycles</li>
+      </ul>
+    </div>
+    <div class="card c-red">
+      <div class="card-hd">🎬 Netflix — Streaming Video</div>
+      <ul>
+        <li>Killed Blockbuster with streaming (2007)</li>
+        <li>New popular series: <strong>millions stream simultaneously</strong></li>
+        <li>Peak: 15%+ of all North American internet traffic</li>
+        <li>Drove invention of Chaos Engineering &amp; microservices architecture</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout ca-amber" style="margin-top:0.75rem;">
+    <strong>The Pattern:</strong> All four faced the same problem — unpredictable load spikes requiring infrastructure far beyond daily average. They ended up with vast surplus capacity at off-peak times. The question became: what do you do with spare data centres?
+  </div>
+</section>
+
+<!-- ── SLIDE 6: Enterprises Open Up & Salesforce ── -->
+<section class="slide" data-title="Enterprises Open Up & Salesforce">
+  <div class="s-era">Parallel Story · 2000–2010s</div>
+  <h2 class="s-title">Enterprises Open Up &amp; <span class="hi3">Salesforce</span> Plants the Seed</h2>
+  <p class="s-sub">Internal systems face the internet. The SaaS model shows enterprises they don't need to own anything.</p>
+
+  <div class="g g2" style="margin-bottom:0.75rem;">
+    <div class="card c-green">
+      <div class="card-hd">Enterprises Go Online</div>
+      <ul>
+        <li>Internet &amp; Mobile Banking — 24×7 availability becomes mandatory</li>
+        <li>e-Commerce — festive sales create the same spike pattern as Amazon</li>
+        <li>Online Insurance, Just-in-Time supply chains, partner portals</li>
+        <li>Every enterprise opening up needs <strong>CRM</strong> — enter Salesforce</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Salesforce — "No Software" (1999)</div>
+      <ul>
+        <li><strong>Old model:</strong> buy CRM licence ($500K+), buy servers, hire DBAs → 18 months to value</li>
+        <li><strong>Salesforce:</strong> browser-based, pay per seat per month → <strong>live in days</strong></li>
+        <li>No software to install. No servers to own. Just pay and use.</li>
+        <li>Enterprises got their first taste of: <strong>Software as a Service</strong></li>
+        <li>CAPEX (buy upfront) → OPEX (pay monthly) — CFOs loved it</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout ca-amber">
+    <strong>The Penny Drops:</strong> If I don't need to own the CRM software or its servers — and I just pay for what I use — why do I need to own <em>any</em> infrastructure? The question that seeded the cloud transition.
+  </div>
+</section>
+
+<!-- ── SLIDE 7: Birth of The Cloud ── -->
+<section class="slide" data-title="The Cloud is Born — AWS 2006">
+  <div class="s-era">Birth of The Cloud · 2006</div>
+  <h2 class="s-title">Amazon's <span class="hi2">Serendipity</span> — The Cloud is Born</h2>
+  <p class="s-sub">Amazon built infrastructure for peak retail load. The idle off-peak capacity became a product.</p>
+
+  <div class="g g2" style="margin-bottom:0.75rem;">
+    <div class="card c-amber">
+      <div class="card-hd">The Insight (2002–2004)</div>
+      <ul>
+        <li>Amazon engineers frustrated by slow internal infrastructure provisioning</li>
+        <li>Standardised all internal services via APIs — same interface for everything</li>
+        <li>Realised: if they offered this externally, idle servers between peaks earn revenue</li>
+        <li><strong>S3</strong> — Simple Storage Service launched March 2006</li>
+        <li><strong>EC2</strong> — Elastic Compute Cloud launched August 2006</li>
+        <li>"Elastic" = scale up and scale back down on demand, pay by the hour</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">What Enterprises Gained</div>
+      <ul>
+        <li>Spin up 1,000 servers in <strong>minutes</strong> (not months of procurement)</li>
+        <li>No data centre to build, own, or maintain</li>
+        <li>Pay only for what you actually use — scale to zero at night</li>
+        <li>Handle Black Friday; scale back Monday; don't pay for idle capacity</li>
+        <li>Google App Engine (2008), Microsoft Azure (2010) quickly followed</li>
+        <li>Competition drove prices down <strong>80%+</strong> over the following decade</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout ca-green">
+    <strong>CAPEX → OPEX:</strong> No more buying hardware upfront and depreciating it over 5 years. Cloud turned infrastructure from a capital asset on the balance sheet into a monthly utility bill — like electricity. You don't own the power plant.
+  </div>
+</section>
+
+<!-- ── SLIDE 8: Software Delivery Transforms ── -->
+<section class="slide" data-title="Software Delivery Transforms">
+  <div class="s-era">Consequence · 2010s</div>
+  <h2 class="s-title">Software Delivery <span class="hi">Transforms</span></h2>
+  <p class="s-sub">From yearly big-bang releases to continuous deployment — the cloud enabled a completely different pace</p>
+
+  <div class="g g2" style="margin-bottom:0.75rem;">
+    <div class="card c-red">
+      <div class="card-hd">The Old Way (Pre-Cloud)</div>
+      <ul>
+        <li>Release once every 6–12 months — months of preparation</li>
+        <li>"Stop the world" — all users impacted simultaneously</li>
+        <li>Change freeze, rollback plans, war-rooms during go-live</li>
+        <li>Big bugs wait 6 months for the fix to reach production</li>
+        <li>Feature backlog grows; customers frustrated; competitors catch up</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">The New Way (Cloud-Native)</div>
+      <ul>
+        <li>Deploy multiple times per day — Amazon: <strong>thousands of deploys/day</strong></li>
+        <li>Feature flags: release to 1% of users first, validate, then roll out</li>
+        <li>A/B testing: try two versions simultaneously, measure, pick winner</li>
+        <li>Bug fixed: deployed in hours, not six months</li>
+        <li>Continuous Integration / Continuous Delivery (CI/CD) pipelines</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="g g3">
+    <div class="card stat"><div class="stat-n sr">1/yr</div><div class="stat-l">Release cadence (2000)</div><div class="stat-note">Big-bang, stop-the-world</div></div>
+    <div class="card stat"><div class="stat-n sa">1/mo</div><div class="stat-l">Release cadence (2010)</div><div class="stat-note">Agile sprints, iterative</div></div>
+    <div class="card c-green stat"><div class="stat-n sg">100+/day</div><div class="stat-l">Amazon today</div><div class="stat-note">Continuous deployment</div></div>
+  </div>
+</section>
+
+<!-- ── SLIDE 9: Summary ── -->
+<section class="slide" data-title="Summary — Five Key Ideas">
+  <div class="s-era">Summary</div>
+  <h2 class="s-title">Five <span class="hi">Key Ideas</span></h2>
+  <p class="s-sub">If you remember nothing else — remember these</p>
+
+  <div class="g g2">
+    <div class="card"><div class="card-hd">① Scale Changed Everything</div><ul><li>When billions of users arrived, every assumption about infrastructure, software delivery, and operations had to be rebuilt from scratch</li></ul></div>
+    <div class="card c-amber"><div class="card-hd">② Unpredictability Drove Innovation</div><ul><li>The inability to predict load forced invention of elastic computing — you cannot pre-buy hardware for a viral tweet or a global news event</li></ul></div>
+    <div class="card c-green"><div class="card-hd">③ The Cloud Was Accidental</div><ul><li>Amazon didn't set out to build a cloud. They solved their own problem. Monetising spare capacity was serendipity — but it changed the world</li></ul></div>
+    <div class="card c-purple"><div class="card-hd">④ Salesforce Changed the Deal</div><ul><li>Proving enterprises would happily rent software they previously owned planted the seed for full cloud adoption across all infrastructure</li></ul></div>
+    <div class="card filled-amber span2"><div class="card-hd">⑤ Software Velocity = Competitive Advantage</div><ul><li>Companies that ship features fastest attract the most users. Users attract ad revenue. Revenue funds more features. Cloud enables this velocity. This is the flywheel that runs today's tech economy — and it's still accelerating.</li></ul></div>
+  </div>
+</section>
+
+<!-- ── SLIDE 10: End ── -->
+<section class="slide cover" data-title="Questions">
+  <div class="cov-grid"></div>
+  <div class="cov-glow" style="left:-150px;top:auto;bottom:-150px;right:auto;"></div>
+  <div class="cov-content" style="margin-top:100px;">
+    <div class="cov-kicker">End of Presentation</div>
+    <h1 class="cov-h1">Questions?<br/><span class="hi">Let's Discuss.</span></h1>
+    <p class="cov-desc">From a punch card in 1952 to a billion-user global cloud platform in 2024 — the pace of change is still accelerating. You'll shape the next chapter.</p>
+    <div class="chips">
+      <span class="chip">What does AI change next?</span>
+      <span class="chip ca">Edge Computing</span>
+      <span class="chip cg">Serverless / Functions</span>
+      <span class="chip cp">FinOps</span>
+    </div>
+  </div>
+</section>
+
+</div><!-- /deck -->
+
+<nav id="nav">
+  <div class="nav-group">
+    <button class="nb" id="btn-prev">← Prev</button>
+    <button class="nb" id="btn-next">Next →</button>
+    <span id="counter">1 / 10</span>
+  </div>
+  <div class="nav-group">
+    <select id="jump"></select>
+  </div>
+  <div class="nav-group">
+    <button id="theme-btn">☀ Light</button>
+  </div>
+</nav>
+
+<script src="../shared/js/deck.js"></script>
+</body>
+</html>
