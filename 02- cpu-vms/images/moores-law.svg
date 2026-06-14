@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 230">
+  <style>
+    .ax{stroke:var(--svg-border,rgba(99,179,237,.35));fill:none}
+    .gl{stroke:var(--svg-border,rgba(99,179,237,.1));fill:none}
+    .yl{fill:var(--svg-text2,rgba(99,179,237,.6));font-family:monospace;font-size:9px}
+    .bar{fill:var(--svg-blue,rgba(99,179,237,.6))}
+    .bh{fill:var(--svg-green,#aaff00);fill-opacity:.8}
+    .vl{fill:var(--svg-text1,#d0e4f8);font-family:monospace;font-size:7.5px}
+    .xl{fill:var(--svg-text2,rgba(99,179,237,.55));font-family:monospace;font-size:8px}
+    .arc{stroke:var(--svg-border,rgba(99,179,237,.35));fill:none}
+    .art{fill:var(--svg-text2,rgba(99,179,237,.55));font-family:monospace;font-size:8px}
+    .cap{fill:var(--svg-text2,rgba(99,179,237,.4));font-family:monospace;font-size:8px}
+    .mul{fill:var(--svg-green,#aaff00);fill-opacity:.8;font-family:monospace;font-size:9.5px;font-weight:700}
+    .arr{fill:var(--svg-border,rgba(99,179,237,.5))}
+  </style>
+  <defs><marker id="arM" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5 z" class="arr"/></marker></defs>
+  <line x1="64" y1="16" x2="64" y2="182" class="ax" stroke-width="1"/>
+  <line x1="64" y1="182" x2="508" y2="182" class="ax" stroke-width="1"/>
+  <line x1="64" y1="150" x2="508" y2="150" class="gl" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="64" y1="118" x2="508" y2="118" class="gl" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="64" y1="86"  x2="508" y2="86"  class="gl" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="64" y1="54"  x2="508" y2="54"  class="gl" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="64" y1="22"  x2="508" y2="22"  class="gl" stroke-width="1" stroke-dasharray="4,4"/>
+  <text x="58" y="185" class="yl" text-anchor="end">1K</text>
+  <text x="58" y="153" class="yl" text-anchor="end">100K</text>
+  <text x="58" y="121" class="yl" text-anchor="end">10M</text>
+  <text x="58" y="89"  class="yl" text-anchor="end">1B</text>
+  <text x="58" y="57"  class="yl" text-anchor="end">100B</text>
+  <text x="58" y="25"  class="yl" text-anchor="end">10T</text>
+  <rect x="76"  y="176" width="22" height="6"   class="bar" rx="2"/>
+  <rect x="118" y="158" width="22" height="24"  class="bar" rx="2"/>
+  <rect x="160" y="131" width="22" height="51"  class="bar" rx="2"/>
+  <rect x="202" y="120" width="22" height="62"  class="bar" rx="2"/>
+  <rect x="244" y="105" width="22" height="77"  class="bar" rx="2"/>
+  <rect x="286" y="91"  width="22" height="91"  class="bar" rx="2"/>
+  <rect x="328" y="79"  width="22" height="103" class="bar" rx="2"/>
+  <rect x="370" y="62"  width="22" height="120" class="bh"  rx="2"/>
+  <rect x="412" y="47"  width="22" height="135" class="bh"  rx="2"/>
+  <text x="87"  y="171" class="vl" text-anchor="middle">2.3K</text>
+  <text x="129" y="153" class="vl" text-anchor="middle">29K</text>
+  <text x="171" y="126" class="vl" text-anchor="middle">1.2M</text>
+  <text x="213" y="115" class="vl" text-anchor="middle">5.5M</text>
+  <text x="255" y="100" class="vl" text-anchor="middle">42M</text>
+  <text x="297" y="86"  class="vl" text-anchor="middle">291M</text>
+  <text x="339" y="74"  class="vl" text-anchor="middle">1.4B</text>
+  <text x="381" y="57"  class="vl" text-anchor="middle">16B</text>
+  <text x="423" y="42"  class="vl" text-anchor="middle" font-weight="700">134B</text>
+  <text x="87"  y="196" class="xl" text-anchor="middle">1971</text>
+  <text x="129" y="196" class="xl" text-anchor="middle">1979</text>
+  <text x="171" y="196" class="xl" text-anchor="middle">1989</text>
+  <text x="213" y="196" class="xl" text-anchor="middle">1995</text>
+  <text x="255" y="196" class="xl" text-anchor="middle">2000</text>
+  <text x="297" y="196" class="xl" text-anchor="middle">2006</text>
+  <text x="339" y="196" class="xl" text-anchor="middle">2012</text>
+  <text x="381" y="196" class="xl" text-anchor="middle">2020</text>
+  <text x="423" y="196" class="xl" text-anchor="middle">2023</text>
+  <path d="M76 30 Q290 -10 412 30" class="arc" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#arM)"/>
+  <text x="244" y="14" class="art" text-anchor="middle">~2× EVERY 18–24 MONTHS</text>
+  <text x="286" y="215" class="cap" text-anchor="middle">TRANSISTORS PER CPU (LOG SCALE) — 1971 → 2023</text>
+  <text x="468" y="96"  class="mul" text-anchor="middle">×58M</text>
+  <text x="468" y="108" class="mul" text-anchor="middle" font-size="7.5">vs 1971</text>
+</svg>

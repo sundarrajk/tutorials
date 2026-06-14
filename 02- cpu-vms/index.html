@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CPUs, Cores &amp; Virtual Machines</title>
+<link rel="stylesheet" href="../shared/css/deck.css"/>
+</head>
+<body>
+
+<div id="prog" style="width:0%"></div>
+
+<div id="deck">
+
+<!-- ── SLIDE 1: Cover ── -->
+<section class="slide cover" data-title="Cover">
+  <div class="cov-grid"></div>
+  <div class="cov-glow"></div>
+  <div class="cov-content">
+    <div class="cov-kicker">Hardware Revolution · For Sophomores</div>
+    <h1 class="cov-h1">From <span class="hi">Single-Core</span><br/>to The Cloud</h1>
+    <p class="cov-desc">How CPUs evolved from one slow core to hundreds of parallel cores — and how Virtual Machines made it possible to use all that power efficiently.</p>
+    <div class="chips">
+      <span class="chip">Moore's Law</span>
+      <span class="chip ca">Clock Speed &amp; Thermal Walls</span>
+      <span class="chip cg">Multi-Core Architecture</span>
+      <span class="chip cp">Virtual Machines</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── SLIDE 2: Single-Core Era ── -->
+<section class="slide" data-title="The Single-Core Era (pre-2000)">
+  <div class="s-era">Era 1 · Pre-2000</div>
+  <h2 class="s-title">The <span class="hi">Single-Core</span> Era</h2>
+  <p class="s-sub">One CPU. One core. One task at a time. And that was fine — for a while.</p>
+
+  <div class="g g-sb">
+    <div class="g" style="gap:0.8rem;">
+      <div class="card">
+        <div class="card-hd">The Server of the 1990s</div>
+        <ul>
+          <li>One physical socket on the motherboard</li>
+          <li>One core inside that socket — single execution unit</li>
+          <li>RAM: typically <strong>16 MB to 256 MB</strong></li>
+          <li>Clock speed: ~<strong>66 MHz</strong> (486 era) to ~1 GHz by 2000</li>
+          <li>OS installed directly on the hard disk — boots bare metal</li>
+          <li>One server = one OS = one application</li>
+        </ul>
+      </div>
+      <div class="card c-green">
+        <div class="card-hd">What "Single Core" Means</div>
+        <ul>
+          <li>CPU executes <strong>one instruction stream</strong> at a time</li>
+          <li>Multiple processes "share" the CPU via fast time-slicing — an illusion of parallel</li>
+          <li>True simultaneous execution: impossible</li>
+          <li>Software designed around this — fine for batch payroll, overnight reports</li>
+        </ul>
+      </div>
+      <div class="callout">
+        <strong>The Workload Reality:</strong> Most 1990s enterprise software was batch-oriented — payroll, end-of-day reports, overnight processing. Interactive users were few. One core was enough.
+      </div>
+    </div>
+    <div class="dbox">
+      <img src="images/single-core.svg" alt="Single socket single core server diagram"/>
+    </div>
+  </div>
+</section>
+
+<!-- ── SLIDE 3: Moore's Law ── -->
+<section class="slide" data-title="Moore's Law">
+  <div class="s-era">The Prediction · 1965</div>
+  <h2 class="s-title">Moore's <span class="hi">Law</span></h2>
+  <p class="s-sub">Gordon Moore's 1965 observation became the engine that drove 50 years of computing progress</p>
+
+  <div class="g g-sb">
+    <div class="g" style="gap:0.8rem;">
+      <div class="card">
+        <div class="card-hd">The Prediction</div>
+        <ul>
+          <li>Gordon Moore (Intel co-founder, 1965): transistor count on a chip doubles approximately <strong>every 18–24 months</strong></li>
+          <li>More transistors = more logic = faster, smarter CPU</li>
+          <li>Held remarkably true for over 50 years</li>
+          <li>Note: Moore predicted transistor doubling, not directly clock speed — but the two were tightly linked during the clock-speed era</li>
+        </ul>
+      </div>
+      <div class="card c-green">
+        <div class="card-hd">The Real-World Numbers</div>
+        <ul>
+          <li><strong>1971</strong> Intel 4004: <strong>2,300</strong> transistors · 0.74 MHz</li>
+          <li><strong>1993</strong> Pentium: <strong>3.1 million</strong> · 66–200 MHz</li>
+          <li><strong>2000</strong> Pentium 4: <strong>42 million</strong> · 1.5 GHz</li>
+          <li><strong>2012</strong> Ivy Bridge: <strong>1.4 billion</strong> · 3.5 GHz</li>
+          <li><strong>2023</strong> Apple M2 Ultra: <strong>134 billion</strong> transistors</li>
+          <li>A <strong>58-million-fold increase</strong> in 52 years</li>
+        </ul>
+      </div>
+      <div class="callout ca-green">
+        <strong>The Free Lunch:</strong> For decades, developers didn't need to optimise code. Just wait 18 months, buy the new CPU — software ran faster automatically. This era ended around 2004 when clock speed hit its thermal limit.
+      </div>
+    </div>
+    <div class="dbox">
+      <img src="images/moores-law.svg" alt="Moore's Law transistor count bar chart"/>
+    </div>
+  </div>
+</section>
+
+<!-- ── SLIDE 4: Thermal Wall ── -->
+<section class="slide" data-title="The Thermal Wall — Clock Speed Peaks">
+  <div class="s-era">The Bottleneck · ~2004</div>
+  <h2 class="s-title">The <span class="hi2">Thermal Wall</span></h2>
+  <p class="s-sub">Clock speeds couldn't keep rising — physics intervened, forcing a complete rethink of CPU design</p>
+
+  <div class="g g-sb">
+    <div class="g" style="gap:0.8rem;">
+      <div class="card">
+        <div class="card-hd">The Clock Speed Race</div>
+        <ul>
+          <li>CPU performance = clock speed × work per cycle</li>
+          <li>Industry focused on clock: <strong>66 MHz → 1 GHz → 3.8 GHz</strong></li>
+          <li>Intel Pentium 4 "Prescott" hit <strong>3.8 GHz in 2004</strong></li>
+          <li>Power consumption: <strong>~130 Watts</strong> — the chip ran scorching hot</li>
+        </ul>
+      </div>
+      <div class="card c-amber">
+        <div class="card-hd">Why It Stopped — Physics</div>
+        <ul>
+          <li>Power = C × V² × frequency — higher clock = more heat</li>
+          <li>At ~4 GHz the chip could not be cooled reliably in a server rack</li>
+          <li>Intel abandoned its "Terahertz Transistor" roadmap targeting 10 GHz</li>
+          <li>Clock speeds <strong>dropped from 3.8 GHz back to ~2.4 GHz</strong> when multi-core arrived</li>
+          <li>Modern per-core clock: <strong>3–5 GHz</strong> — barely above the 2004 peak</li>
+        </ul>
+      </div>
+      <div class="callout ca-amber">
+        <strong>The Pivot:</strong> If we can't go faster per core — add more cores. One fast engine → many parallel engines. This shift changed how software had to be written forever.
+      </div>
+    </div>
+    <div class="dbox">
+      <img src="images/clock-speed.svg" alt="Clock speed evolution chart showing rise and drop"/>
+    </div>
+  </div>
+</section>
+
+<!-- ── SLIDE 5: Multi-Core ── -->
+<section class="slide" data-title="Multi-Core & Multi-Socket">
+  <div class="s-era">The Solution · 2005 onwards</div>
+  <h2 class="s-title"><span class="hi">Multi-Core</span> &amp; Multi-Socket</h2>
+  <p class="s-sub">More cores at slightly lower clock — same chip area, massively more parallel throughput</p>
+
+  <div class="g g-sb">
+    <div class="g" style="gap:0.8rem;">
+      <div class="card">
+        <div class="card-hd">The Multi-Core Leap</div>
+        <ul>
+          <li><strong>2005:</strong> Intel/AMD — first dual-core desktop CPUs</li>
+          <li><strong>2007:</strong> Quad-core mainstream (Core 2 Quad)</li>
+          <li><strong>2010:</strong> 6–8 core server CPUs common</li>
+          <li><strong>2020:</strong> AMD EPYC 7742 — <strong>64 cores per socket</strong></li>
+          <li><strong>2023:</strong> AMD EPYC Genoa — <strong>96 cores per socket</strong></li>
+          <li>Apple M2 Ultra: 24-core CPU + 76-core GPU on one chip</li>
+        </ul>
+      </div>
+      <div class="card c-green">
+        <div class="card-hd">Memory Grew 750,000×</div>
+        <ul>
+          <li><strong>1990:</strong> 16–64 MB typical server RAM</li>
+          <li><strong>2000:</strong> 512 MB – 2 GB</li>
+          <li><strong>2008:</strong> 16–32 GB</li>
+          <li><strong>2015:</strong> 256 GB – 1 TB</li>
+          <li><strong>2024:</strong> AMD EPYC / Intel Xeon — up to <strong>12 TB per server</strong></li>
+          <li>Entire databases now fit in RAM → 1,000× faster than disk reads</li>
+        </ul>
+      </div>
+      <div class="callout ca-green">
+        <strong>But Old Apps Couldn't Use It:</strong> Single-threaded software runs on one core while 63 others sit idle. Adding cores doesn't speed up sequential code. Average enterprise server utilisation: <strong>5–15%</strong> — before virtualisation.
+      </div>
+    </div>
+    <div class="dbox">
+      <img src="images/sockets-cores.svg" alt="Single core vs multi-core multi-socket diagram"/>
+    </div>
+  </div>
+</section>
+
+<!-- ── SLIDE 6: Virtual Machines ── -->
+<section class="slide" data-title="Virtual Machines — The Big Idea">
+  <div class="s-era">The Solution · VMware 1998</div>
+  <h2 class="s-title"><span class="hi3">Virtual Machines</span> — The Big Idea</h2>
+  <p class="s-sub">What if one physical server could pretend to be many? The hypervisor made this possible.</p>
+
+  <div class="g g-sb" style="margin-bottom:0.7rem;">
+    <div class="g" style="gap:0.8rem;">
+      <div class="card">
+        <div class="card-hd">The Key Abstraction</div>
+        <ul>
+          <li><strong>Bare metal:</strong> OS talks directly to physical CPU, RAM, disk, network</li>
+          <li><strong>With virtualisation:</strong> a <em>Hypervisor</em> sits between hardware and OS</li>
+          <li>Hypervisor presents <strong>virtual hardware</strong> to each Guest OS</li>
+          <li>Guest OS doesn't know it's on virtual hardware</li>
+          <li>Multiple Guest OSes run simultaneously, each fully isolated</li>
+          <li>Pioneer: VMware (1998) for x86; IBM mainframes had this since the 1960s</li>
+        </ul>
+      </div>
+      <div class="card c-green">
+        <div class="card-hd">VM Superpowers</div>
+        <ul>
+          <li>📸 <strong>Snapshots:</strong> capture complete VM state — roll back in seconds</li>
+          <li>📋 <strong>Templates:</strong> build one "golden" VM, clone 50 copies in minutes</li>
+          <li>🚚 <strong>vMotion:</strong> move a running VM to another host with zero downtime</li>
+          <li>⚡ <strong>Hot-add:</strong> add CPU cores, RAM, or storage while VM is live</li>
+          <li>Utilisation jumps from 5% → <strong>60–80%</strong> after consolidation</li>
+        </ul>
+      </div>
+    </div>
+    <div class="dbox">
+      <img src="images/vm-vs-bare-metal.svg" alt="Bare metal vs Virtual Machine architecture comparison"/>
+    </div>
+  </div>
+
+  <div class="callout ca-green">
+    <strong>Deployment Speed:</strong> Bare metal: order hardware → wait weeks → rack → cable → OS install → 2–6 weeks total. VM from template: clone → start → configure network → <strong>5–15 minutes</strong>. This speed changed the economics of scaling permanently.
+  </div>
+</section>
+
+<!-- ── SLIDE 7: VMs → Cloud ── -->
+<section class="slide" data-title="VMs Power the Cloud">
+  <div class="s-era">The Foundation</div>
+  <h2 class="s-title">VMs Power <span class="hi2">The Cloud</span></h2>
+  <p class="s-sub">AWS, Azure, and GCP took VM technology, automated it with APIs, and sold it to the world</p>
+
+  <div class="g g2" style="margin-bottom:0.75rem;">
+    <div class="card c-amber">
+      <div class="card-hd">AWS EC2 (2006) — The Breakthrough</div>
+      <ul>
+        <li>Rent a virtual machine by the hour — any size, any quantity</li>
+        <li><strong>Elastic:</strong> scale from 1 to 10,000 VMs — and back — in minutes</li>
+        <li>VM templates (AMIs) — deploy identical copies instantly</li>
+        <li>All the VM superpowers delivered via a web API</li>
+        <li>No hardware to own, manage, cool, or depreciate</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">What the Cloud Delivered</div>
+      <ul>
+        <li>Pay per minute of use — scale to zero at night, stop paying</li>
+        <li>Handle peak load without pre-buying idle capacity</li>
+        <li>Spin up a test environment in minutes (was weeks via ticket queue)</li>
+        <li>Geographic scale: deploy to 30+ regions globally in hours</li>
+        <li>Azure Virtual Machines, Google Compute Engine — same model</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="dbox" style="min-height:140px;">
+    <img src="images/cloud-on-vms.svg" alt="Cloud built on virtual machines — IaaS diagram"/>
+  </div>
+</section>
+
+<!-- ── SLIDE 8: Summary ── -->
+<section class="slide" data-title="Summary">
+  <div class="s-era">Summary</div>
+  <h2 class="s-title">The <span class="hi">Full Story</span></h2>
+  <p class="s-sub">Five ideas — from single transistors to cloud computing</p>
+
+  <div class="g g2">
+    <div class="card"><div class="card-hd">① Moore's Law → Free Speed</div><ul><li>Transistor count doubled every 18 months for 50 years. Clock speeds rose 66 MHz → 3.8 GHz. Apps got faster automatically — no code changes needed.</li></ul></div>
+    <div class="card c-amber"><div class="card-hd">② Thermal Wall → Multi-Core</div><ul><li>~2004: clock speed stopped at 3.8 GHz due to heat. Industry pivoted: lower clock, many more cores. Old single-threaded apps gained nothing — had to be rewritten.</li></ul></div>
+    <div class="card c-green"><div class="card-hd">③ Memory → 750,000× Growth</div><ul><li>RAM grew from 16 MB (1990) to 12 TB (2024). Entire databases fit in memory. But legacy apps wasted nearly all of it — only 5–15% utilisation.</li></ul></div>
+    <div class="card c-purple"><div class="card-hd">④ VMs → Efficient Utilisation</div><ul><li>Hypervisor abstracts hardware → run 10–20 VMs per server. Snapshots, templates, vMotion, hot-add transformed IT operations. Utilisation: 5% → 70%+.</li></ul></div>
+    <div class="card filled-amber span2"><div class="card-hd">⑤ VMs + Scale = The Cloud</div><ul><li>AWS, Azure, GCP automated VM technology at massive scale, delivered it via web APIs, and sold it to the world on a pay-per-minute basis. The cloud's elastic scaling, instant provisioning, and pay-per-use billing are all direct consequences of virtualisation technology. Moore's Law + Virtualisation, delivered as a utility.</li></ul></div>
+  </div>
+</section>
+
+<!-- ── SLIDE 9: End ── -->
+<section class="slide cover" data-title="Questions">
+  <div class="cov-grid"></div>
+  <div class="cov-glow" style="left:-150px;top:auto;bottom:-150px;right:auto;"></div>
+  <div class="cov-content" style="margin-top:100px;">
+    <div class="cov-kicker">End of Presentation</div>
+    <h1 class="cov-h1">Questions?<br/><span class="hi">Let's Discuss.</span></h1>
+    <p class="cov-desc">From 2,300 transistors in 1971 to 134 billion in 2023. From one server per app to 20 VMs per server. From weeks to provision to minutes to clone.</p>
+    <div class="chips">
+      <span class="chip">What's next? Containers</span>
+      <span class="chip ca">Serverless</span>
+      <span class="chip cg">ARM vs x86</span>
+      <span class="chip cp">3D Chiplets</span>
+    </div>
+  </div>
+</section>
+
+</div><!-- /deck -->
+
+<nav id="nav">
+  <div class="nav-group">
+    <button class="nb" id="btn-prev">← Prev</button>
+    <button class="nb" id="btn-next">Next →</button>
+    <span id="counter">1 / 9</span>
+  </div>
+  <div class="nav-group">
+    <select id="jump"></select>
+  </div>
+  <div class="nav-group">
+    <button id="theme-btn">☀ Light</button>
+  </div>
+</nav>
+
+<script src="../shared/js/deck.js"></script>
+</body>
+</html>

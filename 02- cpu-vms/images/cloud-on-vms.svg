@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 200">
+  <style>
+    .cloud{fill:none;stroke:var(--svg-green,rgba(104,211,145,.25));stroke-dasharray:8,5;stroke-width:1.3}
+    .vm-g{fill:var(--svg-fill1,rgba(104,211,145,.1));stroke:var(--svg-green,rgba(104,211,145,.45));stroke-width:1}
+    .vm-b{fill:var(--svg-fill2,rgba(99,179,237,.08));stroke:var(--svg-blue,rgba(99,179,237,.45));stroke-width:1}
+    .cp{fill:var(--svg-purple,rgba(183,148,244,.07));stroke:var(--svg-purple,rgba(183,148,244,.3));stroke-width:1}
+    .dc{fill:var(--svg-fill2,rgba(99,179,237,.06));stroke:var(--svg-border,rgba(99,179,237,.22));stroke-width:1}
+    .ben{fill:var(--svg-fill2,rgba(104,211,145,.03));stroke:var(--svg-green,rgba(104,211,145,.15));stroke-width:.8}
+    .tit{fill:var(--svg-green,rgba(104,211,145,.7));font-family:monospace;font-size:10px;letter-spacing:3px}
+    .vm-tg{fill:var(--svg-green,#68d391);font-family:monospace;font-size:8px;font-weight:700}
+    .vm-sg{fill:var(--svg-green,rgba(104,211,145,.65));font-family:monospace;font-size:7px}
+    .vm-tb{fill:var(--svg-blue,#63b3ed);font-family:monospace;font-size:8px;font-weight:700}
+    .vm-sb{fill:var(--svg-text2,rgba(99,179,237,.65));font-family:monospace;font-size:7px}
+    .dots{fill:var(--svg-green,rgba(104,211,145,.45));font-family:monospace;font-size:13px}
+    .cp-t{fill:var(--svg-purple,rgba(183,148,244,.85));font-family:monospace;font-size:8px;font-weight:700}
+    .cp-s{fill:var(--svg-purple,rgba(183,148,244,.55));font-family:monospace;font-size:6.5px}
+    .dc-t{fill:var(--svg-text1,rgba(99,179,237,.65));font-family:monospace;font-size:8.5px;font-weight:700}
+    .dc-s{fill:var(--svg-text2,rgba(99,179,237,.45));font-family:monospace;font-size:6.5px}
+    .ben-g{fill:var(--svg-green,rgba(104,211,145,.65));font-family:monospace;font-size:7px}
+    .ben-b{fill:var(--svg-blue,rgba(99,179,237,.55));font-family:monospace;font-size:7px}
+    .arr-h{fill:var(--svg-green,rgba(104,211,145,.7))}
+    .arr-l{stroke:var(--svg-green,rgba(104,211,145,.6));fill:none;stroke-width:1.8}
+  </style>
+  <defs><marker id="arCl" markerWidth="7" markerHeight="7" refX="4" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5 z" class="arr-h"/></marker></defs>
+  <text x="260" y="14" class="tit" text-anchor="middle">☁  THE CLOUD  ☁</text>
+  <rect x="10" y="18" width="500" height="58" rx="28" class="cloud"/>
+  <rect x="26"  y="24" width="68" height="46" rx="6" class="vm-g"/>
+  <text x="60" y="42" class="vm-tg" text-anchor="middle">VM</text>
+  <text x="60" y="53" class="vm-sg" text-anchor="middle">EC2 Instance</text>
+  <text x="60" y="63" class="vm-sg" text-anchor="middle">t3.xlarge</text>
+  <rect x="106" y="24" width="68" height="46" rx="6" class="vm-g"/>
+  <text x="140" y="42" class="vm-tg" text-anchor="middle">VM</text>
+  <text x="140" y="53" class="vm-sg" text-anchor="middle">EC2 Instance</text>
+  <text x="140" y="63" class="vm-sg" text-anchor="middle">m5.2xlarge</text>
+  <rect x="186" y="24" width="68" height="46" rx="6" class="vm-g"/>
+  <text x="220" y="42" class="vm-tg" text-anchor="middle">VM</text>
+  <text x="220" y="53" class="vm-sg" text-anchor="middle">EC2 Instance</text>
+  <text x="220" y="63" class="vm-sg" text-anchor="middle">c6g.4xlarge</text>
+  <text x="298" y="50" class="dots" text-anchor="middle">· · ·</text>
+  <rect x="316" y="24" width="68" height="46" rx="6" class="vm-b"/>
+  <text x="350" y="42" class="vm-tb" text-anchor="middle">VM</text>
+  <text x="350" y="53" class="vm-sb" text-anchor="middle">Azure VM</text>
+  <rect x="396" y="24" width="68" height="46" rx="6" class="vm-b"/>
+  <text x="430" y="42" class="vm-tb" text-anchor="middle">VM</text>
+  <text x="430" y="53" class="vm-sb" text-anchor="middle">GCP Compute</text>
+  <line x1="260" y1="93" x2="260" y2="76" class="arr-l" marker-end="url(#arCl)"/>
+  <text x="286" y="89" class="ben-g">SCALE UP IN MINUTES</text>
+  <rect x="10" y="93" width="500" height="26" rx="6" class="cp"/>
+  <text x="260" y="106" class="cp-t" text-anchor="middle">CLOUD CONTROL PLANE · HYPERVISORS · SCHEDULING</text>
+  <text x="260" y="115" class="cp-s" text-anchor="middle">Allocates VM to physical host · Handles billing · Auto-scaling policies</text>
+  <rect x="10" y="126" width="500" height="32" rx="6" class="dc"/>
+  <text x="260" y="140" class="dc-t" text-anchor="middle">PHYSICAL DATA CENTRE — THOUSANDS OF SERVERS</text>
+  <text x="260" y="151" class="dc-s" text-anchor="middle">Amazon / Microsoft / Google own &amp; maintain — you never see or touch them</text>
+  <rect x="10" y="166" width="500" height="30" rx="6" class="ben"/>
+  <text x="30"  y="180" class="ben-g">▸ Spin up 1,000 VMs in minutes</text>
+  <text x="200" y="180" class="ben-g">▸ Pay only when running</text>
+  <text x="345" y="180" class="ben-g">▸ No hardware to manage</text>
+  <text x="30"  y="191" class="ben-b">▸ VM templates → identical copies instantly</text>
+  <text x="310" y="191" class="ben-b">▸ Scale to 0 when idle — zero cost</text>
+</svg>

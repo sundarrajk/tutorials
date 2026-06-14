@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 230">
+  <style>
+    .ax{stroke:var(--svg-border,rgba(99,179,237,.35));fill:none}
+    .gl{stroke:var(--svg-border,rgba(99,179,237,.1));fill:none}
+    .yl{fill:var(--svg-text2,rgba(99,179,237,.6));font-family:monospace;font-size:9px}
+    .xl{fill:var(--svg-text2,rgba(99,179,237,.55));font-family:monospace;font-size:8px}
+    .ln{stroke:var(--svg-blue,#63b3ed);fill:none;stroke-width:2.2;stroke-linejoin:round}
+    .dot{fill:var(--svg-blue,#63b3ed)}
+    .dot-o{fill:var(--svg-amber,#f6ad55)}
+    .dot-g{fill:var(--svg-green,#68d391)}
+    .val{fill:var(--svg-text1,#d0e4f8);font-family:monospace;font-size:8px}
+    .val-o{fill:var(--svg-amber,#f6ad55);font-family:monospace;font-size:8px}
+    .val-g{fill:var(--svg-green,#68d391);font-family:monospace;font-size:8px}
+    .wall{stroke:var(--svg-amber,#f6ad55);stroke-opacity:.5;fill:none;stroke-dasharray:5,4}
+    .wt{fill:var(--svg-amber,#f6ad55);fill-opacity:.75;font-family:monospace;font-size:8px}
+    .ect{fill:var(--svg-text2,rgba(99,179,237,.55));font-family:monospace;font-size:8px}
+    .egt{fill:var(--svg-green,#68d391);fill-opacity:.65;font-family:monospace;font-size:8px}
+    .cap{fill:var(--svg-text2,rgba(99,179,237,.4));font-family:monospace;font-size:8px}
+    .arr-b{fill:var(--svg-blue,rgba(99,179,237,.6))}
+    .arr-g{fill:var(--svg-green,rgba(104,211,145,.6))}
+  </style>
+  <defs>
+    <marker id="arCB" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5 z" class="arr-b"/></marker>
+    <marker id="arCG" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5 z" class="arr-g"/></marker>
+  </defs>
+  <line x1="60" y1="14" x2="60" y2="172" class="ax" stroke-width="1"/>
+  <line x1="60" y1="172" x2="500" y2="172" class="ax" stroke-width="1"/>
+  <line x1="60" y1="140" x2="500" y2="140" class="gl" stroke-width="1" stroke-dasharray="3,4"/>
+  <line x1="60" y1="108" x2="500" y2="108" class="gl" stroke-width="1" stroke-dasharray="3,4"/>
+  <line x1="60" y1="76"  x2="500" y2="76"  class="gl" stroke-width="1" stroke-dasharray="3,4"/>
+  <line x1="60" y1="44"  x2="500" y2="44"  class="gl" stroke-width="1" stroke-dasharray="3,4"/>
+  <text x="54" y="175" class="yl" text-anchor="end">0</text>
+  <text x="54" y="143" class="yl" text-anchor="end">1 GHz</text>
+  <text x="54" y="111" class="yl" text-anchor="end">2 GHz</text>
+  <text x="54" y="79"  class="yl" text-anchor="end">3 GHz</text>
+  <text x="54" y="47"  class="yl" text-anchor="end">4 GHz</text>
+  <polyline points="80,171 130,171 168,163 200,124 222,76 244,52 266,95 310,88 366,60 422,58 448,56" class="ln"/>
+  <circle cx="80"  cy="171" r="4" class="dot"/>
+  <circle cx="130" cy="171" r="4" class="dot"/>
+  <circle cx="168" cy="163" r="4" class="dot"/>
+  <circle cx="200" cy="124" r="4" class="dot"/>
+  <circle cx="222" cy="76"  r="4" class="dot"/>
+  <circle cx="244" cy="52"  r="5" class="dot"/>
+  <circle cx="266" cy="95"  r="5" class="dot-o"/>
+  <circle cx="310" cy="88"  r="4" class="dot-o"/>
+  <circle cx="366" cy="60"  r="4" class="dot-g"/>
+  <circle cx="448" cy="56"  r="4" class="dot-g"/>
+  <text x="80"  y="167" class="val" text-anchor="middle">66MHz</text>
+  <text x="200" y="118" class="val" text-anchor="middle">1.5GHz</text>
+  <text x="244" y="46"  class="val" text-anchor="middle" font-weight="700">3.8GHz PEAK</text>
+  <text x="266" y="89"  class="val-o" text-anchor="middle">2.4GHz</text>
+  <text x="448" y="50"  class="val-g" text-anchor="middle">3.6GHz</text>
+  <text x="80"  y="185" class="xl" text-anchor="middle">1985</text>
+  <text x="200" y="185" class="xl" text-anchor="middle">2000</text>
+  <text x="244" y="185" class="xl" text-anchor="middle">2004</text>
+  <text x="266" y="185" class="xl" text-anchor="middle">2006</text>
+  <text x="448" y="185" class="xl" text-anchor="middle">2023</text>
+  <line x1="255" y1="16" x2="255" y2="170" class="wall" stroke-width="1.5"/>
+  <text x="258" y="28"  class="wt">THERMAL WALL</text>
+  <text x="258" y="39"  class="wt" font-size="7">~130W at 3.8GHz</text>
+  <text x="157" y="206" class="ect" text-anchor="middle">CLOCK SPEED ERA</text>
+  <text x="380" y="206" class="egt" text-anchor="middle">MULTI-CORE ERA</text>
+  <line x1="60"  y1="200" x2="252" y2="200" stroke="var(--svg-blue,rgba(99,179,237,.35))" stroke-width="1" fill="none" marker-end="url(#arCB)"/>
+  <line x1="258" y1="200" x2="500" y2="200" stroke="var(--svg-green,rgba(104,211,145,.35))" stroke-width="1" fill="none" marker-end="url(#arCG)"/>
+  <text x="280" y="222" class="cap" text-anchor="middle">SINGLE-CORE CLOCK SPEED — 1985 to 2023</text>
+</svg>

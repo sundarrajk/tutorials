@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 240">
+  <style>
+    .mb   { fill:var(--svg-fill2,rgba(99,179,237,.04)); stroke:var(--svg-border,rgba(99,179,237,.3)); stroke-width:1.3; }
+    .tr   { stroke:var(--svg-border,rgba(99,179,237,.08)); fill:none; stroke-width:1; }
+    .sk   { fill:var(--svg-fill2,rgba(99,179,237,.08)); stroke:var(--svg-blue,#63b3ed); stroke-width:1.5; }
+    .co   { fill:var(--svg-fill1,rgba(99,179,237,.22)); stroke:var(--svg-blue,#63b3ed); stroke-width:2; }
+    .ram  { fill:var(--svg-fill1,rgba(99,179,237,.16)); stroke:var(--svg-border,rgba(99,179,237,.35)); }
+    .hdd  { fill:var(--svg-fill1,rgba(99,179,237,.12)); stroke:var(--svg-border,rgba(99,179,237,.3)); }
+    .t-tit{ fill:var(--svg-text2,rgba(99,179,237,.6)); font-family:monospace; font-size:9px; letter-spacing:1.5px; }
+    .t-sk { fill:var(--svg-text2,rgba(99,179,237,.55)); font-family:monospace; font-size:8px; }
+    .t-co { fill:var(--svg-blue,#63b3ed); font-family:monospace; font-weight:700; }
+    .t-inf{ fill:var(--svg-text2,rgba(99,179,237,.55)); font-family:monospace; font-size:7.5px; }
+    .t-bot{ fill:var(--svg-text1,#d0e4f8); font-family:sans-serif; font-size:13px; font-weight:700; }
+    .t-sub{ fill:var(--svg-text2,rgba(99,179,237,.5)); font-family:monospace; font-size:8px; }
+  </style>
+  <text x="130" y="14" class="t-tit" text-anchor="middle">SINGLE SOCKET / SINGLE CORE</text>
+  <rect x="20" y="20" width="220" height="170" rx="8" class="mb"/>
+  <line x1="30" y1="60"  x2="230" y2="60"  class="tr"/>
+  <line x1="30" y1="90"  x2="230" y2="90"  class="tr"/>
+  <line x1="30" y1="120" x2="230" y2="120" class="tr"/>
+  <line x1="75"  y1="28" x2="75"  y2="184" class="tr"/>
+  <line x1="130" y1="28" x2="130" y2="184" class="tr"/>
+  <line x1="185" y1="28" x2="185" y2="184" class="tr"/>
+  <rect x="55" y="30" width="150" height="130" rx="6" class="sk"/>
+  <text x="130" y="46" class="t-sk" text-anchor="middle">SOCKET 0</text>
+  <rect x="70" y="54" width="120" height="94" rx="6" class="co"/>
+  <text x="130" y="97"  class="t-co" text-anchor="middle" font-size="16">CORE</text>
+  <text x="130" y="112" class="t-co" text-anchor="middle" font-size="10">× 1</text>
+  <text x="130" y="126" class="t-inf" text-anchor="middle">66 MHz → 1 GHz</text>
+  <text x="130" y="138" class="t-inf" text-anchor="middle">16 – 256 MB RAM</text>
+  <rect x="28" y="160" width="34" height="9" rx="2" class="ram"/>
+  <rect x="66" y="160" width="34" height="9" rx="2" class="ram"/>
+  <text x="65" y="183" class="t-inf" text-anchor="middle">RAM SLOTS (FEW)</text>
+  <rect x="145" y="158" width="64" height="14" rx="3" class="hdd"/>
+  <text x="177" y="168" class="t-inf" text-anchor="middle">HDD (OS lives here)</text>
+  <text x="130" y="208" class="t-bot" text-anchor="middle">1 Socket · 1 Core</text>
+  <text x="130" y="222" class="t-sub" text-anchor="middle">One app · One OS · ~100 MHz</text>
+  <text x="130" y="234" class="t-sub" text-anchor="middle" fill-opacity=".6">Sequential execution only</text>
+</svg>

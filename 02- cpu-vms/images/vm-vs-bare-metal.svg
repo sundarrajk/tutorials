@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 260">
+  <style>
+    .hw{fill:var(--svg-fill1,rgba(99,179,237,.14));stroke:var(--svg-blue,#63b3ed);stroke-width:1.3}
+    .os{fill:var(--svg-fill1,rgba(99,179,237,.22));stroke:var(--svg-blue,#63b3ed);stroke-width:1.8}
+    .app{fill:var(--svg-fill2,rgba(99,179,237,.08));stroke:var(--svg-border,rgba(99,179,237,.25));stroke-width:1.2}
+    .waste{fill:rgba(252,129,129,.04);stroke:var(--svg-red,rgba(252,129,129,.28));stroke-dasharray:4,3;stroke-width:1}
+    .hv{fill:var(--svg-purple,rgba(183,148,244,.18));stroke:var(--svg-purple,rgba(183,148,244,.6));stroke-width:1.8}
+    .vm{fill:var(--svg-fill2,rgba(104,211,145,.07));stroke:var(--svg-green,rgba(104,211,145,.4));stroke-width:1.2}
+    .vmos{fill:var(--svg-fill1,rgba(104,211,145,.14));stroke:var(--svg-green,rgba(104,211,145,.3));stroke-width:.8}
+    .vmapp{fill:var(--svg-fill2,rgba(104,211,145,.08));stroke:var(--svg-green,rgba(104,211,145,.2));stroke-width:.8}
+    .hw2{fill:var(--svg-fill1,rgba(104,211,145,.1));stroke:var(--svg-green,#68d391);stroke-width:1.3}
+    .ben{fill:var(--svg-fill2,rgba(104,211,145,.03));stroke:var(--svg-green,rgba(104,211,145,.2));stroke-width:.8}
+    .con{stroke:var(--svg-blue,rgba(99,179,237,.5));fill:none;stroke-width:1.5}
+    .con2{stroke:var(--svg-green,rgba(104,211,145,.4));fill:none;stroke-width:1.2}
+    .div{stroke:var(--svg-border,rgba(255,255,255,.07));fill:none;stroke-dasharray:4,4}
+    .t-tit{fill:var(--svg-text2,rgba(99,179,237,.6));font-family:monospace;font-size:9px;letter-spacing:1.5px}
+    .t-tit2{fill:var(--svg-green,rgba(104,211,145,.65));font-family:monospace;font-size:9px;letter-spacing:1.5px}
+    .hw-t{fill:var(--svg-blue,#63b3ed);font-family:monospace;font-size:9px;font-weight:700}
+    .hw-s{fill:var(--svg-text2,rgba(99,179,237,.6));font-family:monospace;font-size:7px}
+    .os-t{fill:var(--svg-blue,#63b3ed);font-family:monospace;font-size:9px;font-weight:700}
+    .app-t{fill:var(--svg-text1,rgba(99,179,237,.85));font-family:monospace;font-size:9px;font-weight:700}
+    .app-w{fill:var(--svg-amber,rgba(246,173,85,.65));font-family:monospace;font-size:7px}
+    .wt{fill:var(--svg-red,rgba(252,129,129,.6));font-family:monospace;font-size:9px}
+    .ws{fill:var(--svg-red,rgba(252,129,129,.42));font-family:monospace;font-size:7px}
+    .hv-t{fill:var(--svg-purple,#b794f4);font-family:monospace;font-size:8.5px;font-weight:700}
+    .hv-s{fill:var(--svg-purple,rgba(183,148,244,.6));font-family:monospace;font-size:6.5px}
+    .vm-t{fill:var(--svg-green,#68d391);font-family:monospace;font-size:8px;font-weight:700}
+    .vm-s{fill:var(--svg-green,rgba(104,211,145,.7));font-family:monospace;font-size:6.5px}
+    .vm-r{fill:var(--svg-green,rgba(104,211,145,.55));font-family:monospace;font-size:7px}
+    .ben-t{fill:var(--svg-green,rgba(104,211,145,.8));font-family:monospace;font-size:7.5px;font-weight:700}
+    .ben-s{fill:var(--svg-green,rgba(104,211,145,.65));font-family:monospace;font-size:7px}
+    .hw2-t{fill:var(--svg-green,#68d391);font-family:monospace;font-size:9px;font-weight:700}
+    .hw2-s{fill:var(--svg-green,rgba(104,211,145,.55));font-family:monospace;font-size:7px}
+  </style>
+  <text x="130" y="16" class="t-tit" text-anchor="middle">BARE METAL (TRADITIONAL)</text>
+  <rect x="14" y="220" width="232" height="36" rx="5" class="hw"/>
+  <text x="130" y="236" class="hw-t" text-anchor="middle">PHYSICAL HARDWARE</text>
+  <text x="130" y="248" class="hw-s" text-anchor="middle">CPU · RAM · DISK · NETWORK · I/O</text>
+  <rect x="14" y="164" width="232" height="48" rx="5" class="os"/>
+  <text x="130" y="184" class="os-t" text-anchor="middle">OPERATING SYSTEM</text>
+  <text x="130" y="196" class="hw-s" text-anchor="middle">Talks directly to hardware drivers</text>
+  <text x="130" y="207" class="hw-s" text-anchor="middle">OS owns all resources exclusively</text>
+  <line x1="130" y1="212" x2="130" y2="220" class="con"/>
+  <rect x="14" y="100" width="232" height="56" rx="5" class="app"/>
+  <text x="130" y="120" class="app-t" text-anchor="middle">ONE APPLICATION</text>
+  <text x="130" y="132" class="hw-s" text-anchor="middle">Single app per server</text>
+  <text x="130" y="143" class="app-w" text-anchor="middle">⚠ CPU/RAM wasted — avg 5–15% util</text>
+  <line x1="130" y1="156" x2="130" y2="164" class="con"/>
+  <rect x="14" y="26" width="232" height="66" rx="5" class="waste"/>
+  <text x="130" y="50" class="wt" text-anchor="middle">UNUSED CAPACITY</text>
+  <text x="130" y="63" class="ws" text-anchor="middle">85–95% of CPU &amp; RAM sits idle</text>
+  <text x="130" y="75" class="ws" text-anchor="middle">Cannot share server with another app</text>
+  <line x1="262" y1="14" x2="262" y2="258" class="div"/>
+  <text x="406" y="16" class="t-tit2" text-anchor="middle">VIRTUAL MACHINES</text>
+  <rect x="280" y="228" width="252" height="28" rx="5" class="hw2"/>
+  <text x="406" y="241" class="hw2-t" text-anchor="middle">SAME PHYSICAL HARDWARE</text>
+  <text x="406" y="252" class="hw2-s" text-anchor="middle">No extra cost — same servers used more efficiently</text>
+  <rect x="280" y="196" width="252" height="26" rx="5" class="hv"/>
+  <text x="406" y="208" class="hv-t" text-anchor="middle">HYPERVISOR (VMware ESXi / KVM)</text>
+  <text x="406" y="218" class="hv-s" text-anchor="middle">Abstracts CPU · RAM · Disk · Network → virtual resources</text>
+  <line x1="406" y1="224" x2="406" y2="228" class="con2"/>
+  <rect x="283" y="108" width="75" height="82" rx="5" class="vm"/>
+  <text x="320" y="122" class="vm-t" text-anchor="middle">VM 1</text>
+  <text x="320" y="132" class="vm-s" text-anchor="middle">● Running</text>
+  <rect x="289" y="137" width="63" height="16" rx="3" class="vmos"/>
+  <text x="320" y="148" class="vm-s" text-anchor="middle">Guest OS</text>
+  <rect x="289" y="157" width="63" height="16" rx="3" class="vmapp"/>
+  <text x="320" y="168" class="vm-s" text-anchor="middle">App: Web</text>
+  <text x="320" y="184" class="vm-r" text-anchor="middle">4vCPU · 8GB</text>
+  <line x1="320" y1="190" x2="340" y2="196" class="con2"/>
+  <rect x="368" y="108" width="75" height="82" rx="5" class="vm"/>
+  <text x="405" y="122" class="vm-t" text-anchor="middle">VM 2</text>
+  <text x="405" y="132" class="vm-s" text-anchor="middle">● Running</text>
+  <rect x="374" y="137" width="63" height="16" rx="3" class="vmos"/>
+  <text x="405" y="148" class="vm-s" text-anchor="middle">Guest OS</text>
+  <rect x="374" y="157" width="63" height="16" rx="3" class="vmapp"/>
+  <text x="405" y="168" class="vm-s" text-anchor="middle">App: DB</text>
+  <text x="405" y="184" class="vm-r" text-anchor="middle">8vCPU · 32GB</text>
+  <line x1="406" y1="190" x2="406" y2="196" class="con2"/>
+  <rect x="453" y="108" width="75" height="82" rx="5" class="vm"/>
+  <text x="490" y="122" class="vm-t" text-anchor="middle">VM 3</text>
+  <text x="490" y="132" class="vm-s" text-anchor="middle">● Running</text>
+  <rect x="459" y="137" width="63" height="16" rx="3" class="vmos"/>
+  <text x="490" y="148" class="vm-s" text-anchor="middle">Guest OS</text>
+  <rect x="459" y="157" width="63" height="16" rx="3" class="vmapp"/>
+  <text x="490" y="168" class="vm-s" text-anchor="middle">Cache</text>
+  <text x="490" y="184" class="vm-r" text-anchor="middle">2vCPU · 4GB</text>
+  <line x1="490" y1="190" x2="472" y2="196" class="con2"/>
+  <rect x="283" y="22" width="245" height="80" rx="6" class="ben"/>
+  <text x="406" y="38" class="ben-t" text-anchor="middle">✓ VM SUPERPOWERS</text>
+  <text x="290" y="51" class="ben-s">▸ Snapshots — capture full state, roll back in seconds</text>
+  <text x="290" y="63" class="ben-s">▸ Templates — clone VMs in minutes</text>
+  <text x="290" y="75" class="ben-s">▸ vMotion — move live VM zero-downtime</text>
+  <text x="290" y="87" class="ben-s">▸ Hot-add CPU / RAM / Storage on the fly</text>
+</svg>
