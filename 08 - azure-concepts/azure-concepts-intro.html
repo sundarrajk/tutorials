@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Azure Fundamentals — Concept Primer</title>
+<link rel="stylesheet" href="../shared/css/deck.css">
+</head>
+<body>
+
+<div id="prog"></div>
+
+<div id="deck">
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 0 — COVER -->
+  <!-- ============================================================ -->
+  <section class="slide cover" data-title="Azure Fundamentals">
+    <div class="cov-grid"></div>
+    <div class="cov-glow"></div>
+    <div class="cov-content">
+      <div class="cov-kicker">Hands-On Workshop &middot; Concept Primer</div>
+      <h1 class="cov-h1">Azure <span class="hi">Fundamentals</span><br>for New Cloud Builders</h1>
+      <p class="cov-desc">A short concept walkthrough for each hands-on module. No prior cloud experience assumed — just enough theory before every lab so you know <em>why</em> you're clicking what you're clicking.</p>
+      <div class="chips">
+        <span class="chip az">4 Modules</span>
+        <span class="chip">8&ndash;12 Hours</span>
+        <span class="chip cg">100% Hands-On Labs</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 1 — ROADMAP -->
+  <!-- ============================================================ -->
+  <section class="slide" data-title="Workshop Roadmap">
+    <div class="s-era">Roadmap</div>
+    <h2 class="s-title">Four Modules, <span class="hi">One Running App</span></h2>
+    <p class="s-sub">Every module adds one piece to the same application. By the capstone, you've wired them all together.</p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-y">MODULE 0</div>
+        <div class="tl-t">Setup &amp; cloud mental model</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot da"></div>
+        <div class="tl-y">MODULE 1</div>
+        <div class="tl-t">Compute — VM &amp; App Service</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot dg"></div>
+        <div class="tl-y">MODULE 2</div>
+        <div class="tl-t">Storage — Blob &amp; SQL</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-y">MODULE 3</div>
+        <div class="tl-t">Networking &amp; Identity</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot dr"></div>
+        <div class="tl-y">MODULE 4</div>
+        <div class="tl-t">Monitoring &amp; capstone</div>
+      </div>
+    </div>
+
+    <div class="callout mt-sm">
+      <strong>Pattern for each module:</strong> a short concept section like this one, then a hands-on lab in the companion lab guide. Labs are where the real learning happens — these slides just set up the vocabulary.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 2 — CLOUD MENTAL MODEL -->
+  <!-- ============================================================ -->
+  <section class="slide" data-title="Cloud Mental Model">
+    <div class="s-era">Module 0 &middot; Concept</div>
+    <h2 class="s-title">The Four Words <span class="hi">You'll Hear Constantly</span></h2>
+    <p class="s-sub">Everything in Azure nests inside these containers. Get this hierarchy straight and the portal stops feeling like a maze.</p>
+
+    <div class="g g4">
+      <div class="card">
+        <div class="card-hd">Subscription</div>
+        <p>The billing boundary. Your Azure for Students account is one subscription with a $100 credit.</p>
+      </div>
+      <div class="card c-amber">
+        <div class="card-hd">Resource Group</div>
+        <p>A folder for related resources. Delete the group, delete everything inside it — this is your cleanup button.</p>
+      </div>
+      <div class="card c-green">
+        <div class="card-hd">Region</div>
+        <p>The physical datacenter location running your resource, e.g. <code>East US</code> or <code>Central India</code>.</p>
+      </div>
+      <div class="card c-purple">
+        <div class="card-hd">Resource</div>
+        <p>The actual thing — a VM, a storage account, a database. Everything else exists to organize these.</p>
+      </div>
+    </div>
+
+    <div class="callout ca-amber mt-sm">
+      <strong>Rule of thumb for today:</strong> one resource group per student, named consistently. When the workshop ends, deleting that one resource group deletes everything you built.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 3 — PORTAL VS CLI -->
+  <!-- ============================================================ -->
+  <section class="slide" data-title="Portal vs CLI">
+    <div class="s-era">Module 0 &middot; Concept</div>
+    <h2 class="s-title">Two Ways to Say <span class="hi">the Same Thing</span></h2>
+    <p class="s-sub">The Azure Portal and the Azure CLI both call the same underlying REST API. Neither is "more real" than the other.</p>
+
+    <div class="code-compare">
+      <div class="code-compare-panel">
+        <div class="code-compare-hdr hdr-blue">Portal (GUI)</div>
+        <div class="code-block">
+          <span class="code-label cl-cyan">Click-through</span>
+          <pre><code>Portal.azure.com
+&gt; Create a resource
+&gt; Resource Group
+&gt; Name + Region
+&gt; Review + Create</code></pre>
+        </div>
+      </div>
+      <div class="code-compare-panel">
+        <div class="code-compare-hdr hdr-amber">Cloud Shell (CLI)</div>
+        <div class="code-block">
+          <span class="code-label cl-amber">Command</span>
+          <pre><code><span class="tok-fn">az</span> group create \
+  --name <span class="tok-str">rg-netid-workshop</span> \
+  --location <span class="tok-str">centralindia</span></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout mt-sm">
+      Today you'll use <strong>both</strong> — the portal to build intuition for what exists, the CLI because it's how real engineering teams automate and repeat their work.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 4 — MODULE 1: COMPUTE -->
+  <!-- ============================================================ -->
+  <section class="slide" data-title="Compute — VM vs App Service">
+    <div class="s-era">Module 1 &middot; Concept</div>
+    <h2 class="s-title">Who Manages <span class="hi2">the Operating System?</span></h2>
+    <p class="s-sub">Compute options sit on a spectrum of control vs. convenience. Today you'll build the same app both ways.</p>
+
+    <div class="g g2">
+      <div class="card c-azure">
+        <span class="card-icon">🖥️</span>
+        <div class="card-hd">Virtual Machine</div>
+        <ul>
+          <li>You own the OS, patches, and runtime</li>
+          <li>Full control — install anything</li>
+          <li>You are the ops team</li>
+        </ul>
+      </div>
+      <div class="card c-green">
+        <span class="card-icon">🚀</span>
+        <div class="card-hd">App Service</div>
+        <ul>
+          <li>Azure manages the OS and platform</li>
+          <li>You just push code (git / CLI / CI)</li>
+          <li>Built-in scaling, HTTPS, deployment slots</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout ca-green mt-sm">
+      <strong>Today's lab:</strong> deploy a Linux VM and SSH into it, then deploy the same simple web app to App Service in minutes. You'll feel the difference directly.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 5 — MODULE 2: STORAGE -->
+  <!-- ============================================================ -->
+  <section class="slide" data-title="Storage — Blob vs SQL">
+    <div class="s-era">Module 2 &middot; Concept</div>
+    <h2 class="s-title">Structured Data <span class="hi3">vs. Everything Else</span></h2>
+    <p class="s-sub">Almost every app needs both kinds of storage. Knowing which one to reach for is half the battle.</p>
+
+    <table class="cmp-table">
+      <thead>
+        <tr>
+          <th>Need</th>
+          <th>Use</th>
+          <th>Why</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Files, images, backups, logs</td>
+          <td>Blob Storage</td>
+          <td>Cheap, unstructured, scales to any size</td>
+        </tr>
+        <tr>
+          <td>Rows, relationships, transactions</td>
+          <td>Azure SQL Database</td>
+          <td>Schema, joins, ACID guarantees</td>
+        </tr>
+        <tr>
+          <td>Flexible JSON documents, global scale</td>
+          <td>Cosmos DB</td>
+          <td>Schema-less, multi-region, low latency</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout mt-sm">
+      <strong>Today's lab:</strong> upload/download blobs from the CLI and SDK, then stand up an Azure SQL database with three tables (authors, publishers, books) and sample data. You'll finish by deploying a small Java REST API on your Module 1 VM that reads straight from those tables.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 5b — MODULE 2: JAVA REST API -->
+  <!-- ============================================================ -->
+  <section class="slide" data-title="Java REST API on the VM">
+    <div class="s-era">Module 2 &middot; Concept</div>
+    <h2 class="s-title">One VM, <span class="hi3">Three Running Services</span></h2>
+    <p class="s-sub">Your Module 1 VM never went away \u2014 it's about to run a real, data-backed application alongside nginx and Flask.</p>
+
+    <div class="g g3">
+      <div class="card">
+        <div class="card-hd">Entity</div>
+        <p>A Java class annotated <code>@Entity</code>, mapped to an existing table \u2014 no schema generation, since the tables already exist.</p>
+      </div>
+      <div class="card c-amber">
+        <div class="card-hd">Repository</div>
+        <p>One line of code (<code>extends JpaRepository</code>) gives you working database queries with zero SQL written by hand.</p>
+      </div>
+      <div class="card c-green">
+        <div class="card-hd">Controller</div>
+        <p>Maps HTTP requests like <code>GET /api/authors</code> to repository calls, returning JSON automatically.</p>
+      </div>
+    </div>
+
+    <div class="callout ca-green mt-sm">
+      <strong>Today's lab:</strong> scaffold this Spring Boot app directly on your VM, point it at the SQL database from 2D/2E, and confirm <code>/api/authors</code>, <code>/api/publishers</code>, and <code>/api/books</code> all return real rows.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 6 — MODULE 3: NETWORKING -->
+  <!-- ============================================================ -->
+  <section class="slide" data-title="Networking Basics">
+    <div class="s-era">Module 3 &middot; Concept</div>
+    <h2 class="s-title">Everything Is <span class="hi">Denied by Default</span></h2>
+    <p class="s-sub">A Virtual Network (VNet) is your private slice of the Azure network. Traffic only flows where you explicitly allow it.</p>
+
+    <div class="g g3">
+      <div class="card">
+        <div class="card-hd">VNet</div>
+        <p>Your isolated network space, carved into subnets.</p>
+      </div>
+      <div class="card c-amber">
+        <div class="card-hd">NSG</div>
+        <p>Network Security Group — a firewall of allow/deny rules attached to a subnet or NIC.</p>
+      </div>
+      <div class="card c-red">
+        <div class="card-hd">Default Deny</div>
+        <p>Inbound traffic is blocked unless a rule explicitly opens the port.</p>
+      </div>
+    </div>
+
+    <div class="callout ca-amber mt-sm">
+      <strong>Today's lab:</strong> put your Module 1 VM behind an NSG, then test what happens when you allow and deny specific ports.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 7 — MODULE 3: IDENTITY -->
+  <!-- ============================================================ -->
+  <section class="slide" data-title="Identity Basics">
+    <div class="s-era">Module 3 &middot; Concept</div>
+    <h2 class="s-title">Stop Putting <span class="hi2">Passwords in Code</span></h2>
+    <p class="s-sub">Microsoft Entra ID (formerly Azure AD) handles who — and what — is allowed to do things in Azure.</p>
+
+    <div class="two-col">
+      <div class="col-block">
+        <h3>The old way</h3>
+        <p>Connection strings and keys hard-coded or dropped into config files. Anyone who reads the code gets full access.</p>
+      </div>
+      <div class="col-block">
+        <h3>Managed Identity</h3>
+        <p>Azure gives your App Service its own identity in Entra ID. You grant that identity permission on your Storage Account — no secret ever touches your code.</p>
+      </div>
+    </div>
+
+    <div class="callout ca-purple mt-sm">
+      <strong>Today's lab:</strong> assign a managed identity to your App Service and use it to read from Blob Storage with zero credentials in your app.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 8 — MODULE 4: MONITORING & CAPSTONE -->
+  <!-- ============================================================ -->
+  <section class="slide" data-title="Monitoring & Capstone">
+    <div class="s-era">Module 4 &middot; Concept</div>
+    <h2 class="s-title">If You Can't <span class="hi3">See It, You Can't Fix It</span></h2>
+    <p class="s-sub">Azure Monitor and Application Insights collect metrics, logs, and traces from everything you've deployed today.</p>
+
+    <div class="g g2">
+      <div class="card c-cyan">
+        <div class="card-hd">Azure Monitor</div>
+        <p>Platform-level metrics — CPU, memory, request counts, response times — for every resource, with no code changes.</p>
+      </div>
+      <div class="card c-blue filled-blue">
+        <div class="card-hd">Application Insights</div>
+        <p>Code-level visibility — exceptions, dependency calls, custom events — wired into your App Service.</p>
+      </div>
+    </div>
+
+    <div class="callout mt-sm">
+      <strong>Capstone lab:</strong> wire Modules 1&ndash;3 into one flow — App Service &rarr; Managed Identity &rarr; Storage + SQL, behind NSG rules — then deliberately break something and diagnose it from the logs.
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SLIDE 9 — CLEANUP REMINDER -->
+  <!-- ============================================================ -->
+  <section class="slide" data-title="Cleanup">
+    <div class="s-era">Before You Log Off</div>
+    <h2 class="s-title">One Command, <span class="hi">Full Cleanup</span></h2>
+    <p class="s-sub">Everything you built today lives inside a single resource group. Deleting it deletes everything — and stops your credit from draining.</p>
+
+    <div class="code-block">
+      <span class="code-label cl-red">Cloud Shell</span>
+      <pre><code><span class="tok-fn">az</span> group delete \
+  --name <span class="tok-str">rg-netid-workshop</span> \
+  --yes --no-wait</code></pre>
+    </div>
+
+    <div class="callout ca-red mt-sm">
+      <strong>Do this before you close your laptop.</strong> Full steps and a verification checklist are in the lab guide's final section.
+    </div>
+  </section>
+
+</div>
+
+<nav id="nav">
+  <div class="nav-group">
+    <button id="btn-prev" class="nb">&#9664; <span class="nb-label">Prev</span></button>
+    <span id="counter">1 / 11</span>
+    <button id="btn-next" class="nb"><span class="nb-label">Next</span> &#9654;</button>
+  </div>
+  <div class="nav-group">
+    <select id="jump"></select>
+    <button id="theme-btn" class="nb">&#9728; Light</button>
+  </div>
+</nav>
+
+<script src="../shared/js/deck.js"></script>
+</body>
+</html>
