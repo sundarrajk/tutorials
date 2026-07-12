@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 240">
+  <style>
+    .arr  { fill:var(--svg-text2,rgba(99,179,237,.45)); }
+    .con  { stroke:var(--svg-text2,rgba(99,179,237,.3)); fill:none; stroke-width:1.2; }
+    /* era backgrounds */
+    .e1   { fill:var(--svg-fill2,rgba(99,179,237,.06));  stroke:var(--svg-blue,rgba(99,179,237,.2));   stroke-width:1; }
+    .e2   { fill:var(--svg-fill2,rgba(183,148,244,.06)); stroke:var(--svg-purple,rgba(183,148,244,.2)); stroke-width:1; }
+    .e3   { fill:var(--svg-fill2,rgba(246,173,85,.06));  stroke:var(--svg-amber,rgba(246,173,85,.2));  stroke-width:1; }
+    .e4   { fill:var(--svg-fill2,rgba(104,211,145,.06)); stroke:var(--svg-green,rgba(104,211,145,.2)); stroke-width:1; }
+    /* chip boxes */
+    .chip-b{ fill:var(--svg-fill1,rgba(99,179,237,.18));  stroke:var(--svg-blue,#63b3ed);   stroke-width:1.3; }
+    .chip-p{ fill:var(--svg-fill1,rgba(183,148,244,.18)); stroke:var(--svg-purple,#b794f4); stroke-width:1.3; }
+    .chip-a{ fill:var(--svg-fill1,rgba(246,173,85,.18));  stroke:var(--svg-amber,#f6ad55);  stroke-width:1.3; }
+    .chip-g{ fill:var(--svg-fill1,rgba(104,211,145,.18)); stroke:var(--svg-green,#68d391);  stroke-width:1.3; }
+    /* text */
+    .h1 { fill:var(--svg-blue,#63b3ed);   font-family:monospace; font-size:8.5px; font-weight:700; text-anchor:middle; }
+    .h2 { fill:var(--svg-purple,#b794f4); font-family:monospace; font-size:8.5px; font-weight:700; text-anchor:middle; }
+    .h3 { fill:var(--svg-amber,#f6ad55);  font-family:monospace; font-size:8.5px; font-weight:700; text-anchor:middle; }
+    .h4 { fill:var(--svg-green,#68d391);  font-family:monospace; font-size:8.5px; font-weight:700; text-anchor:middle; }
+    .lbl{ fill:var(--svg-text1,#d0e4f8);  font-family:monospace; font-size:8px; text-anchor:middle; font-weight:700; }
+    .sub{ fill:var(--svg-text2,#6a9ab8);  font-family:monospace; font-size:7px; text-anchor:middle; }
+    .era{ fill:var(--svg-text2,rgba(99,179,237,.5)); font-family:monospace; font-size:8px; text-anchor:middle; letter-spacing:1px; }
+    .note{ fill:var(--svg-text2,#6a9ab8); font-family:monospace; font-size:7.5px; }
+    .good{ fill:var(--svg-green,rgba(104,211,145,.75)); font-family:monospace; font-size:7.5px; }
+    .warn{ fill:var(--svg-amber,rgba(246,173,85,.7)); font-family:monospace; font-size:7.5px; }
+  </style>
+  <defs>
+    <marker id="mA" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <path d="M0,0 L0,7 L7,3.5 z" class="arr"/>
+    </marker>
+  </defs>
+
+  <!-- Era 1: Magnetic -->
+  <rect x="4"   y="24" width="170" height="208" rx="8" class="e1"/>
+  <text x="89"  y="14" class="era">ERA 1: MAGNETIC</text>
+  <text x="89"  y="38" class="h1">1950s – 1970s</text>
+  <rect x="14"  y="46" width="150" height="44" rx="6" class="chip-b"/>
+  <text x="89"  y="62" class="lbl">Magnetic Core Memory</text>
+  <text x="89"  y="73" class="sub">Tiny iron rings threaded on wires</text>
+  <text x="89"  y="83" class="sub">First mainframe RAM — non-volatile!</text>
+  <rect x="14"  y="96" width="150" height="44" rx="6" class="chip-b"/>
+  <text x="89"  y="112" class="lbl">Magnetic Drum Memory</text>
+  <text x="89"  y="123" class="sub">Rotating drum, very slow</text>
+  <text x="89"  y="133" class="sub">Preceded disk drives</text>
+  <text x="14"  y="155" class="note">▸ Bulk, heavy, expensive</text>
+  <text x="14"  y="167" class="note">▸ Survives power-off</text>
+  <text x="14"  y="179" class="note">▸ KB per cubic metre</text>
+  <text x="14"  y="196" class="note">IBM 360: 256 KB core</text>
+  <text x="14"  y="208" class="note">$1/byte in today's money</text>
+
+  <line x1="178" y1="128" x2="194" y2="128" class="con" marker-end="url(#mA)"/>
+
+  <!-- Era 2: ROM types -->
+  <rect x="198" y="24" width="176" height="208" rx="8" class="e2"/>
+  <text x="286" y="14" class="era">ERA 2: READ-ONLY</text>
+  <text x="286" y="38" class="h2">1960s – 1990s</text>
+  <rect x="208" y="46" width="156" height="30" rx="5" class="chip-p"/>
+  <text x="286" y="61" class="lbl">ROM (Mask ROM)</text>
+  <text x="286" y="72" class="sub">Burned at factory — immutable</text>
+  <rect x="208" y="80" width="156" height="30" rx="5" class="chip-p"/>
+  <text x="286" y="95" class="lbl">PROM</text>
+  <text x="286" y="106" class="sub">Programmable once (fuses)</text>
+  <rect x="208" y="114" width="156" height="30" rx="5" class="chip-p"/>
+  <text x="286" y="129" class="lbl">EPROM</text>
+  <text x="286" y="140" class="sub">UV light erases — rewritable</text>
+  <rect x="208" y="148" width="156" height="30" rx="5" class="chip-p"/>
+  <text x="286" y="163" class="lbl">EEPROM</text>
+  <text x="286" y="174" class="sub">Electrically erasable — forerunner of Flash</text>
+  <text x="208" y="194" class="note">Used for BIOS, firmware,</text>
+  <text x="208" y="206" class="note">microcontroller programs</text>
+  <text x="208" y="218" class="note">Still used in embedded systems</text>
+
+  <line x1="378" y1="128" x2="394" y2="128" class="con" marker-end="url(#mA)"/>
+
+  <!-- Era 3: DRAM and SRAM -->
+  <rect x="398" y="24" width="190" height="208" rx="8" class="e3"/>
+  <text x="493" y="14" class="era">ERA 3: VOLATILE RAM</text>
+  <text x="493" y="38" class="h3">1970s – 2000s</text>
+  <rect x="408" y="46" width="170" height="42" rx="5" class="chip-a"/>
+  <text x="493" y="62" class="lbl">SRAM (Static RAM)</text>
+  <text x="493" y="73" class="sub">Flip-flops — fastest, expensive</text>
+  <text x="493" y="83" class="sub">Used for CPU caches (L1/L2/L3)</text>
+  <rect x="408" y="94" width="170" height="42" rx="5" class="chip-a"/>
+  <text x="493" y="110" class="lbl">DRAM (Dynamic RAM)</text>
+  <text x="493" y="121" class="sub">Capacitors — needs refresh cycles</text>
+  <text x="493" y="131" class="sub">Cheap, dense — used for main RAM</text>
+  <rect x="408" y="142" width="170" height="30" rx="5" class="chip-a"/>
+  <text x="493" y="157" class="lbl">FPM → EDO → SDRAM</text>
+  <text x="493" y="168" class="sub">Clock-sync improves bandwidth</text>
+  <text x="408" y="188" class="note">All volatile — contents lost on power-off</text>
+  <text x="408" y="200" class="note">SRAM: picoseconds latency (L1 cache)</text>
+  <text x="408" y="212" class="note">DRAM: ~100 ns (~100× slower than cache)</text>
+
+  <line x1="592" y1="128" x2="608" y2="128" class="con" marker-end="url(#mA)"/>
+
+  <!-- Era 4: DDR generations -->
+  <rect x="612" y="24" width="202" height="208" rx="8" class="e4"/>
+  <text x="713" y="14" class="era">ERA 4: DDR SDRAM</text>
+  <text x="713" y="38" class="h4">2000 – Today</text>
+  <rect x="622" y="46" width="182" height="22" rx="4" class="chip-g"/>
+  <text x="713" y="60" class="lbl">DDR1  (2000) — 200–400 MT/s</text>
+  <rect x="622" y="72" width="182" height="22" rx="4" class="chip-g"/>
+  <text x="713" y="86" class="lbl">DDR2  (2003) — 400–1066 MT/s</text>
+  <rect x="622" y="98" width="182" height="22" rx="4" class="chip-g"/>
+  <text x="713" y="112" class="lbl">DDR3  (2007) — 800–2133 MT/s</text>
+  <rect x="622" y="124" width="182" height="22" rx="4" class="chip-g"/>
+  <text x="713" y="138" class="lbl">DDR4  (2014) — 1600–3200 MT/s</text>
+  <rect x="622" y="150" width="182" height="22" rx="4" class="chip-g"/>
+  <text x="713" y="164" class="lbl">DDR5  (2021) — 3200–8400 MT/s</text>
+  <rect x="622" y="176" width="182" height="22" rx="4" class="chip-g"/>
+  <text x="713" y="190" class="lbl">HBM2e / HBM3 — GPU memory</text>
+  <text x="622" y="210" class="note">DDR = Double Data Rate — transfers on</text>
+  <text x="622" y="222" class="note">rising AND falling clock edge</text>
+  <text x="622" y="234" class="good">DDR5 peak: ~89 GB/s bandwidth</text>
+</svg>

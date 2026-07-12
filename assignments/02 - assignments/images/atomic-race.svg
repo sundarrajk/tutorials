@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 280">
+  <style>
+    .t1bg { fill:var(--svg-fill2,rgba(99,179,237,.08)); stroke:var(--svg-blue,#63b3ed); stroke-width:1.5; }
+    .t2bg { fill:var(--svg-fill2,rgba(104,211,145,.08)); stroke:var(--svg-green,#68d391); stroke-width:1.5; }
+    .mem  { fill:var(--svg-fill1,rgba(246,173,85,.2)); stroke:var(--svg-amber,#f6ad55); stroke-width:1.8; }
+    .reg  { fill:var(--svg-fill1,rgba(183,148,244,.2)); stroke:var(--svg-purple,#b794f4); stroke-width:1.2; }
+    .bad  { fill:rgba(252,129,129,.2); stroke:var(--svg-red,#fc8181); stroke-width:2; }
+    .arr  { fill:var(--svg-text2,rgba(99,179,237,.5)); }
+    .arr-r{ fill:var(--svg-red,rgba(252,129,129,.7)); }
+    .con  { stroke:var(--svg-text2,rgba(99,179,237,.4)); fill:none; stroke-width:1.4; stroke-dasharray:4,3; }
+    .con-r{ stroke:var(--svg-red,rgba(252,129,129,.7)); fill:none; stroke-width:2; }
+    .h1   { fill:var(--svg-blue,#63b3ed);   font-family:monospace; font-size:9.5px; font-weight:700; text-anchor:middle; }
+    .h2   { fill:var(--svg-green,#68d391);  font-family:monospace; font-size:9.5px; font-weight:700; text-anchor:middle; }
+    .h-m  { fill:var(--svg-amber,#f6ad55);  font-family:monospace; font-size:9.5px; font-weight:700; text-anchor:middle; }
+    .h-bad{ fill:var(--svg-red,#fc8181);    font-family:monospace; font-size:9.5px; font-weight:700; text-anchor:middle; }
+    .lbl  { fill:var(--svg-text1,#d0e4f8);  font-family:monospace; font-size:8px; font-weight:700; text-anchor:middle; }
+    .sub  { fill:var(--svg-text2,#6a9ab8);  font-family:monospace; font-size:7.5px; text-anchor:middle; }
+    .code { fill:var(--svg-text1,#d0e4f8);  font-family:monospace; font-size:8px; }
+    .code-r{ fill:var(--svg-red,rgba(252,129,129,.9)); font-family:monospace; font-size:8px; }
+    .note { fill:var(--svg-text2,#6a9ab8);  font-family:monospace; font-size:8px; }
+    .good { fill:var(--svg-green,rgba(104,211,145,.8)); font-family:monospace; font-size:8px; }
+    .warn { fill:var(--svg-red,rgba(252,129,129,.75)); font-family:monospace; font-size:8px; }
+    .step { fill:var(--svg-text2,rgba(99,179,237,.45)); font-family:monospace; font-size:7px; font-weight:700; }
+
+    /* Animate the race — steps light up sequentially */
+    @keyframes race {
+      0%,100% { opacity:.35; }
+      14%     { opacity:1; }
+    }
+    .r1 { animation: race 7s 0.0s infinite; }
+    .r2 { animation: race 7s 1.0s infinite; }
+    .r3 { animation: race 7s 2.0s infinite; }
+    .r4 { animation: race 7s 3.0s infinite; }
+    .r5 { animation: race 7s 4.0s infinite; }
+    .r6 { animation: race 7s 5.0s infinite; }
+    .r7 { animation: race 7s 6.0s infinite; }
+  </style>
+  <defs>
+    <marker id="acA" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5 z" class="arr"/></marker>
+    <marker id="acR" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5 z" class="arr-r"/></marker>
+  </defs>
+
+  <!-- Thread 1 column -->
+  <rect x="6"  y="6"  width="200" height="220" rx="8" class="t1bg"/>
+  <text x="106" y="23" class="h1">THREAD 1 (Core 0)</text>
+  <text x="106" y="35" class="sub">Executes:  x = y + z</text>
+
+  <rect x="14" y="44" width="184" height="24" rx="4" class="reg r1"/>
+  <text x="106" y="54" class="step">① LOAD y</text>
+  <text x="106" y="63" class="code" text-anchor="middle">MOV R1, [y]   ; R1=5</text>
+
+  <rect x="14" y="72" width="184" height="24" rx="4" class="reg r3"/>
+  <text x="106" y="82" class="step">③ LOAD z</text>
+  <text x="106" y="91" class="code" text-anchor="middle">MOV R2, [z]   ; R2=3</text>
+
+  <rect x="14" y="100" width="184" height="24" rx="4" class="reg r5"/>
+  <text x="106" y="110" class="step">⑤ ADD</text>
+  <text x="106" y="119" class="code" text-anchor="middle">ADD R1, R2    ; R1=8</text>
+
+  <rect x="14" y="128" width="184" height="24" rx="4" class="reg r7"/>
+  <text x="106" y="138" class="step">⑦ STORE x</text>
+  <text x="106" y="147" class="code" text-anchor="middle">MOV [x], R1   ; x=8 ✓</text>
+
+  <text x="14"  y="172" class="note">Thread 1 expects x = 5+3 = 8</text>
+  <text x="14"  y="185" class="note">but Thread 2 modifies y between</text>
+  <text x="14"  y="197" class="note">Thread 1's LOAD and STORE.</text>
+  <text x="14"  y="213" class="note">Result: x = 5+3 = 8  BUT y was</text>
+  <text x="14"  y="224" class="note">already 10 when T1 loaded it!</text>
+
+  <!-- Shared memory -->
+  <rect x="226" y="6" width="160" height="130" rx="8" class="mem"/>
+  <text x="306" y="24" class="h-m">SHARED MEMORY</text>
+  <text x="306" y="44" class="lbl">y = 5</text>
+  <text x="306" y="58" class="sub">(Thread 2 changes this)</text>
+  <text x="306" y="78" class="lbl">z = 3</text>
+  <text x="306" y="96" class="lbl">x = ?</text>
+  <text x="306" y="110" class="sub">Expected: 8</text>
+  <text x="306" y="122" class="sub">Got: 8 (wrong y snapshot!)</text>
+
+  <!-- Bad result box -->
+  <rect x="226" y="146" width="160" height="50" rx="7" class="bad"/>
+  <text x="306" y="163" class="h-bad">❌ RACE RESULT</text>
+  <text x="306" y="178" class="sub">T1 loaded y=5 (old)</text>
+  <text x="306" y="190" class="sub">T2 wrote y=10 BETWEEN loads</text>
+
+  <!-- Thread 2 column -->
+  <rect x="406" y="6" width="200" height="220" rx="8" class="t2bg"/>
+  <text x="506" y="23" class="h2">THREAD 2 (Core 1)</text>
+  <text x="506" y="35" class="sub">Executes: y = y + 5</text>
+
+  <rect x="414" y="44" width="184" height="24" rx="4" class="reg r2"/>
+  <text x="506" y="54" class="step">② LOAD y</text>
+  <text x="506" y="63" class="code" text-anchor="middle">MOV R3, [y]   ; R3=5</text>
+
+  <rect x="414" y="72" width="184" height="24" rx="4" class="reg r4"/>
+  <text x="506" y="82" class="step">④ ADD 5</text>
+  <text x="506" y="91" class="code" text-anchor="middle">ADD R3, 5     ; R3=10</text>
+
+  <rect x="414" y="100" width="184" height="24" rx="4" class="reg r6"/>
+  <text x="506" y="110" class="step">⑥ STORE y</text>
+  <text x="506" y="119" class="code" text-anchor="middle">MOV [y], R3   ; y=10 ← !</text>
+
+  <text x="414" y="158" class="note">Thread 2 stores y=10 at step ⑥</text>
+  <text x="414" y="171" class="note">AFTER Thread 1 already read y=5</text>
+  <text x="414" y="184" class="note">at step ①. Thread 1's result is</text>
+  <text x="414" y="197" class="note">now stale — it used old y.</text>
+
+  <!-- Three assembly steps that x=y+z expands to -->
+  <rect x="616" y="6" width="198" height="130" rx="8" fill="var(--svg-fill2,rgba(99,179,237,.06))" stroke="var(--svg-border,rgba(99,179,237,.2))" stroke-width="1"/>
+  <text x="715" y="22" class="h1">x = y + z  IS NOT ATOMIC</text>
+  <text x="624" y="38" class="note">High-level: one line of C</text>
+  <text x="624" y="52" class="code">  int x = y + z;</text>
+  <text x="624" y="68" class="note">CPU: three separate operations</text>
+  <text x="624" y="82" class="code">  LOAD  R1 ← [y]</text>
+  <text x="624" y="95" class="code">  LOAD  R2 ← [z]</text>
+  <text x="624" y="108" class="code">  ADD   R1 ← R1+R2</text>
+  <text x="624" y="121" class="code">  STORE [x] ← R1</text>
+  <text x="624" y="135" class="note">Any step can be interrupted!</text>
+
+  <rect x="616" y="146" width="198" height="80" rx="8" fill="var(--svg-fill2,rgba(104,211,145,.06))" stroke="var(--svg-green,rgba(104,211,145,.25))" stroke-width="1"/>
+  <text x="715" y="162" class="h2">ATOMIC SOLUTION</text>
+  <text x="624" y="178" class="good">✓ Hardware atomic ops:</text>
+  <text x="624" y="192" class="code">  LOCK ADD [x], 1</text>
+  <text x="624" y="206" class="note">  CPU locks memory bus for</text>
+  <text x="624" y="218" class="note">  entire read-modify-write.</text>
+
+  <!-- Arrow connecting T1 load to memory and back -->
+  <line x1="212" y1="56" x2="224" y2="56" class="con" marker-end="url(#acA)"/>
+  <line x1="388" y1="82" x2="224" y2="80" class="con" marker-end="url(#acA)"/>
+
+  <!-- Notes at bottom -->
+  <rect x="6" y="234" width="808" height="42" rx="6" fill="var(--svg-fill2,rgba(99,179,237,.04))" stroke="var(--svg-border,rgba(99,179,237,.12))" stroke-width=".8"/>
+  <text x="14" y="250" class="note">Timeline: ① T1 loads y=5  ② T2 loads y=5  ③ T1 loads z=3  ④ T2 computes 10  ⑤ T1 computes 8  ⑥ T2 stores y=10  ⑦ T1 stores x=8 (stale!)</text>
+  <text x="14" y="266" class="warn">Result: x=8 but it was computed from y=5, not y=10. Lost update. Data corruption. Happens non-deterministically — the worst kind of bug.</text>
+</svg>

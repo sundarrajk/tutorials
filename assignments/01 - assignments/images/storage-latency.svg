@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 310">
+  <style>
+    .ax    { stroke: var(--svg-border,rgba(99,179,237,.45)); fill:none; stroke-width:1.2; }
+    .gl    { stroke: var(--svg-border,rgba(99,179,237,.15)); fill:none; stroke-width:1;
+             stroke-dasharray:4,4; }
+    .b-hdd { fill: var(--svg-red,#fc8181);    fill-opacity:.80; }
+    .b-ssd { fill: var(--svg-amber,#f6ad55);  fill-opacity:.80; }
+    .b-nvm { fill: var(--svg-blue,#63b3ed);   fill-opacity:.85; }
+    .b-opt { fill: var(--svg-green,#68d391);  fill-opacity:.85; }
+    .b-ram { fill: var(--svg-purple,#b794f4); fill-opacity:.85; }
+    .yl    { fill: var(--svg-text2,#6a9ab8); font-family:monospace; font-size:9.5px;
+             text-anchor:end; dominant-baseline:middle; }
+    .xl    { fill: var(--svg-text2,#6a9ab8); font-family:monospace; font-size:9px;
+             text-anchor:middle; }
+    .vl    { fill: var(--svg-text1,#d0e4f8); font-family:monospace; font-size:9px;
+             text-anchor:middle; font-weight:700; }
+    .vl-r  { fill: var(--svg-purple,#b794f4); font-family:monospace; font-size:9px;
+             text-anchor:middle; font-weight:700; }
+    .tit   { fill: var(--svg-text1,#d0e4f8); font-family:monospace; font-size:11px;
+             font-weight:700; text-anchor:middle; letter-spacing:1px; }
+    .cap   { fill: var(--svg-text2,#6a9ab8); font-family:monospace; font-size:8.5px;
+             text-anchor:middle; }
+    .axis-lbl { fill: var(--svg-text2,#6a9ab8); font-family:monospace; font-size:8.5px;
+                text-anchor:middle; }
+    .slow  { fill: var(--svg-red,rgba(252,129,129,.55)); font-family:monospace; font-size:8px; }
+    .fast  { fill: var(--svg-green,rgba(104,211,145,.55)); font-family:monospace; font-size:8px; }
+  </style>
+
+  <!-- Title -->
+  <text x="400" y="16" class="tit">READ LATENCY  (TALLER BAR = SLOWER = WORSE)</text>
+  <text x="400" y="30" class="cap">Log scale: Y-axis bottom = 100 ns (fastest), top = 10 ms (slowest)</text>
+
+  <!-- Rotated Y-axis label -->
+  <text x="14" y="155" class="axis-lbl" transform="rotate(-90,14,155)">LATENCY (log scale, higher = slower)</text>
+
+  <!-- ── CHART AREA ──
+       x-origin = 68, baseline y = 248 (= 100 ns, fastest reference)
+       y top of chart = 48 (= 10 ms, slowest)
+       Total height = 200 px for 5 log-decades (100 ns → 10 ms)
+       40 px per decade
+
+       Decade positions from baseline (y=248):
+         100 ns  y=248  (0 decades — bar bottom/reference)
+           1 µs  y=208  (1 decade up,   +40px)
+          10 µs  y=168  (2 decades up,  +80px)
+         100 µs  y=128  (3 decades up, +120px)
+           1 ms  y=88   (4 decades up, +160px)
+          10 ms  y=48   (5 decades up, +200px)
+
+       Bar tops (all bars from y=248 downward to baseline):
+         HDD   10  ms → top y=48,  h=200
+         SSD   100 µs → top y=128, h=120
+         NVMe  30  µs → top y=148, h=100  (log10(30µs/100ns)=2.48→h=99)
+         Optane 10 µs → top y=168, h=80
+         RAM   100 ns → top y=236, h=12   (min visible bar)
+  -->
+
+  <!-- Axes -->
+  <line x1="68" y1="48"  x2="68"  y2="250" class="ax"/>
+  <line x1="68" y1="250" x2="700" y2="250" class="ax"/>
+
+  <!-- Grid lines with Y-axis labels -->
+  <line x1="68" y1="48"  x2="700" y2="48"  class="gl"/>
+  <line x1="68" y1="88"  x2="700" y2="88"  class="gl"/>
+  <line x1="68" y1="128" x2="700" y2="128" class="gl"/>
+  <line x1="68" y1="168" x2="700" y2="168" class="gl"/>
+  <line x1="68" y1="208" x2="700" y2="208" class="gl"/>
+  <line x1="68" y1="248" x2="700" y2="248" class="gl"/>
+
+  <!-- Y-axis labels (right side of axis, at each gridline) -->
+  <text x="62" y="48"  class="yl">10 ms</text>
+  <text x="62" y="88"  class="yl">1 ms</text>
+  <text x="62" y="128" class="yl">100 µs</text>
+  <text x="62" y="168" class="yl">10 µs</text>
+  <text x="62" y="208" class="yl">1 µs</text>
+  <text x="62" y="248" class="yl">100 ns</text>
+
+  <!-- SLOW / FAST indicators -->
+  <text x="38" y="55"  class="slow" transform="rotate(-90,38,55)" text-anchor="middle">SLOW ▲</text>
+  <text x="38" y="240" class="fast" transform="rotate(-90,38,240)" text-anchor="middle">▼ FAST</text>
+
+  <!-- ── HDD (10 ms) — tallest bar ── -->
+  <rect x="88"  y="48"  width="96" height="200" rx="4" class="b-hdd"/>
+  <text x="136" y="42"  class="vl">10 ms</text>
+  <text x="136" y="264" class="xl">HDD</text>
+  <text x="136" y="275" class="xl">Spinning</text>
+  <text x="136" y="286" class="xl">1956+</text>
+
+  <!-- ── SATA SSD (100 µs) ── -->
+  <rect x="216" y="128" width="96" height="120" rx="4" class="b-ssd"/>
+  <text x="264" y="122" class="vl">100 µs</text>
+  <text x="264" y="264" class="xl">SATA SSD</text>
+  <text x="264" y="275" class="xl">Flash 2.5"</text>
+  <text x="264" y="286" class="xl">~2007+</text>
+
+  <!-- ── NVMe (30 µs) ── log10(30µs/100ns)=2.48 → h=99 → top y=248-99=149 -->
+  <rect x="344" y="149" width="96" height="99" rx="4" class="b-nvm"/>
+  <text x="392" y="143" class="vl">30 µs</text>
+  <text x="392" y="264" class="xl">NVMe SSD</text>
+  <text x="392" y="275" class="xl">PCIe M.2</text>
+  <text x="392" y="286" class="xl">~2013+</text>
+
+  <!-- ── Optane (10 µs) ── 2 decades → h=80 → top y=168 -->
+  <rect x="472" y="168" width="96" height="80" rx="4" class="b-opt"/>
+  <text x="520" y="162" class="vl">10 µs</text>
+  <text x="520" y="264" class="xl">Optane</text>
+  <text x="520" y="275" class="xl">3D XPoint</text>
+  <text x="520" y="286" class="xl">~2017+</text>
+
+  <!-- ── DRAM (100 ns) — minimum bar, clearly shortest ── h=12 → top y=236 -->
+  <rect x="600" y="236" width="96" height="12" rx="3" class="b-ram"/>
+  <text x="648" y="229" class="vl-r">~100 ns</text>
+  <text x="648" y="264" class="xl">DRAM</text>
+  <text x="648" y="275" class="xl">Main Memory</text>
+  <text x="648" y="286" class="xl">(reference)</text>
+
+  <!-- Improvement ratio annotations above bars -->
+  <text x="264" y="110" class="cap">100× faster</text>
+  <text x="264" y="120" class="cap">than HDD</text>
+  <text x="392" y="130" class="cap">~330× faster</text>
+  <text x="392" y="140" class="cap">than HDD</text>
+  <text x="520" y="148" class="cap">1,000× faster</text>
+  <text x="520" y="158" class="cap">than HDD</text>
+  <text x="648" y="210" class="cap">100,000×</text>
+  <text x="648" y="220" class="cap">faster than HDD</text>
+
+  <!-- Caption -->
+  <text x="390" y="301" class="cap">Each gridline = 10× difference · DRAM shown for reference only — volatile, not persistent storage</text>
+</svg>

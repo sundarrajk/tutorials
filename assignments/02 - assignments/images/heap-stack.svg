@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 360">
+  <style>
+    /* ── Base styles ── */
+    .mem-bg { fill:var(--svg-fill2,rgba(99,179,237,.05)); stroke:var(--svg-border,rgba(99,179,237,.3)); stroke-width:1.2; }
+    .heap-s { fill:var(--svg-fill1,rgba(104,211,145,.22)); stroke:var(--svg-green,#68d391); stroke-width:1.2; }
+    .stk-main{ fill:var(--svg-fill1,rgba(99,179,237,.22)); stroke:var(--svg-blue,#63b3ed); stroke-width:1.4; }
+    .stk-fn  { fill:var(--svg-fill1,rgba(183,148,244,.22)); stroke:var(--svg-purple,#b794f4); stroke-width:1.2; }
+    .stk-fn2 { fill:var(--svg-fill1,rgba(246,173,85,.22));  stroke:var(--svg-amber,#f6ad55); stroke-width:1.2; }
+    .heap-obj{ fill:var(--svg-fill1,rgba(104,211,145,.28)); stroke:var(--svg-green,#68d391); stroke-width:1.2; }
+    .ptr-line{ stroke:var(--svg-amber,#f6ad55); fill:none; stroke-width:1.5; stroke-dasharray:5,3; }
+    .arr-y   { fill:var(--svg-amber,#f6ad55); }
+    .arr-b   { fill:var(--svg-blue,#63b3ed); }
+    .h-heap  { fill:var(--svg-green,#68d391); font-family:monospace; font-size:10px; font-weight:700; text-anchor:middle; }
+    .h-stk   { fill:var(--svg-blue,#63b3ed);  font-family:monospace; font-size:10px; font-weight:700; text-anchor:middle; }
+    .lbl     { fill:var(--svg-text1,#d0e4f8); font-family:monospace; font-size:8.5px; font-weight:700; text-anchor:middle; }
+    .lbl-l   { fill:var(--svg-text1,#d0e4f8); font-family:monospace; font-size:8.5px; font-weight:700; }
+    .sub     { fill:var(--svg-text2,#6a9ab8); font-family:monospace; font-size:7.5px; text-anchor:middle; }
+    .sub-l   { fill:var(--svg-text2,#6a9ab8); font-family:monospace; font-size:7.5px; }
+    .var     { fill:var(--svg-amber,rgba(246,173,85,.85)); font-family:monospace; font-size:8px; text-anchor:middle; font-weight:700; }
+    .addr    { fill:var(--svg-text2,#6a9ab8); font-family:monospace; font-size:7px; text-anchor:end; }
+    .sp-lbl  { fill:var(--svg-blue,#63b3ed); font-family:monospace; font-size:8px; font-weight:700; }
+    .note    { fill:var(--svg-text2,#6a9ab8); font-family:monospace; font-size:8px; }
+    .good    { fill:var(--svg-green,rgba(104,211,145,.8)); font-family:monospace; font-size:8px; }
+    .warn    { fill:var(--svg-red,rgba(252,129,129,.75)); font-family:monospace; font-size:8px; }
+    .step-bg { fill:var(--svg-fill2,rgba(99,179,237,.06)); stroke:var(--svg-border,rgba(99,179,237,.2)); stroke-width:.8; }
+    .step-t  { fill:var(--svg-blue,#63b3ed); font-family:monospace; font-size:8.5px; font-weight:700; }
+
+    /* ── Animation — frames push in sequentially ── */
+    /* Step labels highlight in sequence */
+    @keyframes stepHL {
+      0%,100% { opacity:.45; }
+      50%     { opacity:1; }
+    }
+    .s1 { animation: stepHL 6s 0s infinite; }
+    .s2 { animation: stepHL 6s 1.5s infinite; }
+    .s3 { animation: stepHL 6s 3s infinite; }
+    .s4 { animation: stepHL 6s 4.5s infinite; }
+
+    /* Stack frame: add() slides in from bottom */
+    @keyframes addPush {
+      0%,20%  { transform: translateY(60px); opacity:0; }
+      33%,66% { transform: translateY(0);    opacity:1; }
+      80%,100%{ transform: translateY(0);    opacity:.25; }
+    }
+    .frame-add { animation: addPush 6s ease-in-out infinite; transform-origin: center bottom; }
+
+    /* Stack frame: multiply() slides in on top of add */
+    @keyframes mulPush {
+      0%,33%  { transform: translateY(60px); opacity:0; }
+      50%,66% { transform: translateY(0);    opacity:1; }
+      80%,100%{ transform: translateY(0);    opacity:.25; }
+    }
+    .frame-mul { animation: mulPush 6s ease-in-out infinite; transform-origin: center bottom; }
+
+    /* SP arrow moves up as stack grows */
+    @keyframes spMove {
+      0%,20%  { transform: translateY(0); }
+      33%,66% { transform: translateY(-58px); }
+      50%,80% { transform: translateY(-116px); }
+      100%    { transform: translateY(0); }
+    }
+    .sp-arrow { animation: spMove 6s ease-in-out infinite; }
+
+    /* Heap object appears with malloc call */
+    @keyframes heapAppear {
+      0%,45%  { opacity:0; transform:scaleY(0); }
+      60%,90% { opacity:1; transform:scaleY(1); }
+      100%    { opacity:0; transform:scaleY(0); }
+    }
+    .heap-alloc { animation: heapAppear 6s ease-out infinite; transform-origin: top center; }
+  </style>
+  <defs>
+    <marker id="hsA" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <path d="M0,0 L0,7 L7,3.5 z" class="arr-y"/>
+    </marker>
+    <marker id="hsB" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <path d="M0,0 L0,7 L7,3.5 z" class="arr-b"/>
+    </marker>
+  </defs>
+
+  <!-- ─── CODE panel (left) ─── -->
+  <rect x="6" y="6" width="240" height="240" rx="8" class="mem-bg"/>
+  <text x="126" y="22" class="h-stk">PROGRAM CODE</text>
+  <rect x="14" y="30" width="224" height="208" rx="5" fill="var(--svg-bg,#080c14)" stroke="none"/>
+  <text x="20" y="48"  class="sub-l" fill="var(--svg-purple,#b794f4)">int</text><text x="42" y="48" class="sub-l" fill="var(--svg-blue,#63b3ed)"> main</text><text x="88" y="48" class="sub-l" fill="var(--svg-text1,#d0e4f8)">() {</text>
+  <text x="30" y="62"  class="sub-l" fill="var(--svg-amber,#f6ad55)">  int x=5, y=3;</text>
+  <!-- animated step 1 highlight -->
+  <rect x="16" y="68" width="220" height="13" rx="2" class="s1" fill="var(--svg-blue,rgba(99,179,237,.15))" stroke="none"/>
+  <text x="30" y="79"  class="sub-l" fill="var(--svg-green,#68d391)">  int*p=malloc(8);  </text>
+  <!-- animated step 3 highlight -->
+  <rect x="16" y="82" width="220" height="13" rx="2" class="s3" fill="var(--svg-green,rgba(104,211,145,.15))" stroke="none"/>
+  <text x="30" y="93"  class="sub-l" fill="var(--svg-text1,#d0e4f8)">  add(x, y);</text>
+  <rect x="16" y="96" width="220" height="13" rx="2" class="s2" fill="var(--svg-blue,rgba(99,179,237,.1))" stroke="none"/>
+  <text x="30" y="107" class="sub-l" fill="var(--svg-text1,#d0e4f8)">  free(p);}</text>
+  <text x="30" y="128" class="sub-l" fill="var(--svg-purple,#b794f4)">int</text><text x="52" y="128" class="sub-l" fill="var(--svg-blue,#63b3ed)"> add</text><text x="76" y="128" class="sub-l" fill="var(--svg-text1,#d0e4f8)">(int a, int b){</text>
+  <text x="30" y="142" class="sub-l" fill="var(--svg-purple,#b794f4)">  int</text><text x="54" y="142" class="sub-l" fill="var(--svg-text1,#d0e4f8)"> r=multiply(a,b);</text>
+  <rect x="16" y="148" width="220" height="13" rx="2" class="s2" fill="var(--svg-blue,rgba(99,179,237,.1))" stroke="none"/>
+  <text x="30" y="159" class="sub-l" fill="var(--svg-text1,#d0e4f8)">  return r+b; }</text>
+  <text x="30" y="180" class="sub-l" fill="var(--svg-purple,#b794f4)">int</text><text x="52" y="180" class="sub-l" fill="var(--svg-blue,#63b3ed)"> multiply</text><text x="118" y="180" class="sub-l" fill="var(--svg-text1,#d0e4f8)">(a,b){</text>
+  <rect x="16" y="182" width="220" height="13" rx="2" class="s3" fill="var(--svg-purple,rgba(183,148,244,.1))" stroke="none"/>
+  <text x="30" y="194" class="sub-l" fill="var(--svg-text1,#d0e4f8)">  return a*b; }</text>
+
+  <!-- ─── STACK (centre) ─── -->
+  <rect x="256" y="6" width="176" height="290" rx="8" class="mem-bg"/>
+  <text x="344" y="24" class="h-stk">STACK</text>
+  <text x="344" y="36" class="sub">grows upward (lower addresses)</text>
+
+  <!-- Address labels -->
+  <text x="252" y="58"  class="addr">0xFFFF</text>
+  <text x="252" y="178" class="addr">0xFFC0</text>
+  <text x="252" y="238" class="addr">0xFF80</text>
+  <text x="252" y="290" class="addr">0xFF40</text>
+
+  <!-- main() frame — always present -->
+  <rect x="264" y="230" width="160" height="58" rx="5" class="stk-main"/>
+  <text x="344" y="248" class="lbl">main() frame</text>
+  <text x="344" y="260" class="var">x = 5</text>
+  <text x="344" y="272" class="var">y = 3</text>
+  <text x="344" y="283" class="var">p = 0x1000 →heap</text>
+
+  <!-- add() frame — animated push -->
+  <g class="frame-add">
+    <rect x="264" y="172" width="160" height="56" rx="5" class="stk-fn"/>
+    <text x="344" y="189" class="lbl">add() frame</text>
+    <text x="344" y="201" class="var">a = 5 (copy of x)</text>
+    <text x="344" y="213" class="var">b = 3 (copy of y)</text>
+    <text x="344" y="224" class="var">r = ?</text>
+  </g>
+
+  <!-- multiply() frame — animated push on top -->
+  <g class="frame-mul">
+    <rect x="264" y="114" width="160" height="56" rx="5" class="stk-fn2"/>
+    <text x="344" y="131" class="lbl">multiply() frame</text>
+    <text x="344" y="143" class="var">a = 5</text>
+    <text x="344" y="155" class="var">b = 3</text>
+    <text x="344" y="167" class="var">return val: 15</text>
+  </g>
+
+  <!-- SP arrow -->
+  <g class="sp-arrow">
+    <line x1="438" y1="230" x2="438" y2="242" stroke="var(--svg-blue,#63b3ed)" stroke-width="1.5" fill="none"/>
+    <text x="442" y="240" class="sp-lbl">← SP</text>
+  </g>
+
+  <!-- Stack direction arrow -->
+  <text x="344" y="58" class="lbl" fill="var(--svg-blue,rgba(99,179,237,.5))">↑ grows up</text>
+
+  <!-- ─── HEAP (right) ─── -->
+  <rect x="444" y="6" width="176" height="290" rx="8" fill="var(--svg-fill2,rgba(104,211,145,.06))" stroke="var(--svg-green,#68d391)" stroke-width="1.5"/>
+  <text x="532" y="24" class="h-heap">HEAP</text>
+  <text x="532" y="36" class="sub">grows downward (higher addresses)</text>
+
+  <text x="440" y="58"  class="addr" text-anchor="start" fill="var(--svg-text2,#6a9ab8)">0x1000</text>
+  <!-- animated heap allocation -->
+  <g class="heap-alloc">
+    <rect x="452" y="46" width="160" height="50" rx="5" class="heap-obj"/>
+    <text x="532" y="65" class="lbl">malloc(8) block</text>
+    <text x="532" y="78" class="var">8 bytes allocated</text>
+    <text x="532" y="91" class="sub">lives until free(p)</text>
+  </g>
+
+  <!-- free area -->
+  <rect x="452" y="100" width="160" height="120" rx="5" fill="var(--svg-fill2,rgba(104,211,145,.04))" stroke="var(--svg-green,rgba(104,211,145,.15))" stroke-width=".8" stroke-dasharray="4,3"/>
+  <text x="532" y="168" class="sub" fill="var(--svg-green,rgba(104,211,145,.4))">free heap space</text>
+  <text x="532" y="180" class="sub" fill="var(--svg-green,rgba(104,211,145,.4))">grows downward ↓</text>
+
+  <!-- Pointer line: p in main stack → heap -->
+  <line x1="424" y1="283" x2="450" y2="70" class="ptr-line" marker-end="url(#hsA)"/>
+
+  <!-- ─── Explanation box ─── -->
+  <rect x="630" y="6" width="184" height="290" rx="8" class="step-bg"/>
+  <text x="722" y="22" class="step-t" text-anchor="middle">KEY RULES</text>
+  <text x="638" y="40"  class="good">✓ Stack: auto-managed</text>
+  <text x="638" y="53"  class="note">  Allocated when fn called</text>
+  <text x="638" y="66"  class="note">  Freed when fn returns</text>
+  <text x="638" y="79"  class="note">  Very fast (just move SP)</text>
+  <text x="638" y="96"  class="good">✓ Heap: manual/GC</text>
+  <text x="638" y="109" class="note">  malloc/new allocates</text>
+  <text x="638" y="122" class="note">  free/GC releases</text>
+  <text x="638" y="135" class="note">  Flexible, any lifetime</text>
+  <text x="638" y="148" class="note">  Slower (bookkeeping)</text>
+  <text x="638" y="165" class="warn">✗ Stack overflow</text>
+  <text x="638" y="178" class="note">  Deep recursion fills stack</text>
+  <text x="638" y="191" class="note">  → segfault/crash</text>
+  <text x="638" y="208" class="warn">✗ Heap leak</text>
+  <text x="638" y="221" class="note">  Forget free() → memory</text>
+  <text x="638" y="234" class="note">  never reclaimed</text>
+  <text x="638" y="251" class="note" fill="var(--svg-amber,#f6ad55)">Stack frame contains:</text>
+  <text x="638" y="264" class="note">• Return address</text>
+  <text x="638" y="277" class="note">• Saved registers</text>
+  <text x="638" y="290" class="note">• Local variables</text>
+  <text x="638" y="303" class="note">• Function args (by val)</text>
+
+  <!-- Legend -->
+  <rect x="6" y="300" width="620" height="54" rx="6" fill="var(--svg-fill2,rgba(99,179,237,.04))" stroke="var(--svg-border,rgba(99,179,237,.15))" stroke-width=".8"/>
+  <text x="16" y="315" class="step-t">CALL SEQUENCE (animated above):</text>
+  <text x="16" y="329" class="note" class="s1">1. main() starts → x,y,p pushed on stack</text>
+  <text x="16" y="341" class="note" class="s2">2. malloc() → p points to heap block</text>
+  <text x="200" y="329" class="note">3. add() called → new frame pushed on stack (a,b are copies)</text>
+  <text x="200" y="341" class="note">4. multiply() called from add() → another frame pushed</text>
+  <text x="16" y="353" class="note">5. multiply returns → frame popped · add returns → frame popped · free(p) → heap block reclaimed</text>
+</svg>

@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480">
+  <style>
+    .l7{fill:var(--svg-fill1,rgba(252,129,129,.22));stroke:var(--svg-red,#fc8181);stroke-width:1.3;}
+    .l6{fill:var(--svg-fill1,rgba(246,173,85,.22));stroke:var(--svg-amber,#f6ad55);stroke-width:1.3;}
+    .l5{fill:var(--svg-fill1,rgba(183,148,244,.22));stroke:var(--svg-purple,#b794f4);stroke-width:1.3;}
+    .l4{fill:var(--svg-fill1,rgba(104,211,145,.22));stroke:var(--svg-green,#68d391);stroke-width:1.3;}
+    .l3{fill:var(--svg-fill1,rgba(99,179,237,.22));stroke:var(--svg-blue,#63b3ed);stroke-width:1.3;}
+    .l2{fill:var(--svg-fill1,rgba(0,229,255,.22));stroke:var(--svg-cyan,#00e5ff);stroke-width:1.3;}
+    .l1{fill:var(--svg-fill1,rgba(170,255,0,.22));stroke:var(--svg-lime,#aaff00);stroke-width:1.3;}
+    .tcp4{fill:var(--svg-fill1,rgba(252,129,129,.18));stroke:var(--svg-red,rgba(252,129,129,.6));stroke-width:1.2;}
+    .tcp3{fill:var(--svg-fill1,rgba(104,211,145,.18));stroke:var(--svg-green,rgba(104,211,145,.6));stroke-width:1.2;}
+    .tcp2{fill:var(--svg-fill1,rgba(99,179,237,.18));stroke:var(--svg-blue,rgba(99,179,237,.6));stroke-width:1.2;}
+    .tcp1{fill:var(--svg-fill1,rgba(0,229,255,.18));stroke:var(--svg-cyan,rgba(0,229,255,.5));stroke-width:1.2;}
+    .lb7{fill:var(--svg-fill2,rgba(252,129,129,.1));stroke:var(--svg-red,rgba(252,129,129,.5));stroke-width:1.5;stroke-dasharray:5,3;}
+    .lb4{fill:var(--svg-fill2,rgba(104,211,145,.1));stroke:var(--svg-green,rgba(104,211,145,.5));stroke-width:1.5;stroke-dasharray:5,3;}
+    .lb3{fill:var(--svg-fill2,rgba(99,179,237,.1));stroke:var(--svg-blue,rgba(99,179,237,.5));stroke-width:1.5;stroke-dasharray:5,3;}
+    /* High-contrast text for both light and dark modes */
+    .num{fill:var(--svg-text2,#6a9ab8);font-family:monospace;font-size:11px;font-weight:700;text-anchor:middle;}
+    .nm {fill:var(--svg-text1,#d0e4f8);font-family:monospace;font-size:10px;font-weight:700;text-anchor:middle;}
+    .ex {fill:var(--svg-text2,#6a9ab8);font-family:monospace;font-size:8px;text-anchor:middle;}
+    .tc {fill:var(--svg-text1,#d0e4f8);font-family:monospace;font-size:9.5px;font-weight:700;text-anchor:middle;}
+    .ts {fill:var(--svg-text2,#6a9ab8);font-family:monospace;font-size:8px;text-anchor:middle;}
+    .lbl{fill:var(--svg-text2,#6a9ab8);font-family:monospace;font-size:8px;text-anchor:middle;}
+    .lb-t {fill:var(--svg-red,#fc8181);font-family:monospace;font-size:8.5px;font-weight:700;}
+    .lb-tg{fill:var(--svg-green,#68d391);font-family:monospace;font-size:8.5px;font-weight:700;}
+    .lb-tb{fill:var(--svg-blue,#63b3ed);font-family:monospace;font-size:8.5px;font-weight:700;}
+    .hdr{fill:var(--svg-text2,#6a9ab8);font-family:monospace;font-size:9px;letter-spacing:1px;font-weight:700;text-anchor:middle;}
+    .con{stroke:var(--svg-text2,rgba(99,179,237,.3));fill:none;stroke-width:1;stroke-dasharray:3,3;}
+    .arr{fill:var(--svg-text2,rgba(99,179,237,.45));}
+    .it {fill:var(--svg-red,#fc8181);font-family:monospace;font-size:9px;font-weight:700;text-anchor:middle;}
+    /* Light mode: ensure layer name text stays dark/readable on tinted backgrounds */
+    [data-theme="light"] .nm { fill: #1a2a3a; }
+    [data-theme="light"] .tc { fill: #1a2a3a; }
+    [data-theme="light"] .lbl { fill: #2a3a4a; }
+    [data-theme="light"] .sub, [data-theme="light"] .ts, [data-theme="light"] .ex { fill: #3a4a5a; }
+  </style>
+  <defs>
+    <marker id="oA" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L6,3 z" class="arr"/>
+    </marker>
+  </defs>
+
+  <!-- Column headers -->
+  <text x="160" y="16" class="hdr">OSI MODEL (7 LAYERS)</text>
+  <text x="460" y="16" class="hdr">TCP/IP STACK</text>
+  <text x="718" y="16" class="hdr">LOAD BALANCER TIERS</text>
+
+  <!-- OSI Layer 7 -->
+  <rect x="10"  y="24" width="300" height="46" rx="5" class="l7"/>
+  <text x="30"  y="43" class="num">7</text>
+  <text x="165" y="40" class="nm">APPLICATION</text>
+  <text x="165" y="55" class="ex">HTTP · HTTPS · FTP · SMTP · DNS · SSH · WebSocket</text>
+
+  <!-- OSI Layer 6 -->
+  <rect x="10"  y="74" width="300" height="44" rx="5" class="l6"/>
+  <text x="30"  y="92" class="num">6</text>
+  <text x="165" y="89" class="nm">PRESENTATION</text>
+  <text x="165" y="103" class="ex">TLS/SSL encryption · JSON/XML encoding · gzip</text>
+
+  <!-- OSI Layer 5 -->
+  <rect x="10"  y="122" width="300" height="44" rx="5" class="l5"/>
+  <text x="30"  y="140" class="num">5</text>
+  <text x="165" y="137" class="nm">SESSION</text>
+  <text x="165" y="151" class="ex">WebSocket sessions · RPC · NetBIOS · PPTP</text>
+
+  <!-- OSI Layer 4 -->
+  <rect x="10"  y="170" width="300" height="44" rx="5" class="l4"/>
+  <text x="30"  y="188" class="num">4</text>
+  <text x="165" y="185" class="nm">TRANSPORT</text>
+  <text x="165" y="199" class="ex">TCP · UDP · SCTP — ports 0–65535 — segments</text>
+
+  <!-- OSI Layer 3 -->
+  <rect x="10"  y="218" width="300" height="44" rx="5" class="l3"/>
+  <text x="30"  y="236" class="num">3</text>
+  <text x="165" y="233" class="nm">NETWORK</text>
+  <text x="165" y="247" class="ex">IP · ICMP · OSPF · BGP — routing packets</text>
+
+  <!-- OSI Layer 2 -->
+  <rect x="10"  y="266" width="300" height="44" rx="5" class="l2"/>
+  <text x="30"  y="284" class="num">2</text>
+  <text x="165" y="281" class="nm">DATA LINK</text>
+  <text x="165" y="295" class="ex">Ethernet frames · MAC addresses · ARP · VLAN 802.1Q</text>
+
+  <!-- OSI Layer 1 -->
+  <rect x="10"  y="314" width="300" height="44" rx="5" class="l1"/>
+  <text x="30"  y="332" class="num">1</text>
+  <text x="165" y="329" class="nm">PHYSICAL</text>
+  <text x="165" y="343" class="ex">Bits on wire · Cat6 · Fibre · Wi-Fi · RS-232 · NIC</text>
+
+  <!-- Encapsulation note under OSI column -->
+  <text x="165" y="376" class="lbl">DATA UNIT: Data → Segment → Packet → Frame → Bits</text>
+  <line x1="10" y1="383" x2="310" y2="383" stroke="var(--svg-blue,rgba(99,179,237,.3))" stroke-width="1.5" fill="none" marker-end="url(#oA)"/>
+  <text x="165" y="394" class="ex">↓ encapsulation (send)  ·  ↑ decapsulation (receive)</text>
+
+  <!-- Mapping connector lines (OSI → TCP/IP) -->
+  <line x1="312" y1="95"  x2="328" y2="95"  class="con"/>
+  <line x1="312" y1="192" x2="328" y2="192" class="con"/>
+  <line x1="312" y1="240" x2="328" y2="240" class="con"/>
+  <line x1="312" y1="310" x2="328" y2="310" class="con"/>
+
+  <!-- TCP/IP Stack (middle) -->
+  <!-- Application = OSI 5+6+7 -->
+  <rect x="330" y="24"  width="220" height="146" rx="5" class="tcp4"/>
+  <text x="440" y="82"  class="tc">APPLICATION</text>
+  <text x="440" y="97"  class="ts">OSI Layers 5 + 6 + 7 combined</text>
+  <text x="440" y="112" class="ts">HTTP · HTTPS · DNS · SMTP</text>
+  <text x="440" y="127" class="ts">SSH · FTP · WebSocket</text>
+
+  <!-- Transport = OSI 4 -->
+  <rect x="330" y="174" width="220" height="44" rx="5" class="tcp3"/>
+  <text x="440" y="192" class="tc">TRANSPORT</text>
+  <text x="440" y="206" class="ts">TCP  ·  UDP  ·  QUIC</text>
+
+  <!-- Internet = OSI 3 -->
+  <rect x="330" y="222" width="220" height="44" rx="5" class="tcp2"/>
+  <text x="440" y="240" class="tc">INTERNET</text>
+  <text x="440" y="254" class="ts">IPv4  ·  IPv6  ·  ICMP  ·  OSPF  ·  BGP</text>
+
+  <!-- Link = OSI 1+2 -->
+  <rect x="330" y="270" width="220" height="88" rx="5" class="tcp1"/>
+  <text x="440" y="302" class="tc">LINK / NETWORK ACCESS</text>
+  <text x="440" y="317" class="ts">OSI Layers 1 + 2 combined</text>
+  <text x="440" y="332" class="ts">Ethernet · Wi-Fi · NIC Drivers</text>
+
+  <!-- HTTP callout — placed under TCP/IP APPLICATION layer -->
+  <rect x="330" y="370" width="220" height="108" rx="5" fill="var(--svg-fill2,rgba(252,129,129,.08))" stroke="var(--svg-red,rgba(252,129,129,.4))" stroke-width="1"/>
+  <text x="440" y="388" class="it">HTTP LIVES AT LAYER 7</text>
+  <text x="420" y="404" class="ex" text-anchor="start">GET /index.html HTTP/1.1</text>
+  <text x="420" y="418" class="ex" text-anchor="start">Host: google.com</text>
+  <text x="420" y="432" class="ex" text-anchor="start">↓ TCP segment adds port numbers</text>
+  <text x="420" y="446" class="ex" text-anchor="start">↓ IP packet adds source/dest IP</text>
+  <text x="420" y="460" class="ex" text-anchor="start">↓ Ethernet frame adds MAC addrs</text>
+
+  <!-- Load Balancer tiers (right) -->
+  <!-- L7 LB — aligns with TCP/IP Application -->
+  <rect x="562" y="24"  width="330" height="146" rx="6" class="lb7"/>
+  <text x="570" y="42"  class="lb-t">LAYER 7 — APPLICATION LOAD BALANCER</text>
+  <text x="570" y="57"  style="fill:var(--svg-text2,#6a9ab8);font-family:monospace;font-size:8px;">Reads HTTP headers, URLs, cookies, session IDs</text>
+  <text x="570" y="70"  style="fill:var(--svg-text2,#6a9ab8);font-family:monospace;font-size:8px;">Routes: /api → backend · /static → CDN</text>
+  <text x="570" y="83"  style="fill:var(--svg-text2,#6a9ab8);font-family:monospace;font-size:8px;">SSL termination — decrypts HTTPS here</text>
+  <text x="570" y="96"  style="fill:var(--svg-text2,#6a9ab8);font-family:monospace;font-size:8px;">Sticky sessions — same user → same server</text>
+  <text x="570" y="109" style="fill:var(--svg-text2,#6a9ab8);font-family:monospace;font-size:8px;">Health checks — removes failed backends</text>
+  <text x="570" y="122" style="fill:var(--svg-text2,#6a9ab8);font-family:monospace;font-size:8px;">Examples: AWS ALB · nginx · HAProxy · Envoy · Istio</text>
+  <text x="570" y="140" style="fill:var(--svg-red,rgba(252,129,129,.7));font-family:monospace;font-size:8px;">Slowest (must fully parse HTTP) · Most intelligent</text>
+
+  <!-- L4 LB — aligns with TCP/IP Transport -->
+  <rect x="562" y="174" width="330" height="88" rx="6" class="lb4"/>
+  <text x="570" y="192" class="lb-tg">LAYER 4 — TRANSPORT LOAD BALANCER</text>
+  <text x="570" y="207" style="fill:var(--svg-text2,#6a9ab8);font-family:monospace;font-size:8px;">Balances by IP:port only — never reads payload</text>
+  <text x="570" y="220" style="fill:var(--svg-text2,#6a9ab8);font-family:monospace;font-size:8px;">Very fast · Works for any TCP/UDP protocol</text>
+  <text x="570" y="233" style="fill:var(--svg-text2,#6a9ab8);font-family:monospace;font-size:8px;">Examples: AWS NLB · HAProxy TCP mode · IPVS</text>
+  <text x="570" y="250" style="fill:var(--svg-green,rgba(104,211,145,.6));font-family:monospace;font-size:8px;">Fastest LB · Cannot do URL routing or SSL termination</text>
+
+  <!-- L3 LB — aligns with TCP/IP Internet -->
+  <rect x="562" y="266" width="330" height="92" rx="6" class="lb3"/>
+  <text x="570" y="284" class="lb-tb">LAYER 3 — NETWORK / ANYCAST LOAD BALANCER</text>
+  <text x="570" y="299" style="fill:var(--svg-text2,#6a9ab8);font-family:monospace;font-size:8px;">Routes by IP address — Anycast BGP</text>
+  <text x="570" y="312" style="fill:var(--svg-text2,#6a9ab8);font-family:monospace;font-size:8px;">Same IP announced from many data centres</text>
+  <text x="570" y="325" style="fill:var(--svg-text2,#6a9ab8);font-family:monospace;font-size:8px;">Client automatically routed to nearest DC</text>
+  <text x="570" y="342" style="fill:var(--svg-text2,#6a9ab8);font-family:monospace;font-size:8px;">Examples: Cloudflare Anycast · AWS Global Accelerator</text>
+</svg>

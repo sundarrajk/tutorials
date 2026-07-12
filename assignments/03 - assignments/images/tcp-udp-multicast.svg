@@ -1,0 +1,199 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 420">
+  <style>
+    .client{fill:var(--svg-fill1,rgba(99,179,237,.2));stroke:var(--svg-blue,#63b3ed);stroke-width:1.5;}
+    .server{fill:var(--svg-fill1,rgba(104,211,145,.2));stroke:var(--svg-green,#68d391);stroke-width:1.5;}
+    .udp-bg{fill:var(--svg-fill1,rgba(246,173,85,.2));stroke:var(--svg-amber,#f6ad55);stroke-width:1.5;}
+    .mcast{fill:var(--svg-fill1,rgba(183,148,244,.2));stroke:var(--svg-purple,#b794f4);stroke-width:1.5;}
+    .lbl{fill:var(--svg-text1,#d0e4f8);font-family:monospace;font-size:9px;font-weight:700;text-anchor:middle;}
+    .sub{fill:var(--svg-text2,#6a9ab8);font-family:monospace;font-size:8px;text-anchor:middle;}
+    .pkt{fill:var(--svg-text1,#d0e4f8);font-family:monospace;font-size:8px;text-anchor:middle;font-weight:700;}
+    .pkt-r{fill:var(--svg-red,#fc8181);font-family:monospace;font-size:8px;text-anchor:middle;font-weight:700;}
+    .pkt-g{fill:var(--svg-green,#68d391);font-family:monospace;font-size:8px;text-anchor:middle;font-weight:700;}
+    .pkt-a{fill:var(--svg-amber,#f6ad55);font-family:monospace;font-size:8px;text-anchor:middle;font-weight:700;}
+    .pkt-p{fill:var(--svg-purple,#b794f4);font-family:monospace;font-size:8px;text-anchor:middle;font-weight:700;}
+    .note{fill:var(--svg-text2,#6a9ab8);font-family:monospace;font-size:7.5px;}
+    .good{fill:var(--svg-green,rgba(104,211,145,.8));font-family:monospace;font-size:8px;}
+    .warn{fill:var(--svg-red,rgba(252,129,129,.75));font-family:monospace;font-size:8px;}
+    .hdr{fill:var(--svg-text2,rgba(99,179,237,.55));font-family:monospace;font-size:9px;letter-spacing:1px;font-weight:700;text-anchor:middle;}
+    .tl{stroke:var(--svg-text2,rgba(99,179,237,.25));fill:none;stroke-width:1;stroke-dasharray:3,3;}
+    .divl{stroke:var(--svg-text2,rgba(99,179,237,.15));fill:none;stroke-dasharray:5,4;}
+
+    /* --- TCP ANIMATION --- */
+    /* SYN: client→server */
+    @keyframes syn {
+      0%,5%   {opacity:0; transform:translate(0,0);}
+      10%,20% {opacity:1; transform:translate(170px,44px);}
+      25%,100%{opacity:0; transform:translate(170px,44px);}
+    }
+    /* SYN-ACK: server→client */
+    @keyframes synack {
+      0%,25% {opacity:0; transform:translate(0,0);}
+      30%,40%{opacity:1; transform:translate(-170px,22px);}
+      45%,100%{opacity:0; transform:translate(-170px,22px);}
+    }
+    /* ACK: client→server */
+    @keyframes ack {
+      0%,45% {opacity:0; transform:translate(0,0);}
+      50%,58%{opacity:1; transform:translate(170px,22px);}
+      63%,100%{opacity:0; transform:translate(170px,22px);}
+    }
+    /* DATA: client→server */
+    @keyframes data1 {
+      0%,60% {opacity:0; transform:translate(0,0);}
+      65%,73%{opacity:1; transform:translate(170px,55px);}
+      78%,100%{opacity:0; transform:translate(170px,55px);}
+    }
+    /* ACK data: server→client */
+    @keyframes dataack {
+      0%,73% {opacity:0; transform:translate(0,0);}
+      78%,87%{opacity:1; transform:translate(-170px,22px);}
+      92%,100%{opacity:0; transform:translate(-170px,22px);}
+    }
+    .pkt-syn    { animation: syn     12s 0s infinite; transform-origin:80px 60px; }
+    .pkt-synack { animation: synack  12s 0s infinite; transform-origin:260px 106px; }
+    .pkt-ack    { animation: ack     12s 0s infinite; transform-origin:80px 128px; }
+    .pkt-data   { animation: data1   12s 0s infinite; transform-origin:80px 200px; }
+    .pkt-dack   { animation: dataack 12s 0s infinite; transform-origin:260px 256px; }
+
+    /* timeline lines */
+    .tl-c{stroke:var(--svg-blue,#63b3ed);fill:none;stroke-width:1.5;}
+    .tl-s{stroke:var(--svg-green,#68d391);fill:none;stroke-width:1.5;}
+    /* arrow on packets */
+    .arr-b{fill:var(--svg-blue,#63b3ed);}
+    .arr-g{fill:var(--svg-green,#68d391);}
+  </style>
+  <defs>
+    <marker id="tcpC" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" class="arr-b"/></marker>
+    <marker id="tcpS" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" class="arr-g"/></marker>
+  </defs>
+
+  <!-- ═══ LEFT: TCP ═══ -->
+  <text x="200" y="14" class="hdr">TCP — RELIABLE, CONNECTION-ORIENTED</text>
+  <!-- Client and Server boxes -->
+  <rect x="10"  y="22" width="90" height="30" rx="5" class="client"/>
+  <text x="55"  y="34" class="lbl">CLIENT</text>
+  <text x="55"  y="44" class="sub">192.168.1.2</text>
+  <rect x="310" y="22" width="90" height="30" rx="5" class="server"/>
+  <text x="355" y="34" class="lbl">SERVER</text>
+  <text x="355" y="44" class="sub">93.184.216.34</text>
+
+  <!-- Timeline lines -->
+  <line x1="55"  y1="52" x2="55"  y2="390" class="tl-c"/>
+  <line x1="355" y1="52" x2="355" y2="390" class="tl-s"/>
+
+  <!-- Phase labels -->
+  <text x="200" y="68" class="hdr" fill="var(--svg-red,rgba(252,129,129,.7))">3-WAY HANDSHAKE</text>
+
+  <!-- Static arrows (always visible, labels) -->
+  <!-- SYN -->
+  <line x1="55" y1="82" x2="355" y2="106" stroke="var(--svg-blue,rgba(99,179,237,.5))" stroke-width="1.2" fill="none" marker-end="url(#tcpC)"/>
+  <text x="205" y="88" class="pkt-r">SYN</text>
+  <text x="205" y="98" class="note" text-anchor="middle">seq=0, SYN flag</text>
+  <!-- SYN-ACK -->
+  <line x1="355" y1="110" x2="55" y2="134" stroke="var(--svg-green,rgba(104,211,145,.5))" stroke-width="1.2" fill="none" marker-end="url(#tcpS)"/>
+  <text x="205" y="116" class="pkt-g">SYN-ACK</text>
+  <text x="205" y="126" class="note" text-anchor="middle">seq=0, ack=1, SYN+ACK flags</text>
+  <!-- ACK -->
+  <line x1="55" y1="138" x2="355" y2="152" stroke="var(--svg-blue,rgba(99,179,237,.5))" stroke-width="1.2" fill="none" marker-end="url(#tcpC)"/>
+  <text x="205" y="143" class="pkt-r">ACK</text>
+  <text x="205" y="153" class="note" text-anchor="middle">ack=1 — connection ESTABLISHED</text>
+
+  <!-- Data transfer phase -->
+  <text x="200" y="170" class="hdr" fill="var(--svg-amber,rgba(246,173,85,.7))">BIDIRECTIONAL DATA TRANSFER</text>
+  <line x1="55"  y1="180" x2="355" y2="200" stroke="var(--svg-blue,rgba(99,179,237,.5))" stroke-width="1.5" fill="none" marker-end="url(#tcpC)"/>
+  <text x="205" y="185" class="pkt-r">DATA  (HTTP GET)</text>
+  <line x1="355" y1="204" x2="55"  y2="224" stroke="var(--svg-green,rgba(104,211,145,.5))" stroke-width="1.2" fill="none" marker-end="url(#tcpS)"/>
+  <text x="205" y="210" class="pkt-g">ACK</text>
+  <line x1="355" y1="228" x2="55"  y2="258" stroke="var(--svg-green,rgba(104,211,145,.5))" stroke-width="1.5" fill="none" marker-end="url(#tcpS)"/>
+  <text x="205" y="236" class="pkt-g">DATA  (HTTP 200 + body)</text>
+  <line x1="55"  y1="262" x2="355" y2="276" stroke="var(--svg-blue,rgba(99,179,237,.5))" stroke-width="1.2" fill="none" marker-end="url(#tcpC)"/>
+  <text x="205" y="268" class="pkt-r">ACK</text>
+
+  <!-- Close sequence -->
+  <text x="200" y="292" class="hdr" fill="var(--svg-purple,rgba(183,148,244,.7))">4-WAY CLOSE</text>
+  <line x1="55"  y1="300" x2="355" y2="314" stroke="var(--svg-blue,rgba(99,179,237,.4))" stroke-width="1" fill="none" marker-end="url(#tcpC)"/>
+  <text x="205" y="306" class="pkt-p">FIN</text>
+  <line x1="355" y1="318" x2="55"  y2="332" stroke="var(--svg-green,rgba(104,211,145,.4))" stroke-width="1" fill="none" marker-end="url(#tcpS)"/>
+  <text x="205" y="324" class="pkt-p">ACK</text>
+  <line x1="355" y1="336" x2="55"  y2="352" stroke="var(--svg-green,rgba(104,211,145,.4))" stroke-width="1" fill="none" marker-end="url(#tcpS)"/>
+  <text x="205" y="342" class="pkt-p">FIN</text>
+  <line x1="55"  y1="356" x2="355" y2="370" stroke="var(--svg-blue,rgba(99,179,237,.4))" stroke-width="1" fill="none" marker-end="url(#tcpC)"/>
+  <text x="205" y="362" class="pkt-p">ACK — connection CLOSED</text>
+
+  <!-- TCP properties -->
+  <rect x="10" y="376" width="392" height="38" rx="5" fill="var(--svg-fill2,rgba(104,211,145,.05))" stroke="var(--svg-green,rgba(104,211,145,.2))" stroke-width=".8"/>
+  <text x="18" y="392" class="good">✓ Guaranteed delivery · Ordering · Flow control · Congestion control</text>
+  <text x="18" y="406" class="warn">✗ Overhead: ~3 RTTs to start · Head-of-line blocking in HTTP/1.1</text>
+
+  <!-- ═══ RIGHT: UDP & Multicast ═══ -->
+  <line x1="416" y1="10" x2="416" y2="415" class="divl"/>
+
+  <text x="630" y="14" class="hdr">UDP — FIRE AND FORGET</text>
+  <!-- UDP diagram -->
+  <rect x="426" y="22" width="80" height="28" rx="5" class="udp-bg"/>
+  <text x="466" y="34" class="lbl">SENDER</text>
+  <text x="466" y="45" class="sub">10.0.0.1</text>
+
+  <rect x="716" y="22" width="80" height="28" rx="5" class="server"/>
+  <text x="756" y="34" class="lbl">RECEIVER</text>
+  <text x="756" y="45" class="sub">10.0.0.2</text>
+
+  <!-- UDP: no handshake, just fire -->
+  <line x1="506" y1="58" x2="714" y2="68" stroke="var(--svg-amber,rgba(246,173,85,.7))" stroke-width="1.5" fill="none" marker-end="url(#tcpC)"/>
+  <text x="610"  y="63" class="pkt-a">UDP Datagram 1</text>
+  <line x1="506" y1="74" x2="714" y2="84" stroke="var(--svg-amber,rgba(246,173,85,.7))" stroke-width="1.5" fill="none" marker-end="url(#tcpC)"/>
+  <text x="610"  y="79" class="pkt-a">UDP Datagram 2</text>
+  <text x="560"  y="95" class="note">✗ (lost in network)</text>
+  <line x1="506" y1="100" x2="714" y2="110" stroke="var(--svg-amber,rgba(246,173,85,.7))" stroke-width="1.5" fill="none" marker-end="url(#tcpC)"/>
+  <text x="610"  y="105" class="pkt-a">UDP Datagram 4</text>
+  <text x="610"  y="117" class="note" text-anchor="middle">No ACK · No retransmit · No ordering</text>
+  <text x="610"  y="130" class="note" text-anchor="middle">Use: video streaming, VoIP, DNS, gaming, QUIC</text>
+
+  <rect x="426" y="136" width="372" height="30" rx="5" fill="var(--svg-fill2,rgba(246,173,85,.06))" stroke="var(--svg-amber,rgba(246,173,85,.25))" stroke-width=".8"/>
+  <text x="430" y="149" class="note">✓ No setup overhead. 1 packet sent = 1 packet received (or lost). 8 byte header vs 20+ for TCP.</text>
+  <text x="430" y="159" class="note">Application decides if retransmit needed (e.g. game client just uses latest position, ignores old)</text>
+
+  <!-- Multicast -->
+  <text x="630" y="178" class="hdr">MULTICAST — ONE-TO-MANY EFFICIENT</text>
+  <rect x="426" y="186" width="80" height="28" rx="5" class="mcast"/>
+  <text x="466" y="198" class="lbl">SOURCE</text>
+  <text x="466" y="208" class="sub">224.0.0.1 group</text>
+
+  <!-- Multicast router -->
+  <rect x="560" y="194" width="70" height="24" rx="4" fill="var(--svg-fill1,rgba(183,148,244,.15))" stroke="var(--svg-purple,rgba(183,148,244,.5))" stroke-width="1"/>
+  <text x="595" y="207" class="sub" font-weight="700">MCAST</text>
+  <text x="595" y="218" class="sub">router</text>
+
+  <!-- Three receivers -->
+  <rect x="690" y="180" width="68" height="22" rx="4" class="server"/>
+  <text x="724" y="195" class="sub">Subscriber 1</text>
+  <rect x="690" y="208" width="68" height="22" rx="4" class="server"/>
+  <text x="724" y="223" class="sub">Subscriber 2</text>
+  <rect x="690" y="236" width="68" height="22" rx="4" class="server"/>
+  <text x="724" y="251" class="sub">Subscriber 3</text>
+
+  <!-- One packet from source to router -->
+  <line x1="506" y1="206" x2="558" y2="206" stroke="var(--svg-purple,rgba(183,148,244,.7))" stroke-width="2" fill="none" marker-end="url(#tcpC)"/>
+  <text x="532" y="201" class="sub">×1 packet</text>
+  <!-- Router fans out to 3 -->
+  <line x1="630" y1="206" x2="688" y2="191" stroke="var(--svg-purple,rgba(183,148,244,.6))" stroke-width="1.2" fill="none" marker-end="url(#tcpC)"/>
+  <line x1="630" y1="206" x2="688" y2="219" stroke="var(--svg-purple,rgba(183,148,244,.6))" stroke-width="1.2" fill="none" marker-end="url(#tcpC)"/>
+  <line x1="630" y1="206" x2="688" y2="247" stroke="var(--svg-purple,rgba(183,148,244,.6))" stroke-width="1.2" fill="none" marker-end="url(#tcpC)"/>
+
+  <rect x="426" y="266" width="372" height="44" rx="5" fill="var(--svg-fill2,rgba(183,148,244,.05))" stroke="var(--svg-purple,rgba(183,148,244,.2))" stroke-width=".8"/>
+  <text x="430" y="281" class="note">Multicast: one packet on the network, router replicates at the last hop.</text>
+  <text x="430" y="294" class="note">Used for: IPTV (live TV), financial market data feeds, stock price distribution.</text>
+  <text x="430" y="307" class="note">Group 224.0.0.0–239.255.255.255 reserved (Class D). Receivers JOIN the group (IGMP).</text>
+
+  <!-- Summary comparison -->
+  <rect x="426" y="318" width="372" height="96" rx="5" fill="var(--svg-fill2,rgba(99,179,237,.04))" stroke="var(--svg-border,rgba(99,179,237,.14))" stroke-width=".8"/>
+  <text x="430" y="334" class="note" font-weight="700" fill="var(--svg-blue,#63b3ed)">TCP:</text>
+  <text x="468" y="334" class="note">connection setup · guaranteed order · ACK · retransmit · flow control · 20B header</text>
+  <text x="430" y="348" class="note" font-weight="700" fill="var(--svg-amber,#f6ad55)">UDP:</text>
+  <text x="468" y="348" class="note">connectionless · no guarantee · no ACK · 8B header · low latency</text>
+  <text x="430" y="362" class="note" font-weight="700" fill="var(--svg-purple,#b794f4)">Multicast:</text>
+  <text x="490" y="362" class="note">UDP-based · one sender → many receivers · router replicates · saves bandwidth</text>
+  <text x="430" y="378" class="note" font-weight="700" fill="var(--svg-green,#68d391)">QUIC:</text>
+  <text x="468" y="378" class="note">UDP-based · TCP reliability in user space · HTTP/3 · no head-of-line blocking</text>
+  <text x="430" y="408" class="note">QUIC (Google, 2012 → IETF standard 2021) achieves TCP reliability over UDP.</text>
+</svg>

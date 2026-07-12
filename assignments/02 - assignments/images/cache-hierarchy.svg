@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 320">
+  <style>
+    .skt   { fill:var(--svg-fill2,rgba(99,179,237,.06)); stroke:var(--svg-blue,#63b3ed); stroke-width:1.5; }
+    .core  { fill:var(--svg-fill2,rgba(183,148,244,.1));  stroke:var(--svg-purple,#b794f4); stroke-width:1.2; }
+    .l1    { fill:var(--svg-fill1,rgba(252,129,129,.3));   stroke:var(--svg-red,#fc8181); stroke-width:1.2; }
+    .l2    { fill:var(--svg-fill1,rgba(246,173,85,.25));   stroke:var(--svg-amber,#f6ad55); stroke-width:1.2; }
+    .l3    { fill:var(--svg-fill1,rgba(104,211,145,.2));   stroke:var(--svg-green,#68d391); stroke-width:1.4; }
+    .dram  { fill:var(--svg-fill1,rgba(99,179,237,.2));    stroke:var(--svg-blue,#63b3ed); stroke-width:1.5; }
+    .disk  { fill:var(--svg-fill1,rgba(99,179,237,.12));   stroke:var(--svg-blue,rgba(99,179,237,.45)); stroke-width:1; }
+    .qpi   { stroke:var(--svg-amber,rgba(246,173,85,.6)); fill:none; stroke-width:2; stroke-dasharray:6,3; }
+    .bus   { stroke:var(--svg-blue,rgba(99,179,237,.4)); fill:none; stroke-width:1.5; }
+    .arr   { fill:var(--svg-blue,rgba(99,179,237,.5)); }
+    .h-skt { fill:var(--svg-blue,#63b3ed); font-family:monospace; font-size:9px; font-weight:700; text-anchor:middle; }
+    .h-l1  { fill:var(--svg-red,#fc8181);   font-family:monospace; font-size:8px; font-weight:700; text-anchor:middle; }
+    .h-l2  { fill:var(--svg-amber,#f6ad55); font-family:monospace; font-size:8px; font-weight:700; text-anchor:middle; }
+    .h-l3  { fill:var(--svg-green,#68d391); font-family:monospace; font-size:8.5px; font-weight:700; text-anchor:middle; }
+    .h-ram { fill:var(--svg-blue,#63b3ed);  font-family:monospace; font-size:9px; font-weight:700; text-anchor:middle; }
+    .lbl   { fill:var(--svg-text1,#d0e4f8); font-family:monospace; font-size:8px; font-weight:700; text-anchor:middle; }
+    .sub   { fill:var(--svg-text2,#6a9ab8); font-family:monospace; font-size:7px; text-anchor:middle; }
+    .lat   { fill:var(--svg-red,#fc8181); font-family:monospace; font-size:7.5px; font-weight:700; text-anchor:middle; }
+    .lat-g { fill:var(--svg-green,#68d391); font-family:monospace; font-size:7.5px; font-weight:700; text-anchor:middle; }
+    .note  { fill:var(--svg-text2,#6a9ab8); font-family:monospace; font-size:8px; }
+    .good  { fill:var(--svg-green,rgba(104,211,145,.8)); font-family:monospace; font-size:8px; }
+  </style>
+  <defs>
+    <marker id="cA" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <path d="M0,0 L0,7 L7,3.5 z" class="arr"/>
+    </marker>
+  </defs>
+
+  <!-- ─── SOCKET 0 ─── -->
+  <rect x="6" y="6" width="370" height="230" rx="8" class="skt"/>
+  <text x="191" y="22" class="h-skt">CPU SOCKET 0</text>
+
+  <!-- Core 0 -->
+  <rect x="14"  y="30" width="158" height="148" rx="6" class="core"/>
+  <text x="93"  y="46" class="lbl" fill="var(--svg-purple,#b794f4)">CORE 0</text>
+  <rect x="22"  y="52" width="142" height="26" rx="4" class="l1"/>
+  <text x="93"  y="64" class="h-l1">L1-I CACHE</text>
+  <text x="93"  y="74" class="sub">32 KB · 4 cycles · Instructions</text>
+  <rect x="22"  y="82" width="142" height="26" rx="4" class="l1"/>
+  <text x="93"  y="94" class="h-l1">L1-D CACHE</text>
+  <text x="93"  y="104" class="sub">32 KB · 4 cycles · Data</text>
+  <rect x="22"  y="112" width="142" height="26" rx="4" class="l2"/>
+  <text x="93"  y="124" class="h-l2">L2 CACHE</text>
+  <text x="93"  y="134" class="sub">256 KB–1 MB · ~12 cycles</text>
+  <rect x="22"  y="142" width="142" height="30" rx="4" fill="var(--svg-fill2,rgba(183,148,244,.15))" stroke="var(--svg-purple,rgba(183,148,244,.4))" stroke-width="1"/>
+  <text x="93"  y="157" class="sub">ALU · FPU · Registers</text>
+  <text x="93"  y="167" class="sub">Pipeline stages</text>
+
+  <!-- Core 1 -->
+  <rect x="184" y="30" width="158" height="148" rx="6" class="core"/>
+  <text x="263" y="46" class="lbl" fill="var(--svg-purple,#b794f4)">CORE 1</text>
+  <rect x="192" y="52" width="142" height="26" rx="4" class="l1"/>
+  <text x="263" y="64" class="h-l1">L1-I CACHE</text>
+  <text x="263" y="74" class="sub">32 KB · 4 cycles</text>
+  <rect x="192" y="82" width="142" height="26" rx="4" class="l1"/>
+  <text x="263" y="94" class="h-l1">L1-D CACHE</text>
+  <text x="263" y="104" class="sub">32 KB · 4 cycles</text>
+  <rect x="192" y="112" width="142" height="26" rx="4" class="l2"/>
+  <text x="263" y="124" class="h-l2">L2 CACHE</text>
+  <text x="263" y="134" class="sub">256 KB–1 MB · ~12 cycles</text>
+  <rect x="192" y="142" width="142" height="30" rx="4" fill="var(--svg-fill2,rgba(183,148,244,.15))" stroke="var(--svg-purple,rgba(183,148,244,.4))" stroke-width="1"/>
+  <text x="263" y="157" class="sub">ALU · FPU · Registers</text>
+  <text x="263" y="167" class="sub">Pipeline stages</text>
+
+  <!-- Shared L3 Socket 0 -->
+  <rect x="14"  y="184" width="348" height="42" rx="6" class="l3"/>
+  <text x="188" y="200" class="h-l3">SHARED L3 CACHE — 8–32 MB — ~30–40 cycles</text>
+  <text x="188" y="216" class="sub">All cores in socket 0 share this. Cross-core data is fast if in L3.</text>
+
+  <!-- QPI interconnect -->
+  <line x1="380" y1="140" x2="440" y2="140" class="qpi"/>
+  <text x="410" y="133" fill="var(--svg-amber,#f6ad55)" font-family="monospace" font-size="8" text-anchor="middle">QPI / UPI</text>
+  <text x="410" y="155" fill="var(--svg-amber,rgba(246,173,85,.6))" font-family="monospace" font-size="7" text-anchor="middle">~100 ns</text>
+  <text x="410" y="165" fill="var(--svg-amber,rgba(246,173,85,.6))" font-family="monospace" font-size="7" text-anchor="middle">NUMA</text>
+
+  <!-- ─── SOCKET 1 ─── -->
+  <rect x="444" y="6" width="370" height="230" rx="8" class="skt"/>
+  <text x="629" y="22" class="h-skt">CPU SOCKET 1</text>
+  <rect x="452" y="30" width="158" height="148" rx="6" class="core"/>
+  <text x="531" y="46" class="lbl" fill="var(--svg-purple,#b794f4)">CORE 2</text>
+  <rect x="460" y="52" width="142" height="26" rx="4" class="l1"/><text x="531" y="64" class="h-l1">L1-I</text><text x="531" y="74" class="sub">32 KB</text>
+  <rect x="460" y="82" width="142" height="26" rx="4" class="l1"/><text x="531" y="94" class="h-l1">L1-D</text><text x="531" y="104" class="sub">32 KB</text>
+  <rect x="460" y="112" width="142" height="26" rx="4" class="l2"/><text x="531" y="124" class="h-l2">L2</text><text x="531" y="134" class="sub">256 KB</text>
+  <rect x="460" y="142" width="142" height="30" rx="4" fill="var(--svg-fill2,rgba(183,148,244,.15))" stroke="var(--svg-purple,rgba(183,148,244,.4))" stroke-width="1"/>
+  <text x="531" y="162" class="sub">ALU · FPU</text>
+  <rect x="622" y="30" width="158" height="148" rx="6" class="core"/>
+  <text x="701" y="46" class="lbl" fill="var(--svg-purple,#b794f4)">CORE 3</text>
+  <rect x="630" y="52" width="142" height="26" rx="4" class="l1"/><text x="701" y="64" class="h-l1">L1-I</text><text x="701" y="74" class="sub">32 KB</text>
+  <rect x="630" y="82" width="142" height="26" rx="4" class="l1"/><text x="701" y="94" class="h-l1">L1-D</text><text x="701" y="104" class="sub">32 KB</text>
+  <rect x="630" y="112" width="142" height="26" rx="4" class="l2"/><text x="701" y="124" class="h-l2">L2</text><text x="701" y="134" class="sub">256 KB</text>
+  <rect x="630" y="142" width="142" height="30" rx="4" fill="var(--svg-fill2,rgba(183,148,244,.15))" stroke="var(--svg-purple,rgba(183,148,244,.4))" stroke-width="1"/>
+  <text x="701" y="162" class="sub">ALU · FPU</text>
+  <rect x="452" y="184" width="348" height="42" rx="6" class="l3"/>
+  <text x="626" y="200" class="h-l3">SHARED L3 CACHE — 8–32 MB — ~30–40 cycles</text>
+  <text x="626" y="216" class="sub">Socket 1's own L3. Cross-socket access goes via QPI — much slower.</text>
+
+  <!-- ─── DRAM ─── -->
+  <line x1="191" y1="236" x2="191" y2="260" class="bus" marker-end="url(#cA)"/>
+  <line x1="629" y1="236" x2="629" y2="260" class="bus" marker-end="url(#cA)"/>
+  <rect x="6"   y="260" width="808" height="30" rx="6" class="dram"/>
+  <text x="410" y="278" class="h-ram">SYSTEM DRAM — 32–512 GB — ~100 ns (local socket) / ~180 ns (remote socket via QPI)</text>
+
+  <!-- ─── Latency legend ─── -->
+  <rect x="6"   y="298" width="808" height="22" rx="5" fill="var(--svg-fill2,rgba(99,179,237,.04))" stroke="var(--svg-border,rgba(99,179,237,.15))" stroke-width=".8"/>
+  <rect x="14" y="304" width="8" height="8" rx="1" class="l1"/>
+  <text x="26" y="313" class="note">L1: ~4 cycles</text>
+  <rect x="106" y="304" width="8" height="8" rx="1" class="l2"/>
+  <text x="118" y="313" class="note">L2: ~12 cycles</text>
+  <rect x="212" y="304" width="8" height="8" rx="1" class="l3"/>
+  <text x="224" y="313" class="note">L3: ~30–40 cycles</text>
+  <rect x="340" y="304" width="8" height="8" rx="1" class="dram"/>
+  <text x="352" y="313" class="note">DRAM: ~300 cycles</text>
+  <text x="480" y="313" class="note">Cache miss penalty: program stalls waiting for slower memory level</text>
+  <text x="480" y="323" class="good">✓ Spatial locality: load a 64-byte cache line → nearby data already warm</text>
+</svg>

@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Systems Fundamentals — CPU to Concurrency</title>
+  <link rel="stylesheet" href="../shared/css/deck.css"/>
+</head>
+<body>
+<div id="prog" style="width:0%"></div>
+<div id="deck">
+
+<!-- ══ SLIDE 1: Cover ══════════════════════════════════════════ -->
+<section class="slide cover" data-title="Systems Fundamentals">
+  <div class="cov-grid"></div>
+  <div class="cov-glow"></div>
+  <div class="cov-content">
+    <div class="cov-kicker">Computer Science Fundamentals · Systems Series</div>
+    <h1 class="cov-h1">Systems <span class="hi">Fundamentals</span></h1>
+    <p class="cov-desc">From transistors and SIMD to pipelines and semaphores — the operating system, hardware, and concurrency concepts every software engineer must understand to reason about the machines their code runs on.</p>
+    <div class="chips">
+      <span class="chip">CPU · GPU · RISC/CISC</span>
+      <span class="chip ca">Processes · Threads · Memory</span>
+      <span class="chip cg">Caches · Pipelines · Drivers</span>
+      <span class="chip cp">Atomics · Mutexes · Semaphores</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 2: CPU vs GPU ═════════════════════════════════════ -->
+<section class="slide" data-title="CPU vs GPU">
+  <div class="s-era">Hardware Architecture · Topic 1</div>
+  <h2 class="s-title"><span class="hi">CPU</span> vs <span class="hi3">GPU</span></h2>
+  <p class="s-sub">A CPU has a few powerful, flexible cores optimised for sequential branchy logic. A GPU has thousands of tiny, simple cores optimised for one thing: running the same instruction on massive amounts of data simultaneously — SIMD.</p>
+  <div class="dbox wide" style="margin-bottom:0.75rem;">
+    <img src="images/cpu-vs-gpu.svg" alt="CPU vs GPU architecture showing few powerful cores with branch predictors vs thousands of simple shader cores arranged in streaming multiprocessors, with SIMD explanation"/>
+  </div>
+  <div class="g g3">
+    <div class="card">
+      <div class="card-hd">CPU — the Orchestra Conductor</div>
+      <ul>
+        <li>4–128 cores; each has branch predictor, out-of-order execution, large caches</li>
+        <li>Can run any code: OS kernel, database, compiler, game engine logic</li>
+        <li>Handles complex control flow — <code>if/else</code> chains, recursive calls, I/O waits</li>
+        <li>Executes instructions that depend on the result of the previous one (serial dependencies)</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">GPU — the Factory Floor</div>
+      <ul>
+        <li>Thousands of shader cores; each is simple — no branch predictor, tiny cache</li>
+        <li>Works when all threads do the same thing (divergence = stall)</li>
+        <li>Ideal: render 1920×1080 = 2 million pixels, all computed identically in parallel</li>
+        <li>Cannot run an OS — it has no ability to handle interrupts, syscalls, or arbitrary branching</li>
+        <li>Requires a CPU to orchestrate: load data, dispatch work, collect results</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">SIMD — one instruction, many data</div>
+      <ul>
+        <li>CPU also has SIMD units (SSE, AVX, NEON) — processes 4–16 values per instruction</li>
+        <li>GPU SIMD is extreme — a "warp" of 32 threads execute the same instruction simultaneously on 32 different pixels</li>
+        <li>AI training = giant matrix multiplications = perfectly uniform data → GPU 100–1000× faster than CPU</li>
+        <li><strong>GPUs cannot replace CPUs</strong> — but CPUs can simulate GPU work (just very slowly)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 3: RISC vs CISC vs ARM ═══════════════════════════ -->
+<section class="slide" data-title="RISC vs CISC vs ARM">
+  <div class="s-era">Hardware Architecture · Topic 2</div>
+  <h2 class="s-title"><span class="hi2">RISC</span> vs <span class="hi">CISC</span> vs <span class="hi3">ARM</span></h2>
+  <p class="s-sub">Instruction Set Architecture (ISA) is the contract between hardware and software. CISC packs complex operations into single instructions; RISC uses simple, uniform instructions executed very fast. ARM is RISC for power-constrained devices.</p>
+
+  <div class="table-wrap" style="margin-bottom:0.75rem;">
+    <table class="cmp-table">
+      <thead><tr><th>Property</th><th>CISC (x86/x64)</th><th>RISC (SPARC, MIPS, POWER)</th><th>ARM (RISC variant)</th></tr></thead>
+      <tbody>
+        <tr><td>Instruction count</td><td>Thousands of complex opcodes</td><td>~100 simple uniform ops</td><td>~200 (Thumb-2 adds compact 16-bit ops)</td></tr>
+        <tr><td>Instruction length</td><td>Variable 1–15 bytes</td><td>Fixed 4 bytes</td><td>Fixed 4B (32-bit) or 2B (Thumb)</td></tr>
+        <tr><td>Decoding complexity</td><td>Complex: x86 micro-op decode unit</td><td>Simple: one cycle decode</td><td>Simple; pipeline-friendly</td></tr>
+        <tr><td>Registers</td><td>x86: 8 general (legacy); x64: 16</td><td>32–256 general-purpose</td><td>16 (AArch32) / 31 (AArch64)</td></tr>
+        <tr><td>Memory access</td><td>Many instrs operate on memory directly</td><td>Load/Store only — RISC principle</td><td>Load/Store (RISC principle)</td></tr>
+        <tr><td>Clock freq.</td><td>3–6 GHz (complex pipeline)</td><td>1–4 GHz (simpler pipeline)</td><td>1–3.5 GHz mobile; up to 4 GHz Apple M</td></tr>
+        <tr><td>Power</td><td>High (65–280W TDP)</td><td>Medium–high (server workloads)</td><td>Low–medium (0.5–15W mobile)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="g g3">
+    <div class="card">
+      <div class="card-hd">CISC Examples</div>
+      <ul>
+        <li><strong>Intel 8086/8088 (1978)</strong> — birth of x86</li>
+        <li><strong>Intel 486, Pentium (1989–93)</strong> — desktop dominance</li>
+        <li><strong>Intel Core i9-14900K</strong> — current flagship desktop</li>
+        <li><strong>AMD Ryzen 9 7950X</strong> — 16-core x86-64 workstation</li>
+        <li><strong>Intel Xeon / AMD EPYC</strong> — server CPUs, up to 96 cores</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">RISC Examples</div>
+      <ul>
+        <li><strong>MIPS R3000 (1988)</strong> — PlayStation 1 CPU; taught in every architecture course</li>
+        <li><strong>Sun SPARC (1987)</strong> — powered Sun workstations and servers</li>
+        <li><strong>IBM POWER10</strong> — mainframe and HPC (still shipping)</li>
+        <li><strong>RISC-V (2010)</strong> — open ISA; SiFive, StarFive; growing fast</li>
+        <li><strong>DEC Alpha (1992–2004)</strong> — fastest CPU of its era</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">ARM Examples</div>
+      <ul>
+        <li><strong>ARM6 (1991)</strong> — Apple Newton PDA; birth of mobile ARM</li>
+        <li><strong>ARM Cortex-A53</strong> — Raspberry Pi 4; billions of IoT devices</li>
+        <li><strong>Qualcomm Snapdragon 8 Gen 3</strong> — Android flagship phones</li>
+        <li><strong>Apple A17 Pro / M3 Ultra</strong> — iPhone 15 Pro / Mac Studio</li>
+        <li><strong>AWS Graviton4</strong> — ARM server CPU; 30% better perf/$ than x86</li>
+        <li><strong>NVIDIA Tegra</strong> — Nintendo Switch</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 4: Process vs Threads ════════════════════════════ -->
+<section class="slide" data-title="Process vs Threads">
+  <div class="s-era">Operating Systems · Topic 3</div>
+  <h2 class="s-title"><span class="hi">Processes</span> vs <span class="hi3">Threads</span></h2>
+  <p class="s-sub">A process is an isolated execution environment with its own memory space. Threads live inside a process and share its memory — faster to create but requiring careful coordination.</p>
+  <div class="dbox wide" style="margin-bottom:0.75rem;">
+    <img src="images/process-threads.svg" alt="Process A and Process B with separate virtual address spaces showing code, data, heap and per-thread stacks; IPC methods; and historical note on shared address spaces"/>
+  </div>
+  <div class="g g3">
+    <div class="card c-red">
+      <div class="card-hd">The Historical Note — Flat Address Spaces</div>
+      <ul>
+        <li>MS-DOS (1981): single-tasking, one program at a time, flat memory — no protection</li>
+        <li>Early UNIX (1969): processes shared kernel space; early bugs could corrupt other processes</li>
+        <li>Virtual memory (late 1960s, mainstreamed 1980s): MMU maps each process's virtual addresses to different physical pages — the OS enforces isolation in hardware</li>
+        <li>Today: a crash in Process B cannot corrupt Process A — the MMU prevents it</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Process vs Thread Trade-offs</div>
+      <ul>
+        <li><strong>Process creation:</strong> fork() copies page tables, file descriptors — microseconds to milliseconds</li>
+        <li><strong>Thread creation:</strong> allocates new stack only — typically &lt;1 µs</li>
+        <li><strong>Context switch (process):</strong> flush TLB, switch page tables — expensive (~µs)</li>
+        <li><strong>Context switch (thread):</strong> save/restore registers only — cheap</li>
+        <li>Communication between processes requires IPC (pipes, sockets, shm); threads just read shared variables</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Further Topics to Explore</div>
+      <ul>
+        <li><strong>Virtual Memory</strong> — how each process sees a full 64-bit address space</li>
+        <li><strong>Paging &amp; Page Tables</strong> — how virtual→physical mapping works</li>
+        <li><strong>Copy-on-Write (fork)</strong> — why fork() is fast despite "copying" all memory</li>
+        <li><strong>NUMA</strong> — non-uniform memory access on multi-socket servers</li>
+        <li><strong>Green Threads / Goroutines</strong> — user-space threads managed by a runtime</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 5: Pre-emptive Multitasking ══════════════════════ -->
+<section class="slide" data-title="Pre-emptive Multitasking">
+  <div class="s-era">Operating Systems · Topic 4</div>
+  <h2 class="s-title"><span class="hi2">Pre-emptive</span> Multitasking vs Event Loop</h2>
+  <p class="s-sub">How does one CPU appear to run many programs simultaneously? Two very different historical answers — cooperative yielding (old) and pre-emptive interruption (modern).</p>
+
+  <div class="g g2" style="margin-bottom:0.75rem;">
+    <div class="card c-red">
+      <div class="card-hd">Cooperative / Event-Loop Model (Old)</div>
+      <ul>
+        <li>Used by: Windows 3.x (1990–95), early Mac OS, DOS TSRs, Node.js (single-threaded)</li>
+        <li>A running program voluntarily yields the CPU — it calls a "yield" or handles an event and returns control</li>
+        <li>If one program hangs in a tight loop — the whole system freezes. No other app runs.</li>
+        <li>Event loop (Node.js): single-threaded; all I/O is async; callbacks fire when I/O completes; never blocks the loop</li>
+        <li>Works well when all operations are non-blocking. Fails badly with any CPU-bound work.</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Pre-emptive Multitasking (Modern OS)</div>
+      <ul>
+        <li>Used by: Windows NT/XP/10/11, Linux, macOS, Android, iOS</li>
+        <li>A hardware timer fires at ~100–1000 Hz → CPU raises an interrupt → OS scheduler runs</li>
+        <li>Scheduler picks the next thread to run (round-robin, priority, CFS) and forcibly switches</li>
+        <li>The running program has no say — it is stopped mid-instruction if its time slice expires</li>
+        <li>A hung process cannot starve the system — the scheduler interrupts it after its timeslice</li>
+        <li>Each thread gets a <strong>time quantum</strong> (~1–10 ms); I/O-blocked threads sleep and are woken by interrupt when data arrives</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="code-compare">
+    <div class="code-compare-panel">
+      <div class="code-compare-hdr hdr-red">🔴 Cooperative — everything blocks if one thing blocks</div>
+      <div class="code-block">
+        <pre><code><span class="tok-cm">// Old cooperative model (simplified)</span>
+<span class="tok-kw">while</span> (<span class="tok-kw">true</span>) {
+  event = <span class="tok-fn">getNextEvent</span>();      <span class="tok-cm">// yields here</span>
+  <span class="tok-kw">if</span> (event == PAINT)  <span class="tok-fn">doPaint</span>();
+  <span class="tok-kw">if</span> (event == CLICK)  <span class="tok-fn">doClick</span>();
+  <span class="tok-cm">// ↑ must return quickly!</span>
+  <span class="tok-cm">// A slow doClick() freezes UI</span>
+}</code></pre>
+      </div>
+    </div>
+    <div class="code-compare-panel">
+      <div class="code-compare-hdr hdr-green">🟢 Pre-emptive — OS timer interrupts any thread</div>
+      <div class="code-block">
+        <pre><code><span class="tok-cm">// Thread just runs — OS will</span>
+<span class="tok-cm">// interrupt it when timeslice ends</span>
+<span class="tok-kw">void</span> <span class="tok-fn">myThread</span>() {
+  <span class="tok-kw">while</span> (<span class="tok-kw">true</span>) {
+    <span class="tok-fn">doWork</span>();       <span class="tok-cm">// runs freely</span>
+    <span class="tok-cm">// ← OS may preempt here</span>
+    <span class="tok-fn">doMoreWork</span>();  <span class="tok-cm">// resumes later</span>
+  }
+}</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 6: Hyperthreading ════════════════════════════════ -->
+<section class="slide" data-title="Hyperthreading">
+  <div class="s-era">Hardware Architecture · Topic 5</div>
+  <h2 class="s-title"><span class="hi">Hyperthreading</span> — Two Threads Per Core</h2>
+  <p class="s-sub">A CPU core is rarely 100% busy — it spends time waiting for cache misses, memory, and instruction dependencies. Hyperthreading (Intel's name for SMT — Simultaneous Multi-Threading) fills those idle cycles with a second thread.</p>
+
+  <div class="g g2" style="margin-bottom:0.75rem;">
+    <div class="card">
+      <div class="card-hd">How It Works</div>
+      <ul>
+        <li>One physical core has <strong>two sets of architectural registers</strong> — it appears to the OS as two logical CPUs</li>
+        <li>Both threads share: ALU, FPU, L1/L2 cache, branch predictor, execution ports</li>
+        <li>When Thread A stalls waiting for a cache miss, the core's execution units process Thread B's instructions instead</li>
+        <li>No idle cycles wasted — the hardware automatically interleaves without any OS involvement</li>
+        <li>A 12-core Intel Core i9 appears to the OS as <strong>24 logical cores</strong></li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Real-World Performance</div>
+      <ul>
+        <li>Typical throughput gain: <strong>15–30%</strong> — not 2× because threads compete for the same execution units</li>
+        <li>Best for: mixed workloads (some threads waiting on I/O or memory while others compute)</li>
+        <li>Worst for: two CPU-intensive threads — they compete for the same ALU ports and cache, sometimes hurting each other</li>
+        <li>AMD equivalent: <strong>SMT (Simultaneous Multi-Threading)</strong> — same concept, different branding</li>
+        <li>ARM: <strong>SMT</strong> optional, present in some Cortex-X cores and Apple Firestorm</li>
+        <li>Meltdown/Spectre (2018): HT can leak data between logical threads — some servers disable it</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout ca-amber">
+    <strong>Key distinction:</strong> Hyperthreading is <em>not</em> having two cores. Both logical threads share one core's resources — it is one physical core pretending to be two. A 4-core/8-thread CPU is not the same as an 8-core/8-thread CPU, even if the OS presents the same number of schedulable units. CPU-intensive workloads will be faster on 8 real cores.
+  </div>
+</section>
+
+<!-- ══ SLIDE 7: Heap vs Stack ═════════════════════════════════ -->
+<section class="slide" data-title="Heap vs Stack">
+  <div class="s-era">Memory Management · Topic 6</div>
+  <h2 class="s-title"><span class="hi">Heap</span> vs <span class="hi3">Stack</span></h2>
+  <p class="s-sub">A process's memory is divided into regions. The stack handles function calls — automatic, LIFO, fast. The heap handles dynamic allocation — flexible, any lifetime, but requires explicit management. The animation below shows stack frames being pushed and popped as functions call each other.</p>
+  <div class="dbox wide" style="margin-bottom:0.75rem;">
+    <img src="images/heap-stack.svg" alt="Animated heap vs stack diagram showing main frame always present, add() frame being pushed then popped, multiply() pushed on top then popped, and heap block appearing when malloc is called"/>
+  </div>
+  <div class="g g3">
+    <div class="card">
+      <div class="card-hd">Stack — LIFO, Automatic</div>
+      <ul>
+        <li>Allocated when a function is called; freed when it returns — automatically, with zero overhead</li>
+        <li>Contains: return address, saved registers, local variables, function arguments (by value)</li>
+        <li>Size is fixed at thread creation (typically 1–8 MB)</li>
+        <li><strong>Stack overflow:</strong> deep recursion exhausts the stack → segfault</li>
+        <li>Allocation = one <code>SUB RSP, N</code> instruction (move stack pointer) — nanoseconds</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Heap — Flexible, Manual/GC</div>
+      <ul>
+        <li><code>malloc(n)</code> / <code>new</code> allocates a block; <code>free()</code> / GC releases it</li>
+        <li>Can allocate any size; object lives until explicitly freed (C) or until no references remain (GC)</li>
+        <li>Shared by all threads in the process — requires synchronisation for concurrent allocation</li>
+        <li>Fragmentation over time — memory allocator must track free blocks</li>
+        <li>Slower than stack: allocator must search free list, may call <code>sbrk()</code>/mmap to get more pages</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Common Bugs</div>
+      <ul>
+        <li><strong>Stack overflow:</strong> <code>void f() { f(); }</code> — infinite recursion; OS sends SIGSEGV</li>
+        <li><strong>Heap leak:</strong> <code>malloc</code> without <code>free</code> — memory consumed until OOM crash</li>
+        <li><strong>Use-after-free:</strong> read/write a pointer after <code>free()</code> — undefined behaviour, security exploit</li>
+        <li><strong>Double-free:</strong> <code>free(p)</code> twice — corrupts heap metadata</li>
+        <li><strong>Buffer overflow:</strong> write past end of a stack array → overwrite return address → code execution</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 8: Pass by Value vs Reference ════════════════════ -->
+<section class="slide" data-title="Pass by Value vs Reference">
+  <div class="s-era">Memory Management · Topic 7</div>
+  <h2 class="s-title">Pass by <span class="hi2">Value</span> vs Pass by <span class="hi3">Reference</span></h2>
+  <p class="s-sub">Does a function receive a <em>copy</em> of a variable or a <em>pointer to it</em>? The answer determines whether the function can modify the caller's data — and the answer differs between languages.</p>
+
+  <div class="code-compare" style="margin-bottom:0.75rem;">
+    <div class="code-compare-panel">
+      <div class="code-compare-hdr hdr-blue">🔵 C — explicit pass by value AND by reference (pointer)</div>
+      <div class="code-block">
+        <pre><code><span class="tok-cm">/* By VALUE — function gets a copy */</span>
+<span class="tok-ty">void</span> <span class="tok-fn">addTen_val</span>(<span class="tok-ty">int</span> x) {
+  x += <span class="tok-num">10</span>;  <span class="tok-cm">// only local copy changes</span>
+}
+
+<span class="tok-cm">/* By REFERENCE — function gets pointer */</span>
+<span class="tok-ty">void</span> <span class="tok-fn">addTen_ref</span>(<span class="tok-ty">int</span> *x) {
+  *x += <span class="tok-num">10</span>; <span class="tok-cm">// caller's variable changes!</span>
+}
+
+<span class="tok-ty">int</span> <span class="tok-fn">main</span>() {
+  <span class="tok-ty">int</span> a = <span class="tok-num">5</span>;
+  <span class="tok-fn">addTen_val</span>(a);   <span class="tok-cm">// a still = 5</span>
+  <span class="tok-fn">addTen_ref</span>(&amp;a);  <span class="tok-cm">// a now = 15 !</span>
+}</code></pre>
+      </div>
+    </div>
+    <div class="code-compare-panel">
+      <div class="code-compare-hdr hdr-green">🟢 Java — always pass by value, but objects are references</div>
+      <div class="code-block">
+        <pre><code><span class="tok-cm">// Primitives: always by value</span>
+<span class="tok-ty">void</span> <span class="tok-fn">addTen</span>(<span class="tok-ty">int</span> x) {
+  x += <span class="tok-num">10</span>; <span class="tok-cm">// caller's int unchanged</span>
+}
+
+<span class="tok-cm">// Objects: reference is passed by value</span>
+<span class="tok-cm">// The reference copy still points to</span>
+<span class="tok-cm">// the SAME object — mutations visible!</span>
+<span class="tok-ty">void</span> <span class="tok-fn">grow</span>(List&lt;<span class="tok-ty">String</span>&gt; list) {
+  list.<span class="tok-fn">add</span>(<span class="tok-str">"item"</span>); <span class="tok-cm">// caller sees this!</span>
+  list = <span class="tok-kw">new</span> ArrayList&lt;&gt;(); <span class="tok-cm">// rebind: invisible to caller</span>
+}
+<span class="tok-cm">// Java NEVER has pointer syntax (&amp;, *)</span>
+<span class="tok-cm">// but mutable objects feel like pass-by-ref</span></code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="g g3">
+    <div class="card">
+      <div class="card-hd">C++ — both styles</div>
+      <ul>
+        <li><code>void f(int x)</code> — pass by value (copy)</li>
+        <li><code>void f(int &amp;x)</code> — pass by reference (alias)</li>
+        <li><code>void f(int *x)</code> — pass pointer (explicit address)</li>
+        <li><code>void f(const int &amp;x)</code> — const ref: read-only, no copy</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Python — object references</div>
+      <ul>
+        <li>All variables are references to objects</li>
+        <li>Immutable (int, str, tuple): rebinding inside function doesn't affect caller</li>
+        <li>Mutable (list, dict): mutations inside function are visible to caller</li>
+        <li><code>def f(lst): lst.append(1)</code> — caller's list grows</li>
+        <li><code>def f(lst): lst = []</code> — caller's list unchanged (rebind)</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Stack Frame Connection</div>
+      <ul>
+        <li>Pass by value: the value is <em>copied onto the callee's stack frame</em></li>
+        <li>Pass by reference/pointer: the <em>address</em> is placed on the stack frame</li>
+        <li>Large structs: pass by reference to avoid copying megabytes onto the stack</li>
+        <li>This connects directly to the stack diagram on the previous slide — <code>a</code> and <code>b</code> in <code>add()</code> were copies of <code>x</code> and <code>y</code></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 9: L1/L2/L3 Cache ════════════════════════════════ -->
+<section class="slide" data-title="L1/L2/L3 Cache">
+  <div class="s-era">Hardware Architecture · Topic 8</div>
+  <h2 class="s-title">L1 / L2 / L3 <span class="hi">Cache</span></h2>
+  <p class="s-sub">DRAM takes ~300 clock cycles to deliver data. The CPU would stall constantly if it always fetched from RAM. Cache hierarchies solve this by keeping recently-used data in progressively faster, smaller memories closer to the core.</p>
+  <div class="dbox wide" style="margin-bottom:0.75rem;">
+    <img src="images/cache-hierarchy.svg" alt="Dual-socket CPU diagram with each socket showing 2 cores each having private L1-I, L1-D, and L2 caches, all sharing an L3 cache, connected to DRAM via memory bus and QPI between sockets"/>
+  </div>
+  <div class="g g3">
+    <div class="card">
+      <div class="card-hd">Spatial &amp; Temporal Locality</div>
+      <ul>
+        <li><strong>Spatial locality:</strong> if you access address X, you'll likely access X+1 soon. Cache loads a 64-byte <em>cache line</em> at once — neighbouring data is already warm.</li>
+        <li><strong>Temporal locality:</strong> recently accessed data is likely to be accessed again soon — keep it in cache.</li>
+        <li>Array traversal exploits both — sequential access pattern → L1 hit rate near 100%</li>
+        <li>Random access (hash table) destroys locality → frequent L3 misses → 300× slower</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">NUMA — Non-Uniform Memory Access</div>
+      <ul>
+        <li>In a dual-socket server, each socket has its own RAM bank connected directly to it</li>
+        <li>Socket 0 accessing its own RAM: ~100 ns (local)</li>
+        <li>Socket 0 accessing Socket 1's RAM: ~180 ns (remote, via QPI/UPI interconnect)</li>
+        <li>OS NUMA-aware schedulers try to place threads on the socket near their data</li>
+        <li>Database engines (PostgreSQL, Oracle) are NUMA-aware for this reason</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">False Sharing — a Cache Subtlety</div>
+      <ul>
+        <li>Two threads on different cores, each writing their own variable — but both variables happen to sit in the <strong>same 64-byte cache line</strong></li>
+        <li>Every write by Thread A invalidates Thread B's copy of the cache line — even though they're writing different bytes</li>
+        <li>Solution: pad structs so each thread's data is in a different cache line</li>
+        <li>False sharing is a common cause of parallel code being slower than sequential</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 10: Pipeline & Branch Miss ═══════════════════════ -->
+<section class="slide" data-title="Pipeline & Branch Miss">
+  <div class="s-era">Hardware Architecture · Topic 9</div>
+  <h2 class="s-title"><span class="hi2">Pipeline</span> &amp; Branch Miss</h2>
+  <p class="s-sub">Modern CPUs execute instructions in an assembly-line pipeline — multiple instructions in different stages simultaneously. Branch misprediction flushes the pipeline, wasting 15–20 cycles of speculative work.</p>
+  <div class="dbox wide" style="margin-bottom:0.75rem;">
+    <img src="images/pipeline.svg" alt="Three-section animated diagram: without pipelining one instruction per 5 cycles; with pipelining all stages busy giving 1 instruction per cycle steady state; branch misprediction showing wrong-path instructions flushed"/>
+  </div>
+  <div class="g g3">
+    <div class="card">
+      <div class="card-hd">The Five Stages</div>
+      <ul>
+        <li><strong>IF — Instruction Fetch:</strong> load opcode from instruction cache</li>
+        <li><strong>ID — Instruction Decode:</strong> identify operation and source registers</li>
+        <li><strong>EX — Execute:</strong> ALU/FPU performs the operation</li>
+        <li><strong>MEM — Memory Access:</strong> load/store to data cache if needed</li>
+        <li><strong>WB — Write Back:</strong> store result into register file</li>
+        <li>Modern CPUs have 14–20 stages (deeper pipeline = higher clock speed possible, higher branch penalty)</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Branch Prediction</div>
+      <ul>
+        <li>CPU guesses which way an <code>if</code>/<code>for</code> branch goes and speculatively fetches/executes those instructions</li>
+        <li>Correct: no penalty — work was already done</li>
+        <li>Wrong (misprediction): flush pipeline, discard speculative work, restart from correct branch — ~15 cycle penalty at 3 GHz ≈ 5 ns wasted</li>
+        <li>Modern CPUs: 95–99% accuracy using branch history tables</li>
+        <li><strong>Why sorted arrays are faster:</strong> predictable branch pattern (always taken, then always not-taken) → predictor learns it</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Out-of-Order &amp; Speculative Execution</div>
+      <ul>
+        <li>CPU doesn't wait — it executes instructions <em>out of program order</em> when dependencies allow</li>
+        <li>If instruction 5 doesn't depend on instruction 4, execute both in parallel</li>
+        <li><strong>Spectre/Meltdown (2018):</strong> speculative execution could read memory that shouldn't be accessible — speculatively executed work leaves traces in cache timing</li>
+        <li>Mitigations added performance overhead; why some cloud VMs saw 5–30% slowdown post-patch</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 11: Shared Memory ════════════════════════════════ -->
+<section class="slide" data-title="Shared Memory Between Processes">
+  <div class="s-era">Operating Systems · Topic 10</div>
+  <h2 class="s-title"><span class="hi2">Shared Memory</span> Between Processes</h2>
+  <p class="s-sub">Processes are isolated by design — but sometimes two separate programs need to exchange large amounts of data without copying. The OS can map the same physical RAM page into two different processes' virtual address spaces — zero-copy, fastest possible IPC.</p>
+  <div class="dbox wide" style="margin-bottom:0.75rem;">
+    <img src="images/shared-memory.svg" alt="Shared memory diagram showing Process A and Process B each with their virtual address spaces, the MMU page table mapping both virtual addresses to the same physical RAM page frame, with synchronisation warning"/>
+  </div>
+  <div class="g g3">
+    <div class="card">
+      <div class="card-hd">POSIX API (Linux/macOS)</div>
+      <ul>
+        <li><code>shm_open()</code> — create or open a named shared memory object</li>
+        <li><code>ftruncate()</code> — set the size of the shared region</li>
+        <li><code>mmap()</code> — map it into the process's virtual address space</li>
+        <li>Process B: same <code>shm_open()</code> call with same name → same physical pages</li>
+        <li><code>shm_unlink()</code> — remove the named object when done</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Windows API</div>
+      <ul>
+        <li><code>CreateFileMapping(INVALID_HANDLE_VALUE, ...)</code> — creates a named mapping object backed by paging file</li>
+        <li><code>MapViewOfFile()</code> — maps it into the calling process's address space</li>
+        <li>Second process: <code>OpenFileMapping()</code> + <code>MapViewOfFile()</code></li>
+        <li>Used heavily by Windows for DLL sharing and inter-process communication</li>
+      </ul>
+    </div>
+    <div class="card c-red">
+      <div class="card-hd">Mandatory Synchronisation</div>
+      <ul>
+        <li>Two processes writing simultaneously = race condition — corrupt data guaranteed</li>
+        <li>Must use a mutex or semaphore (can be created in shared memory too) to serialise access</li>
+        <li>POSIX: <code>pthread_mutex_t</code> in shared memory with <code>PTHREAD_PROCESS_SHARED</code> attribute</li>
+        <li>Without synchronisation, shared memory is a reliable way to create subtle, non-reproducible bugs</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 12: Device Drivers ═══════════════════════════════ -->
+<section class="slide" data-title="Device Drivers">
+  <div class="s-era">Operating Systems · Topic 11</div>
+  <h2 class="s-title"><span class="hi3">Device Drivers</span> — Hardware Abstraction</h2>
+  <p class="s-sub">A device driver is kernel code that speaks the hardware's language and exposes a standard interface to the rest of the kernel. Application code never touches hardware — it calls library functions which make system calls which route through the VFS to the appropriate driver.</p>
+  <div class="dbox wide" style="margin-bottom:0.75rem;">
+    <img src="images/device-drivers.svg" alt="Animated layer diagram showing fread in application calling libc which issues a read syscall crossing the ring 3/ring 0 boundary into the kernel VFS which selects the correct driver file_operations function which performs DMA to hardware"/>
+  </div>
+  <div class="g g3">
+    <div class="card">
+      <div class="card-hd">Why Drivers Exist</div>
+      <ul>
+        <li>Every piece of hardware speaks a different protocol — NVMe, SATA, USB, PCIe, I2C, SPI all differ completely</li>
+        <li>A driver translates between the hardware's specific commands and the kernel's standard <code>file_operations</code> interface</li>
+        <li>Application sees: <code>fread()</code>, <code>fwrite()</code>, <code>ioctl()</code> — always the same API</li>
+        <li>New hardware just needs a new driver — no application code changes</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Types of Drivers</div>
+      <ul>
+        <li><strong>Character device:</strong> serial port, keyboard, mouse — byte stream, no random access</li>
+        <li><strong>Block device:</strong> HDD, SSD, USB drive — random access by block number; has a request queue</li>
+        <li><strong>Network driver:</strong> NIC — different interface (not file_operations); uses socket buffers (skb)</li>
+        <li><strong>Virtual drivers:</strong> <code>/dev/null</code>, <code>/dev/zero</code>, <code>/dev/random</code> — no real hardware, pure kernel logic</li>
+      </ul>
+    </div>
+    <div class="card c-red">
+      <div class="card-hd">Why Bad Drivers Are Dangerous</div>
+      <ul>
+        <li>Drivers run in <strong>Ring 0 — kernel mode</strong> — no memory protection around them</li>
+        <li>A null pointer dereference in a driver immediately crashes the entire OS (Linux: kernel panic; Windows: Blue Screen of Death)</li>
+        <li>~70% of Linux kernel CVEs are in device drivers</li>
+        <li>Windows kernel crashes: most are caused by third-party graphics or antivirus drivers running in Ring 0</li>
+        <li>Solution: User-space drivers (FUSE, DPDK, io_uring) move drivers out of Ring 0</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 13: Boot Process ════════════════════════════════ -->
+<section class="slide" data-title="Boot Process — BIOS/UEFI">
+  <div class="s-era">Operating Systems · Topic 12</div>
+  <h2 class="s-title">The <span class="hi2">Boot Process</span> — BIOS &amp; UEFI</h2>
+  <p class="s-sub">When you press the power button, the CPU starts executing from a fixed ROM address before RAM has even been initialised. Six distinct phases take the machine from cold silicon to a running operating system.</p>
+  <div class="dbox wide" style="margin-bottom:0.75rem;">
+    <img src="images/boot-process.svg" alt="Animated six-step boot process: power on CPU reset vector, POST hardware test, BIOS or UEFI firmware runs, bootloader loads kernel from disk, kernel initialises memory and drivers, OS starts with Windows Boot Manager or systemd"/>
+  </div>
+  <div class="g g3">
+    <div class="card">
+      <div class="card-hd">BIOS vs UEFI</div>
+      <ul>
+        <li><strong>BIOS:</strong> 16-bit real mode; MBR partition; max 2 TB disk; text-only setup; no Secure Boot; ~1975–2010s</li>
+        <li><strong>UEFI:</strong> 64-bit protected mode from the start; GPT partitions; >9 ZB disk; GUI setup with mouse; Secure Boot; Fast Boot; TPM integration</li>
+        <li>Windows 11 requires: UEFI + Secure Boot + TPM 2.0</li>
+        <li>UEFI can run a small OS before the main OS — useful for recovery environments</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Windows Boot Sequence Detail</div>
+      <ul>
+        <li>UEFI → reads EFI system partition → loads <code>bootmgfw.efi</code></li>
+        <li>Windows Boot Manager presents OS selection menu</li>
+        <li>Loads <code>winload.efi</code> → loads <code>ntoskrnl.exe</code> (kernel) + <code>hal.dll</code> into RAM</li>
+        <li>Kernel initialises: memory manager, I/O manager, object manager, security</li>
+        <li>Loads boot-start drivers from registry</li>
+        <li><code>smss.exe</code> → <code>csrss.exe</code> → <code>winlogon.exe</code> → login screen</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Linux Boot Sequence Detail</div>
+      <ul>
+        <li>UEFI/BIOS → GRUB2 bootloader → loads <code>vmlinuz</code> + <code>initramfs</code> into RAM</li>
+        <li>Kernel decompresses itself, initialises hardware, mounts initramfs as temporary root</li>
+        <li>Initialises devices using <code>initramfs</code> drivers → mounts real root filesystem</li>
+        <li>PID 1 = <code>systemd</code> — starts all other services in parallel based on dependencies</li>
+        <li>Targets: basic.target → multi-user.target → graphical.target</li>
+        <li>Login manager (GDM/SDDM) starts → desktop appears</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 14: Atomic Operations ════════════════════════════ -->
+<section class="slide" data-title="Atomic Operations">
+  <div class="s-era">Concurrency · Topic 13</div>
+  <h2 class="s-title"><span class="hi2">Atomic Operations</span> &amp; Race Conditions</h2>
+  <p class="s-sub">A single line of high-level code compiles to multiple CPU instructions. If two threads interleave between those instructions on shared data, the result is a race condition — non-deterministic data corruption that is notoriously hard to reproduce and debug.</p>
+  <div class="dbox wide" style="margin-bottom:0.75rem;">
+    <img src="images/atomic-race.svg" alt="Animated race condition diagram showing Thread 1 executing x=y+z and Thread 2 executing y=y+5 with their assembly steps interleaved, demonstrating how Thread 1 reads a stale value of y before Thread 2 updates it"/>
+  </div>
+  <div class="g g3">
+    <div class="card c-red">
+      <div class="card-hd">Why x = y + z Is Not Atomic</div>
+      <ul>
+        <li>The compiler expands <code>x = y + z</code> to: LOAD y, LOAD z, ADD, STORE x — four separate instructions</li>
+        <li>The OS can preempt a thread between <em>any</em> of these instructions and run another thread</li>
+        <li>If the other thread modifies <code>y</code> or <code>z</code> during that window — the result is wrong</li>
+        <li>The bug is non-deterministic: it occurs only when the preemption happens during the critical window, which varies with load, CPU speed, and timing</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Hardware Atomic Instructions</div>
+      <ul>
+        <li><code>LOCK ADD [x], 1</code> — x86 prefix; CPU locks memory bus for the entire read-modify-write</li>
+        <li><code>CMPXCHG</code> — Compare-and-Swap (CAS): "if memory == expected, store new value" — atomically</li>
+        <li>ARM: <code>LDREX</code>/<code>STREX</code> — load-link/store-conditional exclusive pair</li>
+        <li>CAS is the foundation of all lock-free data structures</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Language Atomic Support</div>
+      <ul>
+        <li><strong>C++ std::atomic&lt;int&gt;:</strong> <code>x.fetch_add(1)</code> — guaranteed atomic increment</li>
+        <li><strong>Java java.util.concurrent.atomic:</strong> <code>AtomicInteger.incrementAndGet()</code></li>
+        <li><strong>Go sync/atomic:</strong> <code>atomic.AddInt64(&amp;x, 1)</code></li>
+        <li><strong>Python:</strong> the GIL makes individual bytecode operations atomic — but not sequences</li>
+        <li>Atomics are fast (no OS involvement) but only work for <em>single</em> variable operations — complex invariants require a mutex</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 15: Mutex vs Semaphore vs Spinlock ════════════════ -->
+<section class="slide" data-title="Mutex vs Semaphore vs Spinlock">
+  <div class="s-era">Concurrency · Topic 14</div>
+  <h2 class="s-title"><span class="hi">Mutex</span> · <span class="hi2">Semaphore</span> · <span class="hi3">Spinlock</span></h2>
+  <p class="s-sub">When multiple threads or processes access shared data, they must take turns. Three fundamental synchronisation primitives enforce ordering — each with different use cases, performance profiles, and failure modes.</p>
+
+  <div class="g g3" style="margin-bottom:0.75rem;">
+    <div class="card">
+      <div class="card-hd">Mutex — Mutual Exclusion Lock</div>
+      <ul>
+        <li><strong>Binary:</strong> locked or unlocked — only one thread holds it at a time</li>
+        <li><strong>Ownership:</strong> only the thread that locked it can unlock it</li>
+        <li>Thread tries to lock → already locked → thread is put to sleep by OS → woken when lock is released</li>
+        <li>No CPU burned while waiting — efficient for long waits</li>
+        <li><strong>Deadlock:</strong> Thread A holds mutex1, waits for mutex2; Thread B holds mutex2, waits for mutex1 → both wait forever</li>
+        <li>Fix: always acquire mutexes in the same order across all threads</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Semaphore — Counting Gate</div>
+      <ul>
+        <li><strong>Counting:</strong> allows N threads through simultaneously (a mutex is a semaphore with N=1)</li>
+        <li><code>sem_wait()</code> — decrement count; if 0, block</li>
+        <li><code>sem_post()</code> — increment count; wake one waiter</li>
+        <li><strong>No ownership:</strong> any thread can signal — useful for producer/consumer</li>
+        <li><strong>Use case:</strong> connection pool with 10 slots — initialise semaphore to 10; each connection decrements; release increments</li>
+        <li><strong>Binary semaphore</strong> (count=1) can replace a mutex but lacks the ownership guarantee</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Spinlock — Busy-Wait Loop</div>
+      <ul>
+        <li>Thread loops in a tight CAS loop until the lock is available — never sleeps</li>
+        <li><strong>Pros:</strong> no OS context switch overhead; perfect for critical sections that complete in nanoseconds</li>
+        <li><strong>Cons:</strong> wastes CPU cycles while waiting — if the hold time is long, a sleeping mutex is far better</li>
+        <li>Used in OS kernel code, real-time systems, lock-free data structures</li>
+        <li><strong>Rule:</strong> use a spinlock only when the critical section is shorter than the cost of a context switch (~1–5 µs)</li>
+        <li>On single-core: spinlock without preemption = deadlock! The spinning thread prevents the lock-holder from running.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table class="cmp-table">
+      <thead><tr><th>Primitive</th><th>Waiting behaviour</th><th>Ownership</th><th>Count</th><th>Best for</th></tr></thead>
+      <tbody>
+        <tr><td>Mutex</td><td>Sleep (OS blocks thread)</td><td>Yes — locker must unlock</td><td>Binary (0 or 1)</td><td>Protecting data structures; hold &gt;~1 µs</td></tr>
+        <tr><td>Semaphore</td><td>Sleep (OS blocks thread)</td><td>No — any thread can post</td><td>0 to N</td><td>Signalling; rate limiting; producer/consumer</td></tr>
+        <tr><td>Spinlock</td><td>Busy-wait (CAS loop)</td><td>Yes (in kernel implementations)</td><td>Binary</td><td>Kernel critical sections; hold &lt;~1 µs</td></tr>
+        <tr><td>RWLock</td><td>Sleep (writers block readers)</td><td>Yes</td><td>Multiple readers / 1 writer</td><td>Read-heavy data (many reads, rare writes)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══ SLIDE 16: End ════════════════════════════════════════════ -->
+<section class="slide cover" data-title="Questions">
+  <div class="cov-grid"></div>
+  <div class="cov-glow"></div>
+  <div class="cov-content">
+    <div class="cov-kicker">End of Presentation — Systems Fundamentals</div>
+    <h1 class="cov-h1">Questions?<br/><span class="hi">Let's Discuss.</span></h1>
+    <p class="cov-desc">These topics form the bedrock of systems programming. Every database, operating system, web server, and game engine is built on these primitives. Understanding them is what separates a developer who can use a system from one who can reason about why it behaves the way it does.</p>
+    <div class="chips">
+      <span class="chip ca">Memory-Mapped Files</span>
+      <span class="chip cg">Lock-free Data Structures</span>
+      <span class="chip">Virtual Memory &amp; Paging</span>
+      <span class="chip cp">Kernel vs User-space Networking</span>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<nav id="nav">
+  <div class="nav-group">
+    <button class="nb" id="btn-prev">← Prev</button>
+    <button class="nb" id="btn-next">Next →</button>
+    <span id="counter">1 / 16</span>
+  </div>
+  <div class="nav-group"><select id="jump"></select></div>
+  <div class="nav-group"><button id="theme-btn">☀ Light</button></div>
+</nav>
+<script src="../shared/js/deck.js"></script>
+</body>
+</html>

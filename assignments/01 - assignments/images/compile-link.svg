@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 260">
+  <style>
+    .src  { fill:var(--svg-fill1,rgba(99,179,237,.16));  stroke:var(--svg-blue,#63b3ed);   stroke-width:1.4; }
+    .obj  { fill:var(--svg-fill1,rgba(246,173,85,.16));  stroke:var(--svg-amber,#f6ad55);  stroke-width:1.4; }
+    .lib  { fill:var(--svg-fill1,rgba(183,148,244,.16)); stroke:var(--svg-purple,#b794f4); stroke-width:1.4; }
+    .exe  { fill:var(--svg-fill1,rgba(104,211,145,.16)); stroke:var(--svg-green,#68d391);  stroke-width:2; }
+    .proc { fill:var(--svg-fill2,rgba(99,179,237,.08));  stroke:var(--svg-blue,rgba(99,179,237,.4)); stroke-width:1; stroke-dasharray:5,3; }
+    .lnk  { fill:var(--svg-fill2,rgba(246,173,85,.1));   stroke:var(--svg-amber,rgba(246,173,85,.5)); stroke-width:1.5; }
+    .arr  { fill:var(--svg-text2,rgba(99,179,237,.55)); }
+    .con  { stroke:var(--svg-text2,rgba(99,179,237,.4)); fill:none; stroke-width:1.5; }
+    .con-a{ stroke:var(--svg-amber,rgba(246,173,85,.5)); fill:none; stroke-width:1.5; }
+    .t-src{ fill:var(--svg-blue,#63b3ed);   font-family:monospace; font-size:9.5px; font-weight:700; text-anchor:middle; }
+    .t-obj{ fill:var(--svg-amber,#f6ad55);  font-family:monospace; font-size:9.5px; font-weight:700; text-anchor:middle; }
+    .t-lib{ fill:var(--svg-purple,#b794f4); font-family:monospace; font-size:9.5px; font-weight:700; text-anchor:middle; }
+    .t-exe{ fill:var(--svg-green,#68d391);  font-family:monospace; font-size:9.5px; font-weight:700; text-anchor:middle; }
+    .t-pro{ fill:var(--svg-blue,rgba(99,179,237,.75)); font-family:monospace; font-size:8px; font-weight:700; text-anchor:middle; }
+    .t-lnk{ fill:var(--svg-amber,rgba(246,173,85,.85)); font-family:monospace; font-size:9px; font-weight:700; text-anchor:middle; }
+    .sub  { fill:var(--svg-text2,#6a9ab8); font-family:monospace; font-size:7.5px; text-anchor:middle; }
+    .note { fill:var(--svg-text2,#6a9ab8); font-family:monospace; font-size:8px; }
+    .stg  { fill:var(--svg-text2,rgba(99,179,237,.45)); font-family:monospace; font-size:8px; text-anchor:middle; letter-spacing:1px; }
+  </style>
+  <defs>
+    <marker id="cA" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <path d="M0,0 L0,7 L7,3.5 z" class="arr"/>
+    </marker>
+    <marker id="cAa" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <path d="M0,0 L0,7 L7,3.5 z" fill="var(--svg-amber,rgba(246,173,85,.6))"/>
+    </marker>
+  </defs>
+
+  <!-- Stage 1: Source files -->
+  <text x="90" y="14" class="stg">SOURCE FILES</text>
+  <rect x="6"   y="22" width="80" height="36" rx="5" class="src"/>
+  <text x="46"  y="37" class="t-src">main.c</text>
+  <text x="46"  y="49" class="sub">C source</text>
+
+  <rect x="6"   y="68" width="80" height="36" rx="5" class="src"/>
+  <text x="46"  y="83" class="t-src">utils.c</text>
+  <text x="46"  y="95" class="sub">C source</text>
+
+  <rect x="6"   y="114" width="80" height="36" rx="5" class="src"/>
+  <text x="46"  y="129" class="t-src">payroll.cbl</text>
+  <text x="46"  y="141" class="sub">COBOL source</text>
+
+  <!-- Compiler box -->
+  <rect x="108" y="50" width="108" height="80" rx="7" class="proc"/>
+  <text x="162" y="82"  class="t-pro">COMPILER /</text>
+  <text x="162" y="94"  class="t-pro">ASSEMBLER</text>
+  <text x="162" y="106" class="sub">gcc / cobc</text>
+  <text x="162" y="117" class="sub">Pre-processor</text>
+  <text x="162" y="128" class="sub">Lex/Parse/Optimise</text>
+
+  <!-- Arrows source → compiler -->
+  <line x1="88"  y1="40"  x2="106" y2="75"  class="con" marker-end="url(#cA)"/>
+  <line x1="88"  y1="86"  x2="106" y2="90"  class="con" marker-end="url(#cA)"/>
+  <line x1="88"  y1="132" x2="106" y2="115" class="con" marker-end="url(#cA)"/>
+
+  <!-- Stage 2: Object files -->
+  <text x="262" y="14" class="stg">OBJECT FILES  (.o / .obj)</text>
+  <rect x="234" y="22" width="80" height="36" rx="5" class="obj"/>
+  <text x="274" y="37" class="t-obj">main.o</text>
+  <text x="274" y="49" class="sub">Machine code</text>
+
+  <rect x="234" y="68" width="80" height="36" rx="5" class="obj"/>
+  <text x="274" y="83" class="t-obj">utils.o</text>
+  <text x="274" y="95" class="sub">Unresolved refs</text>
+
+  <rect x="234" y="114" width="80" height="36" rx="5" class="obj"/>
+  <text x="274" y="129" class="t-obj">payroll.o</text>
+  <text x="274" y="141" class="sub">COBOL object</text>
+
+  <!-- Arrows compiler → object -->
+  <line x1="218" y1="90"  x2="232" y2="75"  class="con" marker-end="url(#cA)"/>
+  <line x1="218" y1="90"  x2="232" y2="90"  class="con" marker-end="url(#cA)"/>
+  <line x1="218" y1="90"  x2="232" y2="125" class="con" marker-end="url(#cA)"/>
+
+  <!-- Libraries -->
+  <text x="262" y="170" class="stg">LIBRARIES</text>
+  <rect x="234" y="180" width="80" height="30" rx="5" class="lib"/>
+  <text x="274" y="193" class="t-lib">libc.a</text>
+  <text x="274" y="204" class="sub">C Standard Lib</text>
+
+  <rect x="234" y="216" width="80" height="30" rx="5" class="lib"/>
+  <text x="274" y="229" class="t-lib">runtime.lib</text>
+  <text x="274" y="240" class="sub">COBOL runtime</text>
+
+  <!-- Linker box -->
+  <rect x="346" y="72" width="108" height="80" rx="7" class="lnk"/>
+  <text x="400" y="102" class="t-lnk">LINKER</text>
+  <text x="400" y="114" class="sub">ld / link.exe</text>
+  <text x="400" y="125" class="sub">Resolves symbols</text>
+  <text x="400" y="136" class="sub">Merges sections</text>
+  <text x="400" y="147" class="sub">Sets addresses</text>
+
+  <!-- Arrows obj/lib → linker -->
+  <line x1="316" y1="40"  x2="344" y2="95"  class="con-a" marker-end="url(#cAa)"/>
+  <line x1="316" y1="86"  x2="344" y2="108" class="con-a" marker-end="url(#cAa)"/>
+  <line x1="316" y1="132" x2="344" y2="128" class="con-a" marker-end="url(#cAa)"/>
+  <line x1="316" y1="195" x2="344" y2="130" class="con-a" marker-end="url(#cAa)"/>
+  <line x1="316" y1="231" x2="344" y2="142" class="con-a" marker-end="url(#cAa)"/>
+
+  <!-- Output executable -->
+  <text x="546" y="14" class="stg">EXECUTABLE</text>
+  <rect x="478" y="62" width="110" height="76" rx="8" class="exe"/>
+  <text x="533" y="92"  class="t-exe">program.exe</text>
+  <text x="533" y="104" class="sub">payroll</text>
+  <text x="533" y="116" class="sub">Platform-specific</text>
+  <text x="533" y="127" class="sub">Self-contained binary</text>
+  <text x="533" y="138" class="sub">Runs natively</text>
+
+  <!-- Arrow linker → exe -->
+  <line x1="456" y1="112" x2="476" y2="100" class="con" marker-end="url(#cA)"/>
+
+  <!-- Runtime explainer -->
+  <rect x="610" y="30"  width="164" height="200" rx="8" fill="var(--svg-fill2,rgba(183,148,244,.06))" stroke="var(--svg-purple,rgba(183,148,244,.3))" stroke-width="1"/>
+  <text x="692" y="48"  class="t-lib">WHAT IS A RUNTIME?</text>
+  <line x1="620" y1="54" x2="764" y2="54" stroke="var(--svg-purple,rgba(183,148,244,.18))" stroke-width=".7" fill="none"/>
+  <text x="620" y="68"  class="note">The runtime provides services</text>
+  <text x="620" y="81"  class="note">every program needs:</text>
+  <text x="620" y="98"  class="note">▸ Memory allocation (malloc)</text>
+  <text x="620" y="111" class="note">▸ I/O (printf, file open)</text>
+  <text x="620" y="124" class="note">▸ Math library (sqrt, sin)</text>
+  <text x="620" y="137" class="note">▸ Stack setup &amp; teardown</text>
+  <text x="620" y="150" class="note">▸ Exception handling hooks</text>
+  <text x="620" y="167" class="note">C: libc.so / msvcrt.dll</text>
+  <text x="620" y="180" class="note">COBOL: libcob, GnuCOBOL rt</text>
+  <text x="620" y="193" class="note">Java: JVM (not compiled in)</text>
+  <text x="620" y="206" class="note">.NET: CLR (not compiled in)</text>
+  <text x="620" y="220" class="note">Go: runtime compiled in!</text>
+
+  <!-- Note at bottom -->
+  <text x="390" y="248" class="note" text-anchor="middle">Object files contain machine code with unresolved symbol references  (e.g. printf is referenced but its address is unknown)</text>
+  <text x="390" y="260" class="note" text-anchor="middle">The linker resolves all references and combines everything into one executable with correct memory addresses</text>
+</svg>

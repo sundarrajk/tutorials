@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Networking Fundamentals — OSI to SDN</title>
+  <link rel="stylesheet" href="../shared/css/deck.css"/>
+</head>
+<body>
+<div id="prog" style="width:0%"></div>
+<div id="deck">
+
+<!-- ══ SLIDE 1: Cover ══════════════════════════════════════════ -->
+<section class="slide cover" data-title="Networking Fundamentals">
+  <div class="cov-grid"></div>
+  <div class="cov-glow"></div>
+  <div class="cov-content">
+    <div class="cov-kicker">Computer Science Fundamentals · Networking Series</div>
+    <h1 class="cov-h1">Networking <span class="hi">Fundamentals</span></h1>
+    <p class="cov-desc">From the OSI model's seven layers to software-defined networks — how the internet actually works, how your browser talks to a server, how email hops across the world, and how global traffic is routed at scale.</p>
+    <div class="chips">
+      <span class="chip">OSI · TCP/IP · UDP</span>
+      <span class="chip ca">DNS · HTTP · SMTP</span>
+      <span class="chip cg">LAN · WAN · VLAN</span>
+      <span class="chip cp">CDN · Edge · SDN</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 2: OSI Layers ═════════════════════════════════════ -->
+<section class="slide" data-title="OSI Layers & TCP/IP Stack">
+  <div class="s-era">Networking Foundations · Topic 1</div>
+  <h2 class="s-title">OSI Model, <span class="hi">TCP/IP Stack</span> &amp; Load Balancer Tiers</h2>
+  <p class="s-sub">The OSI model is a conceptual framework with 7 layers. TCP/IP is the practical 4-layer implementation that runs the internet. Every packet you send travels down all layers on the sender and up all layers on the receiver — each layer adding or stripping its header.</p>
+  <div class="dbox wide" style="margin-bottom:0.75rem;">
+    <img src="images/osi-layers.svg" alt="OSI 7-layer model compared to TCP/IP 4-layer stack with protocol examples at each layer, and load balancer tier annotations showing L7, L4, and L3 load balancers"/>
+  </div>
+  <div class="g g3">
+    <div class="card">
+      <div class="card-hd">Encapsulation — How Layers Work</div>
+      <ul>
+        <li>HTTP message (Layer 7) → TCP adds port numbers (Layer 4) → IP adds source/dest IP (Layer 3) → Ethernet adds MAC addresses (Layer 2) → bits on wire (Layer 1)</li>
+        <li>Each layer only talks to the layer directly below/above it — a clean abstraction</li>
+        <li>The receiver reverses the process: strip each header going up</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">HTTP Lives at Layer 7</div>
+      <ul>
+        <li><code>GET /index.html HTTP/1.1\r\nHost: google.com</code> — this text is the Layer 7 payload</li>
+        <li>It is wrapped in a TCP segment, which is wrapped in an IP packet, which is wrapped in an Ethernet frame</li>
+        <li>A router at Layer 3 only looks at the IP header — never reads HTTP</li>
+        <li>A L7 load balancer reads HTTP headers to make routing decisions</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Load Balancer Tiers</div>
+      <ul>
+        <li><strong>L7 LB (Application):</strong> reads URL, cookies, JWT tokens. Smartest, slowest. AWS ALB, nginx, Envoy. SSL termination here.</li>
+        <li><strong>L4 LB (Transport):</strong> balances by TCP/UDP port. Fast, protocol-agnostic. AWS NLB.</li>
+        <li><strong>L3 LB (Network):</strong> Anycast BGP. Same IP from many data centres — client routed to nearest. Cloudflare, AWS Global Accelerator.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 3: TCP vs UDP vs Multicast ═══════════════════════ -->
+<section class="slide" data-title="TCP vs UDP vs Multicast">
+  <div class="s-era">Transport Protocols · Topic 2</div>
+  <h2 class="s-title"><span class="hi">TCP</span> · <span class="hi2">UDP</span> · <span class="hi3">Multicast</span></h2>
+  <p class="s-sub">Three fundamentally different ways to send data. TCP guarantees delivery with a full handshake and acknowledgement cycle. UDP fires packets with no ceremony. Multicast efficiently delivers one stream to many receivers simultaneously.</p>
+  <div class="dbox wide" style="margin-bottom:0.75rem;">
+    <img src="images/tcp-udp-multicast.svg" alt="Left panel shows TCP 3-way handshake SYN/SYN-ACK/ACK then bidirectional data transfer with ACKs then 4-way FIN close sequence. Right panel shows UDP fire-and-forget with lost packets and multicast router fan-out to three subscribers."/>
+  </div>
+  <div class="g g3">
+    <div class="card">
+      <div class="card-hd">TCP — The Three-Way Handshake</div>
+      <ul>
+        <li><strong>SYN:</strong> "I want to connect, my sequence starts at X"</li>
+        <li><strong>SYN-ACK:</strong> "OK, my sequence starts at Y, I acknowledge your X"</li>
+        <li><strong>ACK:</strong> "I acknowledge your Y — we're connected"</li>
+        <li>Data transfer is bidirectional — both sides can send simultaneously</li>
+        <li>Close: FIN→ACK→FIN→ACK (four steps, graceful drain of in-flight data)</li>
+        <li>Every segment has a sequence number; receiver reorders and ACKs</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">UDP — No Ceremony</div>
+      <ul>
+        <li>No connection setup — first packet sent immediately</li>
+        <li>No ACK — sender doesn't know if packet arrived</li>
+        <li>No ordering — packets may arrive out of sequence</li>
+        <li>8-byte header vs 20+ for TCP</li>
+        <li><strong>Used for:</strong> DNS (1 request/response), video calls (stale frame is fine), gaming (latest position supersedes old), QUIC (HTTP/3 over UDP with reliability in user space)</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Multicast — Efficient One-to-Many</div>
+      <ul>
+        <li>Source sends ONE packet; network replicates at last hop</li>
+        <li>Receivers join a multicast group (224.x.x.x) using IGMP</li>
+        <li>Router knows which downstream ports have group members — copies only there</li>
+        <li>Saves enormous bandwidth vs sending N separate unicast streams</li>
+        <li><strong>Used for:</strong> IPTV live TV, Bloomberg/Reuters market data feeds, corporate live events</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 4: IPv4 vs IPv6 ══════════════════════════════════ -->
+<section class="slide" data-title="IPv4 vs IPv6">
+  <div class="s-era">Network Layer · Topic 3</div>
+  <h2 class="s-title"><span class="hi2">IPv4</span> vs <span class="hi3">IPv6</span> — Why 4 Billion Wasn't Enough</h2>
+  <p class="s-sub">IPv4 was designed in 1981 for a network of university computers. Nobody anticipated billions of smartphones, smart TVs, IoT sensors, and cloud servers. IPv6 solves the address exhaustion problem permanently — but IPv4 lives on via NAT.</p>
+  <div class="dbox wide" style="margin-bottom:0.75rem;">
+    <img src="images/ipv4-ipv6.svg" alt="IPv4 address as 4 dot-separated octets with 32-bit total, IPv6 as 8 groups of 16-bit hex with 128-bit total, and NAT diagram showing 6 private devices sharing one public IPv4 address"/>
+  </div>
+  <div class="g g3">
+    <div class="card c-red">
+      <div class="card-hd">IPv4 Exhaustion</div>
+      <ul>
+        <li>2³² = 4.29 billion addresses — sounded limitless in 1981</li>
+        <li>IANA last /8 block allocated February 2011</li>
+        <li>Asia Pacific (APNIC) ran out 2011; Europe (RIPE) 2019</li>
+        <li>IPv4 addresses now trade on secondary markets for $30–50 each</li>
+        <li>NAT bought a decade of extra time — but breaks end-to-end connectivity</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">IPv6 — Effectively Unlimited</div>
+      <ul>
+        <li>2¹²⁸ ≈ 340 undecillion (3.4 × 10³⁸) addresses</li>
+        <li>Every device on Earth could have trillions of addresses each</li>
+        <li>No NAT needed — every device gets a globally routable address</li>
+        <li>Simpler header (40 bytes, fixed length) vs IPv4's variable header</li>
+        <li>~40% of global internet traffic is now IPv6 (Google statistics, 2024)</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Why IPv4 Still Dominates</div>
+      <ul>
+        <li>Installed base: billions of devices, routers, firewalls with IPv4</li>
+        <li>NAT works well enough for outbound connections (home users, mobile)</li>
+        <li>Dual-stack: most modern systems run both IPv4 and IPv6 simultaneously</li>
+        <li>Transition will take decades — many enterprise data centres still IPv4-only internally</li>
+        <li>Private address ranges (10.x, 172.16.x, 192.168.x) will remain in use forever</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 5: DNS ════════════════════════════════════════════ -->
+<section class="slide" data-title="DNS — The Internet's Phone Book">
+  <div class="s-era">Application Layer · Topic 4</div>
+  <h2 class="s-title"><span class="hi">DNS</span> — Recursive Resolution of <code>google.com</code></h2>
+  <p class="s-sub">The Domain Name System is a globally distributed, hierarchical database that maps human-readable names to IP addresses. Without DNS, you would need to memorise 142.250.189.206 instead of typing google.com. The diagram below shows every step of a fresh DNS lookup — animation cycles through the nine steps.</p>
+  <div class="dbox wide" style="margin-bottom:0.75rem;">
+    <img src="images/dns-lookup.svg" alt="Animated 9-step DNS recursive resolution: browser asks resolver, resolver asks root server, root refers to .com TLD, TLD refers to Google's authoritative NS, auth NS returns 142.250.189.206, resolver caches and replies, browser connects"/>
+  </div>
+  <div class="g g3">
+    <div class="card">
+      <div class="card-hd">The Hierarchy</div>
+      <ul>
+        <li><strong>Root servers:</strong> 13 logical clusters (a–m.root-servers.net), hundreds of physical servers globally via Anycast. Know where each TLD lives.</li>
+        <li><strong>TLD servers:</strong> Verisign runs .com/.net. ICANN delegates. Know which authoritative NS to use for each domain.</li>
+        <li><strong>Authoritative NS:</strong> your registrar's server, or Route 53, Cloudflare DNS. Has your actual DNS zone records.</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Caching — Why It's Fast</div>
+      <ul>
+        <li>Every DNS response has a TTL. Once cached, steps 2–7 are skipped.</li>
+        <li>Your OS has a DNS cache. Your browser has one. Your ISP resolver has one.</li>
+        <li>Most lookups return in &lt;1ms from cache. Cold lookup: 50–200ms.</li>
+        <li>Low TTL (60s): fast failover. High TTL (86400s): faster browsing, slower propagation of changes.</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Key Record Types</div>
+      <ul>
+        <li><strong>A:</strong> hostname → IPv4 address</li>
+        <li><strong>AAAA:</strong> hostname → IPv6 address</li>
+        <li><strong>CNAME:</strong> alias → canonical name (www → example.com)</li>
+        <li><strong>MX:</strong> mail exchanger — where to deliver email</li>
+        <li><strong>TXT:</strong> arbitrary text — SPF, DKIM, domain verification</li>
+        <li><strong>NS:</strong> which nameservers are authoritative for this zone</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 6: Domain Registration ══════════════════════════ -->
+<section class="slide" data-title="Domain Registration & DNS in Practice">
+  <div class="s-era">Application Layer · Topic 5</div>
+  <h2 class="s-title">Registering a <span class="hi2">Domain</span>, Website &amp; Email</h2>
+  <p class="s-sub">Owning a domain name is the foundation of every online presence. Three separate registrations — domain name, website hosting, and email hosting — each add their own DNS records, and DNS ties them all together.</p>
+  <div class="dbox wide" style="margin-bottom:0.75rem;">
+    <img src="images/domain-registration.svg" alt="Flow from domain registrar through TLD registry to authoritative name server showing A record for web server and MX record for mail server, with DNS lookup and email delivery flows explained"/>
+  </div>
+  <div class="g g3">
+    <div class="card">
+      <div class="card-hd">① Register the Domain Name</div>
+      <ul>
+        <li>Go to GoDaddy, Namecheap, Google Domains, or AWS Route 53</li>
+        <li>Search for <code>mycompany.com</code> → pay ~$10–15/year</li>
+        <li>Registrar notifies the TLD registry (.com = Verisign) that you own it</li>
+        <li>You can now control DNS records for mycompany.com</li>
+        <li>WHOIS privacy: hide your personal contact details from public database</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">② Register a Website</div>
+      <ul>
+        <li>Get a server: AWS EC2, DigitalOcean, Netlify, Vercel, or shared hosting</li>
+        <li>Note the server's public IP address (e.g. 45.33.32.156)</li>
+        <li>Add an <strong>A record</strong> in your DNS panel: <code>mycompany.com → 45.33.32.156</code></li>
+        <li>Add a CNAME: <code>www → mycompany.com</code></li>
+        <li>Install TLS certificate (Let's Encrypt, free) → HTTPS works automatically</li>
+        <li>DNS propagation: ~5 minutes to 48 hours (TTL dependent)</li>
+      </ul>
+    </div>
+    <div class="card c-red">
+      <div class="card-hd">③ Register Email (@mycompany.com)</div>
+      <ul>
+        <li>Sign up for Google Workspace, Microsoft 365, or Zoho Mail</li>
+        <li>Provider gives you an MX record: <code>mycompany.com MX mail.google.com</code></li>
+        <li>Add MX record in your DNS → email to @mycompany.com now routes to Google</li>
+        <li>Also add SPF, DKIM, DMARC TXT records (anti-spam proof)</li>
+        <li>Create user accounts (alice@mycompany.com, bob@mycompany.com) in admin panel</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 7: HTTP vs HTTPS ═════════════════════════════════ -->
+<section class="slide" data-title="HTTP vs HTTPS">
+  <div class="s-era">Application Layer · Topic 6</div>
+  <h2 class="s-title"><span class="hi2">HTTP</span> vs <span class="hi3">HTTPS</span> — TLS Handshake</h2>
+  <p class="s-sub">HTTP sends everything as readable text — anyone on the same network can read your passwords. HTTPS wraps HTTP inside TLS (Transport Layer Security), encrypting all data with AES-256 and authenticating the server with a certificate.</p>
+  <div class="dbox wide" style="margin-bottom:0.75rem;">
+    <img src="images/http-https.svg" alt="HTTP panel showing plaintext GET request with password visible to an attacker Eve on the network. HTTPS panel shows TLS handshake: ClientHello, ServerHello with certificate, key exchange, then all subsequent data encrypted. Full DNS+HTTPS flow listed on left."/>
+  </div>
+  <div class="g g3">
+    <div class="card">
+      <div class="card-hd">TLS Handshake (TLS 1.3)</div>
+      <ul>
+        <li><strong>ClientHello:</strong> "I support TLS 1.3, here are my cipher suites and a random nonce"</li>
+        <li><strong>ServerHello + Certificate:</strong> chosen cipher, server's public key cert (signed by CA)</li>
+        <li><strong>Certificate verification:</strong> browser checks CA signature, expiry, domain match</li>
+        <li><strong>Key derivation:</strong> both sides independently compute the same session key (ECDHE)</li>
+        <li><strong>All further traffic:</strong> encrypted with AES-256-GCM</li>
+        <li>TLS 1.3: 1-RTT (was 2-RTT in TLS 1.2) — faster startup</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Certificates &amp; Certificate Authorities</div>
+      <ul>
+        <li>A certificate is a public key + domain name, digitally signed by a trusted CA</li>
+        <li><strong>CA hierarchy:</strong> Root CA (in your OS/browser) → Intermediate CA → your cert</li>
+        <li><strong>Let's Encrypt:</strong> free automated certificates, ~300 million active certs</li>
+        <li><strong>EV certificates:</strong> Extended Validation — CA verified company identity (green bar)</li>
+        <li>Expired cert → browser shows red warning and blocks access</li>
+        <li>Certificate Transparency (CT) logs: all certs publicly logged, detectable forgery</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Full URL-to-Page Flow</div>
+      <ul>
+        <li>Type <code>https://mycompany.com</code> → DNS lookup (50–200ms cold, &lt;1ms cached)</li>
+        <li>TCP connect to port 443 (SYN/SYN-ACK/ACK ~10–50ms)</li>
+        <li>TLS handshake (~10–30ms for TLS 1.3)</li>
+        <li>HTTP GET / → server returns HTML (&lt;50ms for close servers)</li>
+        <li>Total: 150–300ms first visit · &lt;50ms repeated visit (TLS session resume)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 8: SMTP ═══════════════════════════════════════════ -->
+<section class="slide" data-title="SMTP — Email Routing">
+  <div class="s-era">Application Layer · Topic 7</div>
+  <h2 class="s-title"><span class="hi">SMTP</span> — How Email Travels Across Domains</h2>
+  <p class="s-sub">Simple Mail Transfer Protocol (1982) is the standard for sending email between mail servers. A message from alice@company-a.com to bob@company-b.com hops through DNS, authentication checks, and spam filters before reaching Bob's inbox.</p>
+  <div class="dbox wide" style="margin-bottom:0.75rem;">
+    <img src="images/smtp-flow.svg" alt="SMTP flow showing Alice's mail client connecting to Company A's MTA on port 587, MTA doing DNS MX lookup for company-b.com, connecting to company-b MTA on port 25 with STARTTLS, receiving MTA checking SPF/DKIM/DMARC, delivering to Bob via IMAP"/>
+  </div>
+  <div class="g g3">
+    <div class="card">
+      <div class="card-hd">The SMTP Hops</div>
+      <ul>
+        <li><strong>Port 587 (submission):</strong> your mail client → your mail server (authenticated)</li>
+        <li><strong>Port 25 (relay):</strong> mail server → remote mail server (MTA to MTA)</li>
+        <li><strong>Port 465/993 (IMAP):</strong> your mail client downloads messages from server</li>
+        <li>DNS MX lookup finds the destination mail server for any domain</li>
+        <li>STARTTLS upgrades plain SMTP to encrypted — mandatory on modern servers</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Anti-Spam DNS Records</div>
+      <ul>
+        <li><strong>SPF:</strong> TXT record listing authorised sending IPs for your domain</li>
+        <li><strong>DKIM:</strong> cryptographic signature per email — verifiable via DNS public key</li>
+        <li><strong>DMARC:</strong> policy for SPF/DKIM failures — reject, quarantine, or report</li>
+        <li>Gmail and Yahoo (2024): bulk senders must have DMARC. No exceptions.</li>
+        <li>Missing these = email lands in spam or is rejected outright</li>
+      </ul>
+    </div>
+    <div class="card c-red">
+      <div class="card-hd">Blacklisting &amp; Reputation</div>
+      <ul>
+        <li>Spam complaint rate &gt;0.1% → Gmail starts filtering your email</li>
+        <li>Spam complaint rate &gt;0.3% → Gmail rejects your email entirely</li>
+        <li>IP/domain blacklists (Spamhaus ZEN) are checked by every MTA on receipt</li>
+        <li>New domain/IP must "warm up" slowly — start with 100 emails/day, scale over weeks</li>
+        <li>Remove unsubscribers immediately; clean bounce lists regularly</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 9: LAN vs WAN vs VLAN ════════════════════════════ -->
+<section class="slide" data-title="LAN vs MAN vs WAN vs VLAN">
+  <div class="s-era">Network Topology · Topic 8</div>
+  <h2 class="s-title"><span class="hi">LAN</span> · <span class="hi2">MAN</span> · <span class="hi3">WAN</span> · VLAN</h2>
+  <p class="s-sub">Networks are classified by their geographic scope. LAN covers a building, MAN a city, WAN the globe. VLANs create logical separation within a physical LAN — the same physical switch can host completely isolated networks.</p>
+  <div class="dbox wide" style="margin-bottom:0.75rem;">
+    <img src="images/lan-wan-vlan.svg" alt="Four network type diagrams: LAN showing switch with 6 devices in one building; MAN showing fibre ring connecting two data centres and two campuses across a city; WAN showing BGP-connected routers in Mumbai, London, New York, Singapore, Frankfurt, LA; VLAN showing HR and Engineering devices on different VLANs sharing one physical switch with colour-coded logical separation"/>
+  </div>
+  <div class="g g4">
+    <div class="card">
+      <div class="card-hd">LAN — &lt;1 km</div>
+      <ul>
+        <li>One building, one floor — Ethernet cable or Wi-Fi</li>
+        <li>Layer 2 switching — MAC address forwarding</li>
+        <li>1–100 Gbps speeds</li>
+        <li>No routing needed — flat network</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">MAN — 1–50 km</div>
+      <ul>
+        <li>City-wide — utility fibre or ISP metro ring</li>
+        <li>Connects multiple buildings or campuses</li>
+        <li>Technologies: MPLS, Metro Ethernet, dark fibre</li>
+        <li>Examples: city council network, university campus</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">WAN — Global</div>
+      <ul>
+        <li>Country to continent — submarine cables, satellite</li>
+        <li>BGP routing between autonomous systems</li>
+        <li>Technologies: MPLS, SD-WAN, internet transit</li>
+        <li>Examples: corporate WAN, the public internet itself</li>
+      </ul>
+    </div>
+    <div class="card c-purple">
+      <div class="card-hd">VLAN — 802.1Q</div>
+      <ul>
+        <li>Logical network on one physical switch</li>
+        <li>Packets tagged with VLAN ID (1–4094)</li>
+        <li>VLANs cannot communicate without a router</li>
+        <li>Use: isolate HR, Finance, Eng on one switch</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 10: Routers, LBs, Switches in a DC ═══════════════ -->
+<section class="slide" data-title="Routers, Load Balancers & Switches">
+  <div class="s-era">Data Centre Architecture · Topic 9</div>
+  <h2 class="s-title">Routers · <span class="hi">Load Balancers</span> · <span class="hi3">Switches</span> in a Data Centre</h2>
+  <p class="s-sub">In a production data centre, traffic flows through a precisely ordered sequence of devices — each operating at a different OSI layer with a specific function. The diagram shows the full path from the public internet to a database server.</p>
+  <div class="dbox wide" style="margin-bottom:0.75rem;">
+    <img src="images/datacenter-network.svg" alt="Data centre network showing Internet to Border Router with BGP, through Outer Firewall stateful, through WAF for HTTP inspection, through L7 Load Balancer with SSL termination, to Core Switch L3 with VLANs, to ToR switches, to Web Tier nginx servers VLAN 10, App Tier Spring Boot servers VLAN 20, and DB Tier PostgreSQL VLAN 30 with Internal Firewall between App and DB tiers"/>
+  </div>
+  <div class="g g3">
+    <div class="card">
+      <div class="card-hd">Router — Layer 3 Path Selection</div>
+      <ul>
+        <li>Border router: speaks BGP to the internet. Announces your IP ranges. Selects best inbound/outbound paths.</li>
+        <li>Core router (L3 switch): routes between VLANs/subnets internally</li>
+        <li>Operates on IP addresses only — does not read TCP ports or HTTP</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Load Balancer — Distribute Traffic</div>
+      <ul>
+        <li>Sits between the internet-facing tier and the server pool</li>
+        <li>Health-checks each server; removes failed servers automatically</li>
+        <li>SSL termination: decrypts HTTPS here, backend gets plain HTTP</li>
+        <li>URL routing: <code>/api</code> → app servers, <code>/static</code> → CDN origin, <code>/admin</code> → separate pool</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Switch — Layer 2 Forwarding</div>
+      <ul>
+        <li>Core switch: OSPF routing between VLANs, 10–100 Gbps trunks</li>
+        <li>Top-of-Rack (ToR) switch: one per rack, connects servers at 1–10 Gbps</li>
+        <li>VLANs 10/20/30 enforce tier isolation at Layer 2 — web tier cannot directly reach DB tier</li>
+        <li>Spanning Tree Protocol (STP) or ECMP for redundancy</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 11: Firewalls & WAF ══════════════════════════════ -->
+<section class="slide" data-title="Firewalls & WAF">
+  <div class="s-era">Security · Topic 10</div>
+  <h2 class="s-title"><span class="hi2">Firewalls</span> &amp; <span class="hi">WAF</span> — Layers of Defence</h2>
+  <p class="s-sub">The data centre diagram from the previous slide has two security layers baked in. A stateful firewall filters at Layer 3/4 (IP + port). A WAF (Web Application Firewall) filters at Layer 7 (HTTP content). Together they implement defence in depth.</p>
+
+  <div class="g g2" style="margin-bottom:0.75rem;">
+    <div class="card c-red">
+      <div class="card-hd">🔥 Stateful Firewall (Layer 3/4)</div>
+      <ul>
+        <li>Tracks every connection's state: NEW → ESTABLISHED → RELATED → INVALID</li>
+        <li>Rules: allow inbound TCP:443 from any, block TCP:22 from internet</li>
+        <li>Blocks ports you don't use — default deny all, allow specific</li>
+        <li>Technologies: Linux iptables/nftables, pfSense, Palo Alto NGFW, Cisco ASA</li>
+        <li><strong>Position:</strong> immediately after the border router — first defence</li>
+        <li>Can also do IPS: Deep Packet Inspection to detect attack signatures</li>
+        <li>Internal firewall between app and DB tiers: only port 5432 (PostgreSQL) allowed from app VLAN — principle of least privilege</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">🛡 WAF — Web Application Firewall (Layer 7)</div>
+      <ul>
+        <li>Reads HTTP request payload — something a stateful FW cannot do</li>
+        <li>Blocks OWASP Top 10 attacks: SQL injection, XSS, CSRF, RFI, path traversal</li>
+        <li>Example rule: block any request containing <code>' OR 1=1--</code> in any parameter</li>
+        <li>Rate limiting: block IP after 100 requests/second (DDoS mitigation)</li>
+        <li>Bot detection: JavaScript challenge or CAPTCHA for suspicious user agents</li>
+        <li>Technologies: AWS WAF, Cloudflare WAF, ModSecurity, Imperva</li>
+        <li><strong>Position:</strong> after outer firewall, before load balancer — inspects HTTPS after SSL termination</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout ca-amber">
+    <strong>Defence in depth:</strong> Border Router (DDoS scrubbing) → Outer Firewall (stateful, port-level) → WAF (HTTP-level) → L7 Load Balancer (SSL, routing) → Core Switch (VLAN isolation) → Internal Firewall (east-west, least privilege) → Database (encrypted at rest). A breach must defeat all six layers sequentially.
+  </div>
+</section>
+
+<!-- ══ SLIDE 12: CDN & Edge Computing ════════════════════════ -->
+<section class="slide" data-title="CDN & Edge Computing">
+  <div class="s-era">Distribution Architecture · Topic 11</div>
+  <h2 class="s-title"><span class="hi3">CDN</span> → <span class="hi">Edge Computing</span></h2>
+  <p class="s-sub">A CDN caches static content at Points of Presence (PoPs) worldwide — reducing latency from 200ms to 5ms by serving from nearby. Edge Computing goes further: it runs actual application code at those PoPs, eliminating round trips to the origin entirely.</p>
+  <div class="dbox wide" style="margin-bottom:0.75rem;">
+    <img src="images/cdn-edge.svg" alt="CDN diagram showing origin server in Virginia and Mumbai user with 200ms latency without CDN, vs 5ms to nearest Mumbai CDN PoP. Edge computing enhancement showing 6 serverless functions running at the edge PoP including premium calculator, auth JWT verification, A/B testing, geo-IP redirect, bot detection, rate limiting. Insurance example and additional use cases."/>
+  </div>
+  <div class="g g3">
+    <div class="card">
+      <div class="card-hd">CDN — Content Delivery Network</div>
+      <ul>
+        <li>Hundreds of PoPs in every major city — Cloudflare has 310+, Akamai 4000+</li>
+        <li>Static assets (HTML, CSS, JS, images, video) cached at nearest PoP</li>
+        <li>DNS directs user to geographically nearest PoP automatically (Anycast or GeoDNS)</li>
+        <li>Cache hit: served from PoP in &lt;5ms · Cache miss: fetches from origin, caches for TTL</li>
+        <li>Major providers: Cloudflare, Akamai, AWS CloudFront, Fastly, Azure CDN</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Edge Computing — Code at the PoP</div>
+      <ul>
+        <li>V8 isolates (Cloudflare Workers) or lightweight containers run at each PoP</li>
+        <li>Your JavaScript/Rust/Go function executes in &lt;1ms, returns result — origin never called</li>
+        <li>Cold start: ~0ms (persistent isolate) vs Lambda's ~100ms</li>
+        <li>Insurance example: premium calculator runs rating tables at Mumbai edge — user types, gets quote as they type, no spinner</li>
+        <li>Platforms: Cloudflare Workers, AWS Lambda@Edge, Fastly Compute@Edge, Vercel Edge Functions</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">More Edge Use Cases</div>
+      <ul>
+        <li><strong>JWT verification:</strong> authenticate every request at the edge — block before origin</li>
+        <li><strong>A/B testing:</strong> edge splits traffic, no origin involvement, zero latency</li>
+        <li><strong>Personalisation:</strong> edge reads cookie, serves personalised HTML — faster than server-side rendering</li>
+        <li><strong>Gaming:</strong> matchmaking server at nearest edge node — 5ms vs 200ms</li>
+        <li><strong>Healthcare:</strong> patient triage chatbot at edge, works even with poor connectivity</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 13: Software Defined Networking ══════════════════ -->
+<section class="slide" data-title="Software Defined Networking">
+  <div class="s-era">Advanced Networking · Topic 12</div>
+  <h2 class="s-title"><span class="hi2">Software Defined Networking</span> — Programmable Infrastructure</h2>
+  <p class="s-sub">Traditional networks configure each device individually. SDN separates the control plane (routing decisions) from the data plane (packet forwarding) — a centralised controller programs all switches via API, making the network as programmable as software.</p>
+  <div class="dbox wide" style="margin-bottom:0.75rem;">
+    <img src="images/sdn-spine-leaf.svg" alt="Left side shows physical spine-leaf network with two spine switches and four leaf switches each connected to every spine, with servers underneath each leaf. Right side shows SDN architecture with central controller pushing flow rules via OpenFlow southbound API to dumb data-plane switches, with Kubernetes northbound API calling the controller, and virtual overlay network (VXLAN) above the physical fabric."/>
+  </div>
+  <div class="g g3">
+    <div class="card">
+      <div class="card-hd">Physical Spine-Leaf — The Foundation</div>
+      <ul>
+        <li>Any server reaches any other server in exactly 2 hops (leaf → spine → leaf)</li>
+        <li>All spine-leaf links are equal cost — traffic distributed across all spines</li>
+        <li>Predictable latency, maximum east-west bandwidth (server-to-server)</li>
+        <li>Scale out: add a leaf switch, connect to all spines — done</li>
+        <li>Each device configured individually: VLAN, ACL, OSPF per switch</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">SDN — Centralised Control</div>
+      <ul>
+        <li><strong>Control plane</strong> (SDN controller): computes routes, holds global topology view</li>
+        <li><strong>Data plane</strong> (dumb switches): just forward packets per flow table rules</li>
+        <li><strong>Southbound API</strong> (OpenFlow, NETCONF): controller pushes rules to switches</li>
+        <li><strong>Northbound API</strong> (REST/gRPC): Kubernetes/OpenStack requests network segments</li>
+        <li>Provision a new VLAN: one API call → controller pushes to all switches in seconds</li>
+        <li>VXLAN overlay: virtual Layer 2 networks tunnelled over Layer 3 physical fabric</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">When to Choose Which</div>
+      <ul>
+        <li><strong>Physical spine-leaf:</strong> stable large data centres, bare-metal performance, proven hardware, lower operational complexity when team knows physical networking</li>
+        <li><strong>SDN/Overlay:</strong> cloud-native environments, Kubernetes clusters, rapid VM provisioning, multi-tenant isolation without hardware reconfiguration</li>
+        <li><strong>Hybrid (most common):</strong> physical spine-leaf fabric + SDN overlay on top (VMware NSX, Cisco ACI)</li>
+        <li><strong>SD-WAN:</strong> SDN applied to WAN — controller picks best path (MPLS vs internet vs 4G) per application class</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 14: End ════════════════════════════════════════════ -->
+<section class="slide cover" data-title="Questions">
+  <div class="cov-grid"></div>
+  <div class="cov-glow"></div>
+  <div class="cov-content">
+    <div class="cov-kicker">End of Presentation — Networking Fundamentals</div>
+    <h1 class="cov-h1">Questions?<br/><span class="hi">Let's Discuss.</span></h1>
+    <p class="cov-desc">From a seven-layer model conceived in 1984 to Cloudflare Workers executing your code in 310 cities in under 1 millisecond — networking has always been about the same thing: getting the right data to the right place as fast as possible. The abstractions change; the principles don't.</p>
+    <div class="chips">
+      <span class="chip ca">HTTP/3 &amp; QUIC</span>
+      <span class="chip cg">Zero Trust Networking</span>
+      <span class="chip">BGP Routing Security (RPKI)</span>
+      <span class="chip cp">Network as Code (Terraform)</span>
+    </div>
+  </div>
+</section>
+
+</div>
+<nav id="nav">
+  <div class="nav-group">
+    <button class="nb" id="btn-prev">← Prev</button>
+    <button class="nb" id="btn-next">Next →</button>
+    <span id="counter">1 / 14</span>
+  </div>
+  <div class="nav-group"><select id="jump"></select></div>
+  <div class="nav-group"><button id="theme-btn">☀ Light</button></div>
+</nav>
+<script src="../shared/js/deck.js"></script>
+</body>
+</html>

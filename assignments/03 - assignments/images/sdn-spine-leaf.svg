@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 540">
+  <style>
+    .spine  {fill:var(--svg-fill1,rgba(99,179,237,.22));stroke:var(--svg-blue,#63b3ed);stroke-width:1.5;}
+    .leaf   {fill:var(--svg-fill1,rgba(183,148,244,.22));stroke:var(--svg-purple,#b794f4);stroke-width:1.3;}
+    .srv    {fill:var(--svg-fill1,rgba(104,211,145,.16));stroke:var(--svg-green,rgba(104,211,145,.5));stroke-width:1.1;}
+    .ctrl   {fill:var(--svg-fill1,rgba(246,173,85,.25));stroke:var(--svg-amber,#f6ad55);stroke-width:1.8;}
+    .northb {fill:var(--svg-fill2,rgba(104,211,145,.1));stroke:var(--svg-green,rgba(104,211,145,.4));stroke-width:1;}
+    .overlay{fill:var(--svg-fill2,rgba(104,211,145,.1));stroke:var(--svg-green,rgba(104,211,145,.5));stroke-width:1.5;stroke-dasharray:6,3;}
+    .physlink {stroke:var(--svg-blue,rgba(99,179,237,.45));fill:none;stroke-width:1.3;}
+    .ctrllink {stroke:var(--svg-amber,rgba(246,173,85,.6));fill:none;stroke-width:1.2;stroke-dasharray:4,3;}
+    .arr  {fill:var(--svg-text2,rgba(99,179,237,.55));}
+    .arr-a{fill:var(--svg-amber,rgba(246,173,85,.7));}
+    .hdr  {fill:var(--svg-text2,rgba(99,179,237,.55));font-family:monospace;font-size:9.5px;letter-spacing:1px;font-weight:700;text-anchor:middle;}
+    .lbl  {fill:var(--svg-text1,#d0e4f8);font-family:monospace;font-size:8px;font-weight:700;text-anchor:middle;}
+    .sub  {fill:var(--svg-text2,#6a9ab8);font-family:monospace;font-size:7.5px;text-anchor:middle;}
+    .note {fill:var(--svg-text2,#6a9ab8);font-family:monospace;font-size:8px;}
+    .good {fill:var(--svg-green,rgba(104,211,145,.8));font-family:monospace;font-size:8px;}
+    .warn {fill:var(--svg-red,rgba(252,129,129,.75));font-family:monospace;font-size:8px;}
+    .cp   {fill:var(--svg-amber,rgba(246,173,85,.9));font-family:monospace;font-size:8px;font-weight:700;text-anchor:middle;}
+    .dp   {fill:var(--svg-blue,rgba(99,179,237,.8));font-family:monospace;font-size:8px;font-weight:700;text-anchor:middle;}
+    .divl {stroke:var(--svg-text2,rgba(99,179,237,.18));fill:none;stroke-dasharray:5,4;}
+  </style>
+  <defs>
+    <marker id="sdnA"  markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" class="arr"/></marker>
+    <marker id="sdnAa" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" class="arr-a"/></marker>
+  </defs>
+
+  <!-- ─── LEFT: Physical Spine-Leaf ─── -->
+  <text x="196" y="14" class="hdr">PHYSICAL SPINE-LEAF NETWORK</text>
+
+  <!-- Spine switches -->
+  <rect x="40"  y="24" width="110" height="32" rx="5" class="spine"/>
+  <text x="95"  y="38" class="lbl">SPINE 1</text>
+  <text x="95"  y="50" class="sub">Arista 7280 · 100G</text>
+
+  <rect x="220" y="24" width="110" height="32" rx="5" class="spine"/>
+  <text x="275" y="38" class="lbl">SPINE 2</text>
+  <text x="275" y="50" class="sub">Arista 7280 · 100G</text>
+
+  <!-- Leaf switches — spread out more -->
+  <rect x="6"   y="84" width="90" height="32" rx="5" class="leaf"/>
+  <text x="51"  y="98" class="lbl">LEAF 1</text>
+  <text x="51"  y="109" class="sub">Cisco 9300</text>
+
+  <rect x="104" y="84" width="90" height="32" rx="5" class="leaf"/>
+  <text x="149" y="98" class="lbl">LEAF 2</text>
+  <text x="149" y="109" class="sub">Cisco 9300</text>
+
+  <rect x="202" y="84" width="90" height="32" rx="5" class="leaf"/>
+  <text x="247" y="98" class="lbl">LEAF 3</text>
+  <text x="247" y="109" class="sub">Cisco 9300</text>
+
+  <rect x="300" y="84" width="90" height="32" rx="5" class="leaf"/>
+  <text x="345" y="98" class="lbl">LEAF 4</text>
+  <text x="345" y="109" class="sub">Cisco 9300</text>
+
+  <!-- Spine-Leaf links: every leaf → every spine -->
+  <line x1="51"  y1="84" x2="80"  y2="56" class="physlink"/>
+  <line x1="51"  y1="84" x2="228" y2="56" class="physlink"/>
+  <line x1="149" y1="84" x2="100" y2="56" class="physlink"/>
+  <line x1="149" y1="84" x2="238" y2="56" class="physlink"/>
+  <line x1="247" y1="84" x2="112" y2="56" class="physlink"/>
+  <line x1="247" y1="84" x2="252" y2="56" class="physlink"/>
+  <line x1="345" y1="84" x2="128" y2="56" class="physlink"/>
+  <line x1="345" y1="84" x2="308" y2="56" class="physlink"/>
+
+  <!-- Servers under each leaf -->
+  <rect x="6"   y="132" width="40" height="18" rx="3" class="srv"/><text x="26"  y="144" class="sub">S1</text>
+  <rect x="52"  y="132" width="40" height="18" rx="3" class="srv"/><text x="72"  y="144" class="sub">S2</text>
+  <rect x="104" y="132" width="40" height="18" rx="3" class="srv"/><text x="124" y="144" class="sub">S3</text>
+  <rect x="150" y="132" width="40" height="18" rx="3" class="srv"/><text x="170" y="144" class="sub">S4</text>
+  <rect x="202" y="132" width="40" height="18" rx="3" class="srv"/><text x="222" y="144" class="sub">S5</text>
+  <rect x="248" y="132" width="40" height="18" rx="3" class="srv"/><text x="268" y="144" class="sub">S6</text>
+  <rect x="300" y="132" width="40" height="18" rx="3" class="srv"/><text x="320" y="144" class="sub">S7</text>
+  <rect x="346" y="132" width="40" height="18" rx="3" class="srv"/><text x="366" y="144" class="sub">S8</text>
+
+  <line x1="26"  y1="132" x2="32"  y2="116" class="physlink"/>
+  <line x1="72"  y1="132" x2="68"  y2="116" class="physlink"/>
+  <line x1="124" y1="132" x2="130" y2="116" class="physlink"/>
+  <line x1="170" y1="132" x2="166" y2="116" class="physlink"/>
+  <line x1="222" y1="132" x2="228" y2="116" class="physlink"/>
+  <line x1="268" y1="132" x2="264" y2="116" class="physlink"/>
+  <line x1="320" y1="132" x2="326" y2="116" class="physlink"/>
+  <line x1="366" y1="132" x2="362" y2="116" class="physlink"/>
+
+  <!-- Notes under physical -->
+  <rect x="6" y="160" width="384" height="96" rx="6" fill="var(--svg-fill2,rgba(99,179,237,.04))" stroke="var(--svg-border,rgba(99,179,237,.12))" stroke-width=".8"/>
+  <text x="14" y="176" class="note">Every leaf → every spine = any server reaches any other</text>
+  <text x="14" y="190" class="note">server in exactly 2 hops (leaf→spine→leaf).</text>
+  <text x="14" y="206" class="good">✓ Predictable latency · High east-west bandwidth</text>
+  <text x="14" y="220" class="good">✓ Scale out: add a leaf, connect to all spines</text>
+  <text x="14" y="236" class="warn">✗ Manual config per device: VLAN, ACL, OSPF</text>
+  <text x="14" y="250" class="warn">✗ Config drift risk · Slow provisioning (hours)</text>
+
+  <line x1="400" y1="10" x2="400" y2="534" class="divl"/>
+
+  <!-- ─── RIGHT: SDN ─── -->
+  <text x="612" y="14" class="hdr">SDN — SOFTWARE DEFINED NETWORKING</text>
+
+  <!-- SDN Controller -->
+  <rect x="414" y="24" width="400" height="46" rx="7" class="ctrl"/>
+  <text x="614" y="38" class="cp">SDN CONTROLLER (CONTROL PLANE)</text>
+  <text x="614" y="51" class="sub">OpenFlow · ONOS · OpenDaylight · Cisco ACI · VMware NSX</text>
+  <text x="614" y="64" class="sub">Global network view · Computes routing · Pushes flow rules via southbound API</text>
+
+  <!-- Northbound API box — moved to avoid overlap -->
+  <rect x="664" y="86"  width="150" height="44" rx="5" class="northb"/>
+  <text x="739" y="102" class="lbl">Kubernetes / OpenStack</text>
+  <text x="739" y="114" class="sub">Northbound REST/gRPC API</text>
+  <text x="739" y="124" class="sub">Requests network segments</text>
+
+  <!-- Data-plane switches -->
+  <rect x="418" y="86"  width="100" height="32" rx="5" class="leaf"/>
+  <text x="468" y="100" class="lbl">SWITCH A</text>
+  <text x="468" y="111" class="sub">data plane only</text>
+
+  <rect x="526" y="86"  width="100" height="32" rx="5" class="leaf"/>
+  <text x="576" y="100" class="lbl">SWITCH B</text>
+  <text x="576" y="111" class="sub">data plane only</text>
+
+  <rect x="634" y="86"  width="100" height="32" rx="5" class="leaf"/>
+  <text x="684" y="100" class="lbl">SWITCH C</text>
+  <text x="684" y="111" class="sub">data plane only</text>
+
+  <!-- Southbound API label -->
+  <text x="576" y="80" class="cp">← Southbound API (OpenFlow / NETCONF) →</text>
+
+  <!-- Controller to switches -->
+  <line x1="524" y1="80" x2="468" y2="84" class="ctrllink" marker-end="url(#sdnAa)"/>
+  <line x1="580" y1="80" x2="576" y2="84" class="ctrllink" marker-end="url(#sdnAa)"/>
+  <line x1="640" y1="80" x2="684" y2="84" class="ctrllink" marker-end="url(#sdnAa)"/>
+
+  <!-- Physical links between switches -->
+  <line x1="518" y1="102" x2="524" y2="102" class="physlink"/>
+  <line x1="626" y1="102" x2="632" y2="102" class="physlink"/>
+
+  <!-- VMs under switches -->
+  <rect x="418" y="132" width="46" height="18" rx="3" class="srv"/><text x="441" y="144" class="sub">VM 1</text>
+  <rect x="470" y="132" width="46" height="18" rx="3" class="srv"/><text x="493" y="144" class="sub">VM 2</text>
+  <rect x="526" y="132" width="46" height="18" rx="3" class="srv"/><text x="549" y="144" class="sub">VM 3</text>
+  <rect x="578" y="132" width="46" height="18" rx="3" class="srv"/><text x="601" y="144" class="sub">VM 4</text>
+  <rect x="634" y="132" width="46" height="18" rx="3" class="srv"/><text x="657" y="144" class="sub">VM 5</text>
+  <rect x="686" y="132" width="46" height="18" rx="3" class="srv"/><text x="709" y="144" class="sub">VM 6</text>
+
+  <line x1="441" y1="132" x2="450" y2="118" class="physlink"/>
+  <line x1="493" y1="132" x2="482" y2="118" class="physlink"/>
+  <line x1="549" y1="132" x2="556" y2="118" class="physlink"/>
+  <line x1="601" y1="132" x2="590" y2="118" class="physlink"/>
+  <line x1="657" y1="132" x2="660" y2="118" class="physlink"/>
+  <line x1="709" y1="132" x2="696" y2="118" class="physlink"/>
+
+  <!-- Overlay label -->
+  <rect x="418" y="158" width="396" height="24" rx="5" class="overlay"/>
+  <text x="616" y="173" class="dp">VIRTUAL OVERLAY NETWORK (VXLAN / GRE) — logical L2 over physical L3</text>
+
+  <!-- SDN notes -->
+  <rect x="414" y="190" width="396" height="96" rx="6" fill="var(--svg-fill2,rgba(246,173,85,.04))" stroke="var(--svg-amber,rgba(246,173,85,.15))" stroke-width=".8"/>
+  <text x="420" y="208" class="good">✓ Centralised: change the whole network via one API call</text>
+  <text x="420" y="222" class="good">✓ Instant provisioning: new VLAN pushed to all switches in seconds</text>
+  <text x="420" y="236" class="good">✓ Kubernetes requests a network segment → controller configures it</text>
+  <text x="420" y="252" class="warn">✗ Controller = single point of failure (deploy as HA cluster)</text>
+  <text x="420" y="266" class="warn">✗ Vendor lock-in risk · Requires OpenFlow-capable hardware</text>
+  <text x="420" y="280" class="note">Control plane: SDN controller knows all topology, computes all paths</text>
+
+  <!-- When-to-choose — shared full width -->
+  <rect x="6"   y="296" width="808" height="236" rx="7" fill="var(--svg-fill2,rgba(99,179,237,.04))" stroke="var(--svg-border,rgba(99,179,237,.14))" stroke-width=".8"/>
+  <text x="410" y="314" class="hdr">WHEN TO CHOOSE WHICH</text>
+
+  <text x="14"  y="334" class="note" font-weight="700" fill="var(--svg-blue,#63b3ed)">Physical Spine-Leaf:</text>
+  <text x="14"  y="350" class="note">Best for stable, large-scale data centres. Predictable, vendor-proven hardware.</text>
+  <text x="14"  y="366" class="note">Teams with deep networking expertise. Performance-critical workloads (HPC, bare metal).</text>
+
+  <text x="14"  y="386" class="note" font-weight="700" fill="var(--svg-amber,#f6ad55)">SDN / Overlay:</text>
+  <text x="14"  y="402" class="note">Best for cloud-native environments. Kubernetes clusters where network must change as fast as pods spin up.</text>
+  <text x="14"  y="418" class="note">Multi-tenant isolation without reconfiguring physical switches. DevOps teams who want network-as-code.</text>
+
+  <text x="14"  y="438" class="note" font-weight="700" fill="var(--svg-green,#68d391)">Hybrid (most common enterprise approach):</text>
+  <text x="14"  y="454" class="note">Physical spine-leaf fabric as the underlay + SDN overlay on top (VMware NSX, Cisco ACI).</text>
+  <text x="14"  y="470" class="note">Physical gives performance guarantees; SDN gives operational flexibility.</text>
+
+  <text x="14"  y="490" class="note" font-weight="700" fill="var(--svg-purple,#b794f4)">SD-WAN:</text>
+  <text x="80"  y="490" class="note">SDN concept applied to WAN links — controller picks best path (MPLS / internet / 4G/5G) per application class.</text>
+
+  <text x="14"  y="510" class="note" font-weight="700" fill="var(--svg-red,#fc8181)">Hyperscalers:</text>
+  <text x="96"  y="510" class="note">Google (Andromeda SDN) · AWS (Nitro + VPC overlay) — both use custom ASICs, avoid vendor hardware entirely.</text>
+  <text x="14"  y="526" class="note">At hyperscale, the cost of vendor switch licensing exceeds the cost of writing your own SDN controller.</text>
+</svg>

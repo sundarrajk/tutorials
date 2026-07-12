@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 280">
+  <style>
+    .col-n { fill:var(--svg-fill2,rgba(99,179,237,.07));  stroke:var(--svg-blue,rgba(99,179,237,.3));   stroke-width:1.2; }
+    .col-i { fill:var(--svg-fill2,rgba(246,173,85,.07));  stroke:var(--svg-amber,rgba(246,173,85,.3));  stroke-width:1.2; }
+    .col-b { fill:var(--svg-fill2,rgba(104,211,145,.07)); stroke:var(--svg-green,rgba(104,211,145,.3)); stroke-width:1.2; }
+    .box-n { fill:var(--svg-fill1,rgba(99,179,237,.18));  stroke:var(--svg-blue,#63b3ed);   stroke-width:1.2; }
+    .box-i { fill:var(--svg-fill1,rgba(246,173,85,.18));  stroke:var(--svg-amber,#f6ad55);  stroke-width:1.2; }
+    .box-b { fill:var(--svg-fill1,rgba(104,211,145,.18)); stroke:var(--svg-green,#68d391);  stroke-width:1.2; }
+    .box-rt{ fill:var(--svg-fill1,rgba(183,148,244,.22)); stroke:var(--svg-purple,#b794f4); stroke-width:1.5; }
+    .cpu   { fill:var(--svg-fill1,rgba(99,179,237,.3));   stroke:var(--svg-blue,#63b3ed);   stroke-width:2; }
+    .arr   { fill:var(--svg-text2,rgba(99,179,237,.55)); }
+    .con   { stroke:var(--svg-text2,rgba(99,179,237,.4)); fill:none; stroke-width:1.4; }
+    .con-n { stroke:var(--svg-blue,rgba(99,179,237,.6));  fill:none; stroke-width:1.4; }
+    .con-i { stroke:var(--svg-amber,rgba(246,173,85,.6)); fill:none; stroke-width:1.4; }
+    .con-b { stroke:var(--svg-green,rgba(104,211,145,.6));fill:none; stroke-width:1.4; }
+    .h-n   { fill:var(--svg-blue,#63b3ed);   font-family:monospace; font-size:10px; font-weight:700; text-anchor:middle; }
+    .h-i   { fill:var(--svg-amber,#f6ad55);  font-family:monospace; font-size:10px; font-weight:700; text-anchor:middle; }
+    .h-b   { fill:var(--svg-green,#68d391);  font-family:monospace; font-size:10px; font-weight:700; text-anchor:middle; }
+    .h-rt  { fill:var(--svg-purple,#b794f4); font-family:monospace; font-size:9px; font-weight:700; text-anchor:middle; }
+    .lbl   { fill:var(--svg-text1,#d0e4f8);  font-family:monospace; font-size:8.5px; text-anchor:middle; }
+    .sub   { fill:var(--svg-text2,#6a9ab8);  font-family:monospace; font-size:7.5px; text-anchor:middle; }
+    .note  { fill:var(--svg-text2,#6a9ab8);  font-family:monospace; font-size:7.5px; }
+    .good  { fill:var(--svg-green,rgba(104,211,145,.75)); font-family:monospace; font-size:7.5px; }
+    .warn  { fill:var(--svg-amber,rgba(246,173,85,.75));  font-family:monospace; font-size:7.5px; }
+    .cpu-t { fill:var(--svg-blue,#63b3ed); font-family:monospace; font-size:9px; font-weight:700; text-anchor:middle; }
+    .divl  { stroke:var(--svg-text2,rgba(99,179,237,.15)); fill:none; stroke-dasharray:5,4; }
+    .ex-t  { fill:var(--svg-text2,rgba(99,179,237,.55)); font-family:monospace; font-size:7.5px; text-anchor:middle; }
+  </style>
+  <defs>
+    <marker id="nA" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <path d="M0,0 L0,7 L7,3.5 z" class="arr"/>
+    </marker>
+  </defs>
+
+  <!-- ── COLUMN 1: NATIVE ── -->
+  <rect x="6"   y="6"  width="240" height="268" rx="8" class="col-n"/>
+  <text x="126" y="26" class="h-n">① NATIVE / COMPILED</text>
+  <text x="126" y="38" class="sub">C · C++ · Go · Rust · COBOL · Fortran</text>
+  <line x1="14" y1="44" x2="238" y2="44" stroke="var(--svg-blue,rgba(99,179,237,.15))" stroke-width=".7" fill="none"/>
+
+  <rect x="18"  y="50" width="100" height="28" rx="5" class="box-n"/>
+  <text x="68"  y="62" class="lbl">Source (.c)</text>
+  <text x="68"  y="72" class="sub">Human readable</text>
+  <line x1="68" y1="80" x2="68" y2="94" class="con-n" marker-end="url(#nA)"/>
+
+  <rect x="18"  y="96" width="100" height="28" rx="5" class="box-n"/>
+  <text x="68"  y="108" class="lbl">Compiler (gcc)</text>
+  <text x="68"  y="118" class="sub">Platform-specific</text>
+  <line x1="68" y1="126" x2="68" y2="140" class="con-n" marker-end="url(#nA)"/>
+
+  <rect x="18"  y="142" width="100" height="28" rx="5" class="box-n"/>
+  <text x="68"  y="154" class="lbl">Native .exe</text>
+  <text x="68"  y="164" class="sub">CPU instructions</text>
+  <line x1="68" y1="172" x2="68" y2="186" class="con-n" marker-end="url(#nA)"/>
+
+  <rect x="108" y="142" width="100" height="28" rx="5" class="box-n"/>
+  <text x="158" y="154" class="lbl">Linux .elf</text>
+  <text x="158" y="164" class="sub">Different binary!</text>
+
+  <rect x="18"  y="188" width="190" height="28" rx="5" class="cpu"/>
+  <text x="113" y="202" class="cpu-t">🖥 CPU EXECUTES DIRECTLY</text>
+  <text x="113" y="212" class="sub">No intermediary — fastest possible</text>
+
+  <text x="14"  y="232" class="good">✓ Maximum performance</text>
+  <text x="14"  y="244" class="good">✓ No startup overhead</text>
+  <text x="14"  y="256" class="warn">✗ Must recompile per platform</text>
+  <text x="14"  y="268" class="warn">✗ Win64 ≠ Linux x64 ≠ ARM</text>
+
+  <line x1="250" y1="10" x2="250" y2="275" class="divl"/>
+
+  <!-- ── COLUMN 2: INTERPRETED ── -->
+  <rect x="256" y="6"  width="250" height="268" rx="8" class="col-i"/>
+  <text x="381" y="26" class="h-i">② INTERPRETED</text>
+  <text x="381" y="38" class="sub">Python · Ruby · PHP · JavaScript (classic) · bash</text>
+  <line x1="264" y1="44" x2="498" y2="44" stroke="var(--svg-amber,rgba(246,173,85,.15))" stroke-width=".7" fill="none"/>
+
+  <rect x="268" y="50" width="110" height="28" rx="5" class="box-i"/>
+  <text x="323" y="62" class="lbl">script.py</text>
+  <text x="323" y="72" class="sub">Plain text file</text>
+  <line x1="323" y1="80" x2="323" y2="94" class="con-i" marker-end="url(#nA)"/>
+
+  <rect x="268" y="96" width="220" height="46" rx="5" class="box-rt"/>
+  <text x="378" y="112" class="h-rt">INTERPRETER RUNTIME</text>
+  <text x="378" y="123" class="sub">CPython / Ruby MRI / PHP engine</text>
+  <text x="378" y="134" class="sub">Reads source line by line at run-time</text>
+  <line x1="378" y1="144" x2="378" y2="158" class="con-i" marker-end="url(#nA)"/>
+
+  <rect x="268" y="160" width="220" height="28" rx="5" class="cpu"/>
+  <text x="378" y="174" class="cpu-t">🖥 CPU EXECUTES</text>
+  <text x="378" y="184" class="sub">Interpreter translates → native ops</text>
+
+  <text x="264" y="204" class="warn">✗ Slower — parsing at runtime</text>
+  <text x="264" y="216" class="warn">✗ No compile-time type errors</text>
+  <text x="264" y="228" class="good">✓ Same source file runs anywhere</text>
+  <text x="264" y="240" class="good">✓ Instant edit→run cycle</text>
+  <text x="264" y="252" class="good">✓ Dynamic typing, flexibility</text>
+  <text x="264" y="264" class="note">NB: Python/V8 now JIT-compile</text>
+
+  <line x1="510" y1="10" x2="510" y2="275" class="divl"/>
+
+  <!-- ── COLUMN 3: BYTECODE ── -->
+  <rect x="516" y="6"  width="298" height="268" rx="8" class="col-b"/>
+  <text x="665" y="26" class="h-b">③ BYTECODE (JVM / CLR)</text>
+  <text x="665" y="38" class="sub">Java · Kotlin · Scala · C# · F# · VB.NET · Clojure</text>
+  <line x1="524" y1="44" x2="806" y2="44" stroke="var(--svg-green,rgba(104,211,145,.15))" stroke-width=".7" fill="none"/>
+
+  <rect x="528" y="50" width="84" height="28" rx="5" class="box-b"/>
+  <text x="570" y="62" class="lbl">Hello.java</text>
+  <text x="570" y="72" class="sub">Source</text>
+  <line x1="614" y1="64" x2="626" y2="64" class="con-b" marker-end="url(#nA)"/>
+
+  <rect x="628" y="50" width="84" height="28" rx="5" class="box-b"/>
+  <text x="670" y="62" class="lbl">javac / csc</text>
+  <text x="670" y="72" class="sub">Compiler</text>
+  <line x1="714" y1="64" x2="726" y2="64" class="con-b" marker-end="url(#nA)"/>
+
+  <rect x="728" y="50" width="80" height="28" rx="5" class="box-b"/>
+  <text x="768" y="62" class="lbl">.class / .dll</text>
+  <text x="768" y="72" class="sub">Bytecode</text>
+
+  <!-- Two runtimes: JVM and CLR -->
+  <line x1="665" y1="80" x2="612" y2="96" class="con-b" marker-end="url(#nA)"/>
+  <line x1="665" y1="80" x2="726" y2="96" class="con-b" marker-end="url(#nA)"/>
+
+  <rect x="528" y="98" width="120" height="52" rx="5" class="box-rt"/>
+  <text x="588" y="116" class="h-rt">JVM</text>
+  <text x="588" y="128" class="sub">Java Virtual Machine</text>
+  <text x="588" y="140" class="sub">Win/Linux/Mac/Android</text>
+
+  <rect x="664" y="98" width="130" height="52" rx="5" class="box-rt"/>
+  <text x="729" y="116" class="h-rt">CLR  (.NET)</text>
+  <text x="729" y="128" class="sub">Common Language Runtime</text>
+  <text x="729" y="140" class="sub">Win/Linux/Mac/WASM</text>
+
+  <line x1="588" y1="152" x2="665" y2="170" class="con-b" marker-end="url(#nA)"/>
+  <line x1="729" y1="152" x2="665" y2="170" class="con-b" marker-end="url(#nA)"/>
+
+  <rect x="565" y="172" width="200" height="28" rx="5" class="cpu"/>
+  <text x="665" y="184" class="cpu-t">JIT → 🖥 CPU EXECUTES</text>
+  <text x="665" y="194" class="sub">JIT compiles bytecode to native at runtime</text>
+
+  <text x="524" y="214" class="good">✓ "Write once, run anywhere"</text>
+  <text x="524" y="226" class="good">✓ Strong type safety at compile time</text>
+  <text x="524" y="238" class="good">✓ JIT rivals native performance</text>
+  <text x="524" y="250" class="warn">✗ JVM/CLR must be installed</text>
+  <text x="524" y="262" class="warn">✗ Slower cold start vs native</text>
+
+  <!-- JVM vs CLR note -->
+  <text x="665" y="278" class="ex-t">JVM: Oracle / OpenJDK / GraalVM  ·  CLR: Mono / .NET Core / .NET 5+</text>
+</svg>

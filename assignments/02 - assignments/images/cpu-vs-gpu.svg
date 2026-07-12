@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 300">
+  <style>
+    .cpu-bg { fill:var(--svg-fill2,rgba(99,179,237,.08)); stroke:var(--svg-blue,#63b3ed); stroke-width:1.5; }
+    .gpu-bg { fill:var(--svg-fill2,rgba(104,211,145,.08)); stroke:var(--svg-green,#68d391); stroke-width:1.5; }
+    .core-cpu { fill:var(--svg-fill1,rgba(99,179,237,.28)); stroke:var(--svg-blue,#63b3ed); stroke-width:1.2; }
+    .core-gpu { fill:var(--svg-fill1,rgba(104,211,145,.22)); stroke:var(--svg-green,#68d391); stroke-width:.8; }
+    .ctrl { fill:var(--svg-fill1,rgba(246,173,85,.22)); stroke:var(--svg-amber,#f6ad55); stroke-width:1; }
+    .cache-b { fill:var(--svg-fill1,rgba(183,148,244,.22)); stroke:var(--svg-purple,#b794f4); stroke-width:1; }
+    .dram  { fill:var(--svg-fill1,rgba(252,129,129,.18)); stroke:var(--svg-red,#fc8181); stroke-width:1.2; }
+    .vram  { fill:var(--svg-fill1,rgba(104,211,145,.18)); stroke:var(--svg-green,#68d391); stroke-width:1.2; }
+    .h-cpu { fill:var(--svg-blue,#63b3ed); font-family:monospace; font-size:11px; font-weight:700; text-anchor:middle; }
+    .h-gpu { fill:var(--svg-green,#68d391); font-family:monospace; font-size:11px; font-weight:700; text-anchor:middle; }
+    .lbl   { fill:var(--svg-text1,#d0e4f8); font-family:monospace; font-size:8px; font-weight:700; text-anchor:middle; }
+    .sub   { fill:var(--svg-text2,#6a9ab8); font-family:monospace; font-size:7.5px; text-anchor:middle; }
+    .note  { fill:var(--svg-text2,#6a9ab8); font-family:monospace; font-size:8px; }
+    .good  { fill:var(--svg-green,rgba(104,211,145,.8)); font-family:monospace; font-size:8px; }
+    .warn  { fill:var(--svg-amber,rgba(246,173,85,.75)); font-family:monospace; font-size:8px; }
+    .simd-box { fill:var(--svg-fill1,rgba(104,211,145,.18)); stroke:var(--svg-green,#68d391); stroke-width:1; }
+    .simd-lbl { fill:var(--svg-green,#68d391); font-family:monospace; font-size:9px; font-weight:700; text-anchor:middle; }
+    .scalar-box { fill:var(--svg-fill1,rgba(99,179,237,.2)); stroke:var(--svg-blue,#63b3ed); stroke-width:1; }
+    .scalar-lbl { fill:var(--svg-blue,#63b3ed); font-family:monospace; font-size:9px; font-weight:700; text-anchor:middle; }
+    .divl  { stroke:var(--svg-text2,rgba(99,179,237,.18)); fill:none; stroke-dasharray:5,4; }
+    .op    { fill:var(--svg-amber,#f6ad55); font-family:monospace; font-size:11px; font-weight:700; text-anchor:middle; }
+  </style>
+
+  <!-- ─── LEFT: CPU ─── -->
+  <rect x="6" y="6" width="320" height="220" rx="9" class="cpu-bg"/>
+  <text x="166" y="25" class="h-cpu">CPU — FEW POWERFUL CORES</text>
+  <text x="166" y="37" class="sub">Optimised for sequential, branch-heavy tasks</text>
+
+  <!-- 4 big CPU cores -->
+  <rect x="18"  y="46" width="130" height="90" rx="7" class="core-cpu"/>
+  <text x="83"  y="65" class="lbl">CORE 0</text>
+  <rect x="24"  y="70" width="56" height="14" rx="3" class="ctrl"/>
+  <text x="52"  y="80" class="sub">Branch predictor</text>
+  <rect x="84"  y="70" width="56" height="14" rx="3" class="ctrl"/>
+  <text x="112" y="80" class="sub">Out-of-order exec</text>
+  <rect x="24"  y="88" width="116" height="14" rx="3" class="cache-b"/>
+  <text x="82"  y="98" class="sub">L1+L2 Cache (256KB–1MB)</text>
+  <rect x="24"  y="106" width="116" height="24" rx="3" fill="var(--svg-fill2,rgba(99,179,237,.12))" stroke="none"/>
+  <text x="82"  y="118" class="sub">ALU  FPU  SIMD unit</text>
+  <text x="82"  y="129" class="sub">64-bit, 1 instr/cycle</text>
+
+  <rect x="162" y="46" width="130" height="90" rx="7" class="core-cpu"/>
+  <text x="227" y="65" class="lbl">CORE 1</text>
+  <rect x="168" y="70" width="56" height="14" rx="3" class="ctrl"/>
+  <text x="196" y="80" class="sub">Branch predictor</text>
+  <rect x="228" y="70" width="56" height="14" rx="3" class="ctrl"/>
+  <text x="256" y="80" class="sub">Out-of-order exec</text>
+  <rect x="168" y="88" width="116" height="14" rx="3" class="cache-b"/>
+  <text x="226" y="98" class="sub">L1+L2 Cache</text>
+  <rect x="168" y="106" width="116" height="24" rx="3" fill="var(--svg-fill2,rgba(99,179,237,.12))" stroke="none"/>
+  <text x="226" y="121" class="sub">ALU  FPU  SIMD unit</text>
+
+  <!-- Shared L3 -->
+  <rect x="18"  y="144" width="274" height="22" rx="5" class="cache-b"/>
+  <text x="155" y="158" class="lbl">SHARED L3 CACHE  (8–96 MB)</text>
+
+  <!-- DRAM -->
+  <rect x="18"  y="172" width="274" height="22" rx="5" class="dram"/>
+  <text x="155" y="186" class="lbl">SYSTEM DRAM  (16–512 GB)  ~100 ns</text>
+
+  <!-- CPU notes -->
+  <text x="14"  y="210" class="good">✓ Complex control flow, OS, databases, compilers</text>
+  <text x="14"  y="222" class="warn">✗ Sequential ops: one pixel at a time is slow</text>
+
+  <line x1="330" y1="10" x2="330" y2="290" class="divl"/>
+
+  <!-- ─── RIGHT: GPU ─── -->
+  <rect x="338" y="6" width="476" height="220" rx="9" class="gpu-bg"/>
+  <text x="576" y="25" class="h-gpu">GPU — THOUSANDS OF SIMPLE CORES</text>
+  <text x="576" y="37" class="sub">Optimised for parallel, uniform data tasks (SIMD)</text>
+
+  <!-- Grid of shader cores -->
+  <rect x="350" y="44" width="452" height="108" rx="6" fill="var(--svg-fill2,rgba(104,211,145,.05))" stroke="var(--svg-green,rgba(104,211,145,.2))" stroke-width=".8"/>
+  <text x="576" y="59" class="lbl">SHADER CORES (e.g. 4096 × CUDA cores on RTX 3080)</text>
+  <!-- 8x6 grid of tiny cores -->
+  <rect x="358" y="64" width="14" height="10" rx="2" class="core-gpu"/><rect x="375" y="64" width="14" height="10" rx="2" class="core-gpu"/><rect x="392" y="64" width="14" height="10" rx="2" class="core-gpu"/><rect x="409" y="64" width="14" height="10" rx="2" class="core-gpu"/><rect x="426" y="64" width="14" height="10" rx="2" class="core-gpu"/><rect x="443" y="64" width="14" height="10" rx="2" class="core-gpu"/><rect x="460" y="64" width="14" height="10" rx="2" class="core-gpu"/><rect x="477" y="64" width="14" height="10" rx="2" class="core-gpu"/>
+  <rect x="358" y="78" width="14" height="10" rx="2" class="core-gpu"/><rect x="375" y="78" width="14" height="10" rx="2" class="core-gpu"/><rect x="392" y="78" width="14" height="10" rx="2" class="core-gpu"/><rect x="409" y="78" width="14" height="10" rx="2" class="core-gpu"/><rect x="426" y="78" width="14" height="10" rx="2" class="core-gpu"/><rect x="443" y="78" width="14" height="10" rx="2" class="core-gpu"/><rect x="460" y="78" width="14" height="10" rx="2" class="core-gpu"/><rect x="477" y="78" width="14" height="10" rx="2" class="core-gpu"/>
+  <rect x="358" y="92" width="14" height="10" rx="2" class="core-gpu"/><rect x="375" y="92" width="14" height="10" rx="2" class="core-gpu"/><rect x="392" y="92" width="14" height="10" rx="2" class="core-gpu"/><rect x="409" y="92" width="14" height="10" rx="2" class="core-gpu"/><rect x="426" y="92" width="14" height="10" rx="2" class="core-gpu"/><rect x="443" y="92" width="14" height="10" rx="2" class="core-gpu"/><rect x="460" y="92" width="14" height="10" rx="2" class="core-gpu"/><rect x="477" y="92" width="14" height="10" rx="2" class="core-gpu"/>
+  <text x="510" y="76" class="sub">… × 512</text>
+  <text x="510" y="89" class="sub">Each core</text>
+  <text x="510" y="101" class="sub">is simple:</text>
+  <text x="510" y="113" class="sub">no branch</text>
+  <text x="510" y="125" class="sub">predictor</text>
+  <!-- SM groupings -->
+  <rect x="540" y="64" width="240" height="86" rx="5" fill="var(--svg-fill2,rgba(104,211,145,.08))" stroke="var(--svg-green,rgba(104,211,145,.3))" stroke-width=".8"/>
+  <text x="660" y="78" class="lbl">STREAMING MULTIPROCESSOR (SM)</text>
+  <text x="660" y="90" class="sub">Warp scheduler dispatches 32 threads simultaneously</text>
+  <text x="660" y="103" class="sub">All 32 execute the SAME instruction (SIMD)</text>
+  <text x="660" y="116" class="sub">on DIFFERENT data elements (pixels, vertices)</text>
+  <text x="660" y="129" class="sub">Shared memory + L1 cache per SM</text>
+  <text x="660" y="141" class="sub">Multiple SMs per GPU chip</text>
+
+  <!-- VRAM -->
+  <rect x="350" y="158" width="452" height="22" rx="5" class="vram"/>
+  <text x="576" y="172" class="lbl">VRAM (GDDR6/HBM) — 16–80 GB — ~1 TB/s bandwidth (10× DRAM)</text>
+
+  <!-- GPU notes -->
+  <text x="342" y="210" class="good">✓ Render millions of pixels in parallel, matrix multiply, training AI models</text>
+  <text x="342" y="222" class="warn">✗ Cannot run OS, databases, serial code — needs CPU to orchestrate it</text>
+
+  <!-- SIMD explanation at bottom -->
+  <rect x="6" y="232" width="808" height="62" rx="8" fill="var(--svg-fill2,rgba(246,173,85,.06))" stroke="var(--svg-amber,rgba(246,173,85,.3))" stroke-width="1"/>
+  <text x="20" y="248" class="simd-lbl" text-anchor="start">SIMD — Single Instruction, Multiple Data</text>
+  <!-- Scalar -->
+  <text x="20" y="263" class="scalar-lbl" text-anchor="start">CPU scalar:</text>
+  <rect x="120" y="253" width="24" height="14" rx="3" class="scalar-box"/><text x="132" y="263" class="lbl">R</text>
+  <text x="148" y="263" class="op">+</text>
+  <rect x="158" y="253" width="24" height="14" rx="3" class="scalar-box"/><text x="170" y="263" class="lbl">G</text>
+  <text x="148" y="276" class="sub">one at a time</text>
+  <!-- GPU SIMD -->
+  <text x="230" y="263" class="simd-lbl" text-anchor="start">GPU SIMD:</text>
+  <rect x="318" y="253" width="18" height="14" rx="2" class="simd-box"/><text x="327" y="263" class="lbl">R</text>
+  <rect x="339" y="253" width="18" height="14" rx="2" class="simd-box"/><text x="348" y="263" class="lbl">G</text>
+  <rect x="360" y="253" width="18" height="14" rx="2" class="simd-box"/><text x="369" y="263" class="lbl">B</text>
+  <rect x="381" y="253" width="18" height="14" rx="2" class="simd-box"/><text x="390" y="263" class="lbl">A</text>
+  <text x="406" y="263" class="op">+</text>
+  <rect x="420" y="253" width="18" height="14" rx="2" class="simd-box"/><text x="429" y="263" class="lbl">R</text>
+  <rect x="441" y="253" width="18" height="14" rx="2" class="simd-box"/><text x="450" y="263" class="lbl">G</text>
+  <rect x="462" y="253" width="18" height="14" rx="2" class="simd-box"/><text x="471" y="263" class="lbl">B</text>
+  <rect x="483" y="253" width="18" height="14" rx="2" class="simd-box"/><text x="492" y="263" class="lbl">A</text>
+  <text x="318" y="278" class="sub">ALL four channels in ONE instruction cycle — 4× throughput vs scalar</text>
+  <text x="620" y="263" class="note">GPU executes one add-vector instruction</text>
+  <text x="620" y="276" class="note">across 32 pixels simultaneously (a "warp")</text>
+</svg>

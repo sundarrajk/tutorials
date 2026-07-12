@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 280">
+  <style>
+    .proc  { fill:var(--svg-fill2,rgba(99,179,237,.08)); stroke:var(--svg-blue,#63b3ed); stroke-width:1.5; }
+    .proc2 { fill:var(--svg-fill2,rgba(183,148,244,.08)); stroke:var(--svg-purple,#b794f4); stroke-width:1.5; }
+    .seg   { stroke-width:1; }
+    .s-priv{ fill:var(--svg-fill1,rgba(99,179,237,.2));  stroke:var(--svg-blue,rgba(99,179,237,.5)); }
+    .s-prv2{ fill:var(--svg-fill1,rgba(183,148,244,.2)); stroke:var(--svg-purple,rgba(183,148,244,.5)); }
+    .s-shm { fill:var(--svg-fill1,rgba(252,129,129,.3)); stroke:var(--svg-red,#fc8181); stroke-width:1.5; }
+    .phys  { fill:var(--svg-fill1,rgba(104,211,145,.18)); stroke:var(--svg-green,#68d391); stroke-width:1.5; }
+    .phys-shm{ fill:var(--svg-fill1,rgba(252,129,129,.28)); stroke:var(--svg-red,#fc8181); stroke-width:2; }
+    .pte   { fill:var(--svg-fill1,rgba(246,173,85,.2));  stroke:var(--svg-amber,#f6ad55); stroke-width:1; }
+    .arr   { fill:var(--svg-text2,rgba(99,179,237,.5)); }
+    .arr-r { fill:var(--svg-red,rgba(252,129,129,.7)); }
+    .con   { stroke:var(--svg-text2,rgba(99,179,237,.4)); fill:none; stroke-width:1.3; }
+    .con-r { stroke:var(--svg-red,rgba(252,129,129,.7)); fill:none; stroke-width:2; }
+    .h1    { fill:var(--svg-blue,#63b3ed);   font-family:monospace; font-size:10px; font-weight:700; text-anchor:middle; }
+    .h2    { fill:var(--svg-purple,#b794f4); font-family:monospace; font-size:10px; font-weight:700; text-anchor:middle; }
+    .h-shm { fill:var(--svg-red,#fc8181);    font-family:monospace; font-size:10px; font-weight:700; text-anchor:middle; }
+    .h-phys{ fill:var(--svg-green,#68d391);  font-family:monospace; font-size:10px; font-weight:700; text-anchor:middle; }
+    .lbl   { fill:var(--svg-text1,#d0e4f8);  font-family:monospace; font-size:8.5px; font-weight:700; text-anchor:middle; }
+    .sub   { fill:var(--svg-text2,#6a9ab8);  font-family:monospace; font-size:7.5px; text-anchor:middle; }
+    .note  { fill:var(--svg-text2,#6a9ab8);  font-family:monospace; font-size:8px; }
+    .good  { fill:var(--svg-green,rgba(104,211,145,.8)); font-family:monospace; font-size:8px; }
+    .warn  { fill:var(--svg-amber,rgba(246,173,85,.75)); font-family:monospace; font-size:8px; }
+    .api   { fill:var(--svg-amber,#f6ad55); font-family:monospace; font-size:7.5px; font-weight:700; text-anchor:middle; }
+  </style>
+  <defs>
+    <marker id="smA" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5 z" class="arr"/></marker>
+    <marker id="smR" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5 z" class="arr-r"/></marker>
+  </defs>
+
+  <!-- Process A virtual space -->
+  <rect x="6" y="6" width="220" height="200" rx="8" class="proc"/>
+  <text x="116" y="22" class="h1">PROCESS A</text>
+  <text x="116" y="33" class="sub">Virtual Address Space</text>
+  <rect x="14" y="40" width="204" height="36" rx="4" class="seg s-priv"/>
+  <text x="116" y="56" class="lbl">Private Code + Data</text>
+  <text x="116" y="67" class="sub">0x0000 – 0xBFFF</text>
+  <rect x="14" y="82" width="204" height="40" rx="4" class="seg s-shm"/>
+  <text x="116" y="100" class="h-shm">SHARED MEMORY REGION</text>
+  <text x="116" y="112" class="sub">mapped at 0xC000 in A's space</text>
+  <rect x="14" y="128" width="204" height="36" rx="4" class="seg s-priv"/>
+  <text x="116" y="144" class="lbl">Private Heap + Stack</text>
+  <text x="116" y="155" class="sub">Process-only memory</text>
+  <text x="14"  y="180" class="note">A writes to 0xC000:</text>
+  <text x="14"  y="192" class="api">shmget() + shmat()</text>
+  <text x="14"  y="204" class="note">(POSIX) or CreateFileMappingA (Win)</text>
+
+  <!-- Process B virtual space -->
+  <rect x="596" y="6" width="220" height="200" rx="8" class="proc2"/>
+  <text x="706" y="22" class="h2">PROCESS B</text>
+  <text x="706" y="33" class="sub">Virtual Address Space</text>
+  <rect x="604" y="40" width="204" height="36" rx="4" class="seg s-prv2"/>
+  <text x="706" y="56" class="lbl">Private Code + Data</text>
+  <text x="706" y="67" class="sub">0x0000 – 0x7FFF</text>
+  <rect x="604" y="82" width="204" height="40" rx="4" class="seg s-shm"/>
+  <text x="706" y="100" class="h-shm">SHARED MEMORY REGION</text>
+  <text x="706" y="112" class="sub">mapped at 0x8000 in B's space</text>
+  <rect x="604" y="128" width="204" height="36" rx="4" class="seg s-prv2"/>
+  <text x="706" y="144" class="lbl">Private Heap + Stack</text>
+  <text x="706" y="155" class="sub">Process-only memory</text>
+  <text x="604" y="180" class="note">B reads from 0x8000 —</text>
+  <text x="604" y="192" class="note">sees exact bytes A wrote</text>
+  <text x="604" y="204" class="note">Different virtual addr, same physical page!</text>
+
+  <!-- MMU / Page Table -->
+  <rect x="258" y="60" width="140" height="80" rx="7" class="pte"/>
+  <text x="328" y="78" class="api">MMU PAGE TABLE</text>
+  <text x="328" y="91" class="sub">A:0xC000 → Phys:0x5000</text>
+  <text x="328" y="104" class="sub">B:0x8000 → Phys:0x5000</text>
+  <text x="328" y="117" class="sub">Both map to SAME physical</text>
+  <text x="328" y="130" class="sub">page frame 0x5000!</text>
+
+  <!-- Physical RAM -->
+  <rect x="258" y="180" width="304" height="60" rx="8" class="phys"/>
+  <text x="410" y="198" class="h-phys">PHYSICAL RAM</text>
+  <rect x="276" y="206" width="150" height="26" rx="4" fill="var(--svg-fill2,rgba(104,211,145,.1))" stroke="var(--svg-green,rgba(104,211,145,.3))" stroke-width=".8"/>
+  <text x="351" y="222" class="sub">Other pages</text>
+  <rect x="436" y="206" width="110" height="26" rx="4" class="phys-shm"/>
+  <text x="491" y="219" class="lbl">Shared page</text>
+  <text x="491" y="228" class="sub">frame 0x5000</text>
+
+  <!-- Arrows: A virtual → MMU -->
+  <line x1="218" y1="102" x2="256" y2="102" class="con-r" marker-end="url(#smR)"/>
+  <!-- B virtual → MMU -->
+  <line x1="602" y1="102" x2="400" y2="102" class="con-r" marker-end="url(#smR)"/>
+  <!-- MMU → physical -->
+  <line x1="328" y1="142" x2="491" y2="204" class="con-r" marker-end="url(#smR)"/>
+
+  <!-- Note box -->
+  <rect x="6" y="214" width="248" height="62" rx="6" fill="var(--svg-fill2,rgba(99,179,237,.05))" stroke="var(--svg-border,rgba(99,179,237,.2))" stroke-width=".8"/>
+  <text x="14" y="230" class="good">✓ Zero-copy data sharing</text>
+  <text x="14" y="243" class="note">No data is copied — both processes</text>
+  <text x="14" y="255" class="note">see the same physical memory.</text>
+  <text x="14" y="268" class="note">Fastest possible IPC mechanism.</text>
+
+  <rect x="568" y="214" width="248" height="62" rx="6" fill="var(--svg-fill2,rgba(252,129,129,.05))" stroke="var(--svg-red,rgba(252,129,129,.25))" stroke-width=".8"/>
+  <text x="576" y="230" class="warn">⚠ Requires synchronisation</text>
+  <text x="576" y="243" class="note">Two processes writing simultaneously</text>
+  <text x="576" y="255" class="note">→ race condition. Must use mutex</text>
+  <text x="576" y="268" class="note">or semaphore to coordinate access.</text>
+</svg>

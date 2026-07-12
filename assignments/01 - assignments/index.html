@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CS Fundamentals — Software, Storage &amp; Programming Languages</title>
+  <link rel="stylesheet" href="../shared/css/deck.css"/>
+</head>
+<body>
+
+<div id="prog" style="width:0%"></div>
+<div id="deck">
+
+<!-- ══ SLIDE 1: Cover ══════════════════════════════════════════ -->
+<section class="slide cover" data-title="CS Fundamentals">
+  <div class="cov-grid"></div>
+  <div class="cov-glow"></div>
+  <div class="cov-content">
+    <div class="cov-kicker">Computer Science Fundamentals · Undergraduates</div>
+    <h1 class="cov-h1">CS <span class="hi">Fundamentals</span></h1>
+    <p class="cov-desc">From SaaS products that enterprise uses today, through the evolution of storage and memory, to how programs are written, compiled, typed, and executed — the bedrock every software engineer must know.</p>
+    <div class="chips">
+      <span class="chip ca">Salesforce · Zoho</span>
+      <span class="chip">Storage &amp; Memory</span>
+      <span class="chip cg">Opcodes → High-Level</span>
+      <span class="chip cp">Compile · Link · Execute</span>
+      <span class="chip ca">OOP · Functional · Types</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 2: Salesforce ═════════════════════════════════════ -->
+<section class="slide" data-title="Salesforce — SaaS Pioneer">
+  <div class="s-era">SaaS in Practice · Salesforce</div>
+  <h2 class="s-title"><span class="hi2">Salesforce</span> — The Platform That Proved SaaS</h2>
+  <p class="s-sub">Founded 1999. Marc Benioff's vision: "No Software." Pay per seat per month, access via browser. Killed the idea that enterprises must own the software they use. Today a $30B+ revenue platform.</p>
+
+  <div class="g g3" style="margin-bottom:0.7rem;">
+    <div class="card c-amber">
+      <div class="card-hd">Core CRM</div>
+      <ul>
+        <li><strong>Sales Cloud</strong> — manage leads, opportunities, accounts, pipeline forecasts. The product that started it all.</li>
+        <li><strong>Service Cloud</strong> — customer support, case management, knowledge base, omni-channel routing</li>
+        <li><strong>Marketing Cloud</strong> — email journeys, campaign automation, audience segmentation</li>
+        <li><strong>Commerce Cloud</strong> — e-commerce storefronts, order management, B2B/B2C</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-hd">Platform &amp; Development</div>
+      <ul>
+        <li><strong>Force.com / Salesforce Platform</strong> — build custom applications on Salesforce infrastructure using Apex (Java-like), Visualforce, Lightning Web Components</li>
+        <li><strong>AppExchange</strong> — marketplace of 5000+ third-party apps built on the platform</li>
+        <li><strong>Flow Builder</strong> — visual no-code automation; clicks not code for business users</li>
+        <li><strong>Heroku</strong> — PaaS for running custom apps in any language alongside Salesforce data</li>
+        <li><strong>MuleSoft</strong> — API integration platform; connect Salesforce to any system</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">AI, Analytics &amp; Data</div>
+      <ul>
+        <li><strong>Einstein AI</strong> — predictive lead scoring, opportunity insights, automated email replies</li>
+        <li><strong>Einstein GPT / Agentforce</strong> — generative AI assistant across all clouds</li>
+        <li><strong>Tableau</strong> — enterprise BI and analytics (acquired 2019)</li>
+        <li><strong>Data Cloud</strong> — unified customer data platform; real-time profile across all touchpoints</li>
+        <li><strong>Slack</strong> — team messaging, huddles, channels (acquired 2021)</li>
+        <li><strong>Industries</strong> — pre-built vertical solutions: Health Cloud, Financial Services Cloud, Automotive, Education</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout ca-amber">
+    <strong>The Business Model Innovation:</strong> Before Salesforce, a mid-size company buying CRM spent $500K on licences + $1M on servers + 18 months of implementation before a single user logged in. Salesforce: sign up, pay $150/user/month, live in a week. The CFO and CTO both said yes. This is the CAPEX → OPEX shift in software.
+  </div>
+</section>
+
+<!-- ══ SLIDE 3: Zoho ═══════════════════════════════════════════ -->
+<section class="slide" data-title="Zoho — India's SaaS Giant">
+  <div class="s-era">SaaS in Practice · Zoho Corporation</div>
+  <h2 class="s-title"><span class="hi3">Zoho</span> — India's Quiet SaaS Powerhouse</h2>
+  <p class="s-sub">Founded in Chennai, 1996. Bootstrapped — never took VC funding. 100M+ users, 55+ integrated applications, operates from tier-2 Indian cities. Directly competes with Google Workspace, Microsoft 365, Salesforce, and QuickBooks simultaneously.</p>
+
+  <div class="g g4">
+    <div class="card">
+      <div class="card-hd">Productivity Suite</div>
+      <ul>
+        <li><strong>Zoho Docs</strong> — collaborative word processor</li>
+        <li><strong>Zoho Sheet</strong> — spreadsheet with formulas and charts</li>
+        <li><strong>Zoho Show</strong> — presentation builder</li>
+        <li><strong>Zoho Mail</strong> — ad-free business email hosting</li>
+        <li><strong>Zoho Cliq</strong> — team messaging and channels</li>
+        <li><strong>Zoho WorkDrive</strong> — cloud file storage and sharing</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Business Operations</div>
+      <ul>
+        <li><strong>Zoho Books</strong> — full GST-compliant accounting software</li>
+        <li><strong>Zoho Payroll</strong> — payroll, TDS, statutory compliance</li>
+        <li><strong>Zoho Invoice</strong> — invoicing and payment collection</li>
+        <li><strong>Zoho Inventory</strong> — multi-warehouse stock management</li>
+        <li><strong>Zoho Expense</strong> — expense reports and reimbursements</li>
+        <li><strong>Zoho Sign</strong> — legally binding e-signatures</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">CRM &amp; Customer Service</div>
+      <ul>
+        <li><strong>Zoho CRM</strong> — leads, contacts, deals, pipeline — Salesforce alternative</li>
+        <li><strong>Zoho Desk</strong> — help desk ticketing, SLA management</li>
+        <li><strong>Zoho Campaigns</strong> — email marketing automation</li>
+        <li><strong>Zoho SalesIQ</strong> — live chat and visitor tracking</li>
+        <li><strong>Zoho Survey</strong> — customer feedback surveys</li>
+        <li><strong>Zoho Bigin</strong> — lightweight CRM for small businesses</li>
+      </ul>
+    </div>
+    <div class="card c-purple">
+      <div class="card-hd">Developer &amp; IT Platform</div>
+      <ul>
+        <li><strong>Zoho Creator</strong> — low-code app builder on Zoho infrastructure</li>
+        <li><strong>Zoho Analytics</strong> — BI dashboards, SQL queries, AI insights</li>
+        <li><strong>Zoho Projects</strong> — project management, Gantt, timesheets</li>
+        <li><strong>Zoho Recruit</strong> — applicant tracking, hiring pipeline</li>
+        <li><strong>Zoho People</strong> — HR management, leave, attendance</li>
+        <li><strong>ManageEngine</strong> — Zoho's IT management division: ITSM, MDM, network monitoring</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 4: Storage Evolution ═════════════════════════════ -->
+<section class="slide" data-title="Storage Evolution — Latency & Throughput">
+  <div class="s-era">Storage · How Speed Changed</div>
+  <h2 class="s-title">Storage <span class="hi">Latency</span> — Five Orders of Magnitude</h2>
+  <p class="s-sub">From the spinning magnetic drums of 1956 to Intel Optane in 2017 — read latency dropped by a factor of one million. Each generation made new software architectures possible.</p>
+
+  <div class="dbox wide" style="margin-bottom:0.75rem;">
+    <img src="images/storage-latency.svg" alt="Bar chart comparing read latency across HDD, SATA SSD, NVMe SSD, Optane, and DRAM on a log scale"/>
+  </div>
+
+  <div class="table-wrap">
+    <table class="cmp-table">
+      <thead>
+        <tr><th>Technology</th><th>Read Latency</th><th>Seq. Read</th><th>Seq. Write</th><th>Interface</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>HDD (7200 RPM)</td><td><span class="bad">5–10 ms</span></td><td>150–200 MB/s</td><td>140–180 MB/s</td><td>SATA</td><td>Mechanical seek; still cheapest per TB</td></tr>
+        <tr><td>SATA SSD</td><td><span class="warn">70–100 µs</span></td><td>500–560 MB/s</td><td>400–520 MB/s</td><td>SATA 6Gbps</td><td>100× faster than HDD; SATA is the bottleneck</td></tr>
+        <tr><td>NVMe SSD (PCIe 4)</td><td><span class="warn">20–30 µs</span></td><td>5–7 GB/s</td><td>4–6 GB/s</td><td>PCIe 4 M.2</td><td>10× faster than SATA; direct CPU bus access</td></tr>
+        <tr><td>Intel Optane (3D XPoint)</td><td><span class="good">~10 µs</span></td><td>2.5 GB/s</td><td>2 GB/s</td><td>PCIe / DIMM</td><td>Persistent memory; byte-addressable. Discontinued 2022.</td></tr>
+        <tr><td>DRAM (DDR5)</td><td><span class="good">~100 ns</span></td><td>60–89 GB/s</td><td>60–89 GB/s</td><td>Memory bus</td><td>Not persistent — reference only</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══ SLIDE 5: Storage Types ═════════════════════════════════ -->
+<section class="slide" data-title="Storage Types — Floppy to SAN">
+  <div class="s-era">Storage · Types &amp; Use Cases</div>
+  <h2 class="s-title">Every <span class="hi2">Storage Type</span> — And Why It Existed</h2>
+  <p class="s-sub">Each technology solved a specific problem of its era — portability, capacity, speed, or network sharing. Many coexist today.</p>
+
+  <div class="g g3" style="margin-bottom:0.7rem;">
+    <div class="card">
+      <div class="card-hd">Removable &amp; Optical</div>
+      <ul>
+        <li><strong>Punch cards / tape</strong> — 1950s–70s; sequential access only; program input</li>
+        <li><strong>Floppy disk (8", 5.25", 3.5")</strong> — 1971–2000s; 80 KB to 1.44 MB; software distribution, portability between PCs</li>
+        <li><strong>CD-ROM</strong> — 1985+; 650–700 MB; read-only software distribution, audio</li>
+        <li><strong>DVD</strong> — 1996+; 4.7–17 GB; HD video, large software</li>
+        <li><strong>Blu-ray</strong> — 2006+; 25–128 GB; 4K video, archival</li>
+        <li><strong>USB Flash drive</strong> — 2000+; portable, NAND flash, replaced floppies instantly</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Internal &amp; Local</div>
+      <ul>
+        <li><strong>Mainframe HDD (IBM 350, 1956)</strong> — 5 MB, size of a refrigerator; $34,000/year to lease</li>
+        <li><strong>HDD (PC era)</strong> — 1980s+; 10 MB → 20 TB today; spinning platters, magnetic heads</li>
+        <li><strong>SATA SSD</strong> — 2007+; 2.5" flash; dropped HDD from laptops from ~2012</li>
+        <li><strong>NVMe M.2</strong> — 2013+; gum-stick form factor, PCIe bus; standard in modern laptops/servers</li>
+        <li><strong>Optane (3D XPoint)</strong> — 2017–2022; Intel DIMM or PCIe; persistent memory bridging RAM and storage</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Network Storage</div>
+      <ul>
+        <li><strong>DAS (Direct Attached Storage)</strong> — drives in the server itself or via USB/SAS cable; simple but not shared</li>
+        <li><strong>NAS (Network Attached Storage)</strong> — file server on the LAN; shares via NFS or SMB; Synology, QNAP, NetApp; home labs to enterprise</li>
+        <li><strong>SAN (Storage Area Network)</strong> — dedicated high-speed network (Fibre Channel or iSCSI) presenting raw block storage to servers; appears as local disk; enterprise datacentres; high performance, high cost</li>
+        <li><strong>Object Storage (S3/Blob/GCS)</strong> — flat key-value; infinite scale; HTTP API; the cloud model</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>The Cloud Shift:</strong> NAS and SAN required expensive proprietary hardware. Cloud object storage (S3, introduced 2006) offered infinite capacity, 11-nines durability, and pay-per-GB pricing — with no hardware to own. EBS (block) and EFS (file) replicate SAN and NAS as managed services.
+  </div>
+</section>
+
+<!-- ══ SLIDE 6: Memory Types ══════════════════════════════════ -->
+<section class="slide" data-title="Memory Types — Core to DDR5">
+  <div class="s-era">Memory · From Magnetic to DDR5</div>
+  <h2 class="s-title">Memory Types — <span class="hi3">Magnetic Core to DDR5</span></h2>
+  <p class="s-sub">Memory (RAM) and storage are often confused — RAM is fast, volatile working space; storage is persistent. Both evolved dramatically, but at very different rates and for different purposes.</p>
+
+  <div class="dbox wide" style="margin-bottom:0.75rem;">
+    <img src="images/memory-types.svg" alt="Memory evolution from magnetic core through ROM/PROM/EPROM/EEPROM through SRAM/DRAM to DDR1–DDR5"/>
+  </div>
+
+  <div class="g g3">
+    <div class="card">
+      <div class="card-hd">Cache vs RAM — The Hierarchy</div>
+      <ul>
+        <li><strong>L1 cache (SRAM)</strong> — 32–64 KB; ~1 ns; inside the CPU core; 4× faster than L2</li>
+        <li><strong>L2 cache (SRAM)</strong> — 256 KB–1 MB; ~4 ns; per core or shared</li>
+        <li><strong>L3 cache (SRAM)</strong> — 4–96 MB; ~10 ns; shared across all cores</li>
+        <li><strong>Main RAM (DRAM)</strong> — 4–1024 GB; ~100 ns; 100× slower than L1</li>
+        <li>Cache miss: CPU stalls waiting for RAM. The whole point of caches.</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Why Volatile Matters</div>
+      <ul>
+        <li>All RAM loses contents on power-off — running programs must be loaded from storage each boot</li>
+        <li>This is why BIOS/UEFI is stored in EEPROM/flash — it must survive power-off</li>
+        <li>Hibernate (suspend-to-disk) copies RAM to disk before shutdown; resume reloads it</li>
+        <li>Optane DIMM was the first persistent RAM — a game-changer for in-memory databases</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">DDR Generations</div>
+      <ul>
+        <li><strong>DDR = Double Data Rate</strong> — transfers on both rising and falling clock edge; doubles bandwidth vs SDR</li>
+        <li>Each generation roughly doubles bandwidth and reduces voltage</li>
+        <li>DDR4 (2014): peak 25.6 GB/s · 1.2V · most common today</li>
+        <li>DDR5 (2021): peak 89 GB/s · 1.1V · error-correction built in</li>
+        <li>HBM3 (GPU): 819 GB/s — 3D stacked DRAM alongside the GPU die</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 7: Opcode → Assembly → High Level ════════════════ -->
+<section class="slide" data-title="Opcodes → Assembly → High-Level Languages">
+  <div class="s-era">Programming Languages · The Abstraction Ladder</div>
+  <h2 class="s-title">Opcodes → Assembly → <span class="hi">High-Level</span></h2>
+  <p class="s-sub">Every programming language is an abstraction over the CPU's raw instruction set. Each rung of the ladder trades control for productivity. The CPU only ever executes binary opcodes — everything else is a translation.</p>
+
+  <div class="g g2" style="margin-bottom:0.75rem;">
+    <div class="card">
+      <div class="card-hd">The 8085 CPU — Machine Code (Opcodes)</div>
+      <ul>
+        <li>Intel 8085 (1976) — 8-bit CPU, 40 pin DIP, used in countless embedded systems and early PCs</li>
+        <li>Every instruction is a 1–3 byte number — the <strong>opcode</strong> tells the CPU exactly what to do</li>
+        <li><strong>3E 05</strong> — opcode 3E = "MVI A" (Move Immediate to register A); 05 = the value 5</li>
+        <li><strong>06 03</strong> — opcode 06 = "MVI B"; 03 = the value 3</li>
+        <li><strong>80</strong> — opcode 80 = "ADD B" (add register B to register A)</li>
+        <li><strong>32 00 20</strong> — opcode 32 = "STA" (Store A); 00 20 = memory address 2000h</li>
+        <li>No variables, no functions, no types — just registers and memory addresses</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">The Abstraction Ladder</div>
+      <ul>
+        <li><strong>Level 0 — Binary:</strong> 00111110 00000101 … pure bits, impossible to read</li>
+        <li><strong>Level 1 — Hex opcodes:</strong> 3E 05 06 03 80 … compact, still CPU-specific</li>
+        <li><strong>Level 2 — Assembly:</strong> <code>MVI A, 5</code> — English mnemonics, 1-to-1 with opcodes, still CPU-specific</li>
+        <li><strong>Level 3 — Fortran/C:</strong> <code>c = a + b</code> — one line compiles to many opcodes; portable across CPUs</li>
+        <li><strong>Level 4 — Python/Java:</strong> <code>c = a + b</code> — same syntax, further from hardware, even more portable</li>
+        <li>Each level up: less control, more productivity, more portability</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout ca-amber">
+    <strong>The Assembler:</strong> A program that translates assembly mnemonics (<code>MVI A, 5</code>) directly to their binary opcodes (<code>3E 05</code>). One-to-one mapping. The compiler does the reverse — it takes one high-level statement and generates many assembly instructions.
+  </div>
+</section>
+
+<!-- ══ SLIDE 8: Same Code — 4 Languages ═══════════════════════ -->
+<section class="slide" data-title="One Operation — Four Languages">
+  <div class="s-era">Programming Languages · The Same Code at Every Level</div>
+  <h2 class="s-title">Set a=5, b=3. <span class="hi2">c = a+b</span>, then <span class="hi3">d = c−b</span></h2>
+  <p class="s-sub">Exactly the same two operations — add and subtract — written at every level of the abstraction ladder. The CPU executes the same instructions regardless; only the notation changes.</p>
+
+  <div class="code-grid cg4">
+    <div>
+      <div class="code-block">
+        <span class="code-label">8085 MACHINE CODE (HEX)</span>
+        <pre><code><span class="tok-cm">; Load a=5 into register A</span>
+<span class="tok-num">3E 05</span>   <span class="tok-cm">; MVI A, 05h</span>
+<span class="tok-cm">; Load b=3 into register B</span>
+<span class="tok-num">06 03</span>   <span class="tok-cm">; MVI B, 03h</span>
+<span class="tok-cm">; c = A + B → result in A</span>
+<span class="tok-num">80</span>      <span class="tok-cm">; ADD B</span>
+<span class="tok-cm">; Store c at address 2000h</span>
+<span class="tok-num">32 00 20</span> <span class="tok-cm">; STA 2000h</span>
+<span class="tok-cm">; d = c - b  (A=c, B still=3)</span>
+<span class="tok-num">90</span>      <span class="tok-cm">; SUB B</span>
+<span class="tok-cm">; Store d at address 2001h</span>
+<span class="tok-num">32 01 20</span> <span class="tok-cm">; STA 2001h</span>
+<span class="tok-num">76</span>      <span class="tok-cm">; HLT</span></code></pre>
+      </div>
+      <div class="card" style="margin-top:0.5rem; padding:0.6rem;">
+        <div class="card-hd">What you see</div>
+        <p>Raw bytes. No names. Registers A and B are the only "variables." Memory addresses instead of variable names. Every byte has meaning.</p>
+      </div>
+    </div>
+
+    <div>
+      <div class="code-block">
+        <span class="code-label cl-amber">8085 ASSEMBLY</span>
+        <pre><code><span class="tok-cm">; a = 5, b = 3</span>
+<span class="tok-kw">MVI</span> <span class="tok-fn">A</span>, <span class="tok-num">05h</span>  <span class="tok-cm">; A ← 5</span>
+<span class="tok-kw">MVI</span> <span class="tok-fn">B</span>, <span class="tok-num">03h</span>  <span class="tok-cm">; B ← 3</span>
+
+<span class="tok-cm">; c = a + b</span>
+<span class="tok-kw">ADD</span>  <span class="tok-fn">B</span>       <span class="tok-cm">; A ← A+B</span>
+<span class="tok-kw">STA</span>  <span class="tok-num">2000h</span>   <span class="tok-cm">; mem[2000]←A</span>
+
+<span class="tok-cm">; d = c - b</span>
+<span class="tok-kw">SUB</span>  <span class="tok-fn">B</span>       <span class="tok-cm">; A ← A-B</span>
+<span class="tok-kw">STA</span>  <span class="tok-num">2001h</span>   <span class="tok-cm">; mem[2001]←A</span>
+
+<span class="tok-kw">HLT</span>          <span class="tok-cm">; halt</span></code></pre>
+      </div>
+      <div class="card c-amber" style="margin-top:0.5rem; padding:0.6rem;">
+        <div class="card-hd">What changed</div>
+        <p>English mnemonics replace hex bytes. Assembler translates 1:1. Still 8085-specific — won't run on ARM or x86.</p>
+      </div>
+    </div>
+
+    <div>
+      <div class="code-block">
+        <span class="code-label cl-green">FORTRAN 77</span>
+        <pre><code><span class="tok-cm">C Fortran: vars are typed</span>
+<span class="tok-cm">C INTEGER means 16/32-bit int</span>
+      <span class="tok-ty">INTEGER</span> A, B, C, D
+
+      A = <span class="tok-num">5</span>
+      B = <span class="tok-num">3</span>
+
+<span class="tok-cm">C c = a + b</span>
+      C = A + B
+
+<span class="tok-cm">C d = c - b</span>
+      D = C - B
+
+      <span class="tok-kw">PRINT</span> *, C, D
+      <span class="tok-kw">STOP</span>
+      <span class="tok-kw">END</span></code></pre>
+      </div>
+      <div class="card c-green" style="margin-top:0.5rem; padding:0.6rem;">
+        <div class="card-hd">What changed</div>
+        <p>Named variables. Compiler generates all register loads and stores. One line = many opcodes. Runs on any CPU Fortran compiles for.</p>
+      </div>
+    </div>
+
+    <div>
+      <div class="code-block">
+        <span class="code-label cl-purple">C  (K&amp;R / ANSI C)</span>
+        <pre><code><span class="tok-cm">/* same logic in C */</span>
+<span class="tok-kw">#include</span> &lt;stdio.h&gt;
+
+<span class="tok-ty">int</span> <span class="tok-fn">main</span>() {
+  <span class="tok-ty">int</span> a = <span class="tok-num">5</span>;
+  <span class="tok-ty">int</span> b = <span class="tok-num">3</span>;
+
+  <span class="tok-cm">/* c = a + b */</span>
+  <span class="tok-ty">int</span> c = a + b;
+
+  <span class="tok-cm">/* d = c - b */</span>
+  <span class="tok-ty">int</span> d = c - b;
+
+  <span class="tok-fn">printf</span>(<span class="tok-str">"%d %d\n"</span>,c,d);
+  <span class="tok-kw">return</span> <span class="tok-num">0</span>;
+}</code></pre>
+      </div>
+      <div class="card c-purple" style="margin-top:0.5rem; padding:0.6rem;">
+        <div class="card-hd">What changed</div>
+        <p>Functions, braces, standard library. <code>gcc main.c</code> compiles this for x86, ARM, RISC-V — same source, different binaries.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 9: Compile & Link ════════════════════════════════ -->
+<section class="slide" data-title="Compile, Link & Runtime">
+  <div class="s-era">How Programs are Built</div>
+  <h2 class="s-title"><span class="hi">Compile</span> → Link → <span class="hi3">Execute</span></h2>
+  <p class="s-sub">A single <code>gcc hello.c</code> quietly runs four steps: pre-processing, compilation, assembly, and linking. Understanding each step explains every "undefined reference" error you've ever seen.</p>
+
+  <div class="dbox wide" style="margin-bottom:0.75rem;">
+    <img src="images/compile-link.svg" alt="Compilation pipeline from source files through compiler to object files, through linker with libraries to final executable, with runtime explanation"/>
+  </div>
+
+  <div class="g g3">
+    <div class="card">
+      <div class="card-hd">The Four Phases of gcc</div>
+      <ul>
+        <li><strong>Pre-processor:</strong> expands <code>#include</code> and <code>#define</code> — pure text substitution</li>
+        <li><strong>Compiler:</strong> translates C → assembly; applies optimisation (<code>-O2</code>)</li>
+        <li><strong>Assembler:</strong> translates assembly → machine-code object file (<code>.o</code>)</li>
+        <li><strong>Linker:</strong> combines all <code>.o</code> files + libraries → final executable</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Object Files &amp; Symbol Resolution</div>
+      <ul>
+        <li>An <code>.o</code> file contains machine code with <em>unresolved references</em> — e.g. <code>printf</code> is called but its address is unknown</li>
+        <li>The linker's job: match every "call X" to "here is where X lives"</li>
+        <li><strong>Static library (.a / .lib):</strong> code copied into the executable at link time — self-contained, larger binary</li>
+        <li><strong>Dynamic library (.so / .dll):</strong> reference stored in executable; loaded from disk at run-time</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">What Is the Runtime?</div>
+      <ul>
+        <li>Every language needs a runtime — code that runs before and alongside your program</li>
+        <li><strong>C runtime (libc):</strong> sets up stack, calls <code>main()</code>, provides malloc/printf/exit</li>
+        <li><strong>COBOL runtime (libcob):</strong> handles PIC clauses, packed decimal arithmetic, file I/O verbs</li>
+        <li><strong>Go:</strong> unusual — runtime compiled <em>into</em> the binary; includes GC, goroutine scheduler</li>
+        <li><strong>Java/C#:</strong> runtime (JVM/CLR) is separate; must be installed on the target machine</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 10: Native vs Interpreted vs Bytecode ═══════════ -->
+<section class="slide" data-title="Native vs Interpreted vs Bytecode">
+  <div class="s-era">Execution Models</div>
+  <h2 class="s-title">Native · <span class="hi2">Interpreted</span> · <span class="hi3">Bytecode</span></h2>
+  <p class="s-sub">Once your source code is written, there are three fundamentally different ways it can be turned into running behaviour. Each model makes different trade-offs between portability, performance, and safety.</p>
+
+  <div class="dbox wide" style="margin-bottom:0.75rem;">
+    <img src="images/execution-models.svg" alt="Three execution model columns: Native compiled, Interpreted at runtime, and Bytecode/JVM/CLR with JIT"/>
+  </div>
+
+  <div class="table-wrap">
+    <table class="cmp-table">
+      <thead>
+        <tr><th>Language / Tech</th><th>Model</th><th>Runtime</th><th>Platform binary?</th><th>Examples</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>C, C++, Go, Rust</td><td><span class="good">Native</span></td><td>libc / built-in</td><td>Yes — x64 ≠ ARM</td><td>Linux kernel, Chrome, Docker</td></tr>
+        <tr><td>Fortran, COBOL, Pascal</td><td><span class="good">Native</span></td><td>Language runtime</td><td>Yes</td><td>Banking cores, scientific HPC</td></tr>
+        <tr><td>Python, Ruby, PHP</td><td><span class="warn">Interpreted</span></td><td>CPython, MRI, Zend</td><td>No — source is universal</td><td>Django, Rails, WordPress</td></tr>
+        <tr><td>bash, PowerShell, Perl</td><td><span class="warn">Interpreted</span></td><td>Shell / engine</td><td>No</td><td>CI/CD scripts, automation</td></tr>
+        <tr><td>Java, Kotlin, Scala</td><td><span class="good">Bytecode (JVM)</span></td><td>JVM (JDK/OpenJDK)</td><td>No — .class is universal</td><td>Spring Boot, Android, Kafka</td></tr>
+        <tr><td>C#, F#, VB.NET</td><td><span class="good">Bytecode (CLR)</span></td><td>.NET Runtime</td><td>No — IL is universal</td><td>ASP.NET, Unity, Azure Fns</td></tr>
+        <tr><td>JavaScript (V8/SpiderMonkey)</td><td><span class="warn">JIT compiled</span></td><td>V8 / SpiderMonkey</td><td>No — text source</td><td>Node.js, React, Chrome</td></tr>
+        <tr><td>Swift (iOS), Dart (Flutter)</td><td><span class="good">Native (AOT)</span></td><td>Minimal runtime</td><td>Yes</td><td>iOS apps, Flutter</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+</div><!-- /#deck end of first half — continued below -->
+
+<!-- ══ SLIDE 11: .NET vs Java ══════════════════════════════════ -->
+<section class="slide" data-title=".NET vs Java — JVM vs CLR">
+  <div class="s-era">Bytecode Platforms</div>
+  <h2 class="s-title"><span class="hi">.NET / CLR</span> vs <span class="hi3">Java / JVM</span></h2>
+  <p class="s-sub">Both compile to an intermediate bytecode and run on a virtual machine. They share the same fundamental idea but differ in language philosophy, ecosystem, and platform reach.</p>
+
+  <div class="g g2" style="margin-bottom:0.75rem;">
+    <div class="card c-purple">
+      <div class="card-hd">Java / JVM — "Write Once Run Anywhere"</div>
+      <ul>
+        <li>Sun Microsystems, 1995. Designed for portability from day one.</li>
+        <li><strong>Compile:</strong> <code>javac Hello.java</code> → <code>Hello.class</code> (bytecode)</li>
+        <li><strong>Run:</strong> <code>java Hello</code> — JVM interprets + JIT compiles to native</li>
+        <li><strong>JVM languages:</strong> Java · Kotlin (Android) · Scala · Clojure · Groovy · JRuby</li>
+        <li>JVM runs on any OS with a JDK installed — Windows, Linux, macOS, Android (Dalvik/ART)</li>
+        <li><strong>GraalVM:</strong> AOT-compiles Java to a native binary — no JVM needed at runtime; faster startup</li>
+        <li>Ecosystem: Maven/Gradle, Spring Boot, Hibernate, Kafka, Hadoop</li>
+      </ul>
+    </div>
+    <div class="card c-blue">
+      <div class="card-hd">.NET / CLR — Common Language Runtime</div>
+      <ul>
+        <li>Microsoft, 2002. Multi-language from the start — C#, F#, VB.NET all compile to IL (Intermediate Language)</li>
+        <li><strong>Compile:</strong> <code>csc Hello.cs</code> or <code>dotnet build</code> → <code>Hello.dll</code> (IL bytecode)</li>
+        <li><strong>Run:</strong> CLR JIT-compiles IL to native on first execution</li>
+        <li><strong>.NET 5+ (2020):</strong> cross-platform — Windows, Linux, macOS, WASM, iOS, Android</li>
+        <li><strong>NativeAOT (.NET 7+):</strong> compiles directly to native — like Go, no runtime needed</li>
+        <li>Ecosystem: ASP.NET Core, Blazor, MAUI, Entity Framework, SignalR</li>
+        <li><strong>Key difference:</strong> .NET spans from microcontrollers to cloud functions to desktop GUI apps within one SDK</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table class="cmp-table">
+      <thead><tr><th>Aspect</th><th>JVM / Java</th><th>CLR / .NET</th></tr></thead>
+      <tbody>
+        <tr><td>Bytecode format</td><td>.class files / JAR</td><td>IL in .dll / .exe</td></tr>
+        <tr><td>JIT engine</td><td>HotSpot, GraalVM</td><td>RyuJIT</td></tr>
+        <tr><td>Memory model</td><td>GC — generational</td><td>GC — generational + LOH</td></tr>
+        <tr><td>Native AOT</td><td>GraalVM Native Image</td><td>NativeAOT (.NET 7+)</td></tr>
+        <tr><td>Primary language</td><td>Java / Kotlin</td><td>C# / F#</td></tr>
+        <tr><td>Mobile</td><td>Android (ART)</td><td>iOS/Android via MAUI/Xamarin</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══ SLIDE 12: Procedural → OOP ═════════════════════════════ -->
+<section class="slide" data-title="Procedural vs Object-Oriented Programming">
+  <div class="s-era">Programming Paradigms · Part 1</div>
+  <h2 class="s-title"><span class="hi2">Procedural</span> → <span class="hi3">Object-Oriented</span></h2>
+  <p class="s-sub">The dominant shift in software design from the 1960s to the 1990s. Procedural programs are sequences of instructions. OOP programs model the real world as interacting objects.</p>
+
+  <div class="g g2" style="margin-bottom:0.6rem;">
+    <div class="card">
+      <div class="card-hd">Procedural — Functions All the Way Down</div>
+      <ul>
+        <li>Program has an <strong>entry point</strong> (e.g. <code>main()</code>), then calls one procedure after another</li>
+        <li><strong>Data and code are separate:</strong> data lives in variables/structs; functions operate on data passed to them</li>
+        <li>Global state is common — any function can modify any variable</li>
+        <li>Good for: algorithms, scripts, system programming, linear workflows</li>
+        <li><strong>Languages:</strong> C, Pascal, COBOL, Fortran, bash</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Object-Oriented — Real-World Modelling</div>
+      <ul>
+        <li>Programs are collections of <strong>objects</strong> — each bundles its own data (fields) and behaviour (methods)</li>
+        <li><strong>Class = blueprint;</strong> Object = instance. <code>BankAccount</code> is a class; <em>Alice's account</em> is an object.</li>
+        <li>Objects communicate by sending messages (calling methods) — no direct access to another object's internals</li>
+        <li>Good for: large codebases, teams, modelling business domains</li>
+        <li><strong>Languages:</strong> Java, C++, C#, Python, Ruby, Kotlin, Swift</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="code-compare">
+    <div class="code-compare-panel">
+      <div class="code-compare-hdr hdr-blue">
+        🔵 PROCEDURAL (C) — Data &amp; Code are Separate
+      </div>
+      <div class="code-block">
+        <pre><code><span class="tok-cm">/* Data lives in a struct — just a record */</span>
+<span class="tok-kw">struct</span> Account {
+  <span class="tok-ty">char</span>   owner[<span class="tok-num">50</span>];
+  <span class="tok-ty">double</span> balance;
+};
+
+<span class="tok-cm">/* Functions are SEPARATE — they receive</span>
+<span class="tok-cm">   the struct as an argument.             */</span>
+<span class="tok-ty">void</span> <span class="tok-fn">deposit</span>(<span class="tok-kw">struct</span> Account *a, <span class="tok-ty">double</span> amt) {
+  a-&gt;balance += amt;
+}
+<span class="tok-ty">double</span> <span class="tok-fn">getBalance</span>(<span class="tok-kw">struct</span> Account *a) {
+  <span class="tok-kw">return</span> a-&gt;balance;
+}
+
+<span class="tok-cm">/* Caller passes data explicitly */</span>
+<span class="tok-ty">int</span> <span class="tok-fn">main</span>() {
+  <span class="tok-kw">struct</span> Account alice;
+  <span class="tok-fn">deposit</span>(&amp;alice, <span class="tok-num">100.0</span>); <span class="tok-cm">// data passed in</span>
+  <span class="tok-fn">getBalance</span>(&amp;alice);
+}</code></pre>
+      </div>
+    </div>
+    <div class="code-compare-panel">
+      <div class="code-compare-hdr hdr-green">
+        🟢 OBJECT-ORIENTED (Java) — Data &amp; Behaviour Together
+      </div>
+      <div class="code-block">
+        <pre><code><span class="tok-cm">// Class = blueprint (exists once in source)</span>
+<span class="tok-cm">// Object = instance (created with 'new')</span>
+<span class="tok-kw">public class</span> <span class="tok-ty">BankAccount</span> {
+  <span class="tok-cm">// Fields — private, only THIS class touches them</span>
+  <span class="tok-kw">private</span> <span class="tok-ty">String</span> owner;
+  <span class="tok-kw">private</span> <span class="tok-ty">double</span> balance;
+
+  <span class="tok-cm">// Constructor — called when 'new' is used</span>
+  <span class="tok-kw">public</span> <span class="tok-fn">BankAccount</span>(<span class="tok-ty">String</span> o) {
+    owner = o; balance = <span class="tok-num">0</span>;
+  }
+  <span class="tok-cm">// Methods BELONG to the object — no arg needed</span>
+  <span class="tok-kw">public void</span> <span class="tok-fn">deposit</span>(<span class="tok-ty">double</span> amt) {
+    balance += amt; <span class="tok-cm">// accesses its own field</span>
+  }
+  <span class="tok-kw">public double</span> <span class="tok-fn">getBalance</span>() { <span class="tok-kw">return</span> balance; }
+}
+<span class="tok-cm">// Usage — object carries its own data</span>
+<span class="tok-ty">BankAccount</span> alice = <span class="tok-kw">new</span> <span class="tok-fn">BankAccount</span>(<span class="tok-str">"Alice"</span>);
+alice.<span class="tok-fn">deposit</span>(<span class="tok-num">100.0</span>); <span class="tok-cm">// no data passed — it's inside</span></code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 13: Four Pillars of OOP ═════════════════════════ -->
+<section class="slide" data-title="OOP — Four Pillars">
+  <div class="s-era">Object-Oriented Programming · Core Concepts</div>
+  <h2 class="s-title">The Four Pillars of <span class="hi3">OOP</span></h2>
+  <p class="s-sub">Every OOP language implements the same four concepts. Understanding them is the difference between code that works and code that scales.</p>
+
+  <div class="g g4" style="margin-bottom:0.75rem;">
+    <div class="card">
+      <div class="card-hd">Encapsulation</div>
+      <p>Bundle data and the methods that operate on it inside one object. Hide internals with <code>private</code>. Only expose what callers need (<code>public</code> interface). Prevents accidental state corruption.</p>
+      <p><em>Bank account example: <code>balance</code> is private — only <code>deposit()</code> and <code>withdraw()</code> can change it. No external code can set it to -∞.</em></p>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Inheritance</div>
+      <p>A child class extends a parent class, inheriting its fields and methods while adding or overriding behaviour. Models "is-a" relationships.</p>
+      <p><em><code>SavingsAccount extends BankAccount</code> — inherits <code>deposit()</code> but adds <code>addInterest()</code>. Code reuse without copying.</em></p>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Polymorphism</div>
+      <p>One interface, many implementations. A variable of type <code>Shape</code> can hold a <code>Circle</code> or a <code>Rectangle</code>. Calling <code>shape.area()</code> dispatches to the right implementation at runtime.</p>
+      <p><em>Greek: "many forms." Write code against the interface — the concrete type can change without changing the caller.</em></p>
+    </div>
+    <div class="card c-purple">
+      <div class="card-hd">Abstraction</div>
+      <p>Expose what something does, hide how it does it. Interfaces and abstract classes define contracts. Callers depend on the contract, not the implementation.</p>
+      <p><em><code>PaymentGateway</code> interface with <code>charge()</code> method — swap Stripe for Razorpay by changing one line, not by rewriting the payment flow.</em></p>
+    </div>
+  </div>
+
+  <div class="callout ca-green">
+    <strong>Class vs Object — the most common confusion:</strong> A <code>BankAccount</code> class is the architect's blueprint — it exists once in the source code. An object is a specific instance created in memory when <code>new BankAccount("Alice")</code> runs. You can have millions of objects, all sharing one class definition. The class defines structure; objects hold data.
+  </div>
+</section>
+
+<!-- ══ SLIDE 14: Functional Programming ═══════════════════════ -->
+<section class="slide" data-title="Functional Programming">
+  <div class="s-era">Programming Paradigms · Part 3</div>
+  <h2 class="s-title"><span class="hi">Functional</span> Programming</h2>
+  <p class="s-sub">Functions become first-class citizens — passed as arguments, returned from functions, stored in variables. Computation is the evaluation of mathematical functions with no side effects. Immutability is key.</p>
+
+  <div class="g g2" style="margin-bottom:0.75rem;">
+    <div class="card">
+      <div class="card-hd">Core Ideas</div>
+      <ul>
+        <li><strong>First-class functions:</strong> pass a function as an argument to another function. <code>list.filter(x → x > 0)</code> — the arrow function is passed <em>as a value</em></li>
+        <li><strong>Pure functions:</strong> same input always produces same output; no side effects (no writing to disk, no modifying globals)</li>
+        <li><strong>Immutability:</strong> once a value is created, it cannot be changed — you create a new value instead. Crucial for multi-core safety.</li>
+        <li><strong>Higher-order functions:</strong> <code>map</code>, <code>filter</code>, <code>reduce</code> — operate on collections without explicit loops</li>
+        <li><strong>Recursion over iteration:</strong> functional programs express loops as recursive function calls</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Why Immutability Matters for Multi-Core</div>
+      <ul>
+        <li>On a multi-core CPU, two threads can run truly simultaneously on different cores</li>
+        <li>If both threads modify the same variable — a <em>race condition</em> — the result is unpredictable</li>
+        <li><strong>Mutable state requires locks</strong> — mutexes, semaphores, synchronized blocks — which are complex and error-prone</li>
+        <li><strong>Immutable values need no locks</strong> — if data cannot change, any number of threads can read it safely in parallel</li>
+        <li>This is why Erlang (designed for telecom, 1986) handles millions of concurrent connections reliably — everything is immutable</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="g g3">
+    <div class="card c-purple">
+      <div class="card-hd">Pure Functional Languages</div>
+      <ul>
+        <li><strong>Haskell</strong> — no side effects by default; monads for I/O; lazy evaluation</li>
+        <li><strong>Erlang / Elixir</strong> — immutable, actor model, fault-tolerant; WhatsApp ran on Erlang</li>
+        <li><strong>Clojure</strong> — Lisp on the JVM; persistent data structures</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Hybrid (OOP + Functional)</div>
+      <ul>
+        <li><strong>Scala</strong> — OOP + FP on JVM; used by Spark, Kafka</li>
+        <li><strong>Kotlin</strong> — OOP-first but strong FP support; lambdas, coroutines</li>
+        <li><strong>F#</strong> — FP-first on .NET; immutable by default</li>
+        <li><strong>Swift</strong> — value types (structs) favour immutability</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-hd">FP in OOP Languages</div>
+      <ul>
+        <li><strong>Java 8+ Streams:</strong> <code>list.stream().filter().map().collect()</code></li>
+        <li><strong>Python:</strong> <code>map()</code>, <code>filter()</code>, list comprehensions, lambdas</li>
+        <li><strong>JavaScript:</strong> <code>.filter().map().reduce()</code> on arrays; functions are objects</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 15: Static vs Dynamic Typing ═════════════════════ -->
+<section class="slide" data-title="Static vs Dynamic Typing">
+  <div class="s-era">Type Systems</div>
+  <h2 class="s-title"><span class="hi2">Static</span> vs <span class="hi3">Dynamic</span> Typing</h2>
+  <p class="s-sub">When does the language check that you're using a variable correctly — at compile time or at runtime? This single design decision has enormous consequences for developer experience, performance, and bug rates.</p>
+
+  <div class="g g2" style="margin-bottom:0.6rem;">
+    <div class="card">
+      <div class="card-hd">Static Typing — Checked at Compile Time</div>
+      <ul>
+        <li>Every variable's type is declared (or inferred) at compile time</li>
+        <li>The compiler rejects type errors before the program ever runs</li>
+        <li>Better IDE support: autocomplete, refactoring, navigation are precise</li>
+        <li>Faster execution: compiler generates optimal code knowing exact types</li>
+        <li><strong>Languages:</strong> C, C++, Java, C#, Go, Rust, Swift, Kotlin, TypeScript</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Dynamic Typing — Checked at Runtime</div>
+      <ul>
+        <li>Variables have no declared type — the type is attached to the value, not the variable</li>
+        <li>A variable can hold a number now and a string next line — legal</li>
+        <li>Type errors only discovered when that line of code actually executes</li>
+        <li>Faster to write, easier to prototype, harder to maintain at large scale</li>
+        <li><strong>Languages:</strong> Python, Ruby, JavaScript, PHP, Perl, Lua, R</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="code-compare">
+    <div class="code-compare-panel">
+      <div class="code-compare-hdr hdr-blue">
+        🔵 STATIC TYPING (Java) — type error caught at COMPILE time
+      </div>
+      <div class="code-block">
+        <pre><code><span class="tok-ty">int</span> age = <span class="tok-num">25</span>;
+<span class="tok-ty">String</span> name = <span class="tok-str">"Alice"</span>;
+
+<span class="tok-cm">// ❌ COMPILE ERROR — before the program runs</span>
+<span class="tok-ty">int</span> result = age + name; <span class="tok-cm">// rejected by javac</span>
+<span class="tok-cm">// error: incompatible types: String cannot</span>
+<span class="tok-cm">// be converted to int</span>
+
+<span class="tok-cm">// ✓ Must be explicit</span>
+<span class="tok-ty">String</span> out = name + <span class="tok-str">" is "</span> + age;
+<span class="tok-cm">// Compiler knows: String+int → String</span>
+
+<span class="tok-cm">// Type inference — var (Java 10+)</span>
+<span class="tok-kw">var</span> list = <span class="tok-kw">new</span> ArrayList&lt;<span class="tok-ty">String</span>&gt;();
+<span class="tok-cm">// type inferred as ArrayList&lt;String&gt;</span>
+<span class="tok-cm">// still statically typed — compiler knows</span></code></pre>
+      </div>
+    </div>
+    <div class="code-compare-panel">
+      <div class="code-compare-hdr hdr-amber">
+        🟡 DYNAMIC TYPING (Python) — type error at RUNTIME only
+      </div>
+      <div class="code-block">
+        <pre><code>age  = <span class="tok-num">25</span>        <span class="tok-cm"># int — for now</span>
+name = <span class="tok-str">"Alice"</span>  <span class="tok-cm"># str</span>
+
+<span class="tok-cm"># ✓ This runs fine</span>
+out = name + <span class="tok-str">" is "</span> + <span class="tok-fn">str</span>(age)
+
+<span class="tok-cm"># ❌ TypeError — but ONLY when this</span>
+<span class="tok-cm">#    line of code actually executes</span>
+result = age + name
+<span class="tok-cm"># TypeError: unsupported operand type(s)</span>
+<span class="tok-cm"># for +: 'int' and 'str'</span>
+
+<span class="tok-cm"># ✓ Perfectly legal — age is now a string!</span>
+age = <span class="tok-str">"twenty five"</span>
+<span class="tok-cm"># The variable has no declared type;</span>
+<span class="tok-cm"># the value carries the type</span></code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 16: Declarative vs Imperative ════════════════════ -->
+<section class="slide" data-title="Declarative vs Imperative">
+  <div class="s-era">Programming Styles</div>
+  <h2 class="s-title"><span class="hi">Imperative</span> vs <span class="hi3">Declarative</span></h2>
+  <p class="s-sub"><strong>Imperative:</strong> tell the computer exactly how to do it, step by step. <strong>Declarative:</strong> describe what you want — let the system figure out how. SQL is the most familiar declarative language; functional pipelines bring this style into general-purpose code.</p>
+
+  <div class="code-compare" style="margin-bottom:0.75rem;">
+    <div class="code-compare-panel">
+      <div class="code-compare-hdr hdr-blue">
+        🔵 IMPERATIVE — explicit loop, mutable state, HOW step by step
+      </div>
+      <div class="code-block">
+        <pre><code>numbers = [<span class="tok-num">1</span>,<span class="tok-num">2</span>,<span class="tok-num">3</span>,<span class="tok-num">4</span>,<span class="tok-num">5</span>,<span class="tok-num">6</span>,<span class="tok-num">7</span>,<span class="tok-num">8</span>,<span class="tok-num">9</span>,<span class="tok-num">10</span>]
+
+<span class="tok-cm"># You control every step explicitly:</span>
+total = <span class="tok-num">0</span>                <span class="tok-cm"># mutable accumulator</span>
+<span class="tok-kw">for</span> n <span class="tok-kw">in</span> numbers:
+    <span class="tok-kw">if</span> n % <span class="tok-num">2</span> != <span class="tok-num">0</span>:       <span class="tok-cm"># test inline</span>
+        total += n         <span class="tok-cm"># mutate state</span>
+
+<span class="tok-fn">print</span>(total)  <span class="tok-cm"># 25</span>
+
+<span class="tok-cm"># You decide: loop order, accumulation,</span>
+<span class="tok-cm"># when to stop, how state changes.</span></code></pre>
+      </div>
+    </div>
+    <div class="code-compare-panel">
+      <div class="code-compare-hdr hdr-green">
+        🟢 DECLARATIVE — WHAT you want; functions as first-class values
+      </div>
+      <div class="code-block">
+        <pre><code><span class="tok-kw">from</span> functools <span class="tok-kw">import</span> reduce
+
+numbers = [<span class="tok-num">1</span>,<span class="tok-num">2</span>,<span class="tok-num">3</span>,<span class="tok-num">4</span>,<span class="tok-num">5</span>,<span class="tok-num">6</span>,<span class="tok-num">7</span>,<span class="tok-num">8</span>,<span class="tok-num">9</span>,<span class="tok-num">10</span>]
+
+<span class="tok-cm"># ── Version A: lambda (anonymous function) ──</span>
+<span class="tok-cm"># lambda n: n%2!=0   IS a function — with no name.</span>
+<span class="tok-cm"># It is passed AS A VALUE to filter().</span>
+odds  = <span class="tok-fn">filter</span>(<span class="tok-kw">lambda</span> n: n%<span class="tok-num">2</span>!=<span class="tok-num">0</span>,  numbers)
+total = <span class="tok-fn">reduce</span>(<span class="tok-kw">lambda</span> a,b: a+b,    odds)
+<span class="tok-fn">print</span>(total)  <span class="tok-cm"># 25</span>
+
+<span class="tok-cm"># ── Version B: named functions (identical result) ──</span>
+<span class="tok-cm"># isOdd and add are ordinary functions.</span>
+<span class="tok-cm"># They are passed exactly like lambdas.</span>
+<span class="tok-kw">def</span> <span class="tok-fn">isOdd</span>(n):         <span class="tok-cm"># same as lambda n: n%2!=0</span>
+    <span class="tok-kw">return</span> n % <span class="tok-num">2</span> != <span class="tok-num">0</span>
+
+<span class="tok-kw">def</span> <span class="tok-fn">add</span>(a, b):         <span class="tok-cm"># same as lambda a,b: a+b</span>
+    <span class="tok-kw">return</span> a + b
+
+odds  = <span class="tok-fn">filter</span>(<span class="tok-fn">isOdd</span>, numbers)  <span class="tok-cm"># function as value</span>
+total = <span class="tok-fn">reduce</span>(<span class="tok-fn">add</span>,    odds)    <span class="tok-cm"># function as value</span>
+<span class="tok-fn">print</span>(total)  <span class="tok-cm"># 25 — identical output</span></code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="g g3">
+    <div class="card">
+      <div class="card-hd">Lambda vs Named Function — Same Thing</div>
+      <ul>
+        <li><strong>Lambda</strong> <code>lambda n: n%2!=0</code> — an anonymous function created inline. Convenient for short, one-time use.</li>
+        <li><strong>Named function</strong> <code>def isOdd(n): return n%2!=0</code> — the same logic with a name. Reusable, testable, readable.</li>
+        <li>Both are <strong>first-class values</strong> — they can be passed as arguments, stored in variables, returned from other functions. This is the core of functional programming.</li>
+        <li><strong>filter(isOdd, numbers)</strong> — <code>isOdd</code> is not being called here; it is being passed as a value. <code>filter</code> calls it internally on each element.</li>
+        <li><strong>reduce(add, odds)</strong> — <code>add</code> is applied cumulatively: <code>add(add(add(add(1,3),5),7),9)</code> = 25</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Declarative in Other Contexts</div>
+      <ul>
+        <li><strong>SQL:</strong> <code>SELECT SUM(amount) FROM sales WHERE odd = 1</code> — you describe the result, not the algorithm</li>
+        <li><strong>HTML/CSS:</strong> describe the page structure and appearance — browser figures out rendering</li>
+        <li><strong>Terraform/k8s YAML:</strong> describe desired infrastructure state — platform converges to it</li>
+        <li><strong>React JSX:</strong> describe what the UI should look like — framework updates the DOM</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">When Each Style Wins</div>
+      <ul>
+        <li><strong>Imperative wins</strong> when you need precise control: performance-critical loops, low-level algorithms, hardware interaction</li>
+        <li><strong>Declarative wins</strong> when clarity and correctness matter more: data transformations, UI state, infrastructure configuration, query languages</li>
+        <li>Modern languages support both — use the right style for each problem</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 17: Dynamic Loading — DLLs ═══════════════════════ -->
+<section class="slide" data-title="Dynamic Loading — DLLs">
+  <div class="s-era">Linking &amp; Loading</div>
+  <h2 class="s-title"><span class="hi2">Dynamic Libraries</span> — Static Binding vs Runtime Loading</h2>
+  <p class="s-sub">A DLL (.dll on Windows, .so on Linux, .dylib on macOS) is a library that lives on disk as a separate file. There are two ways for a program to use it — and understanding the difference explains plugin systems, hot-patching, and "DLL hell."</p>
+
+  <div class="g g2" style="margin-bottom:0.75rem;">
+    <div class="card">
+      <div class="card-hd">Load-Time (Implicit) Dynamic Linking</div>
+      <ul>
+        <li>The DLL name is recorded in the executable at link time — the OS loader finds and loads it <em>automatically</em> before <code>main()</code> starts</li>
+        <li>If the DLL is missing or the wrong version → program fails to start entirely</li>
+        <li>This is the standard model for system DLLs: <code>kernel32.dll</code>, <code>msvcrt.dll</code>, <code>libc.so.6</code></li>
+        <li>Benefit: all DLLs are available to all functions immediately; simplest to code</li>
+        <li>"<strong>DLL Hell</strong>" — two programs need different versions of the same DLL; classic Windows nightmare of the 1990s–2000s</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Runtime (Explicit) Dynamic Loading</div>
+      <ul>
+        <li>The program calls OS APIs at runtime to load a DLL: <code>LoadLibrary("plugin.dll")</code> on Windows; <code>dlopen("plugin.so")</code> on Linux</li>
+        <li>Then resolves specific function addresses: <code>GetProcAddress()</code> / <code>dlsym()</code></li>
+        <li>The DLL need not exist at program startup — can be loaded on demand</li>
+        <li>This is the foundation of <strong>plugin architectures:</strong> Photoshop filters, browser extensions, IDE plugins, game mods</li>
+        <li>Can also <strong>unload</strong> a DLL at runtime and swap in a new version — basis of hot-patching</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="code-grid cg2">
+    <div class="code-block">
+      <span class="code-label">STATIC binding at link-time (C)</span>
+      <pre><code><span class="tok-cm">/* Link with -lm (math library) */</span>
+<span class="tok-kw">#include</span> &lt;math.h&gt;
+
+<span class="tok-ty">int</span> <span class="tok-fn">main</span>() {
+  <span class="tok-cm">/* sqrt is resolved automatically */</span>
+  <span class="tok-cm">/* by the OS loader before main() */</span>
+  <span class="tok-ty">double</span> x = <span class="tok-fn">sqrt</span>(<span class="tok-num">16.0</span>);
+  <span class="tok-kw">return</span> <span class="tok-num">0</span>;
+}
+<span class="tok-cm">/* libm.so is listed in the binary's</span>
+<span class="tok-cm">   "needed" section — auto-loaded */</span></code></pre>
+    </div>
+    <div class="code-block">
+      <span class="code-label cl-green">RUNTIME loading — plugin pattern (Linux)</span>
+      <pre><code><span class="tok-kw">#include</span> &lt;dlfcn.h&gt;
+
+<span class="tok-ty">int</span> <span class="tok-fn">main</span>() {
+  <span class="tok-cm">/* Load plugin at runtime */</span>
+  <span class="tok-ty">void</span> *lib = <span class="tok-fn">dlopen</span>(<span class="tok-str">"./plugin.so"</span>,
+                       RTLD_LAZY);
+
+  <span class="tok-cm">/* Get function address by name */</span>
+  <span class="tok-kw">typedef</span> <span class="tok-ty">void</span> (*<span class="tok-fn">RunFn</span>)();
+  RunFn run = <span class="tok-fn">dlsym</span>(lib, <span class="tok-str">"run"</span>);
+
+  <span class="tok-fn">run</span>();         <span class="tok-cm">/* call plugin fn */</span>
+  <span class="tok-fn">dlclose</span>(lib); <span class="tok-cm">/* unload safely  */</span>
+}</code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 18: Garbage Collection ══════════════════════════ -->
+<section class="slide" data-title="Garbage Collection">
+  <div class="s-era">Memory Management</div>
+  <h2 class="s-title"><span class="hi">Memory Management</span> — Manual to Garbage Collection</h2>
+  <p class="s-sub">Every object allocated on the heap must eventually be freed. The question is: who is responsible — the programmer, or the runtime? The answer defines your language's entire memory safety story.</p>
+
+  <div class="g g3" style="margin-bottom:0.75rem;">
+    <div class="card c-red">
+      <div class="card-hd">Manual Memory Management (C/C++)</div>
+      <ul>
+        <li>Programmer calls <code>malloc()</code> to allocate; <strong>must</strong> call <code>free()</code> to release</li>
+        <li><strong>Memory leak:</strong> forget to free → memory fills up → crash (hours/days later)</li>
+        <li><strong>Dangling pointer:</strong> free memory but still hold a pointer to it → corrupted data, security vulnerability</li>
+        <li><strong>Double-free:</strong> free the same block twice → heap corruption</li>
+        <li>C++ smart pointers (<code>unique_ptr</code>, <code>shared_ptr</code>) automate this with RAII — destructor frees memory</li>
+        <li><strong>Rust ownership:</strong> compiler enforces correct memory management at compile time — no GC, no leaks</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Reference Counting (Python, Swift, Obj-C)</div>
+      <ul>
+        <li>Each object has a count of how many references point to it</li>
+        <li>Count reaches 0 → object is immediately freed</li>
+        <li><strong>Python:</strong> CPython uses reference counting + a cycle detector</li>
+        <li><strong>Swift / Objective-C:</strong> Automatic Reference Counting (ARC) — compiler inserts retain/release calls</li>
+        <li><strong>Problem: reference cycles</strong> — object A holds ref to B, B holds ref to A; both counts stay at 1 forever — leak!</li>
+        <li><strong>Solution:</strong> weak references (don't increment count) break cycles</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Garbage Collection (Java, C#, Go, Python)</div>
+      <ul>
+        <li>GC periodically scans the heap and frees all objects that are no longer reachable from any live reference</li>
+        <li><strong>Mark-and-sweep:</strong> mark all reachable objects; sweep (free) everything unmarked</li>
+        <li><strong>Generational GC (JVM, CLR):</strong> most objects die young — collect young generation frequently (fast), old generation rarely</li>
+        <li><strong>Stop-the-world pause:</strong> GC briefly halts all threads — latency spike; problematic for real-time systems</li>
+        <li><strong>Concurrent GC (Go, ZGC, Shenandoah):</strong> GC runs alongside the program — pauses under 1ms</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout ca-amber">
+    <strong>The Tradeoff:</strong> Manual (C/Rust) = maximum performance, maximum risk. Reference counting (Swift) = immediate deterministic deallocation, cycle risk. GC (Java/Go) = no leaks, no dangling pointers, but throughput overhead and occasional pause. Rust's ownership system is the only approach that achieves safety <em>without</em> a runtime cost.
+  </div>
+</section>
+
+<!-- ══ SLIDE 19: Summary ═══════════════════════════════════════ -->
+<section class="slide" data-title="Summary">
+  <div class="s-era">Summary</div>
+  <h2 class="s-title">Ten <span class="hi">Fundamental Ideas</span></h2>
+  <p class="s-sub">These underpin every technology decision you will make as an engineer.</p>
+
+  <div class="g g2">
+    <div class="card">
+      <div class="card-hd">① SaaS Changed the Business Model</div>
+      <p>Salesforce proved enterprises would rent software instead of buying it. Zoho proved a bootstrapped Indian company could compete globally. CAPEX→OPEX is now the default for all software procurement.</p>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">② Storage Latency Defines Architecture</div>
+      <p>HDD latency is 10 ms; NVMe is 30 µs; RAM is 100 ns — five orders of magnitude. Whether you can cache in RAM, stream from SSD, or must hit disk shapes every performance decision.</p>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">③ All Code is Opcodes Eventually</div>
+      <p>Every language — Python, Java, C# — translates to CPU instructions. The abstraction layers (Assembly → C → JVM bytecode → Python) trade control for productivity at each step.</p>
+    </div>
+    <div class="card c-purple">
+      <div class="card-hd">④ Compile → Link → Execute</div>
+      <p>Compilation produces <em>object files</em> with unresolved references. Linking resolves them. The runtime provides startup services. Understanding this explains every linker error you will ever encounter.</p>
+    </div>
+    <div class="card">
+      <div class="card-hd">⑤ Native / Interpreted / Bytecode</div>
+      <p>Native = fastest, platform-specific. Interpreted = portable, slower. Bytecode (JVM/CLR) = portable + JIT performance. Choose based on your constraints — startup time, throughput, and portability all differ.</p>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">⑥ OOP Models the World</div>
+      <p>Encapsulation, Inheritance, Polymorphism, Abstraction. Class = blueprint; Object = instance. The four pillars make large codebases maintainable by decoupling what something does from how it does it.</p>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">⑦ Immutability Enables Multi-Core</div>
+      <p>Functional programming's insistence on immutable data is not academic — mutable shared state requires locks, which are the primary source of bugs and performance bottlenecks in concurrent systems.</p>
+    </div>
+    <div class="card c-purple">
+      <div class="card-hd">⑧ Types Catch Bugs Early</div>
+      <p>Static types catch type errors at compile time — before the code ships. Dynamic types allow flexibility at the cost of runtime surprises. TypeScript (JavaScript + types) exists because the industry learned this the hard way.</p>
+    </div>
+    <div class="card filled-amber span2">
+      <div class="card-hd">⑨ Declarative Describes What, Imperative Describes How · ⑩ Memory Management is a Safety Decision</div>
+      <p>SQL, HTML, Terraform, React — all declarative. You say what you want; the platform decides how. Imperative code gives you control but responsibility. And whether memory is managed manually (C), by reference counting (Swift), or by GC (Java) is the most consequential language design decision — it determines your safety guarantees, your performance profile, and what class of bugs you are even capable of introducing.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 20: End ════════════════════════════════════════════ -->
+<section class="slide cover" data-title="Questions">
+  <div class="cov-grid"></div>
+  <div class="cov-glow"></div>
+  <div class="cov-content">
+    <div class="cov-kicker">End of Presentation — CS Fundamentals Series</div>
+    <h1 class="cov-h1">Questions?<br/><span class="hi">Let's Discuss.</span></h1>
+    <p class="cov-desc">From magnetic core memory holding kilobytes in 1955 to DDR5 delivering 89 GB/s in 2024. From hex opcodes to Python in one abstraction ladder. From manual malloc to concurrent garbage collectors that pause for under a millisecond. These fundamentals are not historical curiosities — they are the substrate every cloud service, every AI model, and every mobile app runs on.</p>
+    <div class="chips">
+      <span class="chip ca">WebAssembly — bytecode for browsers</span>
+      <span class="chip cg">Rust ownership model</span>
+      <span class="chip">Persistent Memory (CXL)</span>
+      <span class="chip cp">Type inference in modern languages</span>
+    </div>
+  </div>
+</section>
+
+<!-- NAV (only one nav needed — JS watches all slides) -->
+<nav id="nav">
+  <div class="nav-group">
+    <button class="nb" id="btn-prev">← Prev</button>
+    <button class="nb" id="btn-next">Next →</button>
+    <span id="counter">1 / 20</span>
+  </div>
+  <div class="nav-group">
+    <select id="jump"></select>
+  </div>
+  <div class="nav-group">
+    <button id="theme-btn">☀ Light</button>
+  </div>
+</nav>
+
+<script src="../shared/js/deck.js"></script>
+</body>
+</html>

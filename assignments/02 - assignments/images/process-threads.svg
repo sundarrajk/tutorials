@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 310">
+  <style>
+    .proc-bg { fill:var(--svg-fill2,rgba(99,179,237,.07)); stroke:var(--svg-blue,#63b3ed); stroke-width:1.5; }
+    .proc2-bg{ fill:var(--svg-fill2,rgba(104,211,145,.07)); stroke:var(--svg-green,#68d391); stroke-width:1.5; }
+    .seg   { stroke-width:1.2; }
+    .s-code{ fill:var(--svg-fill1,rgba(183,148,244,.25)); stroke:var(--svg-purple,#b794f4); }
+    .s-data{ fill:var(--svg-fill1,rgba(246,173,85,.25));  stroke:var(--svg-amber,#f6ad55); }
+    .s-heap{ fill:var(--svg-fill1,rgba(104,211,145,.25)); stroke:var(--svg-green,#68d391); }
+    .s-stk { fill:var(--svg-fill1,rgba(99,179,237,.25));  stroke:var(--svg-blue,#63b3ed); }
+    .s-shm { fill:var(--svg-fill1,rgba(252,129,129,.25)); stroke:var(--svg-red,#fc8181); }
+    .thd   { fill:var(--svg-fill1,rgba(99,179,237,.18));  stroke:var(--svg-blue,#63b3ed); stroke-width:1; }
+    .thd2  { fill:var(--svg-fill1,rgba(104,211,145,.18)); stroke:var(--svg-green,#68d391); stroke-width:1; }
+    .arr   { fill:var(--svg-text2,rgba(99,179,237,.5)); }
+    .con   { stroke:var(--svg-text2,rgba(99,179,237,.4)); fill:none; stroke-width:1.3; stroke-dasharray:4,3; }
+    .con-s { stroke:var(--svg-red,rgba(252,129,129,.6)); fill:none; stroke-width:1.5; stroke-dasharray:5,3; }
+    .h     { fill:var(--svg-blue,#63b3ed); font-family:monospace; font-size:10px; font-weight:700; text-anchor:middle; }
+    .h2    { fill:var(--svg-green,#68d391); font-family:monospace; font-size:10px; font-weight:700; text-anchor:middle; }
+    .lbl   { fill:var(--svg-text1,#d0e4f8); font-family:monospace; font-size:8.5px; font-weight:700; text-anchor:middle; }
+    .sub   { fill:var(--svg-text2,#6a9ab8); font-family:monospace; font-size:7.5px; text-anchor:middle; }
+    .note  { fill:var(--svg-text2,#6a9ab8); font-family:monospace; font-size:8px; }
+    .good  { fill:var(--svg-green,rgba(104,211,145,.8)); font-family:monospace; font-size:8px; }
+    .warn  { fill:var(--svg-amber,rgba(246,173,85,.75)); font-family:monospace; font-size:8px; }
+    .share-t { fill:var(--svg-red,#fc8181); font-family:monospace; font-size:8.5px; font-weight:700; text-anchor:middle; }
+    .era   { fill:var(--svg-text2,rgba(99,179,237,.5)); font-family:monospace; font-size:8.5px; letter-spacing:1px; }
+    .divl  { stroke:var(--svg-text2,rgba(99,179,237,.18)); fill:none; stroke-dasharray:5,4; }
+  </style>
+  <defs>
+    <marker id="ptA" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <path d="M0,0 L0,7 L7,3.5 z" class="arr"/>
+    </marker>
+  </defs>
+
+  <!-- ─── PROCESS A ─── -->
+  <rect x="6" y="6" width="252" height="240" rx="9" class="proc-bg"/>
+  <text x="132" y="24" class="h">PROCESS A</text>
+  <text x="132" y="36" class="sub">Own virtual address space (isolation)</text>
+
+  <!-- Memory segments stacked -->
+  <rect x="18" y="44" width="228" height="30" rx="5" class="seg s-code"/>
+  <text x="132" y="57" class="lbl">CODE SEGMENT</text>
+  <text x="132" y="67" class="sub">Read-only executable instructions</text>
+
+  <rect x="18" y="78" width="228" height="30" rx="5" class="seg s-data"/>
+  <text x="132" y="91" class="lbl">DATA SEGMENT</text>
+  <text x="132" y="101" class="sub">Global &amp; static variables</text>
+
+  <rect x="18" y="112" width="228" height="36" rx="5" class="seg s-heap"/>
+  <text x="132" y="127" class="lbl">HEAP ↓ (grows down)</text>
+  <text x="132" y="138" class="sub">malloc/new — dynamic allocation</text>
+  <text x="132" y="148" class="sub">Shared by all threads in process</text>
+
+  <!-- Thread stacks -->
+  <rect x="18" y="154" width="100" height="50" rx="5" class="seg s-stk"/>
+  <text x="68" y="170" class="lbl">THREAD 1</text>
+  <text x="68" y="181" class="lbl">STACK ↑</text>
+  <text x="68" y="192" class="sub">Local vars</text>
+  <text x="68" y="201" class="sub">Call frames</text>
+
+  <rect x="128" y="154" width="118" height="50" rx="5" class="seg s-stk"/>
+  <text x="187" y="170" class="lbl">THREAD 2</text>
+  <text x="187" y="181" class="lbl">STACK ↑</text>
+  <text x="187" y="192" class="sub">Own stack</text>
+  <text x="187" y="201" class="sub">(private)</text>
+
+  <text x="18" y="222" class="note">Threads share: code, data, heap, files</text>
+  <text x="18" y="234" class="note">Threads own: stack, registers, PC</text>
+  <text x="18" y="246" class="note">→ threads are lightweight; cheap to create</text>
+
+  <!-- ─── PROCESS B ─── -->
+  <rect x="274" y="6" width="252" height="240" rx="9" class="proc2-bg"/>
+  <text x="400" y="24" class="h2">PROCESS B</text>
+  <text x="400" y="36" class="sub">Separate virtual address space</text>
+
+  <rect x="286" y="44" width="228" height="30" rx="5" class="seg s-code"/>
+  <text x="400" y="57" class="lbl">CODE SEGMENT</text>
+  <text x="400" y="67" class="sub">Different binary image</text>
+
+  <rect x="286" y="78" width="228" height="30" rx="5" class="seg s-data"/>
+  <text x="400" y="91" class="lbl">DATA SEGMENT</text>
+  <text x="400" y="101" class="sub">Completely separate variables</text>
+
+  <rect x="286" y="112" width="228" height="36" rx="5" class="seg s-heap"/>
+  <text x="400" y="127" class="lbl">HEAP (separate)</text>
+  <text x="400" y="138" class="sub">Process B cannot touch Process A heap</text>
+  <text x="400" y="148" class="sub">OS enforces isolation via MMU</text>
+
+  <rect x="286" y="154" width="228" height="50" rx="5" class="seg s-stk"/>
+  <text x="400" y="175" class="lbl">THREAD 1 STACK</text>
+  <text x="400" y="188" class="sub">Only one thread shown</text>
+
+  <text x="286" y="222" class="note">Crash in Process B cannot corrupt A</text>
+  <text x="286" y="234" class="good">✓ Isolation = reliability, security</text>
+  <text x="286" y="246" class="warn">✗ IPC needed to communicate</text>
+
+  <line x1="534" y1="10" x2="534" y2="300" class="divl"/>
+
+  <!-- ─── RIGHT: Communication & history ─── -->
+  <rect x="544" y="6" width="270" height="110" rx="8" fill="var(--svg-fill2,rgba(252,129,129,.06))" stroke="var(--svg-red,rgba(252,129,129,.3))" stroke-width="1"/>
+  <text x="679" y="22" class="share-t">PROCESS COMMUNICATION (IPC)</text>
+  <text x="550" y="38" class="note">Processes need OS help to communicate:</text>
+  <text x="550" y="52" class="note">▸ Pipes  (parent→child, one-way)</text>
+  <text x="550" y="65" class="note">▸ Sockets  (same machine or network)</text>
+  <text x="550" y="78" class="note">▸ Shared Memory  (explicit, fast)</text>
+  <text x="550" y="91" class="note">▸ Message Queues  (async, buffered)</text>
+  <text x="550" y="104" class="note">▸ Files / mmap  (persistent)</text>
+
+  <rect x="544" y="126" width="270" height="82" rx="8" fill="var(--svg-fill2,rgba(246,173,85,.06))" stroke="var(--svg-amber,rgba(246,173,85,.3))" stroke-width="1"/>
+  <text x="679" y="142" class="lbl" fill="var(--svg-amber,#f6ad55)">HISTORICAL NOTE</text>
+  <text x="550" y="158" class="note">Early systems (MS-DOS, early UNIX):</text>
+  <text x="550" y="171" class="note">processes shared a single flat address space.</text>
+  <text x="550" y="184" class="note">One buggy program could overwrite another.</text>
+  <text x="550" y="197" class="note">Virtual memory (1960s–80s) gave each</text>
+  <text x="550" y="209" class="note">process its own "view" of memory → isolation.</text>
+
+  <rect x="544" y="218" width="270" height="78" rx="8" fill="var(--svg-fill2,rgba(104,211,145,.06))" stroke="var(--svg-green,rgba(104,211,145,.3))" stroke-width="1"/>
+  <text x="679" y="234" class="lbl" fill="var(--svg-green,#68d391)">FURTHER TOPICS</text>
+  <text x="550" y="250" class="note">▸ Virtual Memory &amp; Paging</text>
+  <text x="550" y="263" class="note">▸ Copy-on-Write (fork() optimisation)</text>
+  <text x="550" y="276" class="note">▸ Memory-Mapped Files (mmap)</text>
+  <text x="550" y="289" class="note">▸ NUMA — Non-Uniform Memory Access</text>
+</svg>

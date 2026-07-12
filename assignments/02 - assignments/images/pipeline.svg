@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 320">
+  <style>
+    .stage-bg { stroke-width:1.2; }
+    .if  { fill:var(--svg-fill1,rgba(99,179,237,.25));  stroke:var(--svg-blue,#63b3ed); }
+    .id  { fill:var(--svg-fill1,rgba(183,148,244,.25)); stroke:var(--svg-purple,#b794f4); }
+    .ex  { fill:var(--svg-fill1,rgba(104,211,145,.25)); stroke:var(--svg-green,#68d391); }
+    .mem { fill:var(--svg-fill1,rgba(246,173,85,.25));  stroke:var(--svg-amber,#f6ad55); }
+    .wb  { fill:var(--svg-fill1,rgba(252,129,129,.25)); stroke:var(--svg-red,#fc8181); }
+    .bubble { fill:var(--svg-fill2,rgba(99,179,237,.06)); stroke:var(--svg-border,rgba(99,179,237,.2)); stroke-dasharray:4,3; }
+    .flush  { fill:rgba(252,129,129,.15); stroke:var(--svg-red,rgba(252,129,129,.5)); stroke-dasharray:4,3; }
+    .h-if  { fill:var(--svg-blue,#63b3ed);   font-family:monospace; font-size:8.5px; font-weight:700; text-anchor:middle; }
+    .h-id  { fill:var(--svg-purple,#b794f4); font-family:monospace; font-size:8.5px; font-weight:700; text-anchor:middle; }
+    .h-ex  { fill:var(--svg-green,#68d391);  font-family:monospace; font-size:8.5px; font-weight:700; text-anchor:middle; }
+    .h-mem { fill:var(--svg-amber,#f6ad55);  font-family:monospace; font-size:8.5px; font-weight:700; text-anchor:middle; }
+    .h-wb  { fill:var(--svg-red,#fc8181);    font-family:monospace; font-size:8.5px; font-weight:700; text-anchor:middle; }
+    .ins   { fill:var(--svg-text1,#d0e4f8);  font-family:monospace; font-size:7.5px; text-anchor:middle; }
+    .ins-g { fill:var(--svg-green,rgba(104,211,145,.85)); font-family:monospace; font-size:7.5px; text-anchor:middle; }
+    .ins-r { fill:var(--svg-red,rgba(252,129,129,.85)); font-family:monospace; font-size:7.5px; text-anchor:middle; }
+    .cycle { fill:var(--svg-text2,#6a9ab8); font-family:monospace; font-size:8px; text-anchor:middle; }
+    .row-l { fill:var(--svg-text2,#6a9ab8); font-family:monospace; font-size:8px; text-anchor:end; }
+    .sec-t { fill:var(--svg-text1,#d0e4f8); font-family:monospace; font-size:9.5px; font-weight:700; letter-spacing:.5px; }
+    .note  { fill:var(--svg-text2,#6a9ab8); font-family:monospace; font-size:8px; }
+    .good  { fill:var(--svg-green,rgba(104,211,145,.8)); font-family:monospace; font-size:8px; }
+    .warn  { fill:var(--svg-red,rgba(252,129,129,.75)); font-family:monospace; font-size:8px; }
+
+    /* animation: highlight active pipeline stage */
+    @keyframes pulse {
+      0%,100% { opacity:.8; }
+      50%     { opacity:1; filter: brightness(1.3); }
+    }
+    .p1 { animation: pulse 5s 0.0s infinite; }
+    .p2 { animation: pulse 5s 1.0s infinite; }
+    .p3 { animation: pulse 5s 2.0s infinite; }
+    .p4 { animation: pulse 5s 3.0s infinite; }
+    .p5 { animation: pulse 5s 4.0s infinite; }
+  </style>
+
+  <!-- ─── SECTION 1: Pipeline working normally ─── -->
+  <text x="14" y="18" class="sec-t">WITHOUT PIPELINING — 1 instruction per 5 cycles</text>
+  <!-- Cycle headers -->
+  <text x="185" y="36" class="cycle">Cycle 1</text><text x="255" y="36" class="cycle">Cycle 2</text><text x="325" y="36" class="cycle">Cycle 3</text><text x="395" y="36" class="cycle">Cycle 4</text><text x="465" y="36" class="cycle">Cycle 5</text>
+  <!-- Single instruction through all 5 stages sequentially -->
+  <text x="125" y="57" class="row-l">Instr 1:</text>
+  <rect x="150" y="43" width="60" height="20" rx="3" class="if stage-bg p1"/><text x="180" y="57" class="h-if">IF</text>
+  <rect x="220" y="43" width="60" height="20" rx="3" class="id stage-bg p2"/><text x="250" y="57" class="h-id">ID</text>
+  <rect x="290" y="43" width="60" height="20" rx="3" class="ex stage-bg p3"/><text x="320" y="57" class="h-ex">EX</text>
+  <rect x="360" y="43" width="60" height="20" rx="3" class="mem stage-bg p4"/><text x="390" y="57" class="h-mem">MEM</text>
+  <rect x="430" y="43" width="60" height="20" rx="3" class="wb stage-bg p5"/><text x="460" y="57" class="h-wb">WB</text>
+  <text x="510" y="57" class="warn">5 cycles</text>
+
+  <!-- ─── SECTION 2: Pipelined — all stages busy ─── -->
+  <text x="14" y="82" class="sec-t">WITH PIPELINING — 1 instruction completes per cycle (steady state)</text>
+  <!-- Cycle headers -->
+  <text x="185" y="100" class="cycle">Cyc 1</text><text x="245" y="100" class="cycle">Cyc 2</text><text x="305" y="100" class="cycle">Cyc 3</text><text x="365" y="100" class="cycle">Cyc 4</text><text x="425" y="100" class="cycle">Cyc 5</text><text x="485" y="100" class="cycle">Cyc 6</text><text x="545" y="100" class="cycle">Cyc 7</text><text x="605" y="100" class="cycle">Cyc 8</text><text x="665" y="100" class="cycle">Cyc 9</text>
+
+  <!-- Instruction 1 -->
+  <text x="125" y="118" class="row-l">I1:</text>
+  <rect x="150" y="104" width="50" height="18" rx="3" class="if stage-bg"/><text x="175" y="117" class="ins">IF</text>
+  <rect x="210" y="104" width="50" height="18" rx="3" class="id stage-bg"/><text x="235" y="117" class="ins">ID</text>
+  <rect x="270" y="104" width="50" height="18" rx="3" class="ex stage-bg"/><text x="295" y="117" class="ins">EX</text>
+  <rect x="330" y="104" width="50" height="18" rx="3" class="mem stage-bg"/><text x="355" y="117" class="ins">MEM</text>
+  <rect x="390" y="104" width="50" height="18" rx="3" class="wb stage-bg"/><text x="415" y="117" class="ins-g">WB✓</text>
+
+  <!-- Instruction 2 -->
+  <text x="125" y="136" class="row-l">I2:</text>
+  <rect x="210" y="122" width="50" height="18" rx="3" class="if stage-bg"/><text x="235" y="135" class="ins">IF</text>
+  <rect x="270" y="122" width="50" height="18" rx="3" class="id stage-bg"/><text x="295" y="135" class="ins">ID</text>
+  <rect x="330" y="122" width="50" height="18" rx="3" class="ex stage-bg"/><text x="355" y="135" class="ins">EX</text>
+  <rect x="390" y="122" width="50" height="18" rx="3" class="mem stage-bg"/><text x="415" y="135" class="ins">MEM</text>
+  <rect x="450" y="122" width="50" height="18" rx="3" class="wb stage-bg"/><text x="475" y="135" class="ins-g">WB✓</text>
+
+  <!-- Instruction 3 -->
+  <text x="125" y="154" class="row-l">I3:</text>
+  <rect x="270" y="140" width="50" height="18" rx="3" class="if stage-bg"/><text x="295" y="153" class="ins">IF</text>
+  <rect x="330" y="140" width="50" height="18" rx="3" class="id stage-bg"/><text x="355" y="153" class="ins">ID</text>
+  <rect x="390" y="140" width="50" height="18" rx="3" class="ex stage-bg"/><text x="415" y="153" class="ins">EX</text>
+  <rect x="450" y="140" width="50" height="18" rx="3" class="mem stage-bg"/><text x="475" y="153" class="ins">MEM</text>
+  <rect x="510" y="140" width="50" height="18" rx="3" class="wb stage-bg"/><text x="535" y="153" class="ins-g">WB✓</text>
+  <text x="580" y="153" class="good">1 done/cycle in steady state!</text>
+
+  <!-- ─── SECTION 3: Branch miss ─── -->
+  <text x="14" y="178" class="sec-t">BRANCH MISPREDICTION — pipeline flush penalty (~15 cycles wasted)</text>
+  <text x="185" y="196" class="cycle">Cyc 1</text><text x="245" y="196" class="cycle">Cyc 2</text><text x="305" y="196" class="cycle">Cyc 3</text><text x="365" y="196" class="cycle">Cyc 4</text><text x="425" y="196" class="cycle">Cyc 5</text><text x="485" y="196" class="cycle">Cyc 6</text><text x="545" y="196" class="cycle">Cyc 7</text><text x="605" y="196" class="cycle">Cyc 8</text>
+
+  <!-- Branch instruction (taken wrong path) -->
+  <text x="125" y="214" class="row-l">JNE:</text>
+  <rect x="150" y="200" width="50" height="18" rx="3" class="if stage-bg"/><text x="175" y="213" class="ins">IF</text>
+  <rect x="210" y="200" width="50" height="18" rx="3" class="id stage-bg"/><text x="235" y="213" class="ins">ID</text>
+  <rect x="270" y="200" width="50" height="18" rx="3" class="ex stage-bg"/><text x="295" y="213" class="ins">EX</text>
+  <rect x="330" y="200" width="50" height="18" rx="3" class="mem stage-bg"/><text x="355" y="213" class="ins">MEM</text>
+  <rect x="390" y="200" width="50" height="18" rx="3" class="wb stage-bg"/><text x="415" y="213" class="ins-g">WB✓</text>
+  <text x="460" y="213" fill="var(--svg-amber,#f6ad55)" font-family="monospace" font-size="7.5">branch resolved here</text>
+
+  <!-- Wrong-path instructions fetched speculatively -->
+  <text x="125" y="232" class="row-l">W1(wrong):</text>
+  <rect x="210" y="218" width="50" height="18" rx="3" class="flush stage-bg"/><text x="235" y="231" class="ins-r">IF</text>
+  <rect x="270" y="218" width="50" height="18" rx="3" class="flush stage-bg"/><text x="295" y="231" class="ins-r">ID</text>
+  <rect x="330" y="218" width="50" height="18" rx="3" class="flush stage-bg"/><text x="355" y="231" class="ins-r">EX</text>
+  <rect x="390" y="218" width="50" height="18" rx="3" class="flush stage-bg"/><text x="415" y="231" class="ins-r">FLUSH</text>
+
+  <text x="125" y="250" class="row-l">W2(wrong):</text>
+  <rect x="270" y="236" width="50" height="18" rx="3" class="flush stage-bg"/><text x="295" y="249" class="ins-r">IF</text>
+  <rect x="330" y="236" width="50" height="18" rx="3" class="flush stage-bg"/><text x="355" y="249" class="ins-r">ID</text>
+  <rect x="390" y="236" width="50" height="18" rx="3" class="flush stage-bg"/><text x="415" y="249" class="ins-r">FLUSH</text>
+
+  <!-- Correct path restarts -->
+  <text x="125" y="268" class="row-l">C1(correct):</text>
+  <rect x="450" y="254" width="50" height="18" rx="3" class="if stage-bg"/><text x="475" y="267" class="ins">IF</text>
+  <rect x="510" y="254" width="50" height="18" rx="3" class="id stage-bg"/><text x="535" y="267" class="ins">ID</text>
+  <rect x="570" y="254" width="50" height="18" rx="3" class="ex stage-bg"/><text x="595" y="267" class="ins">EX...</text>
+  <text x="640" y="267" class="warn">~3 cycle bubble</text>
+
+  <!-- flush brace -->
+  <rect x="200" y="217" width="200" height="46" rx="4" fill="rgba(252,129,129,.05)" stroke="var(--svg-red,rgba(252,129,129,.4))" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="300" y="280" class="warn">WRONG-PATH WORK DISCARDED — PIPELINE FLUSHED</text>
+
+  <!-- Bottom notes -->
+  <rect x="6" y="290" width="808" height="28" rx="5" fill="var(--svg-fill2,rgba(99,179,237,.04))" stroke="var(--svg-border,rgba(99,179,237,.12))" stroke-width=".8"/>
+  <text x="14" y="305" class="note">Branch predictor: CPU guesses which way a branch goes. Correct → no penalty. Wrong → flush pipeline, reload correct path (~15 cycles wasted).</text>
+  <text x="14" y="317" class="good">✓ Modern CPUs: 95–99% prediction accuracy. Key to why sorted data can be faster than unsorted — predictor builds a pattern.</text>
+</svg>

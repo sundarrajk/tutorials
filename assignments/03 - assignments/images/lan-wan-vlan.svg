@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 460">
+  <style>
+    .lan {fill:var(--svg-fill2,rgba(104,211,145,.07));stroke:var(--svg-green,#68d391);stroke-width:1.5;}
+    .man {fill:var(--svg-fill2,rgba(99,179,237,.07));stroke:var(--svg-blue,#63b3ed);stroke-width:1.5;}
+    .wan {fill:var(--svg-fill2,rgba(246,173,85,.07));stroke:var(--svg-amber,#f6ad55);stroke-width:1.5;}
+    .vlan{fill:var(--svg-fill2,rgba(183,148,244,.07));stroke:var(--svg-purple,#b794f4);stroke-width:1.5;}
+    .device{fill:var(--svg-fill1,rgba(99,179,237,.18));stroke:var(--svg-blue,rgba(99,179,237,.5));stroke-width:1.2;}
+    .switch{fill:var(--svg-fill1,rgba(183,148,244,.22));stroke:var(--svg-purple,#b794f4);stroke-width:1.3;}
+    .router{fill:var(--svg-fill1,rgba(246,173,85,.22));stroke:var(--svg-amber,#f6ad55);stroke-width:1.3;}
+    .vd1{fill:var(--svg-fill1,rgba(252,129,129,.22));stroke:var(--svg-red,#fc8181);stroke-width:1.2;}
+    .vd2{fill:var(--svg-fill1,rgba(104,211,145,.22));stroke:var(--svg-green,#68d391);stroke-width:1.2;}
+    .con   {stroke:var(--svg-text2,rgba(99,179,237,.45));fill:none;stroke-width:1.3;}
+    .con-v1{stroke:var(--svg-red,rgba(252,129,129,.6));fill:none;stroke-width:1.3;stroke-dasharray:5,3;}
+    .con-v2{stroke:var(--svg-green,rgba(104,211,145,.6));fill:none;stroke-width:1.3;stroke-dasharray:5,3;}
+    .arr {fill:var(--svg-text2,rgba(99,179,237,.55));}
+    .hdr {fill:var(--svg-text2,rgba(99,179,237,.55));font-family:monospace;font-size:10px;letter-spacing:1px;font-weight:700;text-anchor:middle;}
+    .lbl {fill:var(--svg-text1,#d0e4f8);font-family:monospace;font-size:8px;font-weight:700;text-anchor:middle;}
+    .sub {fill:var(--svg-text2,#6a9ab8);font-family:monospace;font-size:7.5px;text-anchor:middle;}
+    .note{fill:var(--svg-text2,#6a9ab8);font-family:monospace;font-size:8px;}
+    .good{fill:var(--svg-green,rgba(104,211,145,.8));font-family:monospace;font-size:8px;}
+    .zone-l{fill:var(--svg-text2,#6a9ab8);font-family:monospace;font-size:8.5px;font-weight:700;letter-spacing:.3px;}
+    [data-theme="light"] .lbl   { fill: #1a2a3a; }
+    [data-theme="light"] .sub   { fill: #2a3a4a; }
+    [data-theme="light"] .note  { fill: #2a3a4a; }
+    [data-theme="light"] .good  { fill: #1a5a2a; }
+    [data-theme="light"] .zone-l{ fill: #2a4a6a; }
+  </style>
+
+  <!-- ─── ROW 1: LAN + MAN + WAN ─── -->
+
+  <!-- LAN -->
+  <rect x="6" y="6" width="230" height="186" rx="8" class="lan"/>
+  <text x="121" y="22" class="zone-l" fill="var(--svg-green,#68d391)">LAN — LOCAL AREA NETWORK</text>
+  <text x="121" y="34" class="sub">One building / floor (&lt;100m)</text>
+
+  <rect x="62"  y="42" width="110" height="24" rx="5" class="switch"/>
+  <text x="117" y="57" class="lbl">LAYER 2 SWITCH</text>
+  <rect x="14"  y="80" width="62" height="20" rx="4" class="device"/><text x="45" y="93"  class="sub">PC 10.0.1.2</text>
+  <rect x="82"  y="80" width="62" height="20" rx="4" class="device"/><text x="113" y="93" class="sub">PC 10.0.1.3</text>
+  <rect x="150" y="80" width="78" height="20" rx="4" class="device"/><text x="189" y="93" class="sub">Printer</text>
+  <rect x="14"  y="108" width="62" height="20" rx="4" class="device"/><text x="45" y="121" class="sub">Server</text>
+  <rect x="82"  y="108" width="62" height="20" rx="4" class="device"/><text x="113" y="121" class="sub">NAS</text>
+  <rect x="150" y="108" width="78" height="20" rx="4" class="device"/><text x="189" y="121" class="sub">IP Camera</text>
+
+  <line x1="45"  y1="100" x2="90"  y2="66" class="con"/>
+  <line x1="113" y1="100" x2="117" y2="66" class="con"/>
+  <line x1="189" y1="100" x2="145" y2="66" class="con"/>
+  <line x1="45"  y1="128" x2="90"  y2="66" class="con"/>
+  <line x1="113" y1="128" x2="117" y2="66" class="con"/>
+  <line x1="189" y1="128" x2="145" y2="66" class="con"/>
+
+  <text x="121" y="152" class="note" text-anchor="middle">1–100 Gbps Ethernet · MAC addresses</text>
+  <text x="121" y="166" class="note" text-anchor="middle">No routing — flat L2 broadcast domain</text>
+  <text x="121" y="180" class="note" text-anchor="middle">Wi-Fi extends LAN wirelessly (same VLAN)</text>
+
+  <!-- MAN -->
+  <rect x="244" y="6" width="276" height="186" rx="8" class="man"/>
+  <text x="382" y="22" class="zone-l" fill="var(--svg-blue,#63b3ed)">MAN — METRO AREA NETWORK</text>
+  <text x="382" y="34" class="sub">City-wide · 1–50 km · ISP or utility fibre</text>
+
+  <rect x="254" y="44" width="90" height="26" rx="5" class="router"/><text x="299" y="60" class="lbl">Data Centre 1</text>
+  <rect x="410" y="44" width="100" height="26" rx="5" class="router"/><text x="460" y="60" class="lbl">Data Centre 2</text>
+  <rect x="310" y="80" width="110" height="26" rx="5" class="switch"/>
+  <text x="365" y="91" class="lbl">MAN Core (10Gbps)</text>
+  <text x="365" y="102" class="sub">MPLS / Metro Ethernet ring</text>
+  <rect x="254" y="118" width="90" height="26" rx="5" class="device"/><text x="299" y="134" class="lbl">Campus A</text>
+  <rect x="410" y="118" width="100" height="26" rx="5" class="device"/><text x="460" y="134" class="lbl">Campus B</text>
+
+  <line x1="299" y1="70" x2="330" y2="80" class="con"/>
+  <line x1="460" y1="70" x2="400" y2="80" class="con"/>
+  <line x1="299" y1="118" x2="330" y2="106" class="con"/>
+  <line x1="460" y1="118" x2="400" y2="106" class="con"/>
+
+  <text x="382" y="160" class="note" text-anchor="middle">Metro Ethernet · Dark fibre · DWDM</text>
+  <text x="382" y="174" class="note" text-anchor="middle">ISP-provided · University rings · Smart city</text>
+
+  <!-- WAN -->
+  <rect x="528" y="6" width="286" height="186" rx="8" class="wan"/>
+  <text x="671" y="22" class="zone-l" fill="var(--svg-amber,#f6ad55)">WAN — WIDE AREA NETWORK</text>
+  <text x="671" y="34" class="sub">Country / Global · submarine cables · BGP</text>
+
+  <rect x="536" y="44" width="78" height="24" rx="4" class="router"/><text x="575" y="59" class="lbl">Mumbai</text>
+  <rect x="636" y="44" width="78" height="24" rx="4" class="router"/><text x="675" y="59" class="lbl">London</text>
+  <rect x="736" y="44" width="68" height="24" rx="4" class="router"/><text x="770" y="59" class="lbl">New York</text>
+  <rect x="536" y="100" width="78" height="24" rx="4" class="router"/><text x="575" y="115" class="lbl">Singapore</text>
+  <rect x="636" y="100" width="78" height="24" rx="4" class="router"/><text x="675" y="115" class="lbl">Frankfurt</text>
+  <rect x="736" y="100" width="68" height="24" rx="4" class="router"/><text x="770" y="115" class="lbl">Los Angeles</text>
+
+  <line x1="614" y1="56" x2="634" y2="56" class="con"/>
+  <line x1="714" y1="56" x2="734" y2="56" class="con"/>
+  <line x1="614" y1="112" x2="634" y2="112" class="con"/>
+  <line x1="714" y1="112" x2="734" y2="112" class="con"/>
+  <line x1="575" y1="68"  x2="575" y2="100" class="con"/>
+  <line x1="675" y1="68"  x2="675" y2="100" class="con"/>
+  <line x1="770" y1="68"  x2="770" y2="100" class="con"/>
+
+  <text x="671" y="148" class="note" text-anchor="middle">BGP routing · MPLS · Submarine cables</text>
+  <text x="671" y="162" class="note" text-anchor="middle">Leased lines · SD-WAN · Internet transit</text>
+  <text x="671" y="176" class="note" text-anchor="middle">Latency: 1ms (same city) to 250ms (cross-ocean)</text>
+
+  <!-- ─── ROW 2: VLAN ─── -->
+  <rect x="6" y="202" width="808" height="252" rx="8" class="vlan"/>
+  <text x="410" y="218" class="zone-l" fill="var(--svg-purple,#b794f4)">VLAN — VIRTUAL LAN (IEEE 802.1Q) — LOGICAL SEPARATION ON ONE PHYSICAL SWITCH</text>
+
+  <!-- Physical switch in the middle -->
+  <rect x="340" y="230" width="140" height="40" rx="6" class="switch"/>
+  <text x="410" y="246" class="lbl">MANAGED SWITCH</text>
+  <text x="410" y="257" class="sub">24 physical ports · 802.1Q tagging</text>
+  <text x="410" y="267" class="sub">Ports assigned to VLAN 10 or VLAN 20</text>
+
+  <!-- VLAN 10 devices (HR) — left side -->
+  <text x="136" y="224" class="sub" fill="var(--svg-red,#fc8181)" font-weight="700">VLAN 10 — HR (isolated)</text>
+  <rect x="18"  y="232" width="96" height="24" rx="4" class="vd1"/><text x="66"  y="248" class="sub">HR-PC-1</text>
+  <rect x="122" y="232" width="96" height="24" rx="4" class="vd1"/><text x="170" y="248" class="sub">HR-PC-2</text>
+  <rect x="226" y="232" width="96" height="24" rx="4" class="vd1"/><text x="274" y="248" class="sub">HR-Server</text>
+
+  <!-- VLAN 20 devices (Eng) — right side -->
+  <text x="668" y="224" class="sub" fill="var(--svg-green,#68d391)" font-weight="700">VLAN 20 — Engineering (isolated)</text>
+  <rect x="488" y="232" width="100" height="24" rx="4" class="vd2"/><text x="538" y="248" class="sub">Eng-PC-1</text>
+  <rect x="596" y="232" width="100" height="24" rx="4" class="vd2"/><text x="646" y="248" class="sub">Eng-PC-2</text>
+  <rect x="704" y="232" width="100" height="24" rx="4" class="vd2"/><text x="754" y="248" class="sub">Eng-Server</text>
+
+  <!-- VLAN 10 connections (red dashed) -->
+  <line x1="66"  y1="256" x2="338" y2="246" class="con-v1"/>
+  <line x1="170" y1="256" x2="340" y2="248" class="con-v1"/>
+  <line x1="274" y1="256" x2="342" y2="250" class="con-v1"/>
+  <!-- VLAN 20 connections (green dashed) -->
+  <line x1="538" y1="256" x2="480" y2="250" class="con-v2"/>
+  <line x1="646" y1="256" x2="482" y2="248" class="con-v2"/>
+  <line x1="754" y1="256" x2="484" y2="246" class="con-v2"/>
+
+  <!-- Explanation below the diagram -->
+  <rect x="18" y="282" width="376" height="88" rx="6" fill="var(--svg-fill2,rgba(252,129,129,.06))" stroke="var(--svg-red,rgba(252,129,129,.25))" stroke-width=".8"/>
+  <text x="206" y="298" class="sub" fill="var(--svg-red,#fc8181)" font-weight="700" text-anchor="middle">VLAN 10 — HR DEPARTMENT</text>
+  <text x="26"  y="314" class="note">HR PCs can reach HR-Server (same VLAN).</text>
+  <text x="26"  y="328" class="note">HR CANNOT reach Engineering PCs or servers.</text>
+  <text x="26"  y="342" class="note">Switch tags all frames with VLAN ID 10.</text>
+  <text x="26"  y="356" class="note">Payroll data stays isolated from other departments.</text>
+
+  <rect x="410" y="282" width="384" height="88" rx="6" fill="var(--svg-fill2,rgba(104,211,145,.06))" stroke="var(--svg-green,rgba(104,211,145,.25))" stroke-width=".8"/>
+  <text x="602" y="298" class="sub" fill="var(--svg-green,#68d391)" font-weight="700" text-anchor="middle">VLAN 20 — ENGINEERING DEPARTMENT</text>
+  <text x="418" y="314" class="note">Eng PCs can reach Eng-Server (same VLAN).</text>
+  <text x="418" y="328" class="note">Engineering CANNOT reach HR data.</text>
+  <text x="418" y="342" class="note">Same physical switch — zero extra hardware cost.</text>
+  <text x="418" y="356" class="note">A L3 switch or router is needed to route BETWEEN VLANs.</text>
+
+  <rect x="18" y="382" width="776" height="64" rx="6" fill="var(--svg-fill2,rgba(183,148,244,.05))" stroke="var(--svg-purple,rgba(183,148,244,.2))" stroke-width=".8"/>
+  <text x="410" y="399" class="note" text-anchor="middle" font-weight="700" fill="var(--svg-purple,#b794f4)">KEY VLAN CONCEPTS</text>
+  <text x="26"  y="415" class="note">Access port: one VLAN only (desktop PCs). Trunk port: carries all VLANs (switch-to-switch or switch-to-router links, tagged with 802.1Q).</text>
+  <text x="26"  y="431" class="note">Inter-VLAN routing: requires a router or L3 switch. Policy controls which VLANs can communicate. Finance VLAN→Internet yes; Finance VLAN→Engineering no.</text>
+  <text x="26"  y="447" class="note">Real uses: separate Guest Wi-Fi (VLAN 99) from Corporate (VLAN 10); isolate CCTV cameras (VLAN 40) from office LAN; PCI-DSS compliance for card payment systems.</text>
+</svg>

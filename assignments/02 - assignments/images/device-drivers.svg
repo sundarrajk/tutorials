@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 300">
+  <style>
+    .l-app  { fill:var(--svg-fill1,rgba(99,179,237,.2));  stroke:var(--svg-blue,#63b3ed); stroke-width:1.4; }
+    .l-libc { fill:var(--svg-fill1,rgba(183,148,244,.2)); stroke:var(--svg-purple,#b794f4); stroke-width:1.2; }
+    .l-sc   { fill:var(--svg-fill1,rgba(246,173,85,.2));  stroke:var(--svg-amber,#f6ad55); stroke-width:1.4; }
+    .l-vfs  { fill:var(--svg-fill1,rgba(104,211,145,.2)); stroke:var(--svg-green,#68d391); stroke-width:1.2; }
+    .l-drv  { fill:var(--svg-fill1,rgba(252,129,129,.2)); stroke:var(--svg-red,#fc8181); stroke-width:1.4; }
+    .l-hw   { fill:var(--svg-fill1,rgba(99,179,237,.28)); stroke:var(--svg-blue,#63b3ed); stroke-width:1.8; }
+    .arr    { fill:var(--svg-text2,rgba(99,179,237,.55)); }
+    .con    { stroke:var(--svg-text2,rgba(99,179,237,.45)); fill:none; stroke-width:1.8; }
+    .h-app  { fill:var(--svg-blue,#63b3ed);   font-family:monospace; font-size:9.5px; font-weight:700; text-anchor:middle; }
+    .h-libc { fill:var(--svg-purple,#b794f4); font-family:monospace; font-size:9.5px; font-weight:700; text-anchor:middle; }
+    .h-sc   { fill:var(--svg-amber,#f6ad55);  font-family:monospace; font-size:9.5px; font-weight:700; text-anchor:middle; }
+    .h-vfs  { fill:var(--svg-green,#68d391);  font-family:monospace; font-size:9.5px; font-weight:700; text-anchor:middle; }
+    .h-drv  { fill:var(--svg-red,#fc8181);    font-family:monospace; font-size:9.5px; font-weight:700; text-anchor:middle; }
+    .h-hw   { fill:var(--svg-blue,#63b3ed);   font-family:monospace; font-size:9.5px; font-weight:700; text-anchor:middle; }
+    .lbl    { fill:var(--svg-text1,#d0e4f8);  font-family:monospace; font-size:8px; font-weight:700; text-anchor:middle; }
+    .sub    { fill:var(--svg-text2,#6a9ab8);  font-family:monospace; font-size:7.5px; text-anchor:middle; }
+    .note   { fill:var(--svg-text2,#6a9ab8);  font-family:monospace; font-size:8px; }
+    .code   { fill:var(--svg-blue,#63b3ed);   font-family:monospace; font-size:8.5px; }
+    .good   { fill:var(--svg-green,rgba(104,211,145,.8)); font-family:monospace; font-size:8px; }
+    .ring   { fill:var(--svg-text2,rgba(99,179,237,.45)); font-family:monospace; font-size:7.5px; text-anchor:middle; }
+
+    @keyframes flowDown {
+      0%,100% { opacity:.3; }
+      50%     { opacity:1; }
+    }
+    .fl1 { animation: flowDown 4s 0.0s infinite; }
+    .fl2 { animation: flowDown 4s 0.8s infinite; }
+    .fl3 { animation: flowDown 4s 1.6s infinite; }
+    .fl4 { animation: flowDown 4s 2.4s infinite; }
+    .fl5 { animation: flowDown 4s 3.2s infinite; }
+  </style>
+  <defs>
+    <marker id="ddA" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <path d="M0,0 L0,7 L7,3.5 z" class="arr"/>
+    </marker>
+  </defs>
+
+  <!-- ─── LEFT: Layer stack ─── -->
+  <!-- Layer 1: Application -->
+  <rect x="6"   y="6"   width="400" height="38" rx="7" class="l-app fl1"/>
+  <text x="206" y="22"  class="h-app">APPLICATION (User Space — Ring 3)</text>
+  <text x="206" y="36"  class="sub">fread(buf, 1, 100, fp)   →   "give me 100 bytes from this file"</text>
+  <line x1="206" y1="46" x2="206" y2="58" class="con fl1" marker-end="url(#ddA)"/>
+  <text x="26"  y="56"  class="ring">Ring 3 ↓ (user → kernel boundary)</text>
+
+  <!-- Layer 2: C Library -->
+  <rect x="6"   y="60"  width="400" height="38" rx="7" class="l-libc fl2"/>
+  <text x="206" y="76"  class="h-libc">C STANDARD LIBRARY  (libc)</text>
+  <text x="206" y="90"  class="sub">Buffers I/O. Issues read() syscall when buffer needs refill.</text>
+  <line x1="206" y1="100" x2="206" y2="112" class="con fl2" marker-end="url(#ddA)"/>
+
+  <!-- Layer 3: System Call Interface -->
+  <rect x="6"   y="114" width="400" height="38" rx="7" class="l-sc fl3"/>
+  <text x="206" y="130" class="h-sc">SYSTEM CALL INTERFACE  (kernel entry)</text>
+  <text x="206" y="144" class="sub">read(fd, buf, 100)  →  syscall #0 (Linux x86-64)  TRAP into kernel</text>
+  <line x1="206" y1="154" x2="206" y2="166" class="con fl3" marker-end="url(#ddA)"/>
+  <text x="26"  y="162" class="ring">Ring 0 — kernel executes from here downward</text>
+
+  <!-- Layer 4: VFS -->
+  <rect x="6"   y="168" width="400" height="38" rx="7" class="l-vfs fl4"/>
+  <text x="206" y="184" class="h-vfs">VFS — VIRTUAL FILE SYSTEM</text>
+  <text x="206" y="198" class="sub">Kernel abstraction. Looks up inode. Selects correct driver via file_operations*.</text>
+  <line x1="206" y1="208" x2="206" y2="220" class="con fl4" marker-end="url(#ddA)"/>
+
+  <!-- Layer 5: Driver -->
+  <rect x="6"   y="222" width="400" height="38" rx="7" class="l-drv fl5"/>
+  <text x="206" y="238" class="h-drv">DEVICE DRIVER  (kernel module)</text>
+  <text x="206" y="252" class="sub">ext4_file_read() — translates logical offset to physical block address on disk</text>
+  <line x1="206" y1="262" x2="206" y2="274" class="con fl5" marker-end="url(#ddA)"/>
+
+  <!-- Layer 6: Hardware -->
+  <rect x="6"   y="276" width="400" height="22" rx="7" class="l-hw"/>
+  <text x="206" y="291" class="h-hw">HARDWARE — NVMe SSD / HDD controller — DMA transfer to RAM</text>
+
+  <!-- ─── RIGHT: What a driver provides ─── -->
+  <rect x="420" y="6" width="394" height="150" rx="8" fill="var(--svg-fill2,rgba(252,129,129,.06))" stroke="var(--svg-red,rgba(252,129,129,.3))" stroke-width="1"/>
+  <text x="617" y="22" class="h-drv">WHAT A DRIVER PROVIDES</text>
+  <text x="428" y="40"  class="note">The kernel defines a standard interface (struct file_operations):</text>
+  <text x="428" y="56"  class="code">  .open    = nvme_open</text>
+  <text x="428" y="69"  class="code">  .read    = nvme_read</text>
+  <text x="428" y="82"  class="code">  .write   = nvme_write</text>
+  <text x="428" y="95"  class="code">  .ioctl   = nvme_ioctl</text>
+  <text x="428" y="112" class="note">Every device implements the same interface.</text>
+  <text x="428" y="125" class="note">Your fread() doesn't care if it's talking to</text>
+  <text x="428" y="138" class="note">an NVMe, SATA SSD, HDD, USB drive, or /dev/null.</text>
+  <text x="428" y="152" class="note">The VFS routes the call to the right driver.</text>
+
+  <rect x="420" y="166" width="394" height="66" rx="8" fill="var(--svg-fill2,rgba(104,211,145,.06))" stroke="var(--svg-green,rgba(104,211,145,.25))" stroke-width="1"/>
+  <text x="617" y="182" class="h-vfs">ABSTRACTION BENEFIT</text>
+  <text x="428" y="200" class="good">✓ Application code is identical regardless of hardware</text>
+  <text x="428" y="213" class="note">Replace an HDD with NVMe: same fread() call works.</text>
+  <text x="428" y="226" class="note">Add a network file system: same interface, new driver.</text>
+
+  <rect x="420" y="242" width="394" height="56" rx="8" fill="var(--svg-fill2,rgba(246,173,85,.06))" stroke="var(--svg-amber,rgba(246,173,85,.25))" stroke-width="1"/>
+  <text x="617" y="258" class="h-sc">RING PROTECTION</text>
+  <text x="428" y="274" class="note">Ring 3 (user): can't touch hardware directly — security boundary.</text>
+  <text x="428" y="287" class="note">Ring 0 (kernel): full hardware access. Driver bugs can crash the system.</text>
+  <text x="428" y="297" class="note">That's why a bad NIC driver causes a kernel panic (Blue Screen).</text>
+</svg>
