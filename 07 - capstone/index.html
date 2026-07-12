@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Full Story — From Punch Cards to Cloud-Native</title>
+  <link rel="stylesheet" href="../shared/css/deck.css"/>
+</head>
+<body>
+
+<div id="prog" style="width:0%"></div>
+
+<div id="deck">
+
+<!-- ══ SLIDE 1: Cover ═══════════════════════════════════════════ -->
+<section class="slide cover" data-title="The Full Story">
+  <div class="cov-grid"></div>
+  <div class="cov-glow"></div>
+  <div class="cov-content">
+    <div class="cov-kicker">Capstone Summary · Cloud Architecture Series</div>
+    <h1 class="cov-h1">The <span class="hi">Full Story</span></h1>
+    <p class="cov-desc">
+      Four presentations. Seventy years of computing history. One coherent argument:
+      the internet changed the rules so fundamentally that every layer of the stack —
+      hardware, operating systems, applications, and operations — had to be rebuilt from scratch.
+    </p>
+    <div class="chips">
+      <span class="chip ca">1 · IT History</span>
+      <span class="chip cp">2 · CPU &amp; VMs</span>
+      <span class="chip ca">3 · Cloud Background</span>
+      <span class="chip cg">4 · Monolith → Microservices</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 2: The Five-Act Story Arc ══════════════════════════ -->
+<section class="slide" data-title="The Five-Act Story Arc">
+  <div class="s-era">The Shape of the Argument</div>
+  <h2 class="s-title">One Story, <span class="hi">Four Chapters</span></h2>
+  <p class="s-sub">Each presentation hands a baton to the next. Together they answer a single question: how did we get from a room-sized computer shared by ten operators to a globally distributed system serving a billion users?</p>
+
+  <div class="dbox" style="margin-bottom:0.9rem;">
+    <img src="images/story-arc.svg" alt="Four-act story arc showing IT History → CPU and VMs → Cloud Background → Monolith to Microservices with causal arrows between each"/>
+  </div>
+
+  <div class="g g4">
+    <div class="card">
+      <div class="card-hd">Chapter 1 established</div>
+      <p>The <strong>WHY</strong> — internet scale made every assumption about infrastructure obsolete. Unpredictability, not growth, was the forcing function.</p>
+    </div>
+    <div class="card c-purple">
+      <div class="card-hd">Chapter 2 answered</div>
+      <p>The <strong>HARDWARE</strong> question — Moore's Law built the raw capacity; virtualisation made it usable. Without VMs, cloud is physically impossible.</p>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Chapter 3 revealed</div>
+      <p>The <strong>OPERATIONAL</strong> pain — moving to the cloud is not enough. Lift-and-shift transplants on-premises habits at pay-per-minute rates.</p>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Chapter 4 showed</div>
+      <p>The <strong>REDESIGN</strong> — 12-Factor apps, containers, Kubernetes, and observability are the specific answers to specific on-premises failure modes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 3: Chapter 1 recap — IT History ════════════════════ -->
+<section class="slide" data-title="Chapter 1 Recap — IT History">
+  <div class="s-era">Chapter 1 · IT History &nbsp;·&nbsp; The Why</div>
+  <h2 class="s-title">The Internet <span class="hi2">Broke the Rules</span></h2>
+  <p class="s-sub">For forty years computing grew predictably. Then four companies opened their doors to the entire planet — and everything that worked before stopped working.</p>
+
+  <div class="g g2" style="margin-bottom:0.75rem;">
+    <div class="card">
+      <div class="card-hd">The Pre-Internet World (1950s–1990s)</div>
+      <ul>
+        <li>Software served <strong>internal users only</strong> — hundreds, not millions</li>
+        <li>Load was <strong>predictable</strong> — batch overnight, office hours interactive</li>
+        <li>Hardware procurement took weeks to months — but that was fine</li>
+        <li>Releases every <strong>6–12 months</strong> — coordinated, stop-the-world events</li>
+        <li>One server, one OS, one application — full utilisation by design</li>
+      </ul>
+    </div>
+    <div class="card c-amber filled-amber">
+      <div class="card-hd">The Internet Broke Every Assumption</div>
+      <ul>
+        <li>🛒 <strong>Amazon:</strong> Black Friday spikes 10–20× overnight. 85% idle the rest of the year.</li>
+        <li>🔍 <strong>Google:</strong> 9/11 — global traffic surge in minutes. You cannot plan for this.</li>
+        <li>📱 <strong>Facebook:</strong> viral content — millions simultaneously. Unknown before posting.</li>
+        <li>🎬 <strong>Netflix:</strong> one hit series = 15%+ of all North American internet traffic.</li>
+        <li>Pattern: <strong>vast surplus capacity at off-peak → monetise it → AWS 2006</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-y">1950s</div><div class="tl-t">Punch cards &amp; batch jobs</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-y">1964</div><div class="tl-t">IBM System/360 mainframe</div></div>
+    <div class="tl-item"><div class="tl-dot da"></div><div class="tl-y">1981</div><div class="tl-t">IBM PC, client-server begins</div></div>
+    <div class="tl-item"><div class="tl-dot da"></div><div class="tl-y">1994</div><div class="tl-t">Browser, 3-tier web apps</div></div>
+    <div class="tl-item"><div class="tl-dot dg"></div><div class="tl-y">1999</div><div class="tl-t">Salesforce — "No Software"</div></div>
+    <div class="tl-item"><div class="tl-dot dr"></div><div class="tl-y">2001</div><div class="tl-t">9/11 — Google traffic spike proves unpredictability</div></div>
+    <div class="tl-item"><div class="tl-dot dr"></div><div class="tl-y">2004</div><div class="tl-t">Facebook — scale to a planet</div></div>
+    <div class="tl-item"><div class="tl-dot dg"></div><div class="tl-y">2006</div><div class="tl-t">AWS S3 + EC2 — cloud born</div></div>
+  </div>
+
+  <div class="callout ca-amber" style="margin-top:0.75rem;">
+    <strong>The handoff to Chapter 2:</strong> Amazon had spare data-centre capacity. To monetise it as a product, they needed servers that could be sliced and rented by the hour. That required virtualisation — and virtualisation required the hardware advances in Chapter 2.
+  </div>
+</section>
+
+<!-- ══ SLIDE 4: Chapter 2 recap — CPU & VMs ═════════════════════ -->
+<section class="slide" data-title="Chapter 2 Recap — CPU & VMs">
+  <div class="s-era">Chapter 2 · CPU &amp; Virtual Machines &nbsp;·&nbsp; The Hardware Foundation</div>
+  <h2 class="s-title">Moore's Law Built It. <span class="hi3">Virtualisation</span> Made It Usable.</h2>
+  <p class="s-sub">The cloud is not software magic — it is physics and engineering. Two hardware revolutions made it physically possible to sell compute by the minute.</p>
+
+  <div class="g g2" style="margin-bottom:0.75rem;">
+    <div class="card">
+      <div class="card-hd">Revolution 1 — Moore's Law (1965–2023)</div>
+      <ul>
+        <li>Transistor count doubled every 18–24 months for 50+ years</li>
+        <li>Intel 4004 (1971): <strong>2,300 transistors</strong> · 0.74 MHz</li>
+        <li>Apple M2 Ultra (2023): <strong>134 billion transistors</strong></li>
+        <li>A 58-million-fold increase — the "free lunch" for developers</li>
+        <li><strong>~2004:</strong> clock speed hit the thermal wall at 3.8 GHz · ~130W</li>
+        <li>Industry pivot: fewer, faster cores → more, parallel cores</li>
+        <li>Modern server: 2 sockets × 96 cores = 192 cores, up to 12 TB RAM</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Revolution 2 — Virtualisation (VMware 1998)</div>
+      <ul>
+        <li>Before VMs: one server = one OS = one app = <strong>5–15% utilisation</strong></li>
+        <li>Hypervisor abstracts physical hardware into virtual hardware</li>
+        <li>One physical server now hosts 10–20 isolated VMs</li>
+        <li>Utilisation jumps from <strong>5% → 60–80%</strong> after consolidation</li>
+        <li>Snapshots, templates, vMotion (zero-downtime live migration)</li>
+        <li>VM from template: <strong>5–15 minutes</strong> (was 2–6 weeks bare metal)</li>
+        <li>AWS EC2 = "rent a VM by the hour" — virtualisation at global scale</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="g g3">
+    <div class="card stat">
+      <div class="stat-n">58M×</div>
+      <div class="stat-l">transistor growth 1971→2023</div>
+      <div class="stat-note">The hardware foundation of everything</div>
+    </div>
+    <div class="card stat">
+      <div class="stat-n sa">5–15%</div>
+      <div class="stat-l">Server utilisation before VMs</div>
+      <div class="stat-note">The problem VMs solved</div>
+    </div>
+    <div class="card c-green stat">
+      <div class="stat-n sg">5 min</div>
+      <div class="stat-l">VM from template</div>
+      <div class="stat-note">Was 2–6 weeks bare metal procurement</div>
+    </div>
+  </div>
+
+  <div class="callout ca-green" style="margin-top:0.75rem;">
+    <strong>The handoff to Chapter 3:</strong> VMs made elastic cloud infrastructure possible. But enterprises discovered that simply putting their old applications onto cloud VMs — "lift and shift" — did not deliver the promised benefits. Chapter 3 explains why.
+  </div>
+</section>
+
+<!-- ══ SLIDE 5: Chapter 3 recap — Cloud Background ══════════════ -->
+<section class="slide" data-title="Chapter 3 Recap — Cloud Background">
+  <div class="s-era">Chapter 3 · Cloud Background &nbsp;·&nbsp; The Operational Reality</div>
+  <h2 class="s-title">The Cloud Solved <span class="hi2">Provisioning.</span> Not Everything.</h2>
+  <p class="s-sub">Cloud providers eliminated the hardware procurement bottleneck. But the applications, their deployment processes, and the operational habits they encoded were still built for a world of static IPs and weekend maintenance windows.</p>
+
+  <div class="g g2" style="margin-bottom:0.75rem;">
+    <div class="card c-red">
+      <div class="card-hd">The On-Premises World Apps Were Built For</div>
+      <ul>
+        <li>Fixed IP addresses — every app hard-coded <code>192.168.1.10:8080</code></li>
+        <li>3-tier web (HTTP → App Server → DB) or ESB/SOA hub-and-spoke</li>
+        <li>New server: budget approval → vendor → shipping → racking → OS → <strong>months</strong></li>
+        <li>Deployment: Friday midnight, war-room, rollback plan — <strong>days of downtime</strong></li>
+        <li>Scaling: physical hardware task, even on VMs required a maintenance window</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">Why "Lift and Shift" Failed</div>
+      <ul>
+        <li>IPs change in the cloud — hard-coded addresses silently broke connections</li>
+        <li>Old apps ran at 30–40% CPU — fine when the server was sunk cost, expensive at pay-per-minute</li>
+        <li>Scaling out to fix inefficiency just multiplied the bill without fixing the code</li>
+        <li>No CLI meant no CI/CD pipeline — still deploying manually</li>
+        <li>Vendor lock-in: proprietary managed services hard to migrate later</li>
+        <li>Conclusion: <strong>the cloud gives you elastic hardware. It cannot fix your architecture.</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="g g3">
+    <div class="card stat">
+      <div class="stat-n sr">Months</div>
+      <div class="stat-l">Hardware procurement on-prem</div>
+      <div class="stat-note">Budget → vendor → ship → rack → OS</div>
+    </div>
+    <div class="card stat">
+      <div class="stat-n sa">Hours</div>
+      <div class="stat-l">Cloud provisioning</div>
+      <div class="stat-note">API call → VM ready → deploy</div>
+    </div>
+    <div class="card c-green stat">
+      <div class="stat-n sg">Minutes</div>
+      <div class="stat-l">Cloud-native target</div>
+      <div class="stat-note">Container → K8s pod → serving traffic</div>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:0.75rem;">
+    <strong>The handoff to Chapter 4:</strong> Cloud solves provisioning speed. But to exploit elasticity — to actually scale one service without scaling everything — the application itself must be redesigned. That redesign is what Chapter 4 describes.
+  </div>
+</section>
+
+<!-- ══ SLIDE 6: Chapter 4 recap — Monolith → Microservices ══════ -->
+<section class="slide" data-title="Chapter 4 Recap — Monolith to Microservices">
+  <div class="s-era">Chapter 4 · Monolith → Microservices &nbsp;·&nbsp; The Redesign</div>
+  <h2 class="s-title">Each Microservices Principle Fixes a <span class="hi3">Specific Monolith Failure</span></h2>
+  <p class="s-sub">Chapter 4 is not about technology fashion. Every pattern — bounded contexts, stateless processes, containers, Kubernetes, observability — is a direct engineering response to a specific problem identified in Chapters 1–3.</p>
+
+  <div class="g g2" style="margin-bottom:0.75rem;">
+    <div class="card">
+      <div class="card-hd">Problem → Solution Mapping</div>
+      <ul>
+        <li><strong>Scale everything to scale one thing</strong> → Microservices: each service scales independently (payday: Accounts × 20, everything else × 1)</li>
+        <li><strong>Hard-coded IPs break in cloud</strong> → Service discovery + Kubernetes Services (stable DNS, not IPs)</li>
+        <li><strong>One crash = total outage</strong> → Isolated services: one pod crash doesn't cascade</li>
+        <li><strong>Release coordination hell</strong> → One codebase per service (12-Factor F1): Payments ships Friday, Loans ships Monday</li>
+        <li><strong>"Works on my machine"</strong> → Docker: same image on laptop and production (12-Factor F2, F10)</li>
+        <li><strong>Config / secrets in code</strong> → Kubernetes ConfigMaps + Secrets (12-Factor F3)</li>
+        <li><strong>Idle servers at off-peak</strong> → Kubernetes HPA + Serverless: scale to zero, pay nothing</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">The New Debugging Reality</div>
+      <ul>
+        <li>8 services × 3 replicas = <strong>24 simultaneous log streams</strong></li>
+        <li>A payment failure spans: Payments → Accounts → Debit Card → Core Banking</li>
+        <li>Which hop failed? Which pod served this request? Which was recycled?</li>
+        <li><strong>Metrics</strong> (Prometheus/Grafana): <em>is something wrong right now?</em></li>
+        <li><strong>Traces</strong> (Jaeger/Tempo): <em>where in the call chain is the failure?</em></li>
+        <li><strong>Logs</strong> (Loki/ELK): <em>exactly what went wrong?</em></li>
+        <li>Factor 11 (logs to stdout) is what makes all three collectible without app-side routing code</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout ca-green">
+    <strong>The 12-Factor App is not a checklist.</strong> It is a coherent philosophy: Factor 3 (config in env) enables Factor 10 (dev/prod parity). Factor 6 (stateless) enables Factor 9 (disposability). Factor 11 (logs to stdout) enables observability. The factors and the platform (Docker + Kubernetes) were designed to run this exact kind of application. Build against the factors; the platform rewards you for free.
+  </div>
+</section>
+
+<!-- ══ SLIDE 7: The Complete Evolution Ladder ═══════════════════ -->
+<section class="slide" data-title="The Complete Evolution Ladder">
+  <div class="s-era">Synthesis</div>
+  <h2 class="s-title">Every Layer of the Stack <span class="hi2">Had to Change</span></h2>
+  <p class="s-sub">The internet didn't just change one thing — it forced a complete rethink at every level of the computing stack simultaneously. The five presentations map exactly to five layers of that transformation.</p>
+
+  <div class="dbox" style="margin-bottom:0.9rem;">
+    <img src="images/evolution-ladder.svg" alt="Evolution ladder showing the five presentations as rungs: IT History at the bottom establishing why, through CPU and VMs, Cloud Background, Monolith to Microservices, and Cloud Features at the top"/>
+  </div>
+
+  <div class="callout ca-amber">
+    <strong>Notice the direction of causation:</strong> the internet created scale pressure (1) → that pressure demanded elastic hardware (2) → elastic hardware exposed operational rigidity (3) → rigidity demanded architectural redesign (4) → redesigned apps needed a rich managed-service platform (5). Each layer was a necessary consequence of the one below. This is not a history of fashion — it is engineering responding to physics and economics.
+  </div>
+</section>
+
+<!-- ══ SLIDE 8: The Forcing Function ════════════════════════════ -->
+<section class="slide" data-title="The Single Forcing Function">
+  <div class="s-era">Root Cause Analysis</div>
+  <h2 class="s-title">One Cause. <span class="hi">Dozens of Inventions.</span></h2>
+  <p class="s-sub">Every technology we studied — VMs, containers, Kubernetes, microservices, CI/CD, observability — traces back to the same root cause: the internet exposed software to unpredictable, planetary-scale load that no individual organisation could plan for with fixed hardware.</p>
+
+  <div class="dbox" style="margin-bottom:0.9rem;">
+    <img src="images/forcing-function.svg" alt="Cause and effect diagram showing what broke the old model on the left, the internet as the forcing function in the centre, and all the inventions it drove on the right"/>
+  </div>
+
+  <div class="g g3">
+    <div class="card">
+      <div class="card-hd">The Old Contract (broken ~1995–2010)</div>
+      <ul>
+        <li>Buy hardware upfront for peak load</li>
+        <li>Own and operate your own data centre</li>
+        <li>Static infrastructure, static IPs, manual ops</li>
+        <li>Release infrequently, coordinate everything</li>
+      </ul>
+    </div>
+    <div class="card c-amber filled-amber">
+      <div class="card-hd">The New Contract</div>
+      <ul>
+        <li>Rent compute by the second, scale instantly</li>
+        <li>Stateless apps on ephemeral containers</li>
+        <li>Service discovery, not hard-coded addresses</li>
+        <li>Deploy continuously, observe everything</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">Still Accelerating</div>
+      <ul>
+        <li>Serverless: scale to zero, zero idle cost</li>
+        <li>AI/ML as managed APIs (Bedrock, OpenAI, Vertex)</li>
+        <li>Edge computing: logic at the network boundary</li>
+        <li>FinOps: optimise cloud spend as carefully as code</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 9: The Key Numbers to Remember ═════════════════════ -->
+<section class="slide" data-title="The Numbers That Tell the Story">
+  <div class="s-era">Memorable Anchors</div>
+  <h2 class="s-title">The Numbers That <span class="hi">Tell the Story</span></h2>
+  <p class="s-sub">Anchor the narrative with numbers — each one marks a turning point in the story you have just heard across four presentations.</p>
+
+  <div class="g g4">
+    <div class="card stat">
+      <div class="stat-n">58M×</div>
+      <div class="stat-l">Transistor growth 1971→2023</div>
+      <div class="stat-note">Moore's Law built the hardware foundation of cloud</div>
+    </div>
+    <div class="card stat">
+      <div class="stat-n sa">3.8 GHz</div>
+      <div class="stat-l">The thermal wall (2004)</div>
+      <div class="stat-note">Clock speed stopped. Multi-core began. Apps had to change.</div>
+    </div>
+    <div class="card c-purple stat">
+      <div class="stat-n sp">5–15%</div>
+      <div class="stat-l">Server utilisation before VMs</div>
+      <div class="stat-note">VMs raised this to 60–80%. That surplus capacity became AWS.</div>
+    </div>
+    <div class="card stat">
+      <div class="stat-n">5 min</div>
+      <div class="stat-l">VM from template</div>
+      <div class="stat-note">Was 2–6 weeks bare metal. Changed the economics of scaling.</div>
+    </div>
+    <div class="card c-amber stat">
+      <div class="stat-n sa">Months</div>
+      <div class="stat-l">On-prem hardware procurement</div>
+      <div class="stat-note">Cloud eliminated this entirely. The fundamental CAPEX→OPEX shift.</div>
+    </div>
+    <div class="card stat">
+      <div class="stat-n">12</div>
+      <div class="stat-l">Factors of a cloud-native app</div>
+      <div class="stat-note">Written in 2011. Still the authoritative guide. 12factor.net</div>
+    </div>
+    <div class="card c-green stat">
+      <div class="stat-n sg">100+</div>
+      <div class="stat-l">Deploys per day (Amazon)</div>
+      <div class="stat-note">Was once per year. CI/CD + microservices made this possible.</div>
+    </div>
+    <div class="card stat">
+      <div class="stat-n">200+</div>
+      <div class="stat-l">Services per cloud provider</div>
+      <div class="stat-note">AWS, Azure, GCP each offer over 200 managed services. You own none of the hardware.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLIDE 10: What the Fundamentals Unlocked ══════════════════ -->
+<section class="slide" data-title="What This Unlocks for You">
+  <div class="s-era">Why This Matters for CS Students</div>
+  <h2 class="s-title">Why <span class="hi3">Fundamentals</span> Still Win in the Cloud Era</h2>
+  <p class="s-sub">Every abstraction in the modern cloud stack is a direct application of a computer science fundamental. Understanding the fundamentals is what lets you reason about the cloud — not just use it.</p>
+
+  <div class="g g3" style="margin-bottom:0.75rem;">
+    <div class="card">
+      <div class="card-hd">🧵 Processes, Threads, Scheduling</div>
+      <ul>
+        <li>A Kubernetes pod is a process group. Container isolation is Linux namespaces + cgroups.</li>
+        <li>Horizontal scaling = adding processes. Factor 8 is the OS process model applied at cloud scale.</li>
+        <li>SIGTERM, graceful shutdown = OS signal handling. Factor 9.</li>
+      </ul>
+    </div>
+    <div class="card c-amber">
+      <div class="card-hd">🌐 Networking &amp; Sockets</div>
+      <ul>
+        <li>Every microservice call is a TCP socket connection. Service discovery replaces static IPs.</li>
+        <li>Load balancers operate at L4 (TCP) and L7 (HTTP). OSI stack is not theoretical.</li>
+        <li>DNS TTL is why hard-coded IPs break in the cloud — IPs change; DNS names don't.</li>
+      </ul>
+    </div>
+    <div class="card c-green">
+      <div class="card-hd">💾 Memory, Storage, Databases</div>
+      <ul>
+        <li>The memory hierarchy (registers → cache → RAM → SSD) determines microservice latency budgets.</li>
+        <li>Stateless (Factor 6) = no heap state that can't be reconstructed. Crash safely.</li>
+        <li>ACID transactions, CAP theorem, eventual consistency — all live inside managed cloud databases.</li>
+      </ul>
+    </div>
+    <div class="card c-purple">
+      <div class="card-hd">🔒 Concurrency &amp; Consistency</div>
+      <ul>
+        <li>Distributed transactions across microservices = the hardest concurrency problem.</li>
+        <li>Message queues (SQS, Kafka) = decoupled producer-consumer with durable buffers.</li>
+        <li>Observability traces = distributed execution timeline across asynchronous services.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-hd">⚙️ Compilers, Runtimes, Packaging</div>
+      <ul>
+        <li>A Docker image = a hermetically sealed runtime environment (Factor 2). Static linking at cloud scale.</li>
+        <li>JIT compilation (JVM, V8) explains why container startup time matters — JVM warm-up vs GraalVM native.</li>
+        <li>Immutable releases (Factor 5) = version-controlled build artifacts, just like object files.</li>
+      </ul>
+    </div>
+    <div class="card c-red">
+      <div class="card-hd">🔐 Security Primitives</div>
+      <ul>
+        <li>TLS everywhere = public-key cryptography applied to every service-to-service call (mTLS in service mesh).</li>
+        <li>IAM roles = capability-based security — least-privilege at cloud scale.</li>
+        <li>Secrets Manager = never commit credentials — the operational consequence of key management fundamentals.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout ca-green">
+    <strong>The practitioner advantage:</strong> A developer who understands why Kubernetes sends SIGTERM, what a Linux namespace actually is, and why a stateless process is easier to reschedule will make better architectural decisions than one who can only operate the tooling. The cloud commoditised the infrastructure. Fundamentals still differentiate the engineers.
+  </div>
+</section>
+
+<!-- ══ SLIDE 11: End ════════════════════════════════════════════ -->
+<section class="slide cover" data-title="Questions">
+  <div class="cov-grid"></div>
+  <div class="cov-glow" style="left:-150px;top:auto;bottom:-150px;right:auto;"></div>
+  <div class="cov-content" style="margin-top:80px;">
+    <div class="cov-kicker">End of Capstone — Cloud Architecture Series</div>
+    <h1 class="cov-h1">Questions?<br/><span class="hi">Let's Discuss.</span></h1>
+    <p class="cov-desc">
+      From a 2,300-transistor chip in 1971 to 134 billion in 2023. From one app per server at 5% utilisation to thousands of microservices per cluster at 70%+. From a release every year to hundreds of deploys a day. The pace is still accelerating — and you will shape the next chapter.
+    </p>
+    <div class="chips">
+      <span class="chip ca">What does AI change next?</span>
+      <span class="chip cg">Serverless &amp; FinOps</span>
+      <span class="chip">Edge Computing</span>
+      <span class="chip cp">Platform Engineering</span>
+    </div>
+  </div>
+</section>
+
+</div><!-- /#deck -->
+
+<nav id="nav">
+  <div class="nav-group">
+    <button class="nb" id="btn-prev">← Prev</button>
+    <button class="nb" id="btn-next">Next →</button>
+    <span id="counter">1 / 11</span>
+  </div>
+  <div class="nav-group">
+    <select id="jump"></select>
+  </div>
+  <div class="nav-group">
+    <button id="theme-btn">☀ Light</button>
+  </div>
+</nav>
+
+<script src="../shared/js/deck.js"></script>
+</body>
+</html>

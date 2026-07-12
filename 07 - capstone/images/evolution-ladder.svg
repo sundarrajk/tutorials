@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 260">
+  <style>
+    .rung { rx:6; stroke-width:1.4; }
+    .r0 { fill:var(--svg-fill1,rgba(99,179,237,.13)); stroke:var(--svg-blue,#63b3ed); }
+    .r1 { fill:var(--svg-fill1,rgba(183,148,244,.13)); stroke:var(--svg-purple,#b794f4); }
+    .r2 { fill:var(--svg-fill1,rgba(246,173,85,.13));  stroke:var(--svg-amber,#f6ad55); }
+    .r3 { fill:var(--svg-fill1,rgba(252,129,129,.13)); stroke:var(--svg-red,#fc8181); }
+    .r4 { fill:var(--svg-fill1,rgba(104,211,145,.13)); stroke:var(--svg-green,#68d391); }
+    .rh0{ fill:var(--svg-blue,#63b3ed); fill-opacity:.12; }
+    .rh1{ fill:var(--svg-purple,#b794f4); fill-opacity:.12; }
+    .rh2{ fill:var(--svg-amber,#f6ad55); fill-opacity:.12; }
+    .rh3{ fill:var(--svg-red,#fc8181); fill-opacity:.12; }
+    .rh4{ fill:var(--svg-green,#68d391); fill-opacity:.12; }
+    .l0 { fill:var(--svg-blue,#63b3ed);   font-family:monospace; font-size:9px; font-weight:700; }
+    .l1 { fill:var(--svg-purple,#b794f4); font-family:monospace; font-size:9px; font-weight:700; }
+    .l2 { fill:var(--svg-amber,#f6ad55);  font-family:monospace; font-size:9px; font-weight:700; }
+    .l3 { fill:var(--svg-red,#fc8181);    font-family:monospace; font-size:9px; font-weight:700; }
+    .l4 { fill:var(--svg-green,#68d391);  font-family:monospace; font-size:9px; font-weight:700; }
+    .lbl{ font-family:sans-serif; font-size:12px; font-weight:700; }
+    .lb0{ fill:var(--svg-blue,#63b3ed); }
+    .lb1{ fill:var(--svg-purple,#b794f4); }
+    .lb2{ fill:var(--svg-amber,#f6ad55); }
+    .lb3{ fill:var(--svg-red,#fc8181); }
+    .lb4{ fill:var(--svg-green,#68d391); }
+    .kw { fill:var(--svg-text1,#d0e4f8); font-family:monospace; font-size:9.5px; }
+    .kw2{ fill:var(--svg-text2,#6a9ab8); font-family:monospace; font-size:8.5px; }
+    .num{ font-family:'Playfair Display',serif; font-weight:900; font-size:32px; }
+    .arrow-v { stroke:var(--svg-text2,rgba(99,179,237,.3)); fill:none; stroke-width:1.5; stroke-dasharray:4,3; }
+    .arh{ fill:var(--svg-text2,rgba(99,179,237,.3)); }
+  </style>
+  <defs>
+    <marker id="av" markerWidth="7" markerHeight="7" refX="3.5" refY="5" orient="auto">
+      <path d="M0,0 L7,0 L3.5,6 z" class="arh"/>
+    </marker>
+  </defs>
+
+  <!-- Connecting vertical arrow -->
+  <line x1="32" y1="44" x2="32" y2="242" class="arrow-v" marker-end="url(#av)"/>
+
+  <!-- ── RUNG 1 (bottom foundation) ── -->
+  <rect x="56" y="212" width="672" height="38" rx="6" class="r0 rung"/>
+  <rect x="56" y="212" width="120" height="38" rx="6" class="rh0"/>
+  <text x="116" y="235" class="lbl lb0" text-anchor="middle">IT HISTORY</text>
+  <text x="200" y="228" class="kw">WHY it had to change:</text>
+  <text x="200" y="242" class="kw2">internet scale · unpredictable load · idle hardware · CAPEX trap · slow release cycles</text>
+
+  <!-- ── RUNG 2 ── -->
+  <rect x="56" y="166" width="672" height="38" rx="6" class="r1 rung"/>
+  <rect x="56" y="166" width="120" height="38" rx="6" class="rh1"/>
+  <text x="116" y="185" class="lbl lb1" text-anchor="middle">CPU &amp; VMs</text>
+  <text x="116" y="198" class="lbl lb1" text-anchor="middle" font-size="10">pres. 2</text>
+  <text x="200" y="182" class="kw">HARDWARE foundation:</text>
+  <text x="200" y="196" class="kw2">Moore's Law · thermal wall → multi-core · 5–15% util → VMs fix it → cloud VMs possible</text>
+
+  <!-- ── RUNG 3 ── -->
+  <rect x="56" y="120" width="672" height="38" rx="6" class="r2 rung"/>
+  <rect x="56" y="120" width="120" height="38" rx="6" class="rh2"/>
+  <text x="116" y="139" class="lbl lb2" text-anchor="middle">CLOUD</text>
+  <text x="116" y="152" class="lbl lb2" text-anchor="middle">BACKGROUND</text>
+  <text x="200" y="136" class="kw">OPERATIONAL pain that forced change:</text>
+  <text x="200" y="150" class="kw2">static IPs · procurement months · deploy days · lift-and-shift fails · cloud enables but doesn't guarantee</text>
+
+  <!-- ── RUNG 4 ── -->
+  <rect x="56" y="74" width="672" height="38" rx="6" class="r3 rung"/>
+  <rect x="56" y="74" width="120" height="38" rx="6" class="rh3"/>
+  <text x="116" y="93" class="lbl lb3" text-anchor="middle">MONOLITH →</text>
+  <text x="116" y="106" class="lbl lb3" text-anchor="middle">MICROSERVICES</text>
+  <text x="200" y="90" class="kw">APPLICATION redesign for the cloud:</text>
+  <text x="200" y="104" class="kw2">bounded contexts · 12-Factor · stateless · containers · Kubernetes · observability</text>
+
+  <!-- ── RUNG 5 (top) ── -->
+  <rect x="56" y="28" width="672" height="38" rx="6" class="r4 rung"/>
+  <rect x="56" y="28" width="120" height="38" rx="6" class="rh4"/>
+  <text x="116" y="47" class="lbl lb4" text-anchor="middle">CLOUD</text>
+  <text x="116" y="60" class="lbl lb4" text-anchor="middle">FEATURES</text>
+  <text x="200" y="44" class="kw">THE PLATFORM the redesigned apps run on:</text>
+  <text x="200" y="58" class="kw2">IaaS · PaaS · SaaS · 200+ managed services · AWS, Azure, GCP · pay by the second</text>
+
+  <!-- Number labels on the left -->
+  <text x="32" y="246" class="num lb0" text-anchor="middle" font-size="14">1</text>
+  <text x="32" y="200" class="num lb1" text-anchor="middle" font-size="14">2</text>
+  <text x="32" y="154" class="num lb2" text-anchor="middle" font-size="14">3</text>
+  <text x="32" y="108" class="num lb3" text-anchor="middle" font-size="14">4</text>
+  <text x="32" y="62"  class="num lb4" text-anchor="middle" font-size="14">5</text>
+</svg>
